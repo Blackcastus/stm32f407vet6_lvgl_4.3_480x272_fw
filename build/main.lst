@@ -1,0 +1,1927 @@
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"main.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.rodata.touch_read.str1.4,"aMS",%progbits,1
+  18              		.align	2
+  19              	.LC0:
+  20 0000 28782C20 		.ascii	"(x, y) = (%d, %d) \012\000"
+  20      7929203D 
+  20      20282564 
+  20      2C202564 
+  20      29200A00 
+  21              		.section	.text.touch_read,"ax",%progbits
+  22              		.align	1
+  23              		.global	touch_read
+  24              		.arch armv7e-m
+  25              		.syntax unified
+  26              		.thumb
+  27              		.thumb_func
+  28              		.fpu fpv4-sp-d16
+  30              	touch_read:
+  31              	.LVL0:
+  32              	.LFB341:
+  33              		.file 1 "Src/main.c"
+   1:Src/main.c    **** #include "main.h"
+   2:Src/main.c    **** #include "can.h"
+   3:Src/main.c    **** #include "fatfs.h"
+   4:Src/main.c    **** #include "i2c.h"
+   5:Src/main.c    **** #include "iwdg.h"
+   6:Src/main.c    **** #include "lwip.h"
+   7:Src/main.c    **** #include "rtc.h"
+   8:Src/main.c    **** #include "spi.h"
+   9:Src/main.c    **** #include "usart.h"
+  10:Src/main.c    **** #include "usb_device.h"
+  11:Src/main.c    **** #include "gpio.h"
+  12:Src/main.c    **** #include "fsmc.h"
+  13:Src/main.c    **** #include "ssd1963_fsmc.h"
+  14:Src/main.c    **** #include "lv_driver.h"
+  15:Src/main.c    **** #include "../lvgl/lvgl.h"
+  16:Src/main.c    **** #include "../lv_demos/lv_demo.h"
+  17:Src/main.c    **** 
+  18:Src/main.c    **** #include <stdlib.h>
+  19:Src/main.c    **** #include <string.h>
+  20:Src/main.c    **** #include <errno.h>
+  21:Src/main.c    **** #include <stdio.h>
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 2
+
+
+  22:Src/main.c    **** #include <unistd.h>
+  23:Src/main.c    **** 
+  24:Src/main.c    **** #include "gt911.h"
+  25:Src/main.c    **** 
+  26:Src/main.c    **** /* Declare printf function */
+  27:Src/main.c    **** int _write(int file, char *data, int len);
+  28:Src/main.c    **** 
+  29:Src/main.c    **** /* Private function prototypes -----------------------------------------------*/
+  30:Src/main.c    **** void SystemClock_Config(void);
+  31:Src/main.c    **** /* USER CODE BEGIN PFP */
+  32:Src/main.c    **** 
+  33:Src/main.c    **** /* USER CODE END PFP */
+  34:Src/main.c    **** 
+  35:Src/main.c    **** /* Private user code ---------------------------------------------------------*/
+  36:Src/main.c    **** /* USER CODE BEGIN 0 */
+  37:Src/main.c    **** 
+  38:Src/main.c    **** GT911_Config_t sampleConfig = {.X_Resolution = 480, .Y_Resolution = 272, .Number_Of_Touch_Support =
+  39:Src/main.c    **** TouchCordinate_t cordinate[5];
+  40:Src/main.c    **** uint8_t number;
+  41:Src/main.c    **** uint8_t touch_int = 0;
+  42:Src/main.c    **** 
+  43:Src/main.c    **** void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+  44:Src/main.c    **** {
+  45:Src/main.c    ****   if(GPIO_Pin == GPIO_PIN_0)
+  46:Src/main.c    ****   {
+  47:Src/main.c    ****     printf("touch interrupt \n");
+  48:Src/main.c    ****     touch_int = 1;
+  49:Src/main.c    ****   }
+  50:Src/main.c    **** }
+  51:Src/main.c    **** 
+  52:Src/main.c    **** 
+  53:Src/main.c    **** void touch_read(lv_indev_drv_t *drv, lv_indev_data_t *data)
+  54:Src/main.c    **** {
+  34              		.loc 1 54 1 view -0
+  35              		.cfi_startproc
+  36              		@ args = 0, pretend = 0, frame = 0
+  37              		@ frame_needed = 0, uses_anonymous_args = 0
+  38              		.loc 1 54 1 is_stmt 0 view .LVU1
+  39 0000 08B5     		push	{r3, lr}
+  40              	.LCFI0:
+  41              		.cfi_def_cfa_offset 8
+  42              		.cfi_offset 3, -8
+  43              		.cfi_offset 14, -4
+  55:Src/main.c    ****   if(touch_int == 1)
+  44              		.loc 1 55 3 is_stmt 1 view .LVU2
+  45              		.loc 1 55 16 is_stmt 0 view .LVU3
+  46 0002 0C4B     		ldr	r3, .L6
+  47 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  48              		.loc 1 55 5 view .LVU4
+  49 0006 012B     		cmp	r3, #1
+  50 0008 02D0     		beq	.L5
+  56:Src/main.c    ****   {
+  57:Src/main.c    ****     data->point.x = cordinate[0].x;
+  58:Src/main.c    ****     data->point.y = cordinate[0].y;
+  59:Src/main.c    ****     data->state = LV_INDEV_STATE_PR;
+  60:Src/main.c    ****     printf("(x, y) = (%d, %d) \n", data->point.x, data->point.y);
+  61:Src/main.c    ****     touch_int = 0;
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 3
+
+
+  62:Src/main.c    ****   }
+  63:Src/main.c    ****   else
+  64:Src/main.c    ****   {
+  65:Src/main.c    ****     data->state = LV_INDEV_STATE_REL;
+  51              		.loc 1 65 5 is_stmt 1 view .LVU5
+  52              		.loc 1 65 17 is_stmt 0 view .LVU6
+  53 000a 0023     		movs	r3, #0
+  54 000c 8B73     		strb	r3, [r1, #14]
+  55              	.LVL1:
+  56              	.L1:
+  66:Src/main.c    ****   }
+  67:Src/main.c    **** }
+  57              		.loc 1 67 1 view .LVU7
+  58 000e 08BD     		pop	{r3, pc}
+  59              	.LVL2:
+  60              	.L5:
+  57:Src/main.c    ****     data->point.y = cordinate[0].y;
+  61              		.loc 1 57 5 is_stmt 1 view .LVU8
+  57:Src/main.c    ****     data->point.y = cordinate[0].y;
+  62              		.loc 1 57 33 is_stmt 0 view .LVU9
+  63 0010 094A     		ldr	r2, .L6+4
+  64 0012 B2F90030 		ldrsh	r3, [r2]
+  57:Src/main.c    ****     data->point.y = cordinate[0].y;
+  65              		.loc 1 57 19 view .LVU10
+  66 0016 0B80     		strh	r3, [r1]	@ movhi
+  58:Src/main.c    ****     data->state = LV_INDEV_STATE_PR;
+  67              		.loc 1 58 5 is_stmt 1 view .LVU11
+  58:Src/main.c    ****     data->state = LV_INDEV_STATE_PR;
+  68              		.loc 1 58 33 is_stmt 0 view .LVU12
+  69 0018 B2F90220 		ldrsh	r2, [r2, #2]
+  58:Src/main.c    ****     data->state = LV_INDEV_STATE_PR;
+  70              		.loc 1 58 19 view .LVU13
+  71 001c 4A80     		strh	r2, [r1, #2]	@ movhi
+  59:Src/main.c    ****     printf("(x, y) = (%d, %d) \n", data->point.x, data->point.y);
+  72              		.loc 1 59 5 is_stmt 1 view .LVU14
+  59:Src/main.c    ****     printf("(x, y) = (%d, %d) \n", data->point.x, data->point.y);
+  73              		.loc 1 59 17 is_stmt 0 view .LVU15
+  74 001e 0120     		movs	r0, #1
+  75              	.LVL3:
+  59:Src/main.c    ****     printf("(x, y) = (%d, %d) \n", data->point.x, data->point.y);
+  76              		.loc 1 59 17 view .LVU16
+  77 0020 8873     		strb	r0, [r1, #14]
+  60:Src/main.c    ****     touch_int = 0;
+  78              		.loc 1 60 5 is_stmt 1 view .LVU17
+  79 0022 1946     		mov	r1, r3
+  80              	.LVL4:
+  60:Src/main.c    ****     touch_int = 0;
+  81              		.loc 1 60 5 is_stmt 0 view .LVU18
+  82 0024 0548     		ldr	r0, .L6+8
+  83 0026 FFF7FEFF 		bl	printf
+  84              	.LVL5:
+  61:Src/main.c    ****   }
+  85              		.loc 1 61 5 is_stmt 1 view .LVU19
+  61:Src/main.c    ****   }
+  86              		.loc 1 61 15 is_stmt 0 view .LVU20
+  87 002a 024B     		ldr	r3, .L6
+  88 002c 0022     		movs	r2, #0
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 4
+
+
+  89 002e 1A70     		strb	r2, [r3]
+  90 0030 EDE7     		b	.L1
+  91              	.L7:
+  92 0032 00BF     		.align	2
+  93              	.L6:
+  94 0034 00000000 		.word	.LANCHOR0
+  95 0038 00000000 		.word	.LANCHOR1
+  96 003c 00000000 		.word	.LC0
+  97              		.cfi_endproc
+  98              	.LFE341:
+ 100              		.section	.rodata.HAL_GPIO_EXTI_Callback.str1.4,"aMS",%progbits,1
+ 101              		.align	2
+ 102              	.LC1:
+ 103 0000 746F7563 		.ascii	"touch interrupt \000"
+ 103      6820696E 
+ 103      74657272 
+ 103      75707420 
+ 103      00
+ 104              		.section	.text.HAL_GPIO_EXTI_Callback,"ax",%progbits
+ 105              		.align	1
+ 106              		.global	HAL_GPIO_EXTI_Callback
+ 107              		.syntax unified
+ 108              		.thumb
+ 109              		.thumb_func
+ 110              		.fpu fpv4-sp-d16
+ 112              	HAL_GPIO_EXTI_Callback:
+ 113              	.LVL6:
+ 114              	.LFB340:
+  44:Src/main.c    ****   if(GPIO_Pin == GPIO_PIN_0)
+ 115              		.loc 1 44 1 is_stmt 1 view -0
+ 116              		.cfi_startproc
+ 117              		@ args = 0, pretend = 0, frame = 0
+ 118              		@ frame_needed = 0, uses_anonymous_args = 0
+  45:Src/main.c    ****   {
+ 119              		.loc 1 45 3 view .LVU22
+  45:Src/main.c    ****   {
+ 120              		.loc 1 45 5 is_stmt 0 view .LVU23
+ 121 0000 0128     		cmp	r0, #1
+ 122 0002 00D0     		beq	.L14
+ 123 0004 7047     		bx	lr
+ 124              	.L14:
+  44:Src/main.c    ****   if(GPIO_Pin == GPIO_PIN_0)
+ 125              		.loc 1 44 1 view .LVU24
+ 126 0006 08B5     		push	{r3, lr}
+ 127              	.LCFI1:
+ 128              		.cfi_def_cfa_offset 8
+ 129              		.cfi_offset 3, -8
+ 130              		.cfi_offset 14, -4
+  47:Src/main.c    ****     touch_int = 1;
+ 131              		.loc 1 47 5 is_stmt 1 view .LVU25
+ 132 0008 0348     		ldr	r0, .L15
+ 133              	.LVL7:
+  47:Src/main.c    ****     touch_int = 1;
+ 134              		.loc 1 47 5 is_stmt 0 view .LVU26
+ 135 000a FFF7FEFF 		bl	puts
+ 136              	.LVL8:
+  48:Src/main.c    ****   }
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 5
+
+
+ 137              		.loc 1 48 5 is_stmt 1 view .LVU27
+  48:Src/main.c    ****   }
+ 138              		.loc 1 48 15 is_stmt 0 view .LVU28
+ 139 000e 034B     		ldr	r3, .L15+4
+ 140 0010 0122     		movs	r2, #1
+ 141 0012 1A70     		strb	r2, [r3]
+  50:Src/main.c    **** 
+ 142              		.loc 1 50 1 view .LVU29
+ 143 0014 08BD     		pop	{r3, pc}
+ 144              	.L16:
+ 145 0016 00BF     		.align	2
+ 146              	.L15:
+ 147 0018 00000000 		.word	.LC1
+ 148 001c 00000000 		.word	.LANCHOR0
+ 149              		.cfi_endproc
+ 150              	.LFE340:
+ 152              		.section	.rodata.lv_example_get_started_1.str1.4,"aMS",%progbits,1
+ 153              		.align	2
+ 154              	.LC2:
+ 155 0000 42757474 		.ascii	"Button\000"
+ 155      6F6E00
+ 156              		.section	.text.lv_example_get_started_1,"ax",%progbits
+ 157              		.align	1
+ 158              		.global	lv_example_get_started_1
+ 159              		.syntax unified
+ 160              		.thumb
+ 161              		.thumb_func
+ 162              		.fpu fpv4-sp-d16
+ 164              	lv_example_get_started_1:
+ 165              	.LFB342:
+  68:Src/main.c    **** 
+  69:Src/main.c    **** void lv_example_get_started_1(void)
+  70:Src/main.c    **** {
+ 166              		.loc 1 70 1 is_stmt 1 view -0
+ 167              		.cfi_startproc
+ 168              		@ args = 0, pretend = 0, frame = 0
+ 169              		@ frame_needed = 0, uses_anonymous_args = 0
+ 170 0000 10B5     		push	{r4, lr}
+ 171              	.LCFI2:
+ 172              		.cfi_def_cfa_offset 8
+ 173              		.cfi_offset 4, -8
+ 174              		.cfi_offset 14, -4
+  71:Src/main.c    ****     lv_obj_t * btn = lv_btn_create(lv_scr_act());     /*Add a button the current screen*/
+ 175              		.loc 1 71 5 view .LVU31
+ 176              	.LBB12:
+ 177              	.LBI12:
+ 178              		.file 2 "Inc/../lvgl/src/core/lv_disp.h"
+   1:Inc/../lvgl/src/core/lv_disp.h **** /**
+   2:Inc/../lvgl/src/core/lv_disp.h ****  * @file lv_disp.h
+   3:Inc/../lvgl/src/core/lv_disp.h ****  *
+   4:Inc/../lvgl/src/core/lv_disp.h ****  */
+   5:Inc/../lvgl/src/core/lv_disp.h **** 
+   6:Inc/../lvgl/src/core/lv_disp.h **** #ifndef LV_DISP_H
+   7:Inc/../lvgl/src/core/lv_disp.h **** #define LV_DISP_H
+   8:Inc/../lvgl/src/core/lv_disp.h **** 
+   9:Inc/../lvgl/src/core/lv_disp.h **** #ifdef __cplusplus
+  10:Inc/../lvgl/src/core/lv_disp.h **** extern "C" {
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 6
+
+
+  11:Inc/../lvgl/src/core/lv_disp.h **** #endif
+  12:Inc/../lvgl/src/core/lv_disp.h **** 
+  13:Inc/../lvgl/src/core/lv_disp.h **** /*********************
+  14:Inc/../lvgl/src/core/lv_disp.h ****  *      INCLUDES
+  15:Inc/../lvgl/src/core/lv_disp.h ****  *********************/
+  16:Inc/../lvgl/src/core/lv_disp.h **** #include "../hal/lv_hal.h"
+  17:Inc/../lvgl/src/core/lv_disp.h **** #include "lv_obj.h"
+  18:Inc/../lvgl/src/core/lv_disp.h **** #include "lv_theme.h"
+  19:Inc/../lvgl/src/core/lv_disp.h **** 
+  20:Inc/../lvgl/src/core/lv_disp.h **** /*********************
+  21:Inc/../lvgl/src/core/lv_disp.h ****  *      DEFINES
+  22:Inc/../lvgl/src/core/lv_disp.h ****  *********************/
+  23:Inc/../lvgl/src/core/lv_disp.h **** 
+  24:Inc/../lvgl/src/core/lv_disp.h **** /**********************
+  25:Inc/../lvgl/src/core/lv_disp.h ****  *      TYPEDEFS
+  26:Inc/../lvgl/src/core/lv_disp.h ****  **********************/
+  27:Inc/../lvgl/src/core/lv_disp.h **** 
+  28:Inc/../lvgl/src/core/lv_disp.h **** typedef enum {
+  29:Inc/../lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_NONE,
+  30:Inc/../lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_OVER_LEFT,
+  31:Inc/../lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_OVER_RIGHT,
+  32:Inc/../lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_OVER_TOP,
+  33:Inc/../lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_OVER_BOTTOM,
+  34:Inc/../lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_MOVE_LEFT,
+  35:Inc/../lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_MOVE_RIGHT,
+  36:Inc/../lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_MOVE_TOP,
+  37:Inc/../lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_MOVE_BOTTOM,
+  38:Inc/../lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_FADE_ON,
+  39:Inc/../lvgl/src/core/lv_disp.h **** } lv_scr_load_anim_t;
+  40:Inc/../lvgl/src/core/lv_disp.h **** 
+  41:Inc/../lvgl/src/core/lv_disp.h **** /**********************
+  42:Inc/../lvgl/src/core/lv_disp.h ****  * GLOBAL PROTOTYPES
+  43:Inc/../lvgl/src/core/lv_disp.h ****  **********************/
+  44:Inc/../lvgl/src/core/lv_disp.h **** 
+  45:Inc/../lvgl/src/core/lv_disp.h **** /**
+  46:Inc/../lvgl/src/core/lv_disp.h ****  * Return with a pointer to the active screen
+  47:Inc/../lvgl/src/core/lv_disp.h ****  * @param disp pointer to display which active screen should be get. (NULL to use the default
+  48:Inc/../lvgl/src/core/lv_disp.h ****  * screen)
+  49:Inc/../lvgl/src/core/lv_disp.h ****  * @return pointer to the active screen object (loaded by 'lv_scr_load()')
+  50:Inc/../lvgl/src/core/lv_disp.h ****  */
+  51:Inc/../lvgl/src/core/lv_disp.h **** lv_obj_t * lv_disp_get_scr_act(lv_disp_t * disp);
+  52:Inc/../lvgl/src/core/lv_disp.h **** 
+  53:Inc/../lvgl/src/core/lv_disp.h **** /**
+  54:Inc/../lvgl/src/core/lv_disp.h ****  * Return with a pointer to the previous screen. Only used during screen transitions.
+  55:Inc/../lvgl/src/core/lv_disp.h ****  * @param disp pointer to display which previous screen should be get. (NULL to use the default
+  56:Inc/../lvgl/src/core/lv_disp.h ****  * screen)
+  57:Inc/../lvgl/src/core/lv_disp.h ****  * @return pointer to the previous screen object or NULL if not used now
+  58:Inc/../lvgl/src/core/lv_disp.h ****  */
+  59:Inc/../lvgl/src/core/lv_disp.h **** lv_obj_t * lv_disp_get_scr_prev(lv_disp_t * disp);
+  60:Inc/../lvgl/src/core/lv_disp.h **** 
+  61:Inc/../lvgl/src/core/lv_disp.h **** /**
+  62:Inc/../lvgl/src/core/lv_disp.h ****  * Make a screen active
+  63:Inc/../lvgl/src/core/lv_disp.h ****  * @param scr pointer to a screen
+  64:Inc/../lvgl/src/core/lv_disp.h ****  */
+  65:Inc/../lvgl/src/core/lv_disp.h **** void lv_disp_load_scr(lv_obj_t * scr);
+  66:Inc/../lvgl/src/core/lv_disp.h **** 
+  67:Inc/../lvgl/src/core/lv_disp.h **** /**
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 7
+
+
+  68:Inc/../lvgl/src/core/lv_disp.h ****  * Return with the top layer. (Same on every screen and it is above the normal screen layer)
+  69:Inc/../lvgl/src/core/lv_disp.h ****  * @param disp pointer to display which top layer should be get. (NULL to use the default screen)
+  70:Inc/../lvgl/src/core/lv_disp.h ****  * @return pointer to the top layer object  (transparent screen sized lv_obj)
+  71:Inc/../lvgl/src/core/lv_disp.h ****  */
+  72:Inc/../lvgl/src/core/lv_disp.h **** lv_obj_t * lv_disp_get_layer_top(lv_disp_t * disp);
+  73:Inc/../lvgl/src/core/lv_disp.h **** 
+  74:Inc/../lvgl/src/core/lv_disp.h **** /**
+  75:Inc/../lvgl/src/core/lv_disp.h ****  * Return with the sys. layer. (Same on every screen and it is above the normal screen and the top
+  76:Inc/../lvgl/src/core/lv_disp.h ****  * layer)
+  77:Inc/../lvgl/src/core/lv_disp.h ****  * @param disp pointer to display which sys. layer  should be get. (NULL to use the default screen)
+  78:Inc/../lvgl/src/core/lv_disp.h ****  * @return pointer to the sys layer object  (transparent screen sized lv_obj)
+  79:Inc/../lvgl/src/core/lv_disp.h ****  */
+  80:Inc/../lvgl/src/core/lv_disp.h **** lv_obj_t * lv_disp_get_layer_sys(lv_disp_t * disp);
+  81:Inc/../lvgl/src/core/lv_disp.h **** 
+  82:Inc/../lvgl/src/core/lv_disp.h **** /**
+  83:Inc/../lvgl/src/core/lv_disp.h ****  * Get the theme of a display
+  84:Inc/../lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+  85:Inc/../lvgl/src/core/lv_disp.h ****  * @return the display's theme (can be NULL)
+  86:Inc/../lvgl/src/core/lv_disp.h ****  */
+  87:Inc/../lvgl/src/core/lv_disp.h **** void lv_disp_set_theme(lv_disp_t * disp, lv_theme_t * th);
+  88:Inc/../lvgl/src/core/lv_disp.h **** 
+  89:Inc/../lvgl/src/core/lv_disp.h **** /**
+  90:Inc/../lvgl/src/core/lv_disp.h ****  * Get the theme of a display
+  91:Inc/../lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+  92:Inc/../lvgl/src/core/lv_disp.h ****  * @return the display's theme (can be NULL)
+  93:Inc/../lvgl/src/core/lv_disp.h ****  */
+  94:Inc/../lvgl/src/core/lv_disp.h **** lv_theme_t * lv_disp_get_theme(lv_disp_t * disp);
+  95:Inc/../lvgl/src/core/lv_disp.h **** 
+  96:Inc/../lvgl/src/core/lv_disp.h **** /**
+  97:Inc/../lvgl/src/core/lv_disp.h ****  * Set the background color of a display
+  98:Inc/../lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+  99:Inc/../lvgl/src/core/lv_disp.h ****  * @param color color of the background
+ 100:Inc/../lvgl/src/core/lv_disp.h ****  */
+ 101:Inc/../lvgl/src/core/lv_disp.h **** void lv_disp_set_bg_color(lv_disp_t * disp, lv_color_t color);
+ 102:Inc/../lvgl/src/core/lv_disp.h **** 
+ 103:Inc/../lvgl/src/core/lv_disp.h **** /**
+ 104:Inc/../lvgl/src/core/lv_disp.h ****  * Set the background image of a display
+ 105:Inc/../lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+ 106:Inc/../lvgl/src/core/lv_disp.h ****  * @param img_src path to file or pointer to an `lv_img_dsc_t` variable
+ 107:Inc/../lvgl/src/core/lv_disp.h ****  */
+ 108:Inc/../lvgl/src/core/lv_disp.h **** void lv_disp_set_bg_image(lv_disp_t * disp, const void  * img_src);
+ 109:Inc/../lvgl/src/core/lv_disp.h **** 
+ 110:Inc/../lvgl/src/core/lv_disp.h **** /**
+ 111:Inc/../lvgl/src/core/lv_disp.h ****  * Opacity of the background
+ 112:Inc/../lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+ 113:Inc/../lvgl/src/core/lv_disp.h ****  * @param opa opacity (0..255)
+ 114:Inc/../lvgl/src/core/lv_disp.h ****  */
+ 115:Inc/../lvgl/src/core/lv_disp.h **** void lv_disp_set_bg_opa(lv_disp_t * disp, lv_opa_t opa);
+ 116:Inc/../lvgl/src/core/lv_disp.h **** 
+ 117:Inc/../lvgl/src/core/lv_disp.h **** /**
+ 118:Inc/../lvgl/src/core/lv_disp.h ****  * Switch screen with animation
+ 119:Inc/../lvgl/src/core/lv_disp.h ****  * @param scr pointer to the new screen to load
+ 120:Inc/../lvgl/src/core/lv_disp.h ****  * @param anim_type type of the animation from `lv_scr_load_anim_t`. E.g.  `LV_SCR_LOAD_ANIM_MOVE_L
+ 121:Inc/../lvgl/src/core/lv_disp.h ****  * @param time time of the animation
+ 122:Inc/../lvgl/src/core/lv_disp.h ****  * @param delay delay before the transition
+ 123:Inc/../lvgl/src/core/lv_disp.h ****  * @param auto_del true: automatically delete the old screen
+ 124:Inc/../lvgl/src/core/lv_disp.h ****  */
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 8
+
+
+ 125:Inc/../lvgl/src/core/lv_disp.h **** void lv_scr_load_anim(lv_obj_t * scr, lv_scr_load_anim_t anim_type, uint32_t time, uint32_t delay, 
+ 126:Inc/../lvgl/src/core/lv_disp.h **** 
+ 127:Inc/../lvgl/src/core/lv_disp.h **** /**
+ 128:Inc/../lvgl/src/core/lv_disp.h ****  * Get elapsed time since last user activity on a display (e.g. click)
+ 129:Inc/../lvgl/src/core/lv_disp.h ****  * @param disp pointer to an display (NULL to get the overall smallest inactivity)
+ 130:Inc/../lvgl/src/core/lv_disp.h ****  * @return elapsed ticks (milliseconds) since the last activity
+ 131:Inc/../lvgl/src/core/lv_disp.h ****  */
+ 132:Inc/../lvgl/src/core/lv_disp.h **** uint32_t lv_disp_get_inactive_time(const lv_disp_t * disp);
+ 133:Inc/../lvgl/src/core/lv_disp.h **** 
+ 134:Inc/../lvgl/src/core/lv_disp.h **** /**
+ 135:Inc/../lvgl/src/core/lv_disp.h ****  * Manually trigger an activity on a display
+ 136:Inc/../lvgl/src/core/lv_disp.h ****  * @param disp pointer to an display (NULL to use the default display)
+ 137:Inc/../lvgl/src/core/lv_disp.h ****  */
+ 138:Inc/../lvgl/src/core/lv_disp.h **** void lv_disp_trig_activity(lv_disp_t * disp);
+ 139:Inc/../lvgl/src/core/lv_disp.h **** 
+ 140:Inc/../lvgl/src/core/lv_disp.h **** /**
+ 141:Inc/../lvgl/src/core/lv_disp.h ****  * Clean any CPU cache that is related to the display.
+ 142:Inc/../lvgl/src/core/lv_disp.h ****  * @param disp pointer to an display (NULL to use the default display)
+ 143:Inc/../lvgl/src/core/lv_disp.h ****  */
+ 144:Inc/../lvgl/src/core/lv_disp.h **** void lv_disp_clean_dcache(lv_disp_t * disp);
+ 145:Inc/../lvgl/src/core/lv_disp.h **** 
+ 146:Inc/../lvgl/src/core/lv_disp.h **** /**
+ 147:Inc/../lvgl/src/core/lv_disp.h ****  * Get a pointer to the screen refresher timer to
+ 148:Inc/../lvgl/src/core/lv_disp.h ****  * modify its parameters with `lv_timer_...` functions.
+ 149:Inc/../lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+ 150:Inc/../lvgl/src/core/lv_disp.h ****  * @return pointer to the display refresher timer. (NULL on error)
+ 151:Inc/../lvgl/src/core/lv_disp.h ****  */
+ 152:Inc/../lvgl/src/core/lv_disp.h **** lv_timer_t * _lv_disp_get_refr_timer(lv_disp_t * disp);
+ 153:Inc/../lvgl/src/core/lv_disp.h **** 
+ 154:Inc/../lvgl/src/core/lv_disp.h **** /*------------------------------------------------
+ 155:Inc/../lvgl/src/core/lv_disp.h ****  * To improve backward compatibility
+ 156:Inc/../lvgl/src/core/lv_disp.h ****  * Recommended only if you have one display
+ 157:Inc/../lvgl/src/core/lv_disp.h ****  *------------------------------------------------*/
+ 158:Inc/../lvgl/src/core/lv_disp.h **** 
+ 159:Inc/../lvgl/src/core/lv_disp.h **** /**
+ 160:Inc/../lvgl/src/core/lv_disp.h ****  * Get the active screen of the default display
+ 161:Inc/../lvgl/src/core/lv_disp.h ****  * @return pointer to the active screen
+ 162:Inc/../lvgl/src/core/lv_disp.h ****  */
+ 163:Inc/../lvgl/src/core/lv_disp.h **** static inline lv_obj_t * lv_scr_act(void)
+ 179              		.loc 2 163 26 view .LVU32
+ 180              	.LBB13:
+ 164:Inc/../lvgl/src/core/lv_disp.h **** {
+ 165:Inc/../lvgl/src/core/lv_disp.h ****     return lv_disp_get_scr_act(lv_disp_get_default());
+ 181              		.loc 2 165 5 view .LVU33
+ 182              		.loc 2 165 12 is_stmt 0 view .LVU34
+ 183 0002 FFF7FEFF 		bl	lv_disp_get_default
+ 184              	.LVL9:
+ 185 0006 FFF7FEFF 		bl	lv_disp_get_scr_act
+ 186              	.LVL10:
+ 187              	.LBE13:
+ 188              	.LBE12:
+ 189              		.loc 1 71 22 view .LVU35
+ 190 000a FFF7FEFF 		bl	lv_btn_create
+ 191              	.LVL11:
+ 192 000e 0446     		mov	r4, r0
+ 193              	.LVL12:
+  72:Src/main.c    ****     lv_obj_set_pos(btn, 10, 10);                            /*Set its position*/
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 9
+
+
+ 194              		.loc 1 72 5 is_stmt 1 view .LVU36
+ 195 0010 0A22     		movs	r2, #10
+ 196 0012 1146     		mov	r1, r2
+ 197 0014 FFF7FEFF 		bl	lv_obj_set_pos
+ 198              	.LVL13:
+  73:Src/main.c    ****     lv_obj_set_size(btn, 120, 50);                          /*Set its size*/
+ 199              		.loc 1 73 5 view .LVU37
+ 200 0018 3222     		movs	r2, #50
+ 201 001a 7821     		movs	r1, #120
+ 202 001c 2046     		mov	r0, r4
+ 203 001e FFF7FEFF 		bl	lv_obj_set_size
+ 204              	.LVL14:
+  74:Src/main.c    ****     //lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_ALL, NULL);           /*Assign a callback to 
+  75:Src/main.c    **** 
+  76:Src/main.c    ****     lv_obj_t * label = lv_label_create(btn);          /*Add a label to the button*/
+ 205              		.loc 1 76 5 view .LVU38
+ 206              		.loc 1 76 24 is_stmt 0 view .LVU39
+ 207 0022 2046     		mov	r0, r4
+ 208 0024 FFF7FEFF 		bl	lv_label_create
+ 209              	.LVL15:
+ 210 0028 0446     		mov	r4, r0
+ 211              	.LVL16:
+  77:Src/main.c    ****     lv_label_set_text(label, "Button");                     /*Set the labels text*/
+ 212              		.loc 1 77 5 is_stmt 1 view .LVU40
+ 213 002a 0549     		ldr	r1, .L19
+ 214 002c FFF7FEFF 		bl	lv_label_set_text
+ 215              	.LVL17:
+  78:Src/main.c    ****     lv_obj_center(label);
+ 216              		.loc 1 78 5 view .LVU41
+ 217              	.LBB14:
+ 218              	.LBI14:
+ 219              		.file 3 "Inc/../lvgl/src/core/lv_obj_pos.h"
+   1:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+   2:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @file lv_obj_pos.h
+   3:Inc/../lvgl/src/core/lv_obj_pos.h ****  *
+   4:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+   5:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+   6:Inc/../lvgl/src/core/lv_obj_pos.h **** #ifndef LV_OBJ_POS_H
+   7:Inc/../lvgl/src/core/lv_obj_pos.h **** #define LV_OBJ_POS_H
+   8:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+   9:Inc/../lvgl/src/core/lv_obj_pos.h **** #ifdef __cplusplus
+  10:Inc/../lvgl/src/core/lv_obj_pos.h **** extern "C" {
+  11:Inc/../lvgl/src/core/lv_obj_pos.h **** #endif
+  12:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+  13:Inc/../lvgl/src/core/lv_obj_pos.h **** /*********************
+  14:Inc/../lvgl/src/core/lv_obj_pos.h ****  *      INCLUDES
+  15:Inc/../lvgl/src/core/lv_obj_pos.h ****  *********************/
+  16:Inc/../lvgl/src/core/lv_obj_pos.h **** #include "../misc/lv_area.h"
+  17:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+  18:Inc/../lvgl/src/core/lv_obj_pos.h **** /*********************
+  19:Inc/../lvgl/src/core/lv_obj_pos.h ****  *      DEFINES
+  20:Inc/../lvgl/src/core/lv_obj_pos.h ****  *********************/
+  21:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+  22:Inc/../lvgl/src/core/lv_obj_pos.h **** /**********************
+  23:Inc/../lvgl/src/core/lv_obj_pos.h ****  *      TYPEDEFS
+  24:Inc/../lvgl/src/core/lv_obj_pos.h ****  **********************/
+  25:Inc/../lvgl/src/core/lv_obj_pos.h **** struct _lv_obj_t;
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 10
+
+
+  26:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+  27:Inc/../lvgl/src/core/lv_obj_pos.h **** typedef void (*lv_layout_update_cb_t)(struct _lv_obj_t *, void * user_data);
+  28:Inc/../lvgl/src/core/lv_obj_pos.h **** typedef struct {
+  29:Inc/../lvgl/src/core/lv_obj_pos.h ****     lv_layout_update_cb_t cb;
+  30:Inc/../lvgl/src/core/lv_obj_pos.h ****     void * user_data;
+  31:Inc/../lvgl/src/core/lv_obj_pos.h **** }lv_layout_dsc_t;
+  32:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+  33:Inc/../lvgl/src/core/lv_obj_pos.h **** /**********************
+  34:Inc/../lvgl/src/core/lv_obj_pos.h ****  * GLOBAL PROTOTYPES
+  35:Inc/../lvgl/src/core/lv_obj_pos.h ****  **********************/
+  36:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+  37:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+  38:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Set the relative the position of an object (relative to the parent's top left corner)
+  39:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+  40:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param x         new distance from the left side of the parent plus the parent's left padding
+  41:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param y         new distance from the top side of the parent  plus the parent's right padding
+  42:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+  43:Inc/../lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_pos(struct _lv_obj_t * obj, lv_coord_t x, lv_coord_t y);
+  44:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+  45:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+  46:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Set the x coordinate of a object
+  47:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+  48:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param x         new distance from the left side from the parent plus the parent's left padding
+  49:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+  50:Inc/../lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_x(struct _lv_obj_t * obj, lv_coord_t x);
+  51:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+  52:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+  53:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Set the y coordinate of a object
+  54:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+  55:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param y         new distance from the top of the parent  plus the parent's top padding
+  56:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+  57:Inc/../lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_y(struct _lv_obj_t * obj, lv_coord_t y);
+  58:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+  59:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+  60:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Set the size of an object.
+  61:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+  62:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param w         the new width
+  63:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param h         the new height
+  64:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @note            possible values are:
+  65:Inc/../lvgl/src/core/lv_obj_pos.h ****  *                  pixel               simple set the size accordingly
+  66:Inc/../lvgl/src/core/lv_obj_pos.h ****  *                  LV_SIZE_CONTENT     set the size to involve all children in the given direction
+  67:Inc/../lvgl/src/core/lv_obj_pos.h ****  *                  LV_SIZE_PCT(x)     to set size in percentage of the parent's content area size 
+  68:Inc/../lvgl/src/core/lv_obj_pos.h ****  *                                      x should be in [0..1000]% range
+  69:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+  70:Inc/../lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_size(struct _lv_obj_t * obj, lv_coord_t w, lv_coord_t h);
+  71:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+  72:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+  73:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Recalculate the size of the object
+  74:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+  75:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @return          true: the size has been changed
+  76:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+  77:Inc/../lvgl/src/core/lv_obj_pos.h **** bool lv_obj_refr_size(struct _lv_obj_t * obj);
+  78:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+  79:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+  80:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Set the width of an object
+  81:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+  82:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param w         the new width
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 11
+
+
+  83:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @note            possible values are:
+  84:Inc/../lvgl/src/core/lv_obj_pos.h ****  *                  pixel               simple set the size accordingly
+  85:Inc/../lvgl/src/core/lv_obj_pos.h ****  *                  LV_SIZE_CONTENT     set the size to involve all children in the given direction
+  86:Inc/../lvgl/src/core/lv_obj_pos.h ****  *                  lv_pct(x)           to set size in percentage of the parent's content area size
+  87:Inc/../lvgl/src/core/lv_obj_pos.h ****  *                                      x should be in [0..1000]% range
+  88:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+  89:Inc/../lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_width(struct _lv_obj_t * obj, lv_coord_t w);
+  90:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+  91:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+  92:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Set the height of an object
+  93:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+  94:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param h         the new height
+  95:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @note            possible values are:
+  96:Inc/../lvgl/src/core/lv_obj_pos.h ****  *                  pixel               simple set the size accordingly
+  97:Inc/../lvgl/src/core/lv_obj_pos.h ****  *                  LV_SIZE_CONTENT     set the size to involve all children in the given direction
+  98:Inc/../lvgl/src/core/lv_obj_pos.h ****  *                  lv_pct(x)           to set size in percentage of the parent's content area size
+  99:Inc/../lvgl/src/core/lv_obj_pos.h ****  *                                      x should be in [0..1000]% range
+ 100:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+ 101:Inc/../lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_height(struct _lv_obj_t * obj, lv_coord_t h);
+ 102:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+ 103:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+ 104:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Set the width reduced by the left and right padding and the border width.
+ 105:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+ 106:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param w         the width without paddings in pixels
+ 107:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+ 108:Inc/../lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_content_width(struct _lv_obj_t * obj, lv_coord_t w);
+ 109:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+ 110:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+ 111:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Set the height reduced by the top and bottom padding and the border width.
+ 112:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+ 113:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param h         the height without paddings in pixels
+ 114:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+ 115:Inc/../lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_content_height(struct _lv_obj_t * obj, lv_coord_t h);
+ 116:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+ 117:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+ 118:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Set a layout for an object
+ 119:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+ 120:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param layout    pointer to a layout descriptor to set
+ 121:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+ 122:Inc/../lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_layout(struct _lv_obj_t * obj, uint32_t layout);
+ 123:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+ 124:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+ 125:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Test whether the and object is positioned by a layout or not
+ 126:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object to test
+ 127:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @return true:    positioned by a layout; false: not positioned by a layout
+ 128:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+ 129:Inc/../lvgl/src/core/lv_obj_pos.h **** bool lv_obj_is_layout_positioned(const struct _lv_obj_t * obj);
+ 130:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+ 131:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+ 132:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Mark the object for layout update.
+ 133:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj      pointer to an object whose children needs to be updated
+ 134:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+ 135:Inc/../lvgl/src/core/lv_obj_pos.h **** void lv_obj_mark_layout_as_dirty(struct _lv_obj_t * obj);
+ 136:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+ 137:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+ 138:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Update the layout of an object.
+ 139:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj      pointer to an object whose children needs to be updated
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 12
+
+
+ 140:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+ 141:Inc/../lvgl/src/core/lv_obj_pos.h **** void lv_obj_update_layout(const struct _lv_obj_t * obj);
+ 142:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+ 143:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+ 144:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Regsiter a new layout
+ 145:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param cb        the layout update callback
+ 146:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param user_data custom data that will be passed to `cb`
+ 147:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @return          the ID of the new layout
+ 148:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+ 149:Inc/../lvgl/src/core/lv_obj_pos.h **** uint32_t lv_layout_register(lv_layout_update_cb_t cb, void * user_data);
+ 150:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+ 151:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+ 152:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Change the alignment of an object.
+ 153:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object to align
+ 154:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param align     type of alignment (see 'lv_align_t' enum) `LV_ALIGN_OUT_...` can't be used.
+ 155:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+ 156:Inc/../lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_align(struct _lv_obj_t * obj, lv_align_t align);
+ 157:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+ 158:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+ 159:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Change the alignment of an object and set new coordinates.
+ 160:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Equivalent to:
+ 161:Inc/../lvgl/src/core/lv_obj_pos.h ****  * lv_obj_set_align(obj, align);
+ 162:Inc/../lvgl/src/core/lv_obj_pos.h ****  * lv_obj_set_pos(obj, x_ofs, y_ofs);
+ 163:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object to align
+ 164:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param align     type of alignment (see 'lv_align_t' enum) `LV_ALIGN_OUT_...` can't be used.
+ 165:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param x_ofs     x coordinate offset after alignment
+ 166:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param y_ofs     y coordinate offset after alignment
+ 167:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+ 168:Inc/../lvgl/src/core/lv_obj_pos.h **** void lv_obj_align(struct _lv_obj_t * obj, lv_align_t align, lv_coord_t x_ofs, lv_coord_t y_ofs);
+ 169:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+ 170:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+ 171:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Align an object to an other object.
+ 172:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object to align
+ 173:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param base      pointer to an other object (if NULL `obj`s parent is used). 'obj' will be align
+ 174:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param align     type of alignment (see 'lv_align_t' enum)
+ 175:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param x_ofs     x coordinate offset after alignment
+ 176:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param y_ofs     y coordinate offset after alignment
+ 177:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @note            if the position or size of `base` changes `obj` needs to be aligned manually ag
+ 178:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+ 179:Inc/../lvgl/src/core/lv_obj_pos.h **** void lv_obj_align_to(struct _lv_obj_t * obj, const struct _lv_obj_t * base, lv_align_t align, lv_co
+ 180:Inc/../lvgl/src/core/lv_obj_pos.h **** 
+ 181:Inc/../lvgl/src/core/lv_obj_pos.h **** /**
+ 182:Inc/../lvgl/src/core/lv_obj_pos.h ****  * Align an object to the center on its parent.
+ 183:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object to align
+ 184:Inc/../lvgl/src/core/lv_obj_pos.h ****  * @note            if the parent size changes `obj` needs to be aligned manually again
+ 185:Inc/../lvgl/src/core/lv_obj_pos.h ****  */
+ 186:Inc/../lvgl/src/core/lv_obj_pos.h **** static inline void lv_obj_center(struct _lv_obj_t * obj)
+ 220              		.loc 3 186 20 view .LVU42
+ 221              	.LBB15:
+ 187:Inc/../lvgl/src/core/lv_obj_pos.h **** {
+ 188:Inc/../lvgl/src/core/lv_obj_pos.h ****     lv_obj_align(obj, LV_ALIGN_CENTER, 0, 0);
+ 222              		.loc 3 188 5 view .LVU43
+ 223 0030 0023     		movs	r3, #0
+ 224 0032 1A46     		mov	r2, r3
+ 225 0034 0921     		movs	r1, #9
+ 226 0036 2046     		mov	r0, r4
+ 227 0038 FFF7FEFF 		bl	lv_obj_align
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 13
+
+
+ 228              	.LVL18:
+ 229              		.loc 3 188 5 is_stmt 0 view .LVU44
+ 230              	.LBE15:
+ 231              	.LBE14:
+  79:Src/main.c    **** }
+ 232              		.loc 1 79 1 view .LVU45
+ 233 003c 10BD     		pop	{r4, pc}
+ 234              	.LVL19:
+ 235              	.L20:
+ 236              		.loc 1 79 1 view .LVU46
+ 237 003e 00BF     		.align	2
+ 238              	.L19:
+ 239 0040 00000000 		.word	.LC2
+ 240              		.cfi_endproc
+ 241              	.LFE342:
+ 243              		.section	.text._write,"ax",%progbits
+ 244              		.align	1
+ 245              		.global	_write
+ 246              		.syntax unified
+ 247              		.thumb
+ 248              		.thumb_func
+ 249              		.fpu fpv4-sp-d16
+ 251              	_write:
+ 252              	.LVL20:
+ 253              	.LFB345:
+  80:Src/main.c    **** /* USER CODE END 0 */
+  81:Src/main.c    **** 
+  82:Src/main.c    **** /**
+  83:Src/main.c    ****   * @brief  The application entry point.
+  84:Src/main.c    ****   * @retval int
+  85:Src/main.c    ****   */
+  86:Src/main.c    **** int main(void)
+  87:Src/main.c    **** {
+  88:Src/main.c    ****   /* USER CODE BEGIN 1 */
+  89:Src/main.c    **** 
+  90:Src/main.c    ****   /* USER CODE END 1 */
+  91:Src/main.c    **** 
+  92:Src/main.c    ****   /* MCU Configuration--------------------------------------------------------*/
+  93:Src/main.c    **** 
+  94:Src/main.c    ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  95:Src/main.c    ****   HAL_Init();
+  96:Src/main.c    **** 
+  97:Src/main.c    ****   /* USER CODE BEGIN Init */
+  98:Src/main.c    **** 
+  99:Src/main.c    ****   /* USER CODE END Init */
+ 100:Src/main.c    **** 
+ 101:Src/main.c    ****   /* Configure the system clock */
+ 102:Src/main.c    ****   SystemClock_Config();
+ 103:Src/main.c    **** 
+ 104:Src/main.c    ****   /* USER CODE BEGIN SysInit */
+ 105:Src/main.c    **** 
+ 106:Src/main.c    ****   /* USER CODE END SysInit */
+ 107:Src/main.c    **** 
+ 108:Src/main.c    ****   /* Initialize all configured peripherals */
+ 109:Src/main.c    ****   MX_GPIO_Init();
+ 110:Src/main.c    ****   //MX_CAN1_Init();
+ 111:Src/main.c    ****   MX_FSMC_Init();
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 14
+
+
+ 112:Src/main.c    ****   lv_init(); 
+ 113:Src/main.c    ****   //tft_init();
+ 114:Src/main.c    ****   LCD_Init();
+ 115:Src/main.c    **** 
+ 116:Src/main.c    ****   MX_I2C1_Init();
+ 117:Src/main.c    ****   GT911_Init(sampleConfig);
+ 118:Src/main.c    **** 
+ 119:Src/main.c    ****   static lv_disp_draw_buf_t disp_buf;
+ 120:Src/main.c    ****   static lv_color_t buf_1[480 * 10];
+ 121:Src/main.c    ****   static lv_color_t buf_2[480 * 10];
+ 122:Src/main.c    ****   lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, 480 * 10);
+ 123:Src/main.c    **** 
+ 124:Src/main.c    ****   lv_disp_drv_t disp_drv;
+ 125:Src/main.c    ****   lv_disp_drv_init(&disp_drv);
+ 126:Src/main.c    ****   disp_drv.draw_buf = &disp_buf;
+ 127:Src/main.c    ****   disp_drv.flush_cb = SSD1963_flush;
+ 128:Src/main.c    ****   disp_drv.hor_res = 480;
+ 129:Src/main.c    ****   disp_drv.ver_res = 272;
+ 130:Src/main.c    ****   lv_disp_drv_register(&disp_drv);
+ 131:Src/main.c    **** 
+ 132:Src/main.c    ****   static lv_indev_drv_t indev_drv;
+ 133:Src/main.c    ****   lv_indev_drv_init(&indev_drv);
+ 134:Src/main.c    ****   indev_drv.read_cb = touch_read;
+ 135:Src/main.c    ****   indev_drv.type = LV_INDEV_TYPE_POINTER;
+ 136:Src/main.c    ****   lv_indev_drv_register(&indev_drv);
+ 137:Src/main.c    ****   //lv_example_get_started_1();
+ 138:Src/main.c    ****   lv_demo_widgets();
+ 139:Src/main.c    ****   //MX_I2C1_Init();
+ 140:Src/main.c    ****   //MX_I2C3_Init();
+ 141:Src/main.c    ****   //MX_IWDG_Init();
+ 142:Src/main.c    ****   //MX_RTC_Init();
+ 143:Src/main.c    ****   //MX_SPI1_Init();
+ 144:Src/main.c    ****   //MX_SPI2_Init();
+ 145:Src/main.c    ****   //MX_SPI3_Init();
+ 146:Src/main.c    ****   //MX_USART1_UART_Init();
+ 147:Src/main.c    ****   //MX_USART6_UART_Init();
+ 148:Src/main.c    ****   //MX_FATFS_Init();
+ 149:Src/main.c    ****   //MX_LWIP_Init();
+ 150:Src/main.c    ****   MX_USB_DEVICE_Init();
+ 151:Src/main.c    ****   /* USER CODE BEGIN 2 */
+ 152:Src/main.c    **** 
+ 153:Src/main.c    ****   /* USER CODE END 2 */
+ 154:Src/main.c    **** 
+ 155:Src/main.c    ****   /* Infinite loop */
+ 156:Src/main.c    ****   /* USER CODE BEGIN WHILE */
+ 157:Src/main.c    ****   uint32_t tick = HAL_GetTick();
+ 158:Src/main.c    ****   uint8_t buff[2];
+ 159:Src/main.c    ****   uint32_t id;
+ 160:Src/main.c    ****   uint8_t status;
+ 161:Src/main.c    ****   while (1)
+ 162:Src/main.c    ****   {
+ 163:Src/main.c    ****     /* USER CODE END WHILE */
+ 164:Src/main.c    ****     lv_task_handler();
+ 165:Src/main.c    ****     GT911_ReadTouch(cordinate, &number);
+ 166:Src/main.c    ****     if(HAL_GetTick() - tick >= 1000)
+ 167:Src/main.c    ****     {
+ 168:Src/main.c    ****       // printf("(x, y) = (%d, %d) \n", cordinate[0].x, cordinate[0].y);
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 15
+
+
+ 169:Src/main.c    ****       // printf("STT: %d\n", GT911_GetProductID(&id));
+ 170:Src/main.c    ****       // printf("id: %x \n", id);
+ 171:Src/main.c    ****       printf("Hello World\n");
+ 172:Src/main.c    ****       tick = HAL_GetTick();
+ 173:Src/main.c    ****     }
+ 174:Src/main.c    ****     /* USER CODE BEGIN 3 */
+ 175:Src/main.c    ****   }
+ 176:Src/main.c    ****   /* USER CODE END 3 */
+ 177:Src/main.c    **** }
+ 178:Src/main.c    **** 
+ 179:Src/main.c    **** /**
+ 180:Src/main.c    ****   * @brief System Clock Configuration
+ 181:Src/main.c    ****   * @retval None
+ 182:Src/main.c    ****   */
+ 183:Src/main.c    **** void SystemClock_Config(void)
+ 184:Src/main.c    **** {
+ 185:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+ 186:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 187:Src/main.c    ****   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+ 188:Src/main.c    **** 
+ 189:Src/main.c    ****   /** Configure the main internal regulator output voltage
+ 190:Src/main.c    ****   */
+ 191:Src/main.c    ****   __HAL_RCC_PWR_CLK_ENABLE();
+ 192:Src/main.c    ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+ 193:Src/main.c    ****   /** Initializes the RCC Oscillators according to the specified parameters
+ 194:Src/main.c    ****   * in the RCC_OscInitTypeDef structure.
+ 195:Src/main.c    ****   */
+ 196:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_HSE
+ 197:Src/main.c    ****                               |RCC_OSCILLATORTYPE_LSE;
+ 198:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+ 199:Src/main.c    ****   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+ 200:Src/main.c    ****   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+ 201:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 202:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 203:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLM = 25;
+ 204:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLN = 336;
+ 205:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+ 206:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLQ = 7;
+ 207:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 208:Src/main.c    ****   {
+ 209:Src/main.c    ****     Error_Handler();
+ 210:Src/main.c    ****   }
+ 211:Src/main.c    ****   /** Initializes the CPU, AHB and APB buses clocks
+ 212:Src/main.c    ****   */
+ 213:Src/main.c    ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+ 214:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 215:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+ 216:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 217:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+ 218:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+ 219:Src/main.c    **** 
+ 220:Src/main.c    ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
+ 221:Src/main.c    ****   {
+ 222:Src/main.c    ****     Error_Handler();
+ 223:Src/main.c    ****   }
+ 224:Src/main.c    ****   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
+ 225:Src/main.c    ****   PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 16
+
+
+ 226:Src/main.c    ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+ 227:Src/main.c    ****   {
+ 228:Src/main.c    ****     Error_Handler();
+ 229:Src/main.c    ****   }
+ 230:Src/main.c    **** }
+ 231:Src/main.c    **** 
+ 232:Src/main.c    **** /* USER CODE BEGIN 4 */
+ 233:Src/main.c    **** int _write(int file, char *data, int len)
+ 234:Src/main.c    **** {
+ 254              		.loc 1 234 1 is_stmt 1 view -0
+ 255              		.cfi_startproc
+ 256              		@ args = 0, pretend = 0, frame = 0
+ 257              		@ frame_needed = 0, uses_anonymous_args = 0
+ 258              		.loc 1 234 1 is_stmt 0 view .LVU48
+ 259 0000 08B5     		push	{r3, lr}
+ 260              	.LCFI3:
+ 261              		.cfi_def_cfa_offset 8
+ 262              		.cfi_offset 3, -8
+ 263              		.cfi_offset 14, -4
+ 235:Src/main.c    ****   if ((file != STDOUT_FILENO) && (file != STDERR_FILENO))
+ 264              		.loc 1 235 3 is_stmt 1 view .LVU49
+ 265              		.loc 1 235 31 is_stmt 0 view .LVU50
+ 266 0002 431E     		subs	r3, r0, #1
+ 267              		.loc 1 235 6 view .LVU51
+ 268 0004 012B     		cmp	r3, #1
+ 269 0006 05D8     		bhi	.L25
+ 270 0008 0846     		mov	r0, r1
+ 271              	.LVL21:
+ 272              		.loc 1 235 6 view .LVU52
+ 273 000a 1146     		mov	r1, r2
+ 274              	.LVL22:
+ 236:Src/main.c    ****   {
+ 237:Src/main.c    ****     errno = EBADF;
+ 238:Src/main.c    ****     return -1;
+ 239:Src/main.c    ****   }
+ 240:Src/main.c    ****   uint8_t status = CDC_Transmit_FS((uint8_t *)data, len);
+ 275              		.loc 1 240 3 is_stmt 1 view .LVU53
+ 276              		.loc 1 240 20 is_stmt 0 view .LVU54
+ 277 000c FFF7FEFF 		bl	CDC_Transmit_FS
+ 278              	.LVL23:
+ 241:Src/main.c    ****   return status;
+ 279              		.loc 1 241 3 is_stmt 1 view .LVU55
+ 280 0010 C0B2     		uxtb	r0, r0
+ 281              	.LVL24:
+ 282              	.L21:
+ 242:Src/main.c    **** }
+ 283              		.loc 1 242 1 is_stmt 0 view .LVU56
+ 284 0012 08BD     		pop	{r3, pc}
+ 285              	.LVL25:
+ 286              	.L25:
+ 237:Src/main.c    ****     return -1;
+ 287              		.loc 1 237 5 is_stmt 1 view .LVU57
+ 237:Src/main.c    ****     return -1;
+ 288              		.loc 1 237 11 is_stmt 0 view .LVU58
+ 289 0014 024B     		ldr	r3, .L26
+ 290 0016 0922     		movs	r2, #9
+ 291              	.LVL26:
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 17
+
+
+ 237:Src/main.c    ****     return -1;
+ 292              		.loc 1 237 11 view .LVU59
+ 293 0018 1A60     		str	r2, [r3]
+ 238:Src/main.c    ****   }
+ 294              		.loc 1 238 5 is_stmt 1 view .LVU60
+ 238:Src/main.c    ****   }
+ 295              		.loc 1 238 12 is_stmt 0 view .LVU61
+ 296 001a 4FF0FF30 		mov	r0, #-1
+ 297              	.LVL27:
+ 238:Src/main.c    ****   }
+ 298              		.loc 1 238 12 view .LVU62
+ 299 001e F8E7     		b	.L21
+ 300              	.L27:
+ 301              		.align	2
+ 302              	.L26:
+ 303 0020 00000000 		.word	errno
+ 304              		.cfi_endproc
+ 305              	.LFE345:
+ 307              		.section	.text.Error_Handler,"ax",%progbits
+ 308              		.align	1
+ 309              		.global	Error_Handler
+ 310              		.syntax unified
+ 311              		.thumb
+ 312              		.thumb_func
+ 313              		.fpu fpv4-sp-d16
+ 315              	Error_Handler:
+ 316              	.LFB346:
+ 243:Src/main.c    **** 
+ 244:Src/main.c    **** /* USER CODE END 4 */
+ 245:Src/main.c    **** 
+ 246:Src/main.c    **** /**
+ 247:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
+ 248:Src/main.c    ****   * @retval None
+ 249:Src/main.c    ****   */
+ 250:Src/main.c    **** void Error_Handler(void)
+ 251:Src/main.c    **** {
+ 317              		.loc 1 251 1 is_stmt 1 view -0
+ 318              		.cfi_startproc
+ 319              		@ Volatile: function does not return.
+ 320              		@ args = 0, pretend = 0, frame = 0
+ 321              		@ frame_needed = 0, uses_anonymous_args = 0
+ 322              		@ link register save eliminated.
+ 252:Src/main.c    ****   /* USER CODE BEGIN Error_Handler_Debug */
+ 253:Src/main.c    ****   /* User can add his own implementation to report the HAL error return state */
+ 254:Src/main.c    ****   __disable_irq();
+ 323              		.loc 1 254 3 view .LVU64
+ 324              	.LBB16:
+ 325              	.LBI16:
+ 326              		.file 4 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gc
+   1:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** /**************************************************************************//**
+   2:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
+   3:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
+   4:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * @version  V5.0.4
+   5:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * @date     09. April 2018
+   6:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  ******************************************************************************/
+   7:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** /*
+   8:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * Copyright (c) 2009-2018 Arm Limited. All rights reserved.
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 18
+
+
+   9:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  10:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * SPDX-License-Identifier: Apache-2.0
+  11:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  12:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  13:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * not use this file except in compliance with the License.
+  14:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * You may obtain a copy of the License at
+  15:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  16:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * www.apache.org/licenses/LICENSE-2.0
+  17:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  18:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * Unless required by applicable law or agreed to in writing, software
+  19:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  20:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  21:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * See the License for the specific language governing permissions and
+  22:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  * limitations under the License.
+  23:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+  24:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  25:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __CMSIS_GCC_H
+  26:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_H
+  27:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  28:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** /* ignore some GCC warnings */
+  29:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic push
+  30:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wsign-conversion"
+  31:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wconversion"
+  32:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wunused-parameter"
+  33:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  34:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** /* Fallback for __has_builtin */
+  35:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __has_builtin
+  36:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __has_builtin(x) (0)
+  37:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  38:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  39:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** /* CMSIS compiler specific defines */
+  40:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __ASM
+  41:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __ASM                                  __asm
+  42:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  43:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __INLINE
+  44:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __INLINE                               inline
+  45:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  46:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_INLINE
+  47:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
+  48:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  49:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
+  50:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_FORCEINLINE                   __attribute__((always_inline)) static inline
+  51:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif                                           
+  52:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __NO_RETURN
+  53:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __NO_RETURN                            __attribute__((__noreturn__))
+  54:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  55:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __USED
+  56:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __USED                                 __attribute__((used))
+  57:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  58:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __WEAK
+  59:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __WEAK                                 __attribute__((weak))
+  60:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  61:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED
+  62:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED                               __attribute__((packed, aligned(1)))
+  63:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  64:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED_STRUCT
+  65:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED_STRUCT                        struct __attribute__((packed, aligned(1)))
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 19
+
+
+  66:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  67:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED_UNION
+  68:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED_UNION                         union __attribute__((packed, aligned(1)))
+  69:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  70:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32        /* deprecated */
+  71:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  72:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  73:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  74:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   struct __attribute__((packed)) T_UINT32 { uint32_t v; };
+  75:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  76:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32(x)                  (((struct T_UINT32 *)(x))->v)
+  77:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  78:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_WRITE
+  79:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  80:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  81:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  82:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
+  83:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  84:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT16_WRITE(addr, val)    (void)((((struct T_UINT16_WRITE *)(void *)(addr))-
+  85:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  86:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_READ
+  87:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  88:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  89:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  90:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_READ { uint16_t v; };
+  91:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  92:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT16_READ(addr)          (((const struct T_UINT16_READ *)(const void *)(add
+  93:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  94:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_WRITE
+  95:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  96:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  97:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  98:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_WRITE { uint32_t v; };
+  99:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 100:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_WRITE(addr, val)    (void)((((struct T_UINT32_WRITE *)(void *)(addr))-
+ 101:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 102:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
+ 103:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+ 104:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+ 105:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+ 106:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
+ 107:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 108:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(add
+ 109:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 110:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __ALIGNED
+ 111:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __ALIGNED(x)                           __attribute__((aligned(x)))
+ 112:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 113:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __RESTRICT
+ 114:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __RESTRICT                             __restrict
+ 115:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 116:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 117:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 118:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** /* ###########################  Core Function Access  ########################### */
+ 119:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** /** \ingroup  CMSIS_Core_FunctionInterface
+ 120:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
+ 121:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   @{
+ 122:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 20
+
+
+ 123:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 124:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 125:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Enable IRQ Interrupts
+ 126:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
+ 127:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 128:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 129:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __enable_irq(void)
+ 130:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 131:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsie i" : : : "memory");
+ 132:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 133:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 134:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 135:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 136:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable IRQ Interrupts
+ 137:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
+ 138:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 139:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 140:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __disable_irq(void)
+ 327              		.loc 4 140 27 view .LVU65
+ 328              	.LBB17:
+ 141:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 142:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsid i" : : : "memory");
+ 329              		.loc 4 142 3 view .LVU66
+ 330              		.syntax unified
+ 331              	@ 142 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Include/cmsis_gcc.h
+ 332 0000 72B6     		cpsid i
+ 333              	@ 0 "" 2
+ 334              		.thumb
+ 335              		.syntax unified
+ 336              	.L29:
+ 337              	.LBE17:
+ 338              	.LBE16:
+ 255:Src/main.c    ****   while (1)
+ 339              		.loc 1 255 3 discriminator 1 view .LVU67
+ 256:Src/main.c    ****   {
+ 257:Src/main.c    ****   }
+ 340              		.loc 1 257 3 discriminator 1 view .LVU68
+ 255:Src/main.c    ****   while (1)
+ 341              		.loc 1 255 9 discriminator 1 view .LVU69
+ 342 0002 FEE7     		b	.L29
+ 343              		.cfi_endproc
+ 344              	.LFE346:
+ 346              		.section	.text.SystemClock_Config,"ax",%progbits
+ 347              		.align	1
+ 348              		.global	SystemClock_Config
+ 349              		.syntax unified
+ 350              		.thumb
+ 351              		.thumb_func
+ 352              		.fpu fpv4-sp-d16
+ 354              	SystemClock_Config:
+ 355              	.LFB344:
+ 184:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+ 356              		.loc 1 184 1 view -0
+ 357              		.cfi_startproc
+ 358              		@ args = 0, pretend = 0, frame = 96
+ 359              		@ frame_needed = 0, uses_anonymous_args = 0
+ 360 0000 00B5     		push	{lr}
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 21
+
+
+ 361              	.LCFI4:
+ 362              		.cfi_def_cfa_offset 4
+ 363              		.cfi_offset 14, -4
+ 364 0002 99B0     		sub	sp, sp, #100
+ 365              	.LCFI5:
+ 366              		.cfi_def_cfa_offset 104
+ 185:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 367              		.loc 1 185 3 view .LVU71
+ 185:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 368              		.loc 1 185 22 is_stmt 0 view .LVU72
+ 369 0004 3022     		movs	r2, #48
+ 370 0006 0021     		movs	r1, #0
+ 371 0008 0DEB0200 		add	r0, sp, r2
+ 372 000c FFF7FEFF 		bl	memset
+ 373              	.LVL28:
+ 186:Src/main.c    ****   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+ 374              		.loc 1 186 3 is_stmt 1 view .LVU73
+ 186:Src/main.c    ****   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+ 375              		.loc 1 186 22 is_stmt 0 view .LVU74
+ 376 0010 0023     		movs	r3, #0
+ 377 0012 0793     		str	r3, [sp, #28]
+ 378 0014 0893     		str	r3, [sp, #32]
+ 379 0016 0993     		str	r3, [sp, #36]
+ 380 0018 0A93     		str	r3, [sp, #40]
+ 381 001a 0B93     		str	r3, [sp, #44]
+ 187:Src/main.c    **** 
+ 382              		.loc 1 187 3 is_stmt 1 view .LVU75
+ 187:Src/main.c    **** 
+ 383              		.loc 1 187 28 is_stmt 0 view .LVU76
+ 384 001c 0393     		str	r3, [sp, #12]
+ 385 001e 0493     		str	r3, [sp, #16]
+ 386 0020 0593     		str	r3, [sp, #20]
+ 387 0022 0693     		str	r3, [sp, #24]
+ 191:Src/main.c    ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+ 388              		.loc 1 191 3 is_stmt 1 view .LVU77
+ 389              	.LBB18:
+ 191:Src/main.c    ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+ 390              		.loc 1 191 3 view .LVU78
+ 391 0024 0193     		str	r3, [sp, #4]
+ 191:Src/main.c    ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+ 392              		.loc 1 191 3 view .LVU79
+ 393 0026 284A     		ldr	r2, .L38
+ 394 0028 116C     		ldr	r1, [r2, #64]
+ 395 002a 41F08051 		orr	r1, r1, #268435456
+ 396 002e 1164     		str	r1, [r2, #64]
+ 191:Src/main.c    ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+ 397              		.loc 1 191 3 view .LVU80
+ 398 0030 126C     		ldr	r2, [r2, #64]
+ 399 0032 02F08052 		and	r2, r2, #268435456
+ 400 0036 0192     		str	r2, [sp, #4]
+ 191:Src/main.c    ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+ 401              		.loc 1 191 3 view .LVU81
+ 402 0038 019A     		ldr	r2, [sp, #4]
+ 403              	.LBE18:
+ 191:Src/main.c    ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+ 404              		.loc 1 191 3 view .LVU82
+ 192:Src/main.c    ****   /** Initializes the RCC Oscillators according to the specified parameters
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 22
+
+
+ 405              		.loc 1 192 3 view .LVU83
+ 406              	.LBB19:
+ 192:Src/main.c    ****   /** Initializes the RCC Oscillators according to the specified parameters
+ 407              		.loc 1 192 3 view .LVU84
+ 408 003a 0293     		str	r3, [sp, #8]
+ 192:Src/main.c    ****   /** Initializes the RCC Oscillators according to the specified parameters
+ 409              		.loc 1 192 3 view .LVU85
+ 410 003c 234B     		ldr	r3, .L38+4
+ 411 003e 1A68     		ldr	r2, [r3]
+ 412 0040 42F48042 		orr	r2, r2, #16384
+ 413 0044 1A60     		str	r2, [r3]
+ 192:Src/main.c    ****   /** Initializes the RCC Oscillators according to the specified parameters
+ 414              		.loc 1 192 3 view .LVU86
+ 415 0046 1B68     		ldr	r3, [r3]
+ 416 0048 03F48043 		and	r3, r3, #16384
+ 417 004c 0293     		str	r3, [sp, #8]
+ 192:Src/main.c    ****   /** Initializes the RCC Oscillators according to the specified parameters
+ 418              		.loc 1 192 3 view .LVU87
+ 419 004e 029B     		ldr	r3, [sp, #8]
+ 420              	.LBE19:
+ 192:Src/main.c    ****   /** Initializes the RCC Oscillators according to the specified parameters
+ 421              		.loc 1 192 3 view .LVU88
+ 196:Src/main.c    ****                               |RCC_OSCILLATORTYPE_LSE;
+ 422              		.loc 1 196 3 view .LVU89
+ 196:Src/main.c    ****                               |RCC_OSCILLATORTYPE_LSE;
+ 423              		.loc 1 196 36 is_stmt 0 view .LVU90
+ 424 0050 0D23     		movs	r3, #13
+ 425 0052 0C93     		str	r3, [sp, #48]
+ 198:Src/main.c    ****   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+ 426              		.loc 1 198 3 is_stmt 1 view .LVU91
+ 198:Src/main.c    ****   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+ 427              		.loc 1 198 30 is_stmt 0 view .LVU92
+ 428 0054 4FF48033 		mov	r3, #65536
+ 429 0058 0D93     		str	r3, [sp, #52]
+ 199:Src/main.c    ****   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+ 430              		.loc 1 199 3 is_stmt 1 view .LVU93
+ 199:Src/main.c    ****   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+ 431              		.loc 1 199 30 is_stmt 0 view .LVU94
+ 432 005a 0123     		movs	r3, #1
+ 433 005c 0E93     		str	r3, [sp, #56]
+ 200:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 434              		.loc 1 200 3 is_stmt 1 view .LVU95
+ 200:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 435              		.loc 1 200 30 is_stmt 0 view .LVU96
+ 436 005e 1193     		str	r3, [sp, #68]
+ 201:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 437              		.loc 1 201 3 is_stmt 1 view .LVU97
+ 201:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 438              		.loc 1 201 34 is_stmt 0 view .LVU98
+ 439 0060 0223     		movs	r3, #2
+ 440 0062 1293     		str	r3, [sp, #72]
+ 202:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLM = 25;
+ 441              		.loc 1 202 3 is_stmt 1 view .LVU99
+ 202:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLM = 25;
+ 442              		.loc 1 202 35 is_stmt 0 view .LVU100
+ 443 0064 4FF48002 		mov	r2, #4194304
+ 444 0068 1392     		str	r2, [sp, #76]
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 23
+
+
+ 203:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLN = 336;
+ 445              		.loc 1 203 3 is_stmt 1 view .LVU101
+ 203:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLN = 336;
+ 446              		.loc 1 203 30 is_stmt 0 view .LVU102
+ 447 006a 1922     		movs	r2, #25
+ 448 006c 1492     		str	r2, [sp, #80]
+ 204:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+ 449              		.loc 1 204 3 is_stmt 1 view .LVU103
+ 204:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+ 450              		.loc 1 204 30 is_stmt 0 view .LVU104
+ 451 006e 4FF4A872 		mov	r2, #336
+ 452 0072 1592     		str	r2, [sp, #84]
+ 205:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLQ = 7;
+ 453              		.loc 1 205 3 is_stmt 1 view .LVU105
+ 205:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLQ = 7;
+ 454              		.loc 1 205 30 is_stmt 0 view .LVU106
+ 455 0074 1693     		str	r3, [sp, #88]
+ 206:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 456              		.loc 1 206 3 is_stmt 1 view .LVU107
+ 206:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 457              		.loc 1 206 30 is_stmt 0 view .LVU108
+ 458 0076 0723     		movs	r3, #7
+ 459 0078 1793     		str	r3, [sp, #92]
+ 207:Src/main.c    ****   {
+ 460              		.loc 1 207 3 is_stmt 1 view .LVU109
+ 207:Src/main.c    ****   {
+ 461              		.loc 1 207 7 is_stmt 0 view .LVU110
+ 462 007a 0CA8     		add	r0, sp, #48
+ 463 007c FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 464              	.LVL29:
+ 207:Src/main.c    ****   {
+ 465              		.loc 1 207 6 view .LVU111
+ 466 0080 E0B9     		cbnz	r0, .L35
+ 213:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 467              		.loc 1 213 3 is_stmt 1 view .LVU112
+ 213:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 468              		.loc 1 213 31 is_stmt 0 view .LVU113
+ 469 0082 0F23     		movs	r3, #15
+ 470 0084 0793     		str	r3, [sp, #28]
+ 215:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 471              		.loc 1 215 3 is_stmt 1 view .LVU114
+ 215:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 472              		.loc 1 215 34 is_stmt 0 view .LVU115
+ 473 0086 0223     		movs	r3, #2
+ 474 0088 0893     		str	r3, [sp, #32]
+ 216:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+ 475              		.loc 1 216 3 is_stmt 1 view .LVU116
+ 216:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+ 476              		.loc 1 216 35 is_stmt 0 view .LVU117
+ 477 008a 0023     		movs	r3, #0
+ 478 008c 0993     		str	r3, [sp, #36]
+ 217:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+ 479              		.loc 1 217 3 is_stmt 1 view .LVU118
+ 217:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+ 480              		.loc 1 217 36 is_stmt 0 view .LVU119
+ 481 008e 4FF4A053 		mov	r3, #5120
+ 482 0092 0A93     		str	r3, [sp, #40]
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 24
+
+
+ 218:Src/main.c    **** 
+ 483              		.loc 1 218 3 is_stmt 1 view .LVU120
+ 218:Src/main.c    **** 
+ 484              		.loc 1 218 36 is_stmt 0 view .LVU121
+ 485 0094 4FF48053 		mov	r3, #4096
+ 486 0098 0B93     		str	r3, [sp, #44]
+ 220:Src/main.c    ****   {
+ 487              		.loc 1 220 3 is_stmt 1 view .LVU122
+ 220:Src/main.c    ****   {
+ 488              		.loc 1 220 7 is_stmt 0 view .LVU123
+ 489 009a 0521     		movs	r1, #5
+ 490 009c 07A8     		add	r0, sp, #28
+ 491 009e FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 492              	.LVL30:
+ 220:Src/main.c    ****   {
+ 493              		.loc 1 220 6 view .LVU124
+ 494 00a2 68B9     		cbnz	r0, .L36
+ 224:Src/main.c    ****   PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+ 495              		.loc 1 224 3 is_stmt 1 view .LVU125
+ 224:Src/main.c    ****   PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+ 496              		.loc 1 224 44 is_stmt 0 view .LVU126
+ 497 00a4 0223     		movs	r3, #2
+ 498 00a6 0393     		str	r3, [sp, #12]
+ 225:Src/main.c    ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+ 499              		.loc 1 225 3 is_stmt 1 view .LVU127
+ 225:Src/main.c    ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+ 500              		.loc 1 225 41 is_stmt 0 view .LVU128
+ 501 00a8 4FF48073 		mov	r3, #256
+ 502 00ac 0693     		str	r3, [sp, #24]
+ 226:Src/main.c    ****   {
+ 503              		.loc 1 226 3 is_stmt 1 view .LVU129
+ 226:Src/main.c    ****   {
+ 504              		.loc 1 226 7 is_stmt 0 view .LVU130
+ 505 00ae 03A8     		add	r0, sp, #12
+ 506 00b0 FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
+ 507              	.LVL31:
+ 226:Src/main.c    ****   {
+ 508              		.loc 1 226 6 view .LVU131
+ 509 00b4 30B9     		cbnz	r0, .L37
+ 230:Src/main.c    **** 
+ 510              		.loc 1 230 1 view .LVU132
+ 511 00b6 19B0     		add	sp, sp, #100
+ 512              	.LCFI6:
+ 513              		.cfi_remember_state
+ 514              		.cfi_def_cfa_offset 4
+ 515              		@ sp needed
+ 516 00b8 5DF804FB 		ldr	pc, [sp], #4
+ 517              	.L35:
+ 518              	.LCFI7:
+ 519              		.cfi_restore_state
+ 209:Src/main.c    ****   }
+ 520              		.loc 1 209 5 is_stmt 1 view .LVU133
+ 521 00bc FFF7FEFF 		bl	Error_Handler
+ 522              	.LVL32:
+ 523              	.L36:
+ 222:Src/main.c    ****   }
+ 524              		.loc 1 222 5 view .LVU134
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 25
+
+
+ 525 00c0 FFF7FEFF 		bl	Error_Handler
+ 526              	.LVL33:
+ 527              	.L37:
+ 228:Src/main.c    ****   }
+ 528              		.loc 1 228 5 view .LVU135
+ 529 00c4 FFF7FEFF 		bl	Error_Handler
+ 530              	.LVL34:
+ 531              	.L39:
+ 532              		.align	2
+ 533              	.L38:
+ 534 00c8 00380240 		.word	1073887232
+ 535 00cc 00700040 		.word	1073770496
+ 536              		.cfi_endproc
+ 537              	.LFE344:
+ 539              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+ 540              		.align	2
+ 541              	.LC3:
+ 542 0000 48656C6C 		.ascii	"Hello World\000"
+ 542      6F20576F 
+ 542      726C6400 
+ 543              		.section	.text.main,"ax",%progbits
+ 544              		.align	1
+ 545              		.global	main
+ 546              		.syntax unified
+ 547              		.thumb
+ 548              		.thumb_func
+ 549              		.fpu fpv4-sp-d16
+ 551              	main:
+ 552              	.LFB343:
+  87:Src/main.c    ****   /* USER CODE BEGIN 1 */
+ 553              		.loc 1 87 1 view -0
+ 554              		.cfi_startproc
+ 555              		@ args = 0, pretend = 0, frame = 56
+ 556              		@ frame_needed = 0, uses_anonymous_args = 0
+ 557 0000 10B5     		push	{r4, lr}
+ 558              	.LCFI8:
+ 559              		.cfi_def_cfa_offset 8
+ 560              		.cfi_offset 4, -8
+ 561              		.cfi_offset 14, -4
+ 562 0002 8EB0     		sub	sp, sp, #56
+ 563              	.LCFI9:
+ 564              		.cfi_def_cfa_offset 64
+  95:Src/main.c    **** 
+ 565              		.loc 1 95 3 view .LVU137
+ 566 0004 FFF7FEFF 		bl	HAL_Init
+ 567              	.LVL35:
+ 102:Src/main.c    **** 
+ 568              		.loc 1 102 3 view .LVU138
+ 569 0008 FFF7FEFF 		bl	SystemClock_Config
+ 570              	.LVL36:
+ 109:Src/main.c    ****   //MX_CAN1_Init();
+ 571              		.loc 1 109 3 view .LVU139
+ 572 000c FFF7FEFF 		bl	MX_GPIO_Init
+ 573              	.LVL37:
+ 111:Src/main.c    ****   lv_init(); 
+ 574              		.loc 1 111 3 view .LVU140
+ 575 0010 FFF7FEFF 		bl	MX_FSMC_Init
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 26
+
+
+ 576              	.LVL38:
+ 112:Src/main.c    ****   //tft_init();
+ 577              		.loc 1 112 3 view .LVU141
+ 578 0014 FFF7FEFF 		bl	lv_init
+ 579              	.LVL39:
+ 114:Src/main.c    **** 
+ 580              		.loc 1 114 3 view .LVU142
+ 581 0018 FFF7FEFF 		bl	LCD_Init
+ 582              	.LVL40:
+ 116:Src/main.c    ****   GT911_Init(sampleConfig);
+ 583              		.loc 1 116 3 view .LVU143
+ 584 001c FFF7FEFF 		bl	MX_I2C1_Init
+ 585              	.LVL41:
+ 117:Src/main.c    **** 
+ 586              		.loc 1 117 3 view .LVU144
+ 587 0020 214B     		ldr	r3, .L44
+ 588 0022 93E80700 		ldm	r3, {r0, r1, r2}
+ 589 0026 FFF7FEFF 		bl	GT911_Init
+ 590              	.LVL42:
+ 119:Src/main.c    ****   static lv_color_t buf_1[480 * 10];
+ 591              		.loc 1 119 3 view .LVU145
+ 120:Src/main.c    ****   static lv_color_t buf_2[480 * 10];
+ 592              		.loc 1 120 3 view .LVU146
+ 121:Src/main.c    ****   lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, 480 * 10);
+ 593              		.loc 1 121 3 view .LVU147
+ 122:Src/main.c    **** 
+ 594              		.loc 1 122 3 view .LVU148
+ 595 002a 204C     		ldr	r4, .L44+4
+ 596 002c 4FF49653 		mov	r3, #4800
+ 597 0030 1F4A     		ldr	r2, .L44+8
+ 598 0032 2049     		ldr	r1, .L44+12
+ 599 0034 2046     		mov	r0, r4
+ 600 0036 FFF7FEFF 		bl	lv_disp_draw_buf_init
+ 601              	.LVL43:
+ 124:Src/main.c    ****   lv_disp_drv_init(&disp_drv);
+ 602              		.loc 1 124 3 view .LVU149
+ 125:Src/main.c    ****   disp_drv.draw_buf = &disp_buf;
+ 603              		.loc 1 125 3 view .LVU150
+ 604 003a 6846     		mov	r0, sp
+ 605 003c FFF7FEFF 		bl	lv_disp_drv_init
+ 606              	.LVL44:
+ 126:Src/main.c    ****   disp_drv.flush_cb = SSD1963_flush;
+ 607              		.loc 1 126 3 view .LVU151
+ 126:Src/main.c    ****   disp_drv.flush_cb = SSD1963_flush;
+ 608              		.loc 1 126 21 is_stmt 0 view .LVU152
+ 609 0040 0194     		str	r4, [sp, #4]
+ 127:Src/main.c    ****   disp_drv.hor_res = 480;
+ 610              		.loc 1 127 3 is_stmt 1 view .LVU153
+ 127:Src/main.c    ****   disp_drv.hor_res = 480;
+ 611              		.loc 1 127 21 is_stmt 0 view .LVU154
+ 612 0042 1D4B     		ldr	r3, .L44+16
+ 613 0044 0393     		str	r3, [sp, #12]
+ 128:Src/main.c    ****   disp_drv.ver_res = 272;
+ 614              		.loc 1 128 3 is_stmt 1 view .LVU155
+ 128:Src/main.c    ****   disp_drv.ver_res = 272;
+ 615              		.loc 1 128 20 is_stmt 0 view .LVU156
+ 616 0046 4FF4F073 		mov	r3, #480
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 27
+
+
+ 617 004a ADF80030 		strh	r3, [sp]	@ movhi
+ 129:Src/main.c    ****   lv_disp_drv_register(&disp_drv);
+ 618              		.loc 1 129 3 is_stmt 1 view .LVU157
+ 129:Src/main.c    ****   lv_disp_drv_register(&disp_drv);
+ 619              		.loc 1 129 20 is_stmt 0 view .LVU158
+ 620 004e 4FF48873 		mov	r3, #272
+ 621 0052 ADF80230 		strh	r3, [sp, #2]	@ movhi
+ 130:Src/main.c    **** 
+ 622              		.loc 1 130 3 is_stmt 1 view .LVU159
+ 623 0056 6846     		mov	r0, sp
+ 624 0058 FFF7FEFF 		bl	lv_disp_drv_register
+ 625              	.LVL45:
+ 132:Src/main.c    ****   lv_indev_drv_init(&indev_drv);
+ 626              		.loc 1 132 3 view .LVU160
+ 133:Src/main.c    ****   indev_drv.read_cb = touch_read;
+ 627              		.loc 1 133 3 view .LVU161
+ 628 005c 174C     		ldr	r4, .L44+20
+ 629 005e 2046     		mov	r0, r4
+ 630 0060 FFF7FEFF 		bl	lv_indev_drv_init
+ 631              	.LVL46:
+ 134:Src/main.c    ****   indev_drv.type = LV_INDEV_TYPE_POINTER;
+ 632              		.loc 1 134 3 view .LVU162
+ 134:Src/main.c    ****   indev_drv.type = LV_INDEV_TYPE_POINTER;
+ 633              		.loc 1 134 21 is_stmt 0 view .LVU163
+ 634 0064 164B     		ldr	r3, .L44+24
+ 635 0066 6360     		str	r3, [r4, #4]
+ 135:Src/main.c    ****   lv_indev_drv_register(&indev_drv);
+ 636              		.loc 1 135 3 is_stmt 1 view .LVU164
+ 135:Src/main.c    ****   lv_indev_drv_register(&indev_drv);
+ 637              		.loc 1 135 18 is_stmt 0 view .LVU165
+ 638 0068 0123     		movs	r3, #1
+ 639 006a 2370     		strb	r3, [r4]
+ 136:Src/main.c    ****   //lv_example_get_started_1();
+ 640              		.loc 1 136 3 is_stmt 1 view .LVU166
+ 641 006c 2046     		mov	r0, r4
+ 642 006e FFF7FEFF 		bl	lv_indev_drv_register
+ 643              	.LVL47:
+ 138:Src/main.c    ****   //MX_I2C1_Init();
+ 644              		.loc 1 138 3 view .LVU167
+ 645 0072 FFF7FEFF 		bl	lv_demo_widgets
+ 646              	.LVL48:
+ 150:Src/main.c    ****   /* USER CODE BEGIN 2 */
+ 647              		.loc 1 150 3 view .LVU168
+ 648 0076 FFF7FEFF 		bl	MX_USB_DEVICE_Init
+ 649              	.LVL49:
+ 157:Src/main.c    ****   uint8_t buff[2];
+ 650              		.loc 1 157 3 view .LVU169
+ 157:Src/main.c    ****   uint8_t buff[2];
+ 651              		.loc 1 157 19 is_stmt 0 view .LVU170
+ 652 007a FFF7FEFF 		bl	HAL_GetTick
+ 653              	.LVL50:
+ 654 007e 0446     		mov	r4, r0
+ 655              	.LVL51:
+ 656              	.L41:
+ 158:Src/main.c    ****   uint32_t id;
+ 657              		.loc 1 158 3 is_stmt 1 view .LVU171
+ 159:Src/main.c    ****   uint8_t status;
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 28
+
+
+ 658              		.loc 1 159 3 view .LVU172
+ 160:Src/main.c    ****   while (1)
+ 659              		.loc 1 160 3 view .LVU173
+ 161:Src/main.c    ****   {
+ 660              		.loc 1 161 3 view .LVU174
+ 164:Src/main.c    ****     GT911_ReadTouch(cordinate, &number);
+ 661              		.loc 1 164 5 view .LVU175
+ 662              	.LBB20:
+ 663              	.LBI20:
+ 664              		.file 5 "Inc/../lvgl/src/lv_api_map.h"
+   1:Inc/../lvgl/src/lv_api_map.h **** /**
+   2:Inc/../lvgl/src/lv_api_map.h ****  * @file lv_api_map.h
+   3:Inc/../lvgl/src/lv_api_map.h ****  *
+   4:Inc/../lvgl/src/lv_api_map.h ****  */
+   5:Inc/../lvgl/src/lv_api_map.h **** 
+   6:Inc/../lvgl/src/lv_api_map.h **** #ifndef LV_API_MAP_H
+   7:Inc/../lvgl/src/lv_api_map.h **** #define LV_API_MAP_H
+   8:Inc/../lvgl/src/lv_api_map.h **** 
+   9:Inc/../lvgl/src/lv_api_map.h **** #ifdef __cplusplus
+  10:Inc/../lvgl/src/lv_api_map.h **** extern "C" {
+  11:Inc/../lvgl/src/lv_api_map.h **** #endif
+  12:Inc/../lvgl/src/lv_api_map.h **** 
+  13:Inc/../lvgl/src/lv_api_map.h **** /*********************
+  14:Inc/../lvgl/src/lv_api_map.h ****  *      INCLUDES
+  15:Inc/../lvgl/src/lv_api_map.h ****  *********************/
+  16:Inc/../lvgl/src/lv_api_map.h **** #include "../lvgl.h"
+  17:Inc/../lvgl/src/lv_api_map.h **** 
+  18:Inc/../lvgl/src/lv_api_map.h **** /*********************
+  19:Inc/../lvgl/src/lv_api_map.h ****  *      DEFINES
+  20:Inc/../lvgl/src/lv_api_map.h ****  *********************/
+  21:Inc/../lvgl/src/lv_api_map.h **** 
+  22:Inc/../lvgl/src/lv_api_map.h **** #define LV_NO_TASK_READY LV_NO_TIMER_READY
+  23:Inc/../lvgl/src/lv_api_map.h **** #define LV_INDEV_STATE_REL LV_INDEV_STATE_RELEASED
+  24:Inc/../lvgl/src/lv_api_map.h **** #define LV_INDEV_STATE_PR LV_INDEV_STATE_PRESSED
+  25:Inc/../lvgl/src/lv_api_map.h **** 
+  26:Inc/../lvgl/src/lv_api_map.h **** /**********************
+  27:Inc/../lvgl/src/lv_api_map.h ****  *      TYPEDEFS
+  28:Inc/../lvgl/src/lv_api_map.h ****  **********************/
+  29:Inc/../lvgl/src/lv_api_map.h **** 
+  30:Inc/../lvgl/src/lv_api_map.h **** /**********************
+  31:Inc/../lvgl/src/lv_api_map.h ****  * GLOBAL PROTOTYPES
+  32:Inc/../lvgl/src/lv_api_map.h ****  **********************/
+  33:Inc/../lvgl/src/lv_api_map.h **** 
+  34:Inc/../lvgl/src/lv_api_map.h **** static inline LV_ATTRIBUTE_TIMER_HANDLER uint32_t lv_task_handler(void)
+ 665              		.loc 5 34 51 view .LVU176
+ 666              	.LBB21:
+  35:Inc/../lvgl/src/lv_api_map.h **** {
+  36:Inc/../lvgl/src/lv_api_map.h ****     return lv_timer_handler();
+ 667              		.loc 5 36 5 view .LVU177
+ 668              		.loc 5 36 12 is_stmt 0 view .LVU178
+ 669 0080 FFF7FEFF 		bl	lv_timer_handler
+ 670              	.LVL52:
+ 671              	.LBE21:
+ 672              	.LBE20:
+ 165:Src/main.c    ****     if(HAL_GetTick() - tick >= 1000)
+ 673              		.loc 1 165 5 is_stmt 1 view .LVU179
+ 674 0084 0F49     		ldr	r1, .L44+28
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 29
+
+
+ 675 0086 1048     		ldr	r0, .L44+32
+ 676 0088 FFF7FEFF 		bl	GT911_ReadTouch
+ 677              	.LVL53:
+ 166:Src/main.c    ****     {
+ 678              		.loc 1 166 5 view .LVU180
+ 166:Src/main.c    ****     {
+ 679              		.loc 1 166 8 is_stmt 0 view .LVU181
+ 680 008c FFF7FEFF 		bl	HAL_GetTick
+ 681              	.LVL54:
+ 166:Src/main.c    ****     {
+ 682              		.loc 1 166 22 view .LVU182
+ 683 0090 031B     		subs	r3, r0, r4
+ 166:Src/main.c    ****     {
+ 684              		.loc 1 166 7 view .LVU183
+ 685 0092 B3F57A7F 		cmp	r3, #1000
+ 686 0096 F3D3     		bcc	.L41
+ 171:Src/main.c    ****       tick = HAL_GetTick();
+ 687              		.loc 1 171 7 is_stmt 1 view .LVU184
+ 688 0098 0C48     		ldr	r0, .L44+36
+ 689 009a FFF7FEFF 		bl	puts
+ 690              	.LVL55:
+ 172:Src/main.c    ****     }
+ 691              		.loc 1 172 7 view .LVU185
+ 172:Src/main.c    ****     }
+ 692              		.loc 1 172 14 is_stmt 0 view .LVU186
+ 693 009e FFF7FEFF 		bl	HAL_GetTick
+ 694              	.LVL56:
+ 695 00a2 0446     		mov	r4, r0
+ 696              	.LVL57:
+ 172:Src/main.c    ****     }
+ 697              		.loc 1 172 14 view .LVU187
+ 698 00a4 ECE7     		b	.L41
+ 699              	.L45:
+ 700 00a6 00BF     		.align	2
+ 701              	.L44:
+ 702 00a8 00000000 		.word	.LANCHOR2
+ 703 00ac 00000000 		.word	.LANCHOR3
+ 704 00b0 00000000 		.word	buf_2.1
+ 705 00b4 00000000 		.word	buf_1.2
+ 706 00b8 00000000 		.word	SSD1963_flush
+ 707 00bc 00000000 		.word	.LANCHOR4
+ 708 00c0 00000000 		.word	touch_read
+ 709 00c4 00000000 		.word	.LANCHOR5
+ 710 00c8 00000000 		.word	.LANCHOR1
+ 711 00cc 00000000 		.word	.LC3
+ 712              		.cfi_endproc
+ 713              	.LFE343:
+ 715              		.global	touch_int
+ 716              		.global	number
+ 717              		.global	cordinate
+ 718              		.global	sampleConfig
+ 719              		.section	.bss.buf_1.2,"aw",%nobits
+ 720              		.align	2
+ 723              	buf_1.2:
+ 724 0000 00000000 		.space	19200
+ 724      00000000 
+ 724      00000000 
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 30
+
+
+ 724      00000000 
+ 724      00000000 
+ 725              		.section	.bss.buf_2.1,"aw",%nobits
+ 726              		.align	2
+ 729              	buf_2.1:
+ 730 0000 00000000 		.space	19200
+ 730      00000000 
+ 730      00000000 
+ 730      00000000 
+ 730      00000000 
+ 731              		.section	.bss.cordinate,"aw",%nobits
+ 732              		.align	2
+ 733              		.set	.LANCHOR1,. + 0
+ 736              	cordinate:
+ 737 0000 00000000 		.space	20
+ 737      00000000 
+ 737      00000000 
+ 737      00000000 
+ 737      00000000 
+ 738              		.section	.bss.disp_buf.3,"aw",%nobits
+ 739              		.align	2
+ 740              		.set	.LANCHOR3,. + 0
+ 743              	disp_buf.3:
+ 744 0000 00000000 		.space	36
+ 744      00000000 
+ 744      00000000 
+ 744      00000000 
+ 744      00000000 
+ 745              		.section	.bss.indev_drv.0,"aw",%nobits
+ 746              		.align	2
+ 747              		.set	.LANCHOR4,. + 0
+ 750              	indev_drv.0:
+ 751 0000 00000000 		.space	32
+ 751      00000000 
+ 751      00000000 
+ 751      00000000 
+ 751      00000000 
+ 752              		.section	.bss.number,"aw",%nobits
+ 753              		.set	.LANCHOR5,. + 0
+ 756              	number:
+ 757 0000 00       		.space	1
+ 758              		.section	.bss.touch_int,"aw",%nobits
+ 759              		.set	.LANCHOR0,. + 0
+ 762              	touch_int:
+ 763 0000 00       		.space	1
+ 764              		.section	.data.sampleConfig,"aw"
+ 765              		.align	2
+ 766              		.set	.LANCHOR2,. + 0
+ 769              	sampleConfig:
+ 770 0000 E001     		.short	480
+ 771 0002 1001     		.short	272
+ 772 0004 01       		.byte	1
+ 773 0005 01       		.byte	1
+ 774 0006 01       		.byte	1
+ 775 0007 01       		.byte	1
+ 776 0008 01       		.byte	1
+ 777 0009 00       		.space	1
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 31
+
+
+ 778              		.text
+ 779              	.Letext0:
+ 780              		.file 6 "/Users/nhantt/tools/stm32/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/machin
+ 781              		.file 7 "/Users/nhantt/tools/stm32/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/sys/_s
+ 782              		.file 8 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Device/ST/STM32F
+ 783              		.file 9 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/STM32F4xx_HAL_Driver/I
+ 784              		.file 10 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/STM32F4xx_HAL_Driver/
+ 785              		.file 11 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/STM32F4xx_HAL_Driver/
+ 786              		.file 12 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/
+ 787              		.file 13 "Inc/../lvgl/src/misc/lv_ll.h"
+ 788              		.file 14 "Inc/../lvgl/src/misc/lv_timer.h"
+ 789              		.file 15 "Inc/../lvgl/src/hal/../misc/lv_color.h"
+ 790              		.file 16 "Inc/../lvgl/src/hal/../misc/lv_area.h"
+ 791              		.file 17 "Inc/../lvgl/src/hal/lv_hal_disp.h"
+ 792              		.file 18 "Inc/../lvgl/src/core/lv_theme.h"
+ 793              		.file 19 "Inc/../lvgl/src/core/lv_obj.h"
+ 794              		.file 20 "Inc/../lvgl/src/hal/lv_hal_indev.h"
+ 795              		.file 21 "Inc/../lvgl/src/core/lv_group.h"
+ 796              		.file 22 "Inc/../lvgl/src/core/../misc/../font/lv_font.h"
+ 797              		.file 23 "Inc/../lvgl/src/core/../misc/lv_style.h"
+ 798              		.file 24 "Inc/../lvgl/src/core/lv_obj_scroll.h"
+ 799              		.file 25 "Inc/../lvgl/src/core/lv_obj_style.h"
+ 800              		.file 26 "Inc/../lvgl/src/core/lv_obj_class.h"
+ 801              		.file 27 "Inc/../lvgl/src/core/lv_event.h"
+ 802              		.file 28 "Inc/../lvgl/src/widgets/lv_bar.h"
+ 803              		.file 29 "Inc/../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h"
+ 804              		.file 30 "Inc/gt911.h"
+ 805              		.file 31 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/
+ 806              		.file 32 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/STM32F4xx_HAL_Driver/
+ 807              		.file 33 "Inc/gpio.h"
+ 808              		.file 34 "Inc/fsmc.h"
+ 809              		.file 35 "Inc/ssd1963_fsmc.h"
+ 810              		.file 36 "Inc/i2c.h"
+ 811              		.file 37 "Src/../lv_demos/src/lv_demo_widgets/lv_demo_widgets.h"
+ 812              		.file 38 "USB_DEVICE/App/usb_device.h"
+ 813              		.file 39 "<built-in>"
+ 814              		.file 40 "Inc/../lvgl/src/widgets/lv_btn.h"
+ 815              		.file 41 "Inc/../lvgl/src/widgets/lv_label.h"
+ 816              		.file 42 "/Users/nhantt/tools/stm32/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/stdio
+ 817              		.file 43 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 32
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:18     .rodata.touch_read.str1.4:0000000000000000 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:22     .text.touch_read:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:30     .text.touch_read:0000000000000000 touch_read
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:94     .text.touch_read:0000000000000034 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:101    .rodata.HAL_GPIO_EXTI_Callback.str1.4:0000000000000000 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:105    .text.HAL_GPIO_EXTI_Callback:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:112    .text.HAL_GPIO_EXTI_Callback:0000000000000000 HAL_GPIO_EXTI_Callback
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:147    .text.HAL_GPIO_EXTI_Callback:0000000000000018 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:153    .rodata.lv_example_get_started_1.str1.4:0000000000000000 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:157    .text.lv_example_get_started_1:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:164    .text.lv_example_get_started_1:0000000000000000 lv_example_get_started_1
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:239    .text.lv_example_get_started_1:0000000000000040 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:244    .text._write:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:251    .text._write:0000000000000000 _write
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:303    .text._write:0000000000000020 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:308    .text.Error_Handler:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:315    .text.Error_Handler:0000000000000000 Error_Handler
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:347    .text.SystemClock_Config:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:354    .text.SystemClock_Config:0000000000000000 SystemClock_Config
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:534    .text.SystemClock_Config:00000000000000c8 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:540    .rodata.main.str1.4:0000000000000000 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:544    .text.main:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:551    .text.main:0000000000000000 main
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:702    .text.main:00000000000000a8 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:729    .bss.buf_2.1:0000000000000000 buf_2.1
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:723    .bss.buf_1.2:0000000000000000 buf_1.2
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:762    .bss.touch_int:0000000000000000 touch_int
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:756    .bss.number:0000000000000000 number
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:736    .bss.cordinate:0000000000000000 cordinate
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:769    .data.sampleConfig:0000000000000000 sampleConfig
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:720    .bss.buf_1.2:0000000000000000 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:726    .bss.buf_2.1:0000000000000000 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:732    .bss.cordinate:0000000000000000 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:739    .bss.disp_buf.3:0000000000000000 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:743    .bss.disp_buf.3:0000000000000000 disp_buf.3
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:746    .bss.indev_drv.0:0000000000000000 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:750    .bss.indev_drv.0:0000000000000000 indev_drv.0
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:757    .bss.number:0000000000000000 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:763    .bss.touch_int:0000000000000000 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s:765    .data.sampleConfig:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+printf
+puts
+lv_disp_get_default
+lv_disp_get_scr_act
+lv_btn_create
+lv_obj_set_pos
+lv_obj_set_size
+lv_label_create
+lv_label_set_text
+lv_obj_align
+CDC_Transmit_FS
+errno
+memset
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccCAELhr.s 			page 33
+
+
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+HAL_RCCEx_PeriphCLKConfig
+HAL_Init
+MX_GPIO_Init
+MX_FSMC_Init
+lv_init
+LCD_Init
+MX_I2C1_Init
+GT911_Init
+lv_disp_draw_buf_init
+lv_disp_drv_init
+lv_disp_drv_register
+lv_indev_drv_init
+lv_indev_drv_register
+lv_demo_widgets
+MX_USB_DEVICE_Init
+HAL_GetTick
+lv_timer_handler
+GT911_ReadTouch
+SSD1963_flush

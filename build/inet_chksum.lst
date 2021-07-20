@@ -1,0 +1,1633 @@
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"inet_chksum.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.lwip_standard_chksum,"ax",%progbits
+  18              		.align	1
+  19              		.global	lwip_standard_chksum
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	lwip_standard_chksum:
+  27              	.LVL0:
+  28              	.LFB155:
+  29              		.file 1 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/s
+   1:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /**
+   2:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @file
+   3:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Internet checksum functions.\n
+   4:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+   5:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * These are some reference implementations of the checksum algorithm, with the
+   6:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * aim of being simple, correct and fully portable. Checksumming is the
+   7:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * first thing you would want to optimize for your platform. If you create
+   8:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * your own version, link it in and in your cc.h put:
+   9:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+  10:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * \#define LWIP_CHKSUM your_checksum_routine
+  11:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+  12:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Or you can select from the implementations below by defining
+  13:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * LWIP_CHKSUM_ALGORITHM to 1, 2 or 3.
+  14:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  */
+  15:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+  16:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /*
+  17:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+  18:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * All rights reserved.
+  19:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+  20:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Redistribution and use in source and binary forms, with or without modification,
+  21:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * are permitted provided that the following conditions are met:
+  22:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+  23:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * 1. Redistributions of source code must retain the above copyright notice,
+  24:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *    this list of conditions and the following disclaimer.
+  25:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice,
+  26:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *    this list of conditions and the following disclaimer in the documentation
+  27:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *    and/or other materials provided with the distribution.
+  28:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * 3. The name of the author may not be used to endorse or promote products
+  29:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *    derived from this software without specific prior written permission.
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 2
+
+
+  30:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+  31:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+  32:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  33:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+  34:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  35:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+  36:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  37:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  38:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+  39:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  40:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * OF SUCH DAMAGE.
+  41:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+  42:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * This file is part of the lwIP TCP/IP stack.
+  43:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+  44:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Author: Adam Dunkels <adam@sics.se>
+  45:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+  46:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  */
+  47:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+  48:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #include "lwip/opt.h"
+  49:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+  50:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #include "lwip/inet_chksum.h"
+  51:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #include "lwip/def.h"
+  52:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #include "lwip/ip_addr.h"
+  53:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+  54:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #include <string.h>
+  55:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+  56:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #ifndef LWIP_CHKSUM
+  57:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** # define LWIP_CHKSUM lwip_standard_chksum
+  58:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** # ifndef LWIP_CHKSUM_ALGORITHM
+  59:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #  define LWIP_CHKSUM_ALGORITHM 2
+  60:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** # endif
+  61:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** u16_t lwip_standard_chksum(const void *dataptr, int len);
+  62:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif
+  63:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /* If none set: */
+  64:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #ifndef LWIP_CHKSUM_ALGORITHM
+  65:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** # define LWIP_CHKSUM_ALGORITHM 0
+  66:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif
+  67:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+  68:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if (LWIP_CHKSUM_ALGORITHM == 1) /* Version #1 */
+  69:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /**
+  70:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * lwip checksum
+  71:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+  72:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param dataptr points to start of data to be summed at any boundary
+  73:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param len length of data to be summed
+  74:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @return host order (!) lwip checksum (non-inverted Internet sum)
+  75:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+  76:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @note accumulator size limits summable length to 64k
+  77:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @note host endianess is irrelevant (p3 RFC1071)
+  78:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  */
+  79:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** u16_t
+  80:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** lwip_standard_chksum(const void *dataptr, int len)
+  81:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** {
+  82:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t acc;
+  83:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u16_t src;
+  84:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   const u8_t *octetptr;
+  85:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+  86:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = 0;
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 3
+
+
+  87:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* dataptr may be at odd or even addresses */
+  88:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   octetptr = (const u8_t *)dataptr;
+  89:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   while (len > 1) {
+  90:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     /* declare first octet as most significant
+  91:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****        thus assume network order, ignoring host order */
+  92:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     src = (*octetptr) << 8;
+  93:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     octetptr++;
+  94:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     /* declare second octet as least significant */
+  95:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     src |= (*octetptr);
+  96:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     octetptr++;
+  97:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc += src;
+  98:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     len -= 2;
+  99:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 100:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   if (len > 0) {
+ 101:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     /* accumulate remaining octet */
+ 102:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     src = (*octetptr) << 8;
+ 103:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc += src;
+ 104:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 105:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* add deferred carry bits */
+ 106:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (acc >> 16) + (acc & 0x0000ffffUL);
+ 107:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   if ((acc & 0xffff0000UL) != 0) {
+ 108:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = (acc >> 16) + (acc & 0x0000ffffUL);
+ 109:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 110:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* This maybe a little confusing: reorder sum using lwip_htons()
+ 111:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****      instead of lwip_ntohs() since it has a little less call overhead.
+ 112:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****      The caller must invert bits for Internet sum ! */
+ 113:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   return lwip_htons((u16_t)acc);
+ 114:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 115:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif
+ 116:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 117:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if (LWIP_CHKSUM_ALGORITHM == 2) /* Alternative version #2 */
+ 118:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /*
+ 119:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Curt McDowell
+ 120:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Broadcom Corp.
+ 121:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * csm@broadcom.com
+ 122:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 123:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * IP checksum two bytes at a time with support for
+ 124:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * unaligned buffer.
+ 125:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Works for len up to and including 0x20000.
+ 126:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * by Curt McDowell, Broadcom Corp. 12/08/2005
+ 127:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 128:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param dataptr points to start of data to be summed at any boundary
+ 129:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param len length of data to be summed
+ 130:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @return host order (!) lwip checksum (non-inverted Internet sum)
+ 131:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  */
+ 132:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** u16_t
+ 133:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** lwip_standard_chksum(const void *dataptr, int len)
+ 134:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** {
+  30              		.loc 1 134 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 8
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  35              		.loc 1 134 1 is_stmt 0 view .LVU1
+  36 0000 10B4     		push	{r4}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 4
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 4
+
+
+  39              		.cfi_offset 4, -4
+  40 0002 83B0     		sub	sp, sp, #12
+  41              	.LCFI1:
+  42              		.cfi_def_cfa_offset 16
+ 135:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   const u8_t *pb = (const u8_t *)dataptr;
+  43              		.loc 1 135 3 is_stmt 1 view .LVU2
+  44              	.LVL1:
+ 136:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   const u16_t *ps;
+  45              		.loc 1 136 3 view .LVU3
+ 137:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u16_t t = 0;
+  46              		.loc 1 137 3 view .LVU4
+  47              		.loc 1 137 9 is_stmt 0 view .LVU5
+  48 0004 0023     		movs	r3, #0
+  49 0006 ADF80630 		strh	r3, [sp, #6]	@ movhi
+ 138:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t sum = 0;
+  50              		.loc 1 138 3 is_stmt 1 view .LVU6
+  51              	.LVL2:
+ 139:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   int odd = ((mem_ptr_t)pb & 1);
+  52              		.loc 1 139 3 view .LVU7
+ 140:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 141:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* Get aligned to u16_t */
+ 142:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   if (odd && len > 0) {
+  53              		.loc 1 142 3 view .LVU8
+  54              		.loc 1 142 6 is_stmt 0 view .LVU9
+  55 000a 10F00104 		ands	r4, r0, #1
+  56              	.LVL3:
+  57              		.loc 1 142 6 view .LVU10
+  58 000e 06D0     		beq	.L2
+  59              		.loc 1 142 11 discriminator 1 view .LVU11
+  60 0010 9942     		cmp	r1, r3
+  61 0012 04DD     		ble	.L2
+ 143:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     ((u8_t *)&t)[1] = *pb++;
+  62              		.loc 1 143 5 is_stmt 1 view .LVU12
+  63              	.LVL4:
+  64              		.loc 1 143 23 is_stmt 0 view .LVU13
+  65 0014 10F8013B 		ldrb	r3, [r0], #1	@ zero_extendqisi2
+  66              	.LVL5:
+  67              		.loc 1 143 21 view .LVU14
+  68 0018 8DF80730 		strb	r3, [sp, #7]
+ 144:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     len--;
+  69              		.loc 1 144 5 is_stmt 1 view .LVU15
+  70              		.loc 1 144 8 is_stmt 0 view .LVU16
+  71 001c 0139     		subs	r1, r1, #1
+  72              	.LVL6:
+  73              	.L2:
+ 145:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 146:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 147:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* Add the bulk of the data */
+ 148:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   ps = (const u16_t *)(const void *)pb;
+  74              		.loc 1 148 3 is_stmt 1 view .LVU17
+ 149:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   while (len > 1) {
+  75              		.loc 1 149 3 view .LVU18
+ 138:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   int odd = ((mem_ptr_t)pb & 1);
+  76              		.loc 1 138 9 is_stmt 0 view .LVU19
+  77 001e 0023     		movs	r3, #0
+  78              		.loc 1 149 9 view .LVU20
+  79 0020 03E0     		b	.L3
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 5
+
+
+  80              	.LVL7:
+  81              	.L4:
+ 150:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     sum += *ps++;
+  82              		.loc 1 150 5 is_stmt 1 view .LVU21
+  83              		.loc 1 150 12 is_stmt 0 view .LVU22
+  84 0022 30F8022B 		ldrh	r2, [r0], #2
+  85              	.LVL8:
+  86              		.loc 1 150 9 view .LVU23
+  87 0026 1344     		add	r3, r3, r2
+  88              	.LVL9:
+ 151:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     len -= 2;
+  89              		.loc 1 151 5 is_stmt 1 view .LVU24
+  90              		.loc 1 151 9 is_stmt 0 view .LVU25
+  91 0028 0239     		subs	r1, r1, #2
+  92              	.LVL10:
+  93              	.L3:
+ 149:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     sum += *ps++;
+  94              		.loc 1 149 9 is_stmt 1 view .LVU26
+  95 002a 0129     		cmp	r1, #1
+  96 002c F9DC     		bgt	.L4
+ 152:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 153:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 154:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* Consume left-over byte, if any */
+ 155:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   if (len > 0) {
+  97              		.loc 1 155 3 view .LVU27
+  98              		.loc 1 155 6 is_stmt 0 view .LVU28
+  99 002e 0029     		cmp	r1, #0
+ 100 0030 02DD     		ble	.L5
+ 156:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     ((u8_t *)&t)[0] = *(const u8_t *)ps;
+ 101              		.loc 1 156 5 is_stmt 1 view .LVU29
+ 102              		.loc 1 156 23 is_stmt 0 view .LVU30
+ 103 0032 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 104              		.loc 1 156 21 view .LVU31
+ 105 0034 8DF80620 		strb	r2, [sp, #6]
+ 106              	.L5:
+ 157:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 158:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 159:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* Add end bytes */
+ 160:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   sum += t;
+ 107              		.loc 1 160 3 is_stmt 1 view .LVU32
+ 108              		.loc 1 160 7 is_stmt 0 view .LVU33
+ 109 0038 BDF80600 		ldrh	r0, [sp, #6]
+ 110              	.LVL11:
+ 111              		.loc 1 160 7 view .LVU34
+ 112 003c 0344     		add	r3, r3, r0
+ 113              	.LVL12:
+ 161:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 162:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* Fold 32-bit sum to 16 bits
+ 163:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****      calling this twice is probably faster than if statements... */
+ 164:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   sum = FOLD_U32T(sum);
+ 114              		.loc 1 164 3 is_stmt 1 view .LVU35
+ 115              		.loc 1 164 9 is_stmt 0 view .LVU36
+ 116 003e 98B2     		uxth	r0, r3
+ 117              		.loc 1 164 7 view .LVU37
+ 118 0040 00EB1343 		add	r3, r0, r3, lsr #16
+ 119              	.LVL13:
+ 165:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   sum = FOLD_U32T(sum);
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 6
+
+
+ 120              		.loc 1 165 3 is_stmt 1 view .LVU38
+ 121              		.loc 1 165 9 is_stmt 0 view .LVU39
+ 122 0044 98B2     		uxth	r0, r3
+ 123              		.loc 1 165 7 view .LVU40
+ 124 0046 00EB1340 		add	r0, r0, r3, lsr #16
+ 125              	.LVL14:
+ 166:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 167:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* Swap if alignment was odd */
+ 168:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   if (odd) {
+ 126              		.loc 1 168 3 is_stmt 1 view .LVU41
+ 127              		.loc 1 168 6 is_stmt 0 view .LVU42
+ 128 004a 24B1     		cbz	r4, .L6
+ 169:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     sum = SWAP_BYTES_IN_WORD(sum);
+ 129              		.loc 1 169 5 is_stmt 1 view .LVU43
+ 130              		.loc 1 169 11 is_stmt 0 view .LVU44
+ 131 004c 0302     		lsls	r3, r0, #8
+ 132 004e 9BB2     		uxth	r3, r3
+ 133 0050 C0F30720 		ubfx	r0, r0, #8, #8
+ 134              	.LVL15:
+ 135              		.loc 1 169 9 view .LVU45
+ 136 0054 1843     		orrs	r0, r0, r3
+ 137              	.LVL16:
+ 138              	.L6:
+ 170:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 171:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 172:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   return (u16_t)sum;
+ 139              		.loc 1 172 3 is_stmt 1 view .LVU46
+ 173:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 140              		.loc 1 173 1 is_stmt 0 view .LVU47
+ 141 0056 80B2     		uxth	r0, r0
+ 142              	.LVL17:
+ 143              		.loc 1 173 1 view .LVU48
+ 144 0058 03B0     		add	sp, sp, #12
+ 145              	.LCFI2:
+ 146              		.cfi_def_cfa_offset 4
+ 147              		@ sp needed
+ 148 005a 5DF8044B 		ldr	r4, [sp], #4
+ 149              	.LCFI3:
+ 150              		.cfi_restore 4
+ 151              		.cfi_def_cfa_offset 0
+ 152              	.LVL18:
+ 153              		.loc 1 173 1 view .LVU49
+ 154 005e 7047     		bx	lr
+ 155              		.cfi_endproc
+ 156              	.LFE155:
+ 158              		.section	.text.inet_cksum_pseudo_base,"ax",%progbits
+ 159              		.align	1
+ 160              		.syntax unified
+ 161              		.thumb
+ 162              		.thumb_func
+ 163              		.fpu fpv4-sp-d16
+ 165              	inet_cksum_pseudo_base:
+ 166              	.LVL19:
+ 167              	.LFB156:
+ 174:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif
+ 175:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 176:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if (LWIP_CHKSUM_ALGORITHM == 3) /* Alternative version #3 */
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 7
+
+
+ 177:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /**
+ 178:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * An optimized checksum routine. Basically, it uses loop-unrolling on
+ 179:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * the checksum loop, treating the head and tail bytes specially, whereas
+ 180:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * the inner loop acts on 8 bytes at a time.
+ 181:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 182:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @arg start of buffer to be checksummed. May be an odd byte address.
+ 183:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @len number of bytes in the buffer to be checksummed.
+ 184:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @return host order (!) lwip checksum (non-inverted Internet sum)
+ 185:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 186:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * by Curt McDowell, Broadcom Corp. December 8th, 2005
+ 187:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  */
+ 188:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** u16_t
+ 189:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** lwip_standard_chksum(const void *dataptr, int len)
+ 190:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** {
+ 191:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   const u8_t *pb = (const u8_t *)dataptr;
+ 192:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   const u16_t *ps;
+ 193:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u16_t t = 0;
+ 194:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   const u32_t *pl;
+ 195:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t sum = 0, tmp;
+ 196:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* starts at odd byte address? */
+ 197:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   int odd = ((mem_ptr_t)pb & 1);
+ 198:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 199:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   if (odd && len > 0) {
+ 200:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     ((u8_t *)&t)[1] = *pb++;
+ 201:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     len--;
+ 202:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 203:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 204:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   ps = (const u16_t *)(const void *)pb;
+ 205:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 206:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   if (((mem_ptr_t)ps & 3) && len > 1) {
+ 207:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     sum += *ps++;
+ 208:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     len -= 2;
+ 209:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 210:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 211:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   pl = (const u32_t *)(const void *)ps;
+ 212:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 213:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   while (len > 7)  {
+ 214:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     tmp = sum + *pl++;          /* ping */
+ 215:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     if (tmp < sum) {
+ 216:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****       tmp++;                    /* add back carry */
+ 217:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     }
+ 218:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 219:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     sum = tmp + *pl++;          /* pong */
+ 220:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     if (sum < tmp) {
+ 221:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****       sum++;                    /* add back carry */
+ 222:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     }
+ 223:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 224:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     len -= 8;
+ 225:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 226:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 227:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* make room in upper bits */
+ 228:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   sum = FOLD_U32T(sum);
+ 229:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 230:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   ps = (const u16_t *)pl;
+ 231:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 232:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* 16-bit aligned word remaining? */
+ 233:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   while (len > 1) {
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 8
+
+
+ 234:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     sum += *ps++;
+ 235:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     len -= 2;
+ 236:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 237:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 238:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* dangling tail byte remaining? */
+ 239:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   if (len > 0) {                /* include odd byte */
+ 240:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     ((u8_t *)&t)[0] = *(const u8_t *)ps;
+ 241:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 242:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 243:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   sum += t;                     /* add end bytes */
+ 244:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 245:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* Fold 32-bit sum to 16 bits
+ 246:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****      calling this twice is probably faster than if statements... */
+ 247:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   sum = FOLD_U32T(sum);
+ 248:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   sum = FOLD_U32T(sum);
+ 249:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 250:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   if (odd) {
+ 251:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     sum = SWAP_BYTES_IN_WORD(sum);
+ 252:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 253:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 254:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   return (u16_t)sum;
+ 255:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 256:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif
+ 257:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 258:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /** Parts of the pseudo checksum which are common to IPv4 and IPv6 */
+ 259:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** static u16_t
+ 260:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** inet_cksum_pseudo_base(struct pbuf *p, u8_t proto, u16_t proto_len, u32_t acc)
+ 261:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** {
+ 168              		.loc 1 261 1 is_stmt 1 view -0
+ 169              		.cfi_startproc
+ 170              		@ args = 0, pretend = 0, frame = 0
+ 171              		@ frame_needed = 0, uses_anonymous_args = 0
+ 172              		.loc 1 261 1 is_stmt 0 view .LVU51
+ 173 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 174              	.LCFI4:
+ 175              		.cfi_def_cfa_offset 24
+ 176              		.cfi_offset 4, -24
+ 177              		.cfi_offset 5, -20
+ 178              		.cfi_offset 6, -16
+ 179              		.cfi_offset 7, -12
+ 180              		.cfi_offset 8, -8
+ 181              		.cfi_offset 14, -4
+ 182 0004 0546     		mov	r5, r0
+ 183 0006 8846     		mov	r8, r1
+ 184 0008 1746     		mov	r7, r2
+ 185 000a 1C46     		mov	r4, r3
+ 262:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   struct pbuf *q;
+ 186              		.loc 1 262 3 is_stmt 1 view .LVU52
+ 263:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   int swapped = 0;
+ 187              		.loc 1 263 3 view .LVU53
+ 188              	.LVL20:
+ 264:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 265:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* iterate through all pbuf in chain */
+ 266:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   for (q = p; q != NULL; q = q->next) {
+ 189              		.loc 1 266 3 view .LVU54
+ 263:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   int swapped = 0;
+ 190              		.loc 1 263 7 is_stmt 0 view .LVU55
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 9
+
+
+ 191 000c 0026     		movs	r6, #0
+ 192              		.loc 1 266 3 view .LVU56
+ 193 000e 00E0     		b	.L9
+ 194              	.LVL21:
+ 195              	.L10:
+ 196              		.loc 1 266 26 is_stmt 1 discriminator 2 view .LVU57
+ 197              		.loc 1 266 28 is_stmt 0 discriminator 2 view .LVU58
+ 198 0010 2D68     		ldr	r5, [r5]
+ 199              	.LVL22:
+ 200              	.L9:
+ 201              		.loc 1 266 15 is_stmt 1 discriminator 1 view .LVU59
+ 202              		.loc 1 266 3 is_stmt 0 discriminator 1 view .LVU60
+ 203 0012 B5B1     		cbz	r5, .L14
+ 267:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     LWIP_DEBUGF(INET_DEBUG, ("inet_chksum_pseudo(): checksumming pbuf %p (has next %p) \n",
+ 268:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****                              (void *)q, (void *)q->next));
+ 204              		.loc 1 268 58 is_stmt 1 view .LVU61
+ 269:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc += LWIP_CHKSUM(q->payload, q->len);
+ 205              		.loc 1 269 5 view .LVU62
+ 206              		.loc 1 269 12 is_stmt 0 view .LVU63
+ 207 0014 6989     		ldrh	r1, [r5, #10]
+ 208 0016 6868     		ldr	r0, [r5, #4]
+ 209 0018 FFF7FEFF 		bl	lwip_standard_chksum
+ 210              	.LVL23:
+ 211              		.loc 1 269 9 view .LVU64
+ 212 001c 0444     		add	r4, r4, r0
+ 213              	.LVL24:
+ 270:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     /*LWIP_DEBUGF(INET_DEBUG, ("inet_chksum_pseudo(): unwrapped lwip_chksum()=%"X32_F" \n", acc));*
+ 271:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     /* just executing this next line is probably faster that the if statement needed
+ 272:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****        to check whether we really need to execute it, and does no harm */
+ 273:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = FOLD_U32T(acc);
+ 214              		.loc 1 273 5 is_stmt 1 view .LVU65
+ 215              		.loc 1 273 11 is_stmt 0 view .LVU66
+ 216 001e A3B2     		uxth	r3, r4
+ 217              		.loc 1 273 9 view .LVU67
+ 218 0020 03EB1444 		add	r4, r3, r4, lsr #16
+ 219              	.LVL25:
+ 274:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     if (q->len % 2 != 0) {
+ 220              		.loc 1 274 5 is_stmt 1 view .LVU68
+ 221              		.loc 1 274 10 is_stmt 0 view .LVU69
+ 222 0024 6B89     		ldrh	r3, [r5, #10]
+ 223              		.loc 1 274 8 view .LVU70
+ 224 0026 13F0010F 		tst	r3, #1
+ 225 002a F1D0     		beq	.L10
+ 275:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****       swapped = !swapped;
+ 226              		.loc 1 275 7 is_stmt 1 view .LVU71
+ 227              		.loc 1 275 17 is_stmt 0 view .LVU72
+ 228 002c 86F00106 		eor	r6, r6, #1
+ 229              	.LVL26:
+ 276:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****       acc = SWAP_BYTES_IN_WORD(acc);
+ 230              		.loc 1 276 7 is_stmt 1 view .LVU73
+ 231              		.loc 1 276 13 is_stmt 0 view .LVU74
+ 232 0030 4FEA042C 		lsl	ip, r4, #8
+ 233 0034 1FFA8CFC 		uxth	ip, ip
+ 234 0038 C4F30724 		ubfx	r4, r4, #8, #8
+ 235              	.LVL27:
+ 236              		.loc 1 276 11 view .LVU75
+ 237 003c 4CEA0404 		orr	r4, ip, r4
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 10
+
+
+ 238              	.LVL28:
+ 239              		.loc 1 276 11 view .LVU76
+ 240 0040 E6E7     		b	.L10
+ 241              	.L14:
+ 277:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     }
+ 278:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     /*LWIP_DEBUGF(INET_DEBUG, ("inet_chksum_pseudo(): wrapped lwip_chksum()=%"X32_F" \n", acc));*/
+ 279:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 280:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 281:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   if (swapped) {
+ 242              		.loc 1 281 3 is_stmt 1 view .LVU77
+ 243              		.loc 1 281 6 is_stmt 0 view .LVU78
+ 244 0042 26B1     		cbz	r6, .L12
+ 282:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = SWAP_BYTES_IN_WORD(acc);
+ 245              		.loc 1 282 5 is_stmt 1 view .LVU79
+ 246              		.loc 1 282 11 is_stmt 0 view .LVU80
+ 247 0044 2202     		lsls	r2, r4, #8
+ 248 0046 92B2     		uxth	r2, r2
+ 249 0048 C4F30724 		ubfx	r4, r4, #8, #8
+ 250              	.LVL29:
+ 251              		.loc 1 282 9 view .LVU81
+ 252 004c 1443     		orrs	r4, r4, r2
+ 253              	.LVL30:
+ 254              	.L12:
+ 283:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 284:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 285:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc += (u32_t)lwip_htons((u16_t)proto);
+ 255              		.loc 1 285 3 is_stmt 1 view .LVU82
+ 256              		.loc 1 285 17 is_stmt 0 view .LVU83
+ 257 004e 4046     		mov	r0, r8
+ 258 0050 FFF7FEFF 		bl	lwip_htons
+ 259              	.LVL31:
+ 260              		.loc 1 285 7 view .LVU84
+ 261 0054 0444     		add	r4, r4, r0
+ 262              	.LVL32:
+ 286:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc += (u32_t)lwip_htons(proto_len);
+ 263              		.loc 1 286 3 is_stmt 1 view .LVU85
+ 264              		.loc 1 286 17 is_stmt 0 view .LVU86
+ 265 0056 3846     		mov	r0, r7
+ 266 0058 FFF7FEFF 		bl	lwip_htons
+ 267              	.LVL33:
+ 268              		.loc 1 286 7 view .LVU87
+ 269 005c 2044     		add	r0, r0, r4
+ 270              	.LVL34:
+ 287:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 288:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* Fold 32-bit sum to 16 bits
+ 289:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****      calling this twice is probably faster than if statements... */
+ 290:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 271              		.loc 1 290 3 is_stmt 1 view .LVU88
+ 272              		.loc 1 290 9 is_stmt 0 view .LVU89
+ 273 005e 84B2     		uxth	r4, r0
+ 274              		.loc 1 290 7 view .LVU90
+ 275 0060 04EB1044 		add	r4, r4, r0, lsr #16
+ 276              	.LVL35:
+ 291:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 277              		.loc 1 291 3 is_stmt 1 view .LVU91
+ 278              		.loc 1 291 9 is_stmt 0 view .LVU92
+ 279 0064 A0B2     		uxth	r0, r4
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 11
+
+
+ 280              		.loc 1 291 7 view .LVU93
+ 281 0066 00EB1440 		add	r0, r0, r4, lsr #16
+ 282              	.LVL36:
+ 292:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   LWIP_DEBUGF(INET_DEBUG, ("inet_chksum_pseudo(): pbuf chain lwip_chksum()=%"X32_F"\n", acc));
+ 283              		.loc 1 292 94 is_stmt 1 view .LVU94
+ 293:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   return (u16_t)~(acc & 0xffffUL);
+ 284              		.loc 1 293 3 view .LVU95
+ 285              		.loc 1 293 10 is_stmt 0 view .LVU96
+ 286 006a C043     		mvns	r0, r0
+ 287              	.LVL37:
+ 294:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 288              		.loc 1 294 1 view .LVU97
+ 289 006c 80B2     		uxth	r0, r0
+ 290              	.LVL38:
+ 291              		.loc 1 294 1 view .LVU98
+ 292 006e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 293              		.loc 1 294 1 view .LVU99
+ 294              		.cfi_endproc
+ 295              	.LFE156:
+ 297              		.section	.rodata.inet_cksum_pseudo_partial_base.str1.4,"aMS",%progbits,1
+ 298              		.align	2
+ 299              	.LC0:
+ 300 0000 2F557365 		.ascii	"/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_"
+ 300      72732F6E 
+ 300      68616E74 
+ 300      742F5354 
+ 300      4D333243 
+ 301 0033 56312E32 		.ascii	"V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_"
+ 301      362E302F 
+ 301      4D696464 
+ 301      6C657761 
+ 301      7265732F 
+ 302 0066 63686B73 		.ascii	"chksum.c\000"
+ 302      756D2E63 
+ 302      00
+ 303 006f 00       		.align	2
+ 304              	.LC1:
+ 305 0070 64656C65 		.ascii	"delete me\000"
+ 305      7465206D 
+ 305      6500
+ 306 007a 0000     		.align	2
+ 307              	.LC2:
+ 308 007c 41737365 		.ascii	"Assertion \"%s\" failed at line %d in %s\012\000"
+ 308      7274696F 
+ 308      6E202225 
+ 308      73222066 
+ 308      61696C65 
+ 309              		.section	.text.inet_cksum_pseudo_partial_base,"ax",%progbits
+ 310              		.align	1
+ 311              		.syntax unified
+ 312              		.thumb
+ 313              		.thumb_func
+ 314              		.fpu fpv4-sp-d16
+ 316              	inet_cksum_pseudo_partial_base:
+ 317              	.LVL39:
+ 318              	.LFB159:
+ 295:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 12
+
+
+ 296:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if LWIP_IPV4
+ 297:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /* inet_chksum_pseudo:
+ 298:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 299:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Calculates the IPv4 pseudo Internet checksum used by TCP and UDP for a pbuf chain.
+ 300:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * IP addresses are expected to be in network byte order.
+ 301:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 302:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param p chain of pbufs over that a checksum should be calculated (ip data part)
+ 303:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param src source ip address (used for checksum of pseudo header)
+ 304:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param dst destination ip address (used for checksum of pseudo header)
+ 305:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param proto ip protocol (used for checksum of pseudo header)
+ 306:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param proto_len length of the ip data part (used for checksum of pseudo header)
+ 307:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @return checksum (as u16_t) to be saved directly in the protocol header
+ 308:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  */
+ 309:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** u16_t
+ 310:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** inet_chksum_pseudo(struct pbuf *p, u8_t proto, u16_t proto_len,
+ 311:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****                    const ip4_addr_t *src, const ip4_addr_t *dest)
+ 312:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** {
+ 313:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t acc;
+ 314:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t addr;
+ 315:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 316:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   addr = ip4_addr_get_u32(src);
+ 317:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (addr & 0xffffUL);
+ 318:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (u32_t)(acc + ((addr >> 16) & 0xffffUL));
+ 319:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   addr = ip4_addr_get_u32(dest);
+ 320:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (u32_t)(acc + (addr & 0xffffUL));
+ 321:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (u32_t)(acc + ((addr >> 16) & 0xffffUL));
+ 322:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* fold down to 16 bits */
+ 323:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 324:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 325:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 326:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   return inet_cksum_pseudo_base(p, proto, proto_len, acc);
+ 327:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 328:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif /* LWIP_IPV4 */
+ 329:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 330:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if LWIP_IPV6
+ 331:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /**
+ 332:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Calculates the checksum with IPv6 pseudo header used by TCP and UDP for a pbuf chain.
+ 333:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * IPv6 addresses are expected to be in network byte order.
+ 334:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 335:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param p chain of pbufs over that a checksum should be calculated (ip data part)
+ 336:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param proto ipv6 protocol/next header (used for checksum of pseudo header)
+ 337:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param proto_len length of the ipv6 payload (used for checksum of pseudo header)
+ 338:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param src source ipv6 address (used for checksum of pseudo header)
+ 339:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param dest destination ipv6 address (used for checksum of pseudo header)
+ 340:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @return checksum (as u16_t) to be saved directly in the protocol header
+ 341:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  */
+ 342:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** u16_t
+ 343:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** ip6_chksum_pseudo(struct pbuf *p, u8_t proto, u16_t proto_len,
+ 344:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****                   const ip6_addr_t *src, const ip6_addr_t *dest)
+ 345:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** {
+ 346:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t acc = 0;
+ 347:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t addr;
+ 348:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u8_t addr_part;
+ 349:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 350:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   for (addr_part = 0; addr_part < 4; addr_part++) {
+ 351:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     addr = src->addr[addr_part];
+ 352:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = (u32_t)(acc + (addr & 0xffffUL));
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 13
+
+
+ 353:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = (u32_t)(acc + ((addr >> 16) & 0xffffUL));
+ 354:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     addr = dest->addr[addr_part];
+ 355:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = (u32_t)(acc + (addr & 0xffffUL));
+ 356:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = (u32_t)(acc + ((addr >> 16) & 0xffffUL));
+ 357:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 358:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* fold down to 16 bits */
+ 359:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 360:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 361:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 362:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   return inet_cksum_pseudo_base(p, proto, proto_len, acc);
+ 363:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 364:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif /* LWIP_IPV6 */
+ 365:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 366:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /* ip_chksum_pseudo:
+ 367:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 368:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Calculates the IPv4 or IPv6 pseudo Internet checksum used by TCP and UDP for a pbuf chain.
+ 369:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * IP addresses are expected to be in network byte order.
+ 370:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 371:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param p chain of pbufs over that a checksum should be calculated (ip data part)
+ 372:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param src source ip address (used for checksum of pseudo header)
+ 373:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param dst destination ip address (used for checksum of pseudo header)
+ 374:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param proto ip protocol (used for checksum of pseudo header)
+ 375:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param proto_len length of the ip data part (used for checksum of pseudo header)
+ 376:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @return checksum (as u16_t) to be saved directly in the protocol header
+ 377:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  */
+ 378:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** u16_t
+ 379:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** ip_chksum_pseudo(struct pbuf *p, u8_t proto, u16_t proto_len,
+ 380:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****                  const ip_addr_t *src, const ip_addr_t *dest)
+ 381:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** {
+ 382:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if LWIP_IPV6
+ 383:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   if (IP_IS_V6(dest)) {
+ 384:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     return ip6_chksum_pseudo(p, proto, proto_len, ip_2_ip6(src), ip_2_ip6(dest));
+ 385:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 386:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif /* LWIP_IPV6 */
+ 387:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if LWIP_IPV4 && LWIP_IPV6
+ 388:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   else
+ 389:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif /* LWIP_IPV4 && LWIP_IPV6 */
+ 390:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if LWIP_IPV4
+ 391:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   {
+ 392:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     return inet_chksum_pseudo(p, proto, proto_len, ip_2_ip4(src), ip_2_ip4(dest));
+ 393:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 394:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif /* LWIP_IPV4 */
+ 395:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 396:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 397:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /** Parts of the pseudo checksum which are common to IPv4 and IPv6 */
+ 398:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** static u16_t
+ 399:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** inet_cksum_pseudo_partial_base(struct pbuf *p, u8_t proto, u16_t proto_len,
+ 400:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****                                u16_t chksum_len, u32_t acc)
+ 401:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** {
+ 319              		.loc 1 401 1 is_stmt 1 view -0
+ 320              		.cfi_startproc
+ 321              		@ args = 4, pretend = 0, frame = 0
+ 322              		@ frame_needed = 0, uses_anonymous_args = 0
+ 323              		.loc 1 401 1 is_stmt 0 view .LVU101
+ 324 0000 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 325              	.LCFI5:
+ 326              		.cfi_def_cfa_offset 40
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 14
+
+
+ 327              		.cfi_offset 3, -40
+ 328              		.cfi_offset 4, -36
+ 329              		.cfi_offset 5, -32
+ 330              		.cfi_offset 6, -28
+ 331              		.cfi_offset 7, -24
+ 332              		.cfi_offset 8, -20
+ 333              		.cfi_offset 9, -16
+ 334              		.cfi_offset 10, -12
+ 335              		.cfi_offset 11, -8
+ 336              		.cfi_offset 14, -4
+ 337 0004 0546     		mov	r5, r0
+ 338 0006 8846     		mov	r8, r1
+ 339 0008 9146     		mov	r9, r2
+ 340 000a 1F46     		mov	r7, r3
+ 341 000c 0A9C     		ldr	r4, [sp, #40]
+ 402:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   struct pbuf *q;
+ 342              		.loc 1 402 3 is_stmt 1 view .LVU102
+ 403:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   int swapped = 0;
+ 343              		.loc 1 403 3 view .LVU103
+ 344              	.LVL40:
+ 404:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u16_t chklen;
+ 345              		.loc 1 404 3 view .LVU104
+ 405:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 406:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* iterate through all pbuf in chain */
+ 407:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   for (q = p; (q != NULL) && (chksum_len > 0); q = q->next) {
+ 346              		.loc 1 407 3 view .LVU105
+ 403:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u16_t chklen;
+ 347              		.loc 1 403 7 is_stmt 0 view .LVU106
+ 348 000e 0026     		movs	r6, #0
+ 349              		.loc 1 407 3 view .LVU107
+ 350 0010 08E0     		b	.L16
+ 351              	.LVL41:
+ 352              	.L25:
+ 408:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     LWIP_DEBUGF(INET_DEBUG, ("inet_chksum_pseudo(): checksumming pbuf %p (has next %p) \n",
+ 409:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****                              (void *)q, (void *)q->next));
+ 410:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     chklen = q->len;
+ 411:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     if (chklen > chksum_len) {
+ 412:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****       chklen = chksum_len;
+ 413:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     }
+ 414:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc += LWIP_CHKSUM(q->payload, chklen);
+ 415:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     chksum_len = (u16_t)(chksum_len - chklen);
+ 416:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     LWIP_ASSERT("delete me", chksum_len < 0x7fff);
+ 353              		.loc 1 416 5 is_stmt 1 discriminator 1 view .LVU108
+ 354              		.loc 1 416 5 discriminator 1 view .LVU109
+ 355 0012 234B     		ldr	r3, .L26
+ 356 0014 4FF4D072 		mov	r2, #416
+ 357 0018 2249     		ldr	r1, .L26+4
+ 358 001a 2348     		ldr	r0, .L26+8
+ 359 001c FFF7FEFF 		bl	printf
+ 360              	.LVL42:
+ 361 0020 14E0     		b	.L18
+ 362              	.LVL43:
+ 363              	.L19:
+ 407:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     LWIP_DEBUGF(INET_DEBUG, ("inet_chksum_pseudo(): checksumming pbuf %p (has next %p) \n",
+ 364              		.loc 1 407 48 discriminator 2 view .LVU110
+ 407:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     LWIP_DEBUGF(INET_DEBUG, ("inet_chksum_pseudo(): checksumming pbuf %p (has next %p) \n",
+ 365              		.loc 1 407 50 is_stmt 0 discriminator 2 view .LVU111
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 15
+
+
+ 366 0022 2D68     		ldr	r5, [r5]
+ 367              	.LVL44:
+ 368              	.L16:
+ 407:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     LWIP_DEBUGF(INET_DEBUG, ("inet_chksum_pseudo(): checksumming pbuf %p (has next %p) \n",
+ 369              		.loc 1 407 15 is_stmt 1 discriminator 1 view .LVU112
+ 407:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     LWIP_DEBUGF(INET_DEBUG, ("inet_chksum_pseudo(): checksumming pbuf %p (has next %p) \n",
+ 370              		.loc 1 407 3 is_stmt 0 discriminator 1 view .LVU113
+ 371 0024 1DB3     		cbz	r5, .L20
+ 407:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     LWIP_DEBUGF(INET_DEBUG, ("inet_chksum_pseudo(): checksumming pbuf %p (has next %p) \n",
+ 372              		.loc 1 407 27 discriminator 3 view .LVU114
+ 373 0026 17B3     		cbz	r7, .L20
+ 409:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     chklen = q->len;
+ 374              		.loc 1 409 58 is_stmt 1 view .LVU115
+ 410:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     if (chklen > chksum_len) {
+ 375              		.loc 1 410 5 view .LVU116
+ 410:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     if (chklen > chksum_len) {
+ 376              		.loc 1 410 12 is_stmt 0 view .LVU117
+ 377 0028 B5F80AB0 		ldrh	fp, [r5, #10]
+ 378              	.LVL45:
+ 411:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****       chklen = chksum_len;
+ 379              		.loc 1 411 5 is_stmt 1 view .LVU118
+ 411:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****       chklen = chksum_len;
+ 380              		.loc 1 411 8 is_stmt 0 view .LVU119
+ 381 002c 5F45     		cmp	r7, fp
+ 382 002e 00D2     		bcs	.L17
+ 412:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     }
+ 383              		.loc 1 412 14 view .LVU120
+ 384 0030 BB46     		mov	fp, r7
+ 385              	.LVL46:
+ 386              	.L17:
+ 414:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     chksum_len = (u16_t)(chksum_len - chklen);
+ 387              		.loc 1 414 5 is_stmt 1 view .LVU121
+ 414:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     chksum_len = (u16_t)(chksum_len - chklen);
+ 388              		.loc 1 414 12 is_stmt 0 view .LVU122
+ 389 0032 5946     		mov	r1, fp
+ 390 0034 6868     		ldr	r0, [r5, #4]
+ 391 0036 FFF7FEFF 		bl	lwip_standard_chksum
+ 392              	.LVL47:
+ 414:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     chksum_len = (u16_t)(chksum_len - chklen);
+ 393              		.loc 1 414 9 view .LVU123
+ 394 003a 00EB040A 		add	r10, r0, r4
+ 395              	.LVL48:
+ 415:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     LWIP_ASSERT("delete me", chksum_len < 0x7fff);
+ 396              		.loc 1 415 5 is_stmt 1 view .LVU124
+ 415:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     LWIP_ASSERT("delete me", chksum_len < 0x7fff);
+ 397              		.loc 1 415 16 is_stmt 0 view .LVU125
+ 398 003e A7EB0B03 		sub	r3, r7, fp
+ 399 0042 9FB2     		uxth	r7, r3
+ 400              	.LVL49:
+ 401              		.loc 1 416 5 is_stmt 1 view .LVU126
+ 402              		.loc 1 416 5 view .LVU127
+ 403 0044 47F6FE73 		movw	r3, #32766
+ 404 0048 9F42     		cmp	r7, r3
+ 405 004a E2D8     		bhi	.L25
+ 406              	.L18:
+ 407              		.loc 1 416 5 discriminator 3 view .LVU128
+ 408              		.loc 1 416 5 discriminator 3 view .LVU129
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 16
+
+
+ 417:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     /*LWIP_DEBUGF(INET_DEBUG, ("inet_chksum_pseudo(): unwrapped lwip_chksum()=%"X32_F" \n", acc));*
+ 418:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     /* fold the upper bit down */
+ 419:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = FOLD_U32T(acc);
+ 409              		.loc 1 419 5 discriminator 3 view .LVU130
+ 410              		.loc 1 419 11 is_stmt 0 discriminator 3 view .LVU131
+ 411 004c 1FFA8AF4 		uxth	r4, r10
+ 412              		.loc 1 419 9 discriminator 3 view .LVU132
+ 413 0050 04EB1A44 		add	r4, r4, r10, lsr #16
+ 414              	.LVL50:
+ 420:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     if (q->len % 2 != 0) {
+ 415              		.loc 1 420 5 is_stmt 1 discriminator 3 view .LVU133
+ 416              		.loc 1 420 10 is_stmt 0 discriminator 3 view .LVU134
+ 417 0054 B5F80AC0 		ldrh	ip, [r5, #10]
+ 418              		.loc 1 420 8 discriminator 3 view .LVU135
+ 419 0058 1CF0010F 		tst	ip, #1
+ 420 005c E1D0     		beq	.L19
+ 421:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****       swapped = !swapped;
+ 421              		.loc 1 421 7 is_stmt 1 view .LVU136
+ 422              		.loc 1 421 17 is_stmt 0 view .LVU137
+ 423 005e 86F00106 		eor	r6, r6, #1
+ 424              	.LVL51:
+ 422:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****       acc = SWAP_BYTES_IN_WORD(acc);
+ 425              		.loc 1 422 7 is_stmt 1 view .LVU138
+ 426              		.loc 1 422 13 is_stmt 0 view .LVU139
+ 427 0062 2302     		lsls	r3, r4, #8
+ 428 0064 9BB2     		uxth	r3, r3
+ 429 0066 C4F30724 		ubfx	r4, r4, #8, #8
+ 430              	.LVL52:
+ 431              		.loc 1 422 11 view .LVU140
+ 432 006a 1C43     		orrs	r4, r4, r3
+ 433              	.LVL53:
+ 434              		.loc 1 422 11 view .LVU141
+ 435 006c D9E7     		b	.L19
+ 436              	.LVL54:
+ 437              	.L20:
+ 423:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     }
+ 424:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     /*LWIP_DEBUGF(INET_DEBUG, ("inet_chksum_pseudo(): wrapped lwip_chksum()=%"X32_F" \n", acc));*/
+ 425:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 426:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 427:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   if (swapped) {
+ 438              		.loc 1 427 3 is_stmt 1 view .LVU142
+ 439              		.loc 1 427 6 is_stmt 0 view .LVU143
+ 440 006e 26B1     		cbz	r6, .L22
+ 428:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = SWAP_BYTES_IN_WORD(acc);
+ 441              		.loc 1 428 5 is_stmt 1 view .LVU144
+ 442              		.loc 1 428 11 is_stmt 0 view .LVU145
+ 443 0070 2302     		lsls	r3, r4, #8
+ 444 0072 9BB2     		uxth	r3, r3
+ 445 0074 C4F30724 		ubfx	r4, r4, #8, #8
+ 446              	.LVL55:
+ 447              		.loc 1 428 9 view .LVU146
+ 448 0078 1C43     		orrs	r4, r4, r3
+ 449              	.LVL56:
+ 450              	.L22:
+ 429:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 430:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 431:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc += (u32_t)lwip_htons((u16_t)proto);
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 17
+
+
+ 451              		.loc 1 431 3 is_stmt 1 view .LVU147
+ 452              		.loc 1 431 17 is_stmt 0 view .LVU148
+ 453 007a 4046     		mov	r0, r8
+ 454 007c FFF7FEFF 		bl	lwip_htons
+ 455              	.LVL57:
+ 456              		.loc 1 431 7 view .LVU149
+ 457 0080 0444     		add	r4, r4, r0
+ 458              	.LVL58:
+ 432:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc += (u32_t)lwip_htons(proto_len);
+ 459              		.loc 1 432 3 is_stmt 1 view .LVU150
+ 460              		.loc 1 432 17 is_stmt 0 view .LVU151
+ 461 0082 4846     		mov	r0, r9
+ 462 0084 FFF7FEFF 		bl	lwip_htons
+ 463              	.LVL59:
+ 464              		.loc 1 432 7 view .LVU152
+ 465 0088 2044     		add	r0, r0, r4
+ 466              	.LVL60:
+ 433:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 434:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* Fold 32-bit sum to 16 bits
+ 435:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****      calling this twice is probably faster than if statements... */
+ 436:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 467              		.loc 1 436 3 is_stmt 1 view .LVU153
+ 468              		.loc 1 436 9 is_stmt 0 view .LVU154
+ 469 008a 84B2     		uxth	r4, r0
+ 470              		.loc 1 436 7 view .LVU155
+ 471 008c 04EB1044 		add	r4, r4, r0, lsr #16
+ 472              	.LVL61:
+ 437:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 473              		.loc 1 437 3 is_stmt 1 view .LVU156
+ 474              		.loc 1 437 9 is_stmt 0 view .LVU157
+ 475 0090 A0B2     		uxth	r0, r4
+ 476              		.loc 1 437 7 view .LVU158
+ 477 0092 00EB1440 		add	r0, r0, r4, lsr #16
+ 478              	.LVL62:
+ 438:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   LWIP_DEBUGF(INET_DEBUG, ("inet_chksum_pseudo(): pbuf chain lwip_chksum()=%"X32_F"\n", acc));
+ 479              		.loc 1 438 94 is_stmt 1 view .LVU159
+ 439:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   return (u16_t)~(acc & 0xffffUL);
+ 480              		.loc 1 439 3 view .LVU160
+ 481              		.loc 1 439 10 is_stmt 0 view .LVU161
+ 482 0096 C043     		mvns	r0, r0
+ 483              	.LVL63:
+ 440:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 484              		.loc 1 440 1 view .LVU162
+ 485 0098 80B2     		uxth	r0, r0
+ 486              	.LVL64:
+ 487              		.loc 1 440 1 view .LVU163
+ 488 009a BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 489              	.LVL65:
+ 490              	.L27:
+ 491              		.loc 1 440 1 view .LVU164
+ 492 009e 00BF     		.align	2
+ 493              	.L26:
+ 494 00a0 00000000 		.word	.LC0
+ 495 00a4 70000000 		.word	.LC1
+ 496 00a8 7C000000 		.word	.LC2
+ 497              		.cfi_endproc
+ 498              	.LFE159:
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 18
+
+
+ 500              		.section	.text.inet_chksum_pseudo,"ax",%progbits
+ 501              		.align	1
+ 502              		.global	inet_chksum_pseudo
+ 503              		.syntax unified
+ 504              		.thumb
+ 505              		.thumb_func
+ 506              		.fpu fpv4-sp-d16
+ 508              	inet_chksum_pseudo:
+ 509              	.LVL66:
+ 510              	.LFB157:
+ 312:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t acc;
+ 511              		.loc 1 312 1 is_stmt 1 view -0
+ 512              		.cfi_startproc
+ 513              		@ args = 4, pretend = 0, frame = 0
+ 514              		@ frame_needed = 0, uses_anonymous_args = 0
+ 312:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t acc;
+ 515              		.loc 1 312 1 is_stmt 0 view .LVU166
+ 516 0000 10B5     		push	{r4, lr}
+ 517              	.LCFI6:
+ 518              		.cfi_def_cfa_offset 8
+ 519              		.cfi_offset 4, -8
+ 520              		.cfi_offset 14, -4
+ 313:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t addr;
+ 521              		.loc 1 313 3 is_stmt 1 view .LVU167
+ 314:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 522              		.loc 1 314 3 view .LVU168
+ 316:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (addr & 0xffffUL);
+ 523              		.loc 1 316 3 view .LVU169
+ 316:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (addr & 0xffffUL);
+ 524              		.loc 1 316 8 is_stmt 0 view .LVU170
+ 525 0002 1B68     		ldr	r3, [r3]
+ 526              	.LVL67:
+ 317:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (u32_t)(acc + ((addr >> 16) & 0xffffUL));
+ 527              		.loc 1 317 3 is_stmt 1 view .LVU171
+ 318:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   addr = ip4_addr_get_u32(dest);
+ 528              		.loc 1 318 3 view .LVU172
+ 318:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   addr = ip4_addr_get_u32(dest);
+ 529              		.loc 1 318 30 is_stmt 0 view .LVU173
+ 530 0004 1C0C     		lsrs	r4, r3, #16
+ 318:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   addr = ip4_addr_get_u32(dest);
+ 531              		.loc 1 318 7 view .LVU174
+ 532 0006 14FA83F3 		uxtah	r3, r4, r3
+ 533              	.LVL68:
+ 319:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (u32_t)(acc + (addr & 0xffffUL));
+ 534              		.loc 1 319 3 is_stmt 1 view .LVU175
+ 319:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (u32_t)(acc + (addr & 0xffffUL));
+ 535              		.loc 1 319 8 is_stmt 0 view .LVU176
+ 536 000a 029C     		ldr	r4, [sp, #8]
+ 537 000c 2468     		ldr	r4, [r4]
+ 538              	.LVL69:
+ 320:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (u32_t)(acc + ((addr >> 16) & 0xffffUL));
+ 539              		.loc 1 320 3 is_stmt 1 view .LVU177
+ 320:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (u32_t)(acc + ((addr >> 16) & 0xffffUL));
+ 540              		.loc 1 320 7 is_stmt 0 view .LVU178
+ 541 000e 13FA84F3 		uxtah	r3, r3, r4
+ 542              	.LVL70:
+ 321:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* fold down to 16 bits */
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 19
+
+
+ 543              		.loc 1 321 3 is_stmt 1 view .LVU179
+ 321:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* fold down to 16 bits */
+ 544              		.loc 1 321 7 is_stmt 0 view .LVU180
+ 545 0012 03EB1443 		add	r3, r3, r4, lsr #16
+ 546              	.LVL71:
+ 323:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 547              		.loc 1 323 3 is_stmt 1 view .LVU181
+ 323:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 548              		.loc 1 323 9 is_stmt 0 view .LVU182
+ 549 0016 1FFA83FC 		uxth	ip, r3
+ 323:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 550              		.loc 1 323 7 view .LVU183
+ 551 001a 0CEB1343 		add	r3, ip, r3, lsr #16
+ 552              	.LVL72:
+ 324:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 553              		.loc 1 324 3 is_stmt 1 view .LVU184
+ 324:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 554              		.loc 1 324 9 is_stmt 0 view .LVU185
+ 555 001e 9CB2     		uxth	r4, r3
+ 556              	.LVL73:
+ 326:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 557              		.loc 1 326 3 is_stmt 1 view .LVU186
+ 326:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 558              		.loc 1 326 10 is_stmt 0 view .LVU187
+ 559 0020 04EB1343 		add	r3, r4, r3, lsr #16
+ 560              	.LVL74:
+ 326:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 561              		.loc 1 326 10 view .LVU188
+ 562 0024 FFF7FEFF 		bl	inet_cksum_pseudo_base
+ 563              	.LVL75:
+ 327:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif /* LWIP_IPV4 */
+ 564              		.loc 1 327 1 view .LVU189
+ 565 0028 10BD     		pop	{r4, pc}
+ 327:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif /* LWIP_IPV4 */
+ 566              		.loc 1 327 1 view .LVU190
+ 567              		.cfi_endproc
+ 568              	.LFE157:
+ 570              		.section	.text.ip_chksum_pseudo,"ax",%progbits
+ 571              		.align	1
+ 572              		.global	ip_chksum_pseudo
+ 573              		.syntax unified
+ 574              		.thumb
+ 575              		.thumb_func
+ 576              		.fpu fpv4-sp-d16
+ 578              	ip_chksum_pseudo:
+ 579              	.LVL76:
+ 580              	.LFB158:
+ 381:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if LWIP_IPV6
+ 581              		.loc 1 381 1 is_stmt 1 view -0
+ 582              		.cfi_startproc
+ 583              		@ args = 4, pretend = 0, frame = 0
+ 584              		@ frame_needed = 0, uses_anonymous_args = 0
+ 381:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if LWIP_IPV6
+ 585              		.loc 1 381 1 is_stmt 0 view .LVU192
+ 586 0000 10B5     		push	{r4, lr}
+ 587              	.LCFI7:
+ 588              		.cfi_def_cfa_offset 8
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 20
+
+
+ 589              		.cfi_offset 4, -8
+ 590              		.cfi_offset 14, -4
+ 591 0002 82B0     		sub	sp, sp, #8
+ 592              	.LCFI8:
+ 593              		.cfi_def_cfa_offset 16
+ 392:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 594              		.loc 1 392 5 is_stmt 1 view .LVU193
+ 392:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 595              		.loc 1 392 12 is_stmt 0 view .LVU194
+ 596 0004 049C     		ldr	r4, [sp, #16]
+ 597 0006 0094     		str	r4, [sp]
+ 598 0008 FFF7FEFF 		bl	inet_chksum_pseudo
+ 599              	.LVL77:
+ 395:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 600              		.loc 1 395 1 view .LVU195
+ 601 000c 02B0     		add	sp, sp, #8
+ 602              	.LCFI9:
+ 603              		.cfi_def_cfa_offset 8
+ 604              		@ sp needed
+ 605 000e 10BD     		pop	{r4, pc}
+ 395:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 606              		.loc 1 395 1 view .LVU196
+ 607              		.cfi_endproc
+ 608              	.LFE158:
+ 610              		.section	.text.inet_chksum_pseudo_partial,"ax",%progbits
+ 611              		.align	1
+ 612              		.global	inet_chksum_pseudo_partial
+ 613              		.syntax unified
+ 614              		.thumb
+ 615              		.thumb_func
+ 616              		.fpu fpv4-sp-d16
+ 618              	inet_chksum_pseudo_partial:
+ 619              	.LVL78:
+ 620              	.LFB160:
+ 441:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 442:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if LWIP_IPV4
+ 443:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /* inet_chksum_pseudo_partial:
+ 444:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 445:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Calculates the IPv4 pseudo Internet checksum used by TCP and UDP for a pbuf chain.
+ 446:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * IP addresses are expected to be in network byte order.
+ 447:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 448:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param p chain of pbufs over that a checksum should be calculated (ip data part)
+ 449:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param src source ip address (used for checksum of pseudo header)
+ 450:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param dst destination ip address (used for checksum of pseudo header)
+ 451:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param proto ip protocol (used for checksum of pseudo header)
+ 452:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param proto_len length of the ip data part (used for checksum of pseudo header)
+ 453:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @return checksum (as u16_t) to be saved directly in the protocol header
+ 454:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  */
+ 455:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** u16_t
+ 456:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** inet_chksum_pseudo_partial(struct pbuf *p, u8_t proto, u16_t proto_len,
+ 457:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****                            u16_t chksum_len, const ip4_addr_t *src, const ip4_addr_t *dest)
+ 458:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** {
+ 621              		.loc 1 458 1 is_stmt 1 view -0
+ 622              		.cfi_startproc
+ 623              		@ args = 8, pretend = 0, frame = 0
+ 624              		@ frame_needed = 0, uses_anonymous_args = 0
+ 625              		.loc 1 458 1 is_stmt 0 view .LVU198
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 21
+
+
+ 626 0000 10B5     		push	{r4, lr}
+ 627              	.LCFI10:
+ 628              		.cfi_def_cfa_offset 8
+ 629              		.cfi_offset 4, -8
+ 630              		.cfi_offset 14, -4
+ 631 0002 82B0     		sub	sp, sp, #8
+ 632              	.LCFI11:
+ 633              		.cfi_def_cfa_offset 16
+ 459:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t acc;
+ 634              		.loc 1 459 3 is_stmt 1 view .LVU199
+ 460:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t addr;
+ 635              		.loc 1 460 3 view .LVU200
+ 461:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 462:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   addr = ip4_addr_get_u32(src);
+ 636              		.loc 1 462 3 view .LVU201
+ 637              		.loc 1 462 8 is_stmt 0 view .LVU202
+ 638 0004 049C     		ldr	r4, [sp, #16]
+ 639 0006 2468     		ldr	r4, [r4]
+ 640              	.LVL79:
+ 463:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (addr & 0xffffUL);
+ 641              		.loc 1 463 3 is_stmt 1 view .LVU203
+ 464:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (u32_t)(acc + ((addr >> 16) & 0xffffUL));
+ 642              		.loc 1 464 3 view .LVU204
+ 643              		.loc 1 464 30 is_stmt 0 view .LVU205
+ 644 0008 4FEA144C 		lsr	ip, r4, #16
+ 645              		.loc 1 464 7 view .LVU206
+ 646 000c 1CFA84FC 		uxtah	ip, ip, r4
+ 647              	.LVL80:
+ 465:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   addr = ip4_addr_get_u32(dest);
+ 648              		.loc 1 465 3 is_stmt 1 view .LVU207
+ 649              		.loc 1 465 8 is_stmt 0 view .LVU208
+ 650 0010 059C     		ldr	r4, [sp, #20]
+ 651              	.LVL81:
+ 652              		.loc 1 465 8 view .LVU209
+ 653 0012 2468     		ldr	r4, [r4]
+ 654              	.LVL82:
+ 466:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (u32_t)(acc + (addr & 0xffffUL));
+ 655              		.loc 1 466 3 is_stmt 1 view .LVU210
+ 656              		.loc 1 466 7 is_stmt 0 view .LVU211
+ 657 0014 1CFA84FC 		uxtah	ip, ip, r4
+ 658              	.LVL83:
+ 467:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = (u32_t)(acc + ((addr >> 16) & 0xffffUL));
+ 659              		.loc 1 467 3 is_stmt 1 view .LVU212
+ 660              		.loc 1 467 7 is_stmt 0 view .LVU213
+ 661 0018 0CEB144C 		add	ip, ip, r4, lsr #16
+ 662              	.LVL84:
+ 468:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* fold down to 16 bits */
+ 469:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 663              		.loc 1 469 3 is_stmt 1 view .LVU214
+ 664              		.loc 1 469 9 is_stmt 0 view .LVU215
+ 665 001c 1FFA8CF4 		uxth	r4, ip
+ 666              	.LVL85:
+ 667              		.loc 1 469 7 view .LVU216
+ 668 0020 04EB1C4C 		add	ip, r4, ip, lsr #16
+ 669              	.LVL86:
+ 470:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 670              		.loc 1 470 3 is_stmt 1 view .LVU217
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 22
+
+
+ 671              		.loc 1 470 9 is_stmt 0 view .LVU218
+ 672 0024 1FFA8CF4 		uxth	r4, ip
+ 673              		.loc 1 470 7 view .LVU219
+ 674 0028 04EB1C44 		add	r4, r4, ip, lsr #16
+ 675              	.LVL87:
+ 471:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 472:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   return inet_cksum_pseudo_partial_base(p, proto, proto_len, chksum_len, acc);
+ 676              		.loc 1 472 3 is_stmt 1 view .LVU220
+ 677              		.loc 1 472 10 is_stmt 0 view .LVU221
+ 678 002c 0094     		str	r4, [sp]
+ 679              	.LVL88:
+ 680              		.loc 1 472 10 view .LVU222
+ 681 002e FFF7FEFF 		bl	inet_cksum_pseudo_partial_base
+ 682              	.LVL89:
+ 473:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 683              		.loc 1 473 1 view .LVU223
+ 684 0032 02B0     		add	sp, sp, #8
+ 685              	.LCFI12:
+ 686              		.cfi_def_cfa_offset 8
+ 687              		@ sp needed
+ 688 0034 10BD     		pop	{r4, pc}
+ 689              		.loc 1 473 1 view .LVU224
+ 690              		.cfi_endproc
+ 691              	.LFE160:
+ 693              		.section	.text.ip_chksum_pseudo_partial,"ax",%progbits
+ 694              		.align	1
+ 695              		.global	ip_chksum_pseudo_partial
+ 696              		.syntax unified
+ 697              		.thumb
+ 698              		.thumb_func
+ 699              		.fpu fpv4-sp-d16
+ 701              	ip_chksum_pseudo_partial:
+ 702              	.LVL90:
+ 703              	.LFB161:
+ 474:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif /* LWIP_IPV4 */
+ 475:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 476:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if LWIP_IPV6
+ 477:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /**
+ 478:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Calculates the checksum with IPv6 pseudo header used by TCP and UDP for a pbuf chain.
+ 479:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * IPv6 addresses are expected to be in network byte order. Will only compute for a
+ 480:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * portion of the payload.
+ 481:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 482:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param p chain of pbufs over that a checksum should be calculated (ip data part)
+ 483:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param proto ipv6 protocol/next header (used for checksum of pseudo header)
+ 484:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param proto_len length of the ipv6 payload (used for checksum of pseudo header)
+ 485:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param chksum_len number of payload bytes used to compute chksum
+ 486:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param src source ipv6 address (used for checksum of pseudo header)
+ 487:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param dest destination ipv6 address (used for checksum of pseudo header)
+ 488:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @return checksum (as u16_t) to be saved directly in the protocol header
+ 489:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  */
+ 490:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** u16_t
+ 491:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** ip6_chksum_pseudo_partial(struct pbuf *p, u8_t proto, u16_t proto_len,
+ 492:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****                           u16_t chksum_len, const ip6_addr_t *src, const ip6_addr_t *dest)
+ 493:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** {
+ 494:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t acc = 0;
+ 495:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t addr;
+ 496:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u8_t addr_part;
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 23
+
+
+ 497:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 498:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   for (addr_part = 0; addr_part < 4; addr_part++) {
+ 499:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     addr = src->addr[addr_part];
+ 500:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = (u32_t)(acc + (addr & 0xffffUL));
+ 501:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = (u32_t)(acc + ((addr >> 16) & 0xffffUL));
+ 502:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     addr = dest->addr[addr_part];
+ 503:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = (u32_t)(acc + (addr & 0xffffUL));
+ 504:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = (u32_t)(acc + ((addr >> 16) & 0xffffUL));
+ 505:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 506:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   /* fold down to 16 bits */
+ 507:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 508:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = FOLD_U32T(acc);
+ 509:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 510:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   return inet_cksum_pseudo_partial_base(p, proto, proto_len, chksum_len, acc);
+ 511:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 512:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif /* LWIP_IPV6 */
+ 513:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 514:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /* ip_chksum_pseudo_partial:
+ 515:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 516:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Calculates the IPv4 or IPv6 pseudo Internet checksum used by TCP and UDP for a pbuf chain.
+ 517:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 518:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param p chain of pbufs over that a checksum should be calculated (ip data part)
+ 519:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param src source ip address (used for checksum of pseudo header)
+ 520:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param dst destination ip address (used for checksum of pseudo header)
+ 521:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param proto ip protocol (used for checksum of pseudo header)
+ 522:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param proto_len length of the ip data part (used for checksum of pseudo header)
+ 523:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @return checksum (as u16_t) to be saved directly in the protocol header
+ 524:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  */
+ 525:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** u16_t
+ 526:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** ip_chksum_pseudo_partial(struct pbuf *p, u8_t proto, u16_t proto_len,
+ 527:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****                          u16_t chksum_len, const ip_addr_t *src, const ip_addr_t *dest)
+ 528:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** {
+ 704              		.loc 1 528 1 is_stmt 1 view -0
+ 705              		.cfi_startproc
+ 706              		@ args = 8, pretend = 0, frame = 0
+ 707              		@ frame_needed = 0, uses_anonymous_args = 0
+ 708              		.loc 1 528 1 is_stmt 0 view .LVU226
+ 709 0000 10B5     		push	{r4, lr}
+ 710              	.LCFI13:
+ 711              		.cfi_def_cfa_offset 8
+ 712              		.cfi_offset 4, -8
+ 713              		.cfi_offset 14, -4
+ 714 0002 82B0     		sub	sp, sp, #8
+ 715              	.LCFI14:
+ 716              		.cfi_def_cfa_offset 16
+ 529:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if LWIP_IPV6
+ 530:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   if (IP_IS_V6(dest)) {
+ 531:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     return ip6_chksum_pseudo_partial(p, proto, proto_len, chksum_len, ip_2_ip6(src), ip_2_ip6(dest)
+ 532:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 533:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif /* LWIP_IPV6 */
+ 534:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if LWIP_IPV4 && LWIP_IPV6
+ 535:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   else
+ 536:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif /* LWIP_IPV4 && LWIP_IPV6 */
+ 537:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #if LWIP_IPV4
+ 538:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   {
+ 539:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     return inet_chksum_pseudo_partial(p, proto, proto_len, chksum_len, ip_2_ip4(src), ip_2_ip4(dest
+ 717              		.loc 1 539 5 is_stmt 1 view .LVU227
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 24
+
+
+ 718              		.loc 1 539 12 is_stmt 0 view .LVU228
+ 719 0004 059C     		ldr	r4, [sp, #20]
+ 720 0006 0194     		str	r4, [sp, #4]
+ 721 0008 049C     		ldr	r4, [sp, #16]
+ 722 000a 0094     		str	r4, [sp]
+ 723 000c FFF7FEFF 		bl	inet_chksum_pseudo_partial
+ 724              	.LVL91:
+ 540:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 541:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** #endif /* LWIP_IPV4 */
+ 542:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 725              		.loc 1 542 1 view .LVU229
+ 726 0010 02B0     		add	sp, sp, #8
+ 727              	.LCFI15:
+ 728              		.cfi_def_cfa_offset 8
+ 729              		@ sp needed
+ 730 0012 10BD     		pop	{r4, pc}
+ 731              		.loc 1 542 1 view .LVU230
+ 732              		.cfi_endproc
+ 733              	.LFE161:
+ 735              		.section	.text.inet_chksum,"ax",%progbits
+ 736              		.align	1
+ 737              		.global	inet_chksum
+ 738              		.syntax unified
+ 739              		.thumb
+ 740              		.thumb_func
+ 741              		.fpu fpv4-sp-d16
+ 743              	inet_chksum:
+ 744              	.LVL92:
+ 745              	.LFB162:
+ 543:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 544:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /* inet_chksum:
+ 545:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 546:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Calculates the Internet checksum over a portion of memory. Used primarily for IP
+ 547:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * and ICMP.
+ 548:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 549:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param dataptr start of the buffer to calculate the checksum (no alignment needed)
+ 550:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param len length of the buffer to calculate the checksum
+ 551:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @return checksum (as u16_t) to be saved directly in the protocol header
+ 552:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  */
+ 553:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 554:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** u16_t
+ 555:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** inet_chksum(const void *dataptr, u16_t len)
+ 556:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** {
+ 746              		.loc 1 556 1 is_stmt 1 view -0
+ 747              		.cfi_startproc
+ 748              		@ args = 0, pretend = 0, frame = 0
+ 749              		@ frame_needed = 0, uses_anonymous_args = 0
+ 750              		.loc 1 556 1 is_stmt 0 view .LVU232
+ 751 0000 08B5     		push	{r3, lr}
+ 752              	.LCFI16:
+ 753              		.cfi_def_cfa_offset 8
+ 754              		.cfi_offset 3, -8
+ 755              		.cfi_offset 14, -4
+ 557:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   return (u16_t)~(unsigned int)LWIP_CHKSUM(dataptr, len);
+ 756              		.loc 1 557 3 is_stmt 1 view .LVU233
+ 757              		.loc 1 557 32 is_stmt 0 view .LVU234
+ 758 0002 FFF7FEFF 		bl	lwip_standard_chksum
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 25
+
+
+ 759              	.LVL93:
+ 760              		.loc 1 557 10 view .LVU235
+ 761 0006 C043     		mvns	r0, r0
+ 558:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 762              		.loc 1 558 1 view .LVU236
+ 763 0008 80B2     		uxth	r0, r0
+ 764 000a 08BD     		pop	{r3, pc}
+ 765              		.cfi_endproc
+ 766              	.LFE162:
+ 768              		.section	.text.inet_chksum_pbuf,"ax",%progbits
+ 769              		.align	1
+ 770              		.global	inet_chksum_pbuf
+ 771              		.syntax unified
+ 772              		.thumb
+ 773              		.thumb_func
+ 774              		.fpu fpv4-sp-d16
+ 776              	inet_chksum_pbuf:
+ 777              	.LVL94:
+ 778              	.LFB163:
+ 559:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 560:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** /**
+ 561:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * Calculate a checksum over a chain of pbufs (without pseudo-header, much like
+ 562:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * inet_chksum only pbufs are used).
+ 563:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  *
+ 564:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @param p pbuf chain over that the checksum should be calculated
+ 565:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  * @return checksum (as u16_t) to be saved directly in the protocol header
+ 566:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****  */
+ 567:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** u16_t
+ 568:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** inet_chksum_pbuf(struct pbuf *p)
+ 569:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** {
+ 779              		.loc 1 569 1 is_stmt 1 view -0
+ 780              		.cfi_startproc
+ 781              		@ args = 0, pretend = 0, frame = 0
+ 782              		@ frame_needed = 0, uses_anonymous_args = 0
+ 783              		.loc 1 569 1 is_stmt 0 view .LVU238
+ 784 0000 70B5     		push	{r4, r5, r6, lr}
+ 785              	.LCFI17:
+ 786              		.cfi_def_cfa_offset 16
+ 787              		.cfi_offset 4, -16
+ 788              		.cfi_offset 5, -12
+ 789              		.cfi_offset 6, -8
+ 790              		.cfi_offset 14, -4
+ 791 0002 0546     		mov	r5, r0
+ 570:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   u32_t acc;
+ 792              		.loc 1 570 3 is_stmt 1 view .LVU239
+ 571:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   struct pbuf *q;
+ 793              		.loc 1 571 3 view .LVU240
+ 572:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   int swapped = 0;
+ 794              		.loc 1 572 3 view .LVU241
+ 795              	.LVL95:
+ 573:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 574:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   acc = 0;
+ 796              		.loc 1 574 3 view .LVU242
+ 575:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   for (q = p; q != NULL; q = q->next) {
+ 797              		.loc 1 575 3 view .LVU243
+ 572:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   int swapped = 0;
+ 798              		.loc 1 572 7 is_stmt 0 view .LVU244
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 26
+
+
+ 799 0004 0026     		movs	r6, #0
+ 574:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   for (q = p; q != NULL; q = q->next) {
+ 800              		.loc 1 574 7 view .LVU245
+ 801 0006 3446     		mov	r4, r6
+ 802              		.loc 1 575 3 view .LVU246
+ 803 0008 00E0     		b	.L39
+ 804              	.LVL96:
+ 805              	.L40:
+ 806              		.loc 1 575 26 is_stmt 1 discriminator 2 view .LVU247
+ 807              		.loc 1 575 28 is_stmt 0 discriminator 2 view .LVU248
+ 808 000a 2D68     		ldr	r5, [r5]
+ 809              	.LVL97:
+ 810              	.L39:
+ 811              		.loc 1 575 15 is_stmt 1 discriminator 1 view .LVU249
+ 812              		.loc 1 575 3 is_stmt 0 discriminator 1 view .LVU250
+ 813 000c 9DB1     		cbz	r5, .L44
+ 576:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc += LWIP_CHKSUM(q->payload, q->len);
+ 814              		.loc 1 576 5 is_stmt 1 view .LVU251
+ 815              		.loc 1 576 12 is_stmt 0 view .LVU252
+ 816 000e 6989     		ldrh	r1, [r5, #10]
+ 817 0010 6868     		ldr	r0, [r5, #4]
+ 818 0012 FFF7FEFF 		bl	lwip_standard_chksum
+ 819              	.LVL98:
+ 820              		.loc 1 576 9 view .LVU253
+ 821 0016 0444     		add	r4, r4, r0
+ 822              	.LVL99:
+ 577:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = FOLD_U32T(acc);
+ 823              		.loc 1 577 5 is_stmt 1 view .LVU254
+ 824              		.loc 1 577 11 is_stmt 0 view .LVU255
+ 825 0018 A0B2     		uxth	r0, r4
+ 826              		.loc 1 577 9 view .LVU256
+ 827 001a 00EB1444 		add	r4, r0, r4, lsr #16
+ 828              	.LVL100:
+ 578:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     if (q->len % 2 != 0) {
+ 829              		.loc 1 578 5 is_stmt 1 view .LVU257
+ 830              		.loc 1 578 10 is_stmt 0 view .LVU258
+ 831 001e 6B89     		ldrh	r3, [r5, #10]
+ 832              		.loc 1 578 8 view .LVU259
+ 833 0020 13F0010F 		tst	r3, #1
+ 834 0024 F1D0     		beq	.L40
+ 579:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****       swapped = !swapped;
+ 835              		.loc 1 579 7 is_stmt 1 view .LVU260
+ 836              		.loc 1 579 17 is_stmt 0 view .LVU261
+ 837 0026 86F00106 		eor	r6, r6, #1
+ 838              	.LVL101:
+ 580:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****       acc = SWAP_BYTES_IN_WORD(acc);
+ 839              		.loc 1 580 7 is_stmt 1 view .LVU262
+ 840              		.loc 1 580 13 is_stmt 0 view .LVU263
+ 841 002a 2302     		lsls	r3, r4, #8
+ 842 002c 9BB2     		uxth	r3, r3
+ 843 002e C4F30724 		ubfx	r4, r4, #8, #8
+ 844              	.LVL102:
+ 845              		.loc 1 580 11 view .LVU264
+ 846 0032 1C43     		orrs	r4, r4, r3
+ 847              	.LVL103:
+ 848              		.loc 1 580 11 view .LVU265
+ 849 0034 E9E7     		b	.L40
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 27
+
+
+ 850              	.L44:
+ 581:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     }
+ 582:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 583:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** 
+ 584:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   if (swapped) {
+ 851              		.loc 1 584 3 is_stmt 1 view .LVU266
+ 852              		.loc 1 584 6 is_stmt 0 view .LVU267
+ 853 0036 26B1     		cbz	r6, .L42
+ 585:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****     acc = SWAP_BYTES_IN_WORD(acc);
+ 854              		.loc 1 585 5 is_stmt 1 view .LVU268
+ 855              		.loc 1 585 11 is_stmt 0 view .LVU269
+ 856 0038 2302     		lsls	r3, r4, #8
+ 857 003a 9BB2     		uxth	r3, r3
+ 858 003c C4F30724 		ubfx	r4, r4, #8, #8
+ 859              	.LVL104:
+ 860              		.loc 1 585 9 view .LVU270
+ 861 0040 1C43     		orrs	r4, r4, r3
+ 862              	.LVL105:
+ 863              	.L42:
+ 586:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   }
+ 587:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c ****   return (u16_t)~(acc & 0xffffUL);
+ 864              		.loc 1 587 3 is_stmt 1 view .LVU271
+ 865              		.loc 1 587 10 is_stmt 0 view .LVU272
+ 866 0042 E043     		mvns	r0, r4
+ 588:/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/src/core/inet_chksum.c **** }
+ 867              		.loc 1 588 1 view .LVU273
+ 868 0044 80B2     		uxth	r0, r0
+ 869 0046 70BD     		pop	{r4, r5, r6, pc}
+ 870              		.loc 1 588 1 view .LVU274
+ 871              		.cfi_endproc
+ 872              	.LFE163:
+ 874              		.text
+ 875              	.Letext0:
+ 876              		.file 2 "/Users/nhantt/tools/stm32/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/machin
+ 877              		.file 3 "/Users/nhantt/tools/stm32/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/sys/_s
+ 878              		.file 4 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/s
+ 879              		.file 5 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/s
+ 880              		.file 6 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/s
+ 881              		.file 7 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/s
+ 882              		.file 8 "/Users/nhantt/tools/stm32/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/stdio.
+ 883              		.file 9 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Middlewares/Third_Party/LwIP/s
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s 			page 28
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 inet_chksum.c
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:18     .text.lwip_standard_chksum:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:26     .text.lwip_standard_chksum:0000000000000000 lwip_standard_chksum
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:159    .text.inet_cksum_pseudo_base:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:165    .text.inet_cksum_pseudo_base:0000000000000000 inet_cksum_pseudo_base
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:298    .rodata.inet_cksum_pseudo_partial_base.str1.4:0000000000000000 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:310    .text.inet_cksum_pseudo_partial_base:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:316    .text.inet_cksum_pseudo_partial_base:0000000000000000 inet_cksum_pseudo_partial_base
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:494    .text.inet_cksum_pseudo_partial_base:00000000000000a0 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:501    .text.inet_chksum_pseudo:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:508    .text.inet_chksum_pseudo:0000000000000000 inet_chksum_pseudo
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:571    .text.ip_chksum_pseudo:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:578    .text.ip_chksum_pseudo:0000000000000000 ip_chksum_pseudo
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:611    .text.inet_chksum_pseudo_partial:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:618    .text.inet_chksum_pseudo_partial:0000000000000000 inet_chksum_pseudo_partial
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:694    .text.ip_chksum_pseudo_partial:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:701    .text.ip_chksum_pseudo_partial:0000000000000000 ip_chksum_pseudo_partial
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:736    .text.inet_chksum:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:743    .text.inet_chksum:0000000000000000 inet_chksum
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:769    .text.inet_chksum_pbuf:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccGJjWwf.s:776    .text.inet_chksum_pbuf:0000000000000000 inet_chksum_pbuf
+
+UNDEFINED SYMBOLS
+lwip_htons
+printf

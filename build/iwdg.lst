@@ -1,0 +1,153 @@
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccHlflY7.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"iwdg.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.MX_IWDG_Init,"ax",%progbits
+  18              		.align	1
+  19              		.global	MX_IWDG_Init
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	MX_IWDG_Init:
+  27              	.LFB130:
+  28              		.file 1 "Src/iwdg.c"
+   1:Src/iwdg.c    **** /**
+   2:Src/iwdg.c    ****   ******************************************************************************
+   3:Src/iwdg.c    ****   * @file    iwdg.c
+   4:Src/iwdg.c    ****   * @brief   This file provides code for the configuration
+   5:Src/iwdg.c    ****   *          of the IWDG instances.
+   6:Src/iwdg.c    ****   ******************************************************************************
+   7:Src/iwdg.c    ****   * @attention
+   8:Src/iwdg.c    ****   *
+   9:Src/iwdg.c    ****   * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
+  10:Src/iwdg.c    ****   * All rights reserved.</center></h2>
+  11:Src/iwdg.c    ****   *
+  12:Src/iwdg.c    ****   * This software component is licensed by ST under Ultimate Liberty license
+  13:Src/iwdg.c    ****   * SLA0044, the "License"; You may not use this file except in compliance with
+  14:Src/iwdg.c    ****   * the License. You may obtain a copy of the License at:
+  15:Src/iwdg.c    ****   *                             www.st.com/SLA0044
+  16:Src/iwdg.c    ****   *
+  17:Src/iwdg.c    ****   ******************************************************************************
+  18:Src/iwdg.c    ****   */
+  19:Src/iwdg.c    **** 
+  20:Src/iwdg.c    **** /* Includes ------------------------------------------------------------------*/
+  21:Src/iwdg.c    **** #include "iwdg.h"
+  22:Src/iwdg.c    **** 
+  23:Src/iwdg.c    **** /* USER CODE BEGIN 0 */
+  24:Src/iwdg.c    **** 
+  25:Src/iwdg.c    **** /* USER CODE END 0 */
+  26:Src/iwdg.c    **** 
+  27:Src/iwdg.c    **** IWDG_HandleTypeDef hiwdg;
+  28:Src/iwdg.c    **** 
+  29:Src/iwdg.c    **** /* IWDG init function */
+  30:Src/iwdg.c    **** void MX_IWDG_Init(void)
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccHlflY7.s 			page 2
+
+
+  31:Src/iwdg.c    **** {
+  29              		.loc 1 31 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+  32:Src/iwdg.c    **** 
+  33:Src/iwdg.c    ****   hiwdg.Instance = IWDG;
+  38              		.loc 1 33 3 view .LVU1
+  39              		.loc 1 33 18 is_stmt 0 view .LVU2
+  40 0002 0748     		ldr	r0, .L5
+  41 0004 074B     		ldr	r3, .L5+4
+  42 0006 0360     		str	r3, [r0]
+  34:Src/iwdg.c    ****   hiwdg.Init.Prescaler = IWDG_PRESCALER_4;
+  43              		.loc 1 34 3 is_stmt 1 view .LVU3
+  44              		.loc 1 34 24 is_stmt 0 view .LVU4
+  45 0008 0023     		movs	r3, #0
+  46 000a 4360     		str	r3, [r0, #4]
+  35:Src/iwdg.c    ****   hiwdg.Init.Reload = 4095;
+  47              		.loc 1 35 3 is_stmt 1 view .LVU5
+  48              		.loc 1 35 21 is_stmt 0 view .LVU6
+  49 000c 40F6FF73 		movw	r3, #4095
+  50 0010 8360     		str	r3, [r0, #8]
+  36:Src/iwdg.c    ****   if (HAL_IWDG_Init(&hiwdg) != HAL_OK)
+  51              		.loc 1 36 3 is_stmt 1 view .LVU7
+  52              		.loc 1 36 7 is_stmt 0 view .LVU8
+  53 0012 FFF7FEFF 		bl	HAL_IWDG_Init
+  54              	.LVL0:
+  55              		.loc 1 36 6 view .LVU9
+  56 0016 00B9     		cbnz	r0, .L4
+  57              	.L1:
+  37:Src/iwdg.c    ****   {
+  38:Src/iwdg.c    ****     Error_Handler();
+  39:Src/iwdg.c    ****   }
+  40:Src/iwdg.c    **** 
+  41:Src/iwdg.c    **** }
+  58              		.loc 1 41 1 view .LVU10
+  59 0018 08BD     		pop	{r3, pc}
+  60              	.L4:
+  38:Src/iwdg.c    ****   }
+  61              		.loc 1 38 5 is_stmt 1 view .LVU11
+  62 001a FFF7FEFF 		bl	Error_Handler
+  63              	.LVL1:
+  64              		.loc 1 41 1 is_stmt 0 view .LVU12
+  65 001e FBE7     		b	.L1
+  66              	.L6:
+  67              		.align	2
+  68              	.L5:
+  69 0020 00000000 		.word	.LANCHOR0
+  70 0024 00300040 		.word	1073754112
+  71              		.cfi_endproc
+  72              	.LFE130:
+  74              		.global	hiwdg
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccHlflY7.s 			page 3
+
+
+  75              		.section	.bss.hiwdg,"aw",%nobits
+  76              		.align	2
+  77              		.set	.LANCHOR0,. + 0
+  80              	hiwdg:
+  81 0000 00000000 		.space	12
+  81      00000000 
+  81      00000000 
+  82              		.text
+  83              	.Letext0:
+  84              		.file 2 "/Users/nhantt/tools/stm32/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/machin
+  85              		.file 3 "/Users/nhantt/tools/stm32/gcc-arm-none-eabi-10-2020-q4-major/arm-none-eabi/include/sys/_s
+  86              		.file 4 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/CMSIS/Device/ST/STM32F
+  87              		.file 5 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/STM32F4xx_HAL_Driver/I
+  88              		.file 6 "Inc/main.h"
+  89              		.file 7 "/Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0/Drivers/STM32F4xx_HAL_Driver/I
+  90              		.file 8 "Inc/iwdg.h"
+ARM GAS  /var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccHlflY7.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 iwdg.c
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccHlflY7.s:18     .text.MX_IWDG_Init:0000000000000000 $t
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccHlflY7.s:26     .text.MX_IWDG_Init:0000000000000000 MX_IWDG_Init
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccHlflY7.s:69     .text.MX_IWDG_Init:0000000000000020 $d
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccHlflY7.s:80     .bss.hiwdg:0000000000000000 hiwdg
+/var/folders/k2/cd9bl_j17z77g23y6ffqb_400000gn/T//ccHlflY7.s:76     .bss.hiwdg:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+HAL_IWDG_Init
+Error_Handler
