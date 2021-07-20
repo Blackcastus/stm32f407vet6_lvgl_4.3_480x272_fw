@@ -10,6 +10,7 @@
 #include "usb_device.h"
 #include "gpio.h"
 #include "fsmc.h"
+#include "dma.h"
 #include "ssd1963_fsmc.h"
 #include "lv_driver.h"
 #include "../lvgl/lvgl.h"
@@ -77,12 +78,7 @@ void lv_example_get_started_1(void)
     lv_label_set_text(label, "Button");                     /*Set the labels text*/
     lv_obj_center(label);
 }
-/* USER CODE END 0 */
 
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -109,25 +105,25 @@ int main(void)
   MX_GPIO_Init();
   //MX_CAN1_Init();
   MX_FSMC_Init();
-  lv_init(); 
-  //tft_init();
-  LCD_Init();
-
   MX_I2C1_Init();
   GT911_Init(sampleConfig);
+  lv_init(); 
+  //tft_init();
+  //LCD_Init();
+  tft_init();
 
-  static lv_disp_draw_buf_t disp_buf;
-  static lv_color_t buf_1[480 * 10];
-  static lv_color_t buf_2[480 * 10];
-  lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, 480 * 10);
+  // static lv_disp_draw_buf_t disp_buf;
+  // static lv_color_t buf_1[480 * 10];
+  // static lv_color_t buf_2[480 * 10];
+  // lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, 480 * 10);
 
-  lv_disp_drv_t disp_drv;
-  lv_disp_drv_init(&disp_drv);
-  disp_drv.draw_buf = &disp_buf;
-  disp_drv.flush_cb = SSD1963_flush;
-  disp_drv.hor_res = 480;
-  disp_drv.ver_res = 272;
-  lv_disp_drv_register(&disp_drv);
+  // lv_disp_drv_t disp_drv;
+  // lv_disp_drv_init(&disp_drv);
+  // disp_drv.draw_buf = &disp_buf;
+  // disp_drv.flush_cb = SSD1963_flush;
+  // disp_drv.hor_res = 480;
+  // disp_drv.ver_res = 272;
+  // lv_disp_drv_register(&disp_drv);
 
   static lv_indev_drv_t indev_drv;
   lv_indev_drv_init(&indev_drv);
@@ -161,14 +157,14 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    lv_task_handler();
-    GT911_ReadTouch(cordinate, &number);
-    if(HAL_GetTick() - tick >= 1000)
+    if(HAL_GetTick() - tick >= 5)
     {
+      GT911_ReadTouch(cordinate, &number);
+      lv_task_handler();
       // printf("(x, y) = (%d, %d) \n", cordinate[0].x, cordinate[0].y);
       // printf("STT: %d\n", GT911_GetProductID(&id));
       // printf("id: %x \n", id);
-      printf("Hello World\n");
+      //printf("Hello World\n");
       tick = HAL_GetTick();
     }
     /* USER CODE BEGIN 3 */

@@ -21,7 +21,7 @@ void LCD_Send_Cmd(uint16_t cmd)
 
 void LCD_Send_Dat(uint16_t dat)
 {
-	for (uint8_t i = 0; i < 1; i++)
+	//for (uint8_t i = 0; i < 1; i++)
 	DAT = dat;
 }
 
