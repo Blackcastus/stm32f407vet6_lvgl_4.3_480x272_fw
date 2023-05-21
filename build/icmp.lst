@@ -1,0 +1,1318 @@
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"icmp.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.rodata.icmp_send_response.str1.4,"aMS",%progbits,1
+  20              		.align	2
+  21              	.LC0:
+  22 0000 633A2F55 		.ascii	"c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_"
+  22      73657273 
+  22      2F426C61 
+  22      636B5F4C 
+  22      6966652F 
+  23 0033 46575F46 		.ascii	"FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core"
+  23      345F5631 
+  23      2E32362E 
+  23      322F4D69 
+  23      64646C65 
+  24 0066 2F697076 		.ascii	"/ipv4/icmp.c\000"
+  24      342F6963 
+  24      6D702E63 
+  24      00
+  25 0073 00       		.align	2
+  26              	.LC1:
+  27 0074 63686563 		.ascii	"check that first pbuf can hold icmp message\000"
+  27      6B207468 
+  27      61742066 
+  27      69727374 
+  27      20706275 
+  28              		.align	2
+  29              	.LC2:
+  30 00a0 41737365 		.ascii	"Assertion \"%s\" failed at line %d in %s\012\000"
+  30      7274696F 
+  30      6E202225 
+  30      73222066 
+  30      61696C65 
+  31              		.section	.text.icmp_send_response,"ax",%progbits
+  32              		.align	1
+  33              		.syntax unified
+  34              		.thumb
+  35              		.thumb_func
+  37              	icmp_send_response:
+  38              	.LVL0:
+  39              	.LFB159:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 2
+
+
+  40              		.file 1 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+   1:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** /**
+   2:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * @file
+   3:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * ICMP - Internet Control Message Protocol
+   4:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *
+   5:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  */
+   6:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+   7:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** /*
+   8:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+   9:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * All rights reserved.
+  10:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *
+  11:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * Redistribution and use in source and binary forms, with or without modification,
+  12:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * are permitted provided that the following conditions are met:
+  13:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *
+  14:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * 1. Redistributions of source code must retain the above copyright notice,
+  15:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *    this list of conditions and the following disclaimer.
+  16:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice,
+  17:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *    this list of conditions and the following disclaimer in the documentation
+  18:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *    and/or other materials provided with the distribution.
+  19:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * 3. The name of the author may not be used to endorse or promote products
+  20:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *    derived from this software without specific prior written permission.
+  21:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *
+  22:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+  23:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  24:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+  25:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  26:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+  27:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  28:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  29:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+  30:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  31:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * OF SUCH DAMAGE.
+  32:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *
+  33:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * This file is part of the lwIP TCP/IP stack.
+  34:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *
+  35:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * Author: Adam Dunkels <adam@sics.se>
+  36:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *
+  37:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  */
+  38:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+  39:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** /* Some ICMP messages should be passed to the transport protocols. This
+  40:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****    is not implemented. */
+  41:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+  42:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #include "lwip/opt.h"
+  43:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+  44:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_IPV4 && LWIP_ICMP /* don't build if not configured for use in lwipopts.h */
+  45:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+  46:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #include "lwip/icmp.h"
+  47:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #include "lwip/inet_chksum.h"
+  48:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #include "lwip/ip.h"
+  49:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #include "lwip/def.h"
+  50:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #include "lwip/stats.h"
+  51:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+  52:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #include <string.h>
+  53:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+  54:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #ifdef LWIP_HOOK_FILENAME
+  55:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #include LWIP_HOOK_FILENAME
+  56:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 3
+
+
+  57:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+  58:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** /** Small optimization: set to 0 if incoming PBUF_POOL pbuf always can be
+  59:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * used to modify and send a response packet (and to 1 if this is not the case,
+  60:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * e.g. when link header is stripped off when receiving) */
+  61:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #ifndef LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN
+  62:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #define LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN 1
+  63:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif /* LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN */
+  64:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+  65:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** /* The amount of data from the original packet to return in a dest-unreachable */
+  66:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #define ICMP_DEST_UNREACH_DATASIZE 8
+  67:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+  68:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** static void icmp_send_response(struct pbuf *p, u8_t type, u8_t code);
+  69:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+  70:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** /**
+  71:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * Processes ICMP input packets, called from ip_input().
+  72:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *
+  73:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * Currently only processes icmp echo requests and sends
+  74:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * out the echo response.
+  75:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *
+  76:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * @param p the icmp echo request packet, p->payload pointing to the icmp header
+  77:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * @param inp the netif on which this packet was received
+  78:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  */
+  79:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** void
+  80:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** icmp_input(struct pbuf *p, struct netif *inp)
+  81:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** {
+  82:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   u8_t type;
+  83:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #ifdef LWIP_DEBUG
+  84:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   u8_t code;
+  85:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif /* LWIP_DEBUG */
+  86:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   struct icmp_echo_hdr *iecho;
+  87:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   const struct ip_hdr *iphdr_in;
+  88:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   u16_t hlen;
+  89:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   const ip4_addr_t *src;
+  90:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+  91:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   ICMP_STATS_INC(icmp.recv);
+  92:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   MIB2_STATS_INC(mib2.icmpinmsgs);
+  93:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+  94:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   iphdr_in = ip4_current_header();
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   hlen = IPH_HL_BYTES(iphdr_in);
+  96:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   if (hlen < IP_HLEN) {
+  97:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: short IP header (%"S16_F" bytes) received\n", hlen));
+  98:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     goto lenerr;
+  99:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   }
+ 100:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   if (p->len < sizeof(u16_t) * 2) {
+ 101:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: short ICMP (%"U16_F" bytes) received\n", p->tot_len));
+ 102:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     goto lenerr;
+ 103:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   }
+ 104:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 105:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   type = *((u8_t *)p->payload);
+ 106:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #ifdef LWIP_DEBUG
+ 107:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   code = *(((u8_t *)p->payload) + 1);
+ 108:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   /* if debug is enabled but debug statement below is somehow disabled: */
+ 109:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   LWIP_UNUSED_ARG(code);
+ 110:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif /* LWIP_DEBUG */
+ 111:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   switch (type) {
+ 112:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     case ICMP_ER:
+ 113:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       /* This is OK, echo reply might have been parsed by a raw PCB
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 4
+
+
+ 114:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****          (as obviously, an echo request has been sent, too). */
+ 115:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       MIB2_STATS_INC(mib2.icmpinechoreps);
+ 116:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       break;
+ 117:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     case ICMP_ECHO:
+ 118:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       MIB2_STATS_INC(mib2.icmpinechos);
+ 119:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       src = ip4_current_dest_addr();
+ 120:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       /* multicast destination address? */
+ 121:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       if (ip4_addr_ismulticast(ip4_current_dest_addr())) {
+ 122:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_MULTICAST_PING
+ 123:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* For multicast, use address of receiving interface as source address */
+ 124:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         src = netif_ip4_addr(inp);
+ 125:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #else /* LWIP_MULTICAST_PING */
+ 126:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: Not echoing to multicast pings\n"));
+ 127:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         goto icmperr;
+ 128:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif /* LWIP_MULTICAST_PING */
+ 129:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       }
+ 130:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       /* broadcast destination address? */
+ 131:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       if (ip4_addr_isbroadcast(ip4_current_dest_addr(), ip_current_netif())) {
+ 132:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_BROADCAST_PING
+ 133:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* For broadcast, use address of receiving interface as source address */
+ 134:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         src = netif_ip4_addr(inp);
+ 135:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #else /* LWIP_BROADCAST_PING */
+ 136:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: Not echoing to broadcast pings\n"));
+ 137:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         goto icmperr;
+ 138:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif /* LWIP_BROADCAST_PING */
+ 139:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       }
+ 140:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: ping\n"));
+ 141:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       if (p->tot_len < sizeof(struct icmp_echo_hdr)) {
+ 142:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: bad ICMP echo received\n"));
+ 143:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         goto lenerr;
+ 144:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       }
+ 145:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if CHECKSUM_CHECK_ICMP
+ 146:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       IF__NETIF_CHECKSUM_ENABLED(inp, NETIF_CHECKSUM_CHECK_ICMP) {
+ 147:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         if (inet_chksum_pbuf(p) != 0) {
+ 148:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: checksum failed for received ICMP echo\n"));
+ 149:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           pbuf_free(p);
+ 150:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           ICMP_STATS_INC(icmp.chkerr);
+ 151:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           MIB2_STATS_INC(mib2.icmpinerrors);
+ 152:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           return;
+ 153:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 154:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       }
+ 155:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif
+ 156:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN
+ 157:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       if (pbuf_add_header(p, hlen + PBUF_LINK_HLEN + PBUF_LINK_ENCAPSULATION_HLEN)) {
+ 158:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* p is not big enough to contain link headers
+ 159:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****          * allocate a new one and copy p into it
+ 160:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****          */
+ 161:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         struct pbuf *r;
+ 162:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         u16_t alloc_len = (u16_t)(p->tot_len + hlen);
+ 163:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         if (alloc_len < p->tot_len) {
+ 164:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: allocating new pbuf failed (tot_len overflow)\n"));
+ 165:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 166:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 167:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* allocate new packet buffer with space for link headers */
+ 168:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         r = pbuf_alloc(PBUF_LINK, alloc_len, PBUF_RAM);
+ 169:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         if (r == NULL) {
+ 170:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: allocating new pbuf failed\n"));
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 5
+
+
+ 171:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 172:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 173:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         if (r->len < hlen + sizeof(struct icmp_echo_hdr)) {
+ 174:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("first pbuf cannot hold the ICMP header
+ 175:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           pbuf_free(r);
+ 176:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 177:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 178:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* copy the ip header */
+ 179:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         MEMCPY(r->payload, iphdr_in, hlen);
+ 180:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* switch r->payload back to icmp header (cannot fail) */
+ 181:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         if (pbuf_remove_header(r, hlen)) {
+ 182:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_ASSERT("icmp_input: moving r->payload to icmp header failed\n", 0);
+ 183:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           pbuf_free(r);
+ 184:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 185:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 186:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* copy the rest of the packet without ip header */
+ 187:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         if (pbuf_copy(r, p) != ERR_OK) {
+ 188:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("icmp_input: copying to new pbuf failed
+ 189:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           pbuf_free(r);
+ 190:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 191:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 192:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* free the original p */
+ 193:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         pbuf_free(p);
+ 194:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* we now have an identical copy of p that has room for link headers */
+ 195:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         p = r;
+ 196:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       } else {
+ 197:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* restore p->payload to point to icmp header (cannot fail) */
+ 198:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         if (pbuf_remove_header(p, hlen + PBUF_LINK_HLEN + PBUF_LINK_ENCAPSULATION_HLEN)) {
+ 199:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_ASSERT("icmp_input: restoring original p->payload failed\n", 0);
+ 200:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 201:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 202:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       }
+ 203:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif /* LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN */
+ 204:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       /* At this point, all checks are OK. */
+ 205:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       /* We generate an answer by switching the dest and src ip addresses,
+ 206:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****        * setting the icmp type to ECHO_RESPONSE and updating the checksum. */
+ 207:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       iecho = (struct icmp_echo_hdr *)p->payload;
+ 208:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       if (pbuf_add_header(p, hlen)) {
+ 209:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         LWIP_DEBUGF(ICMP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("Can't move over header in packet"));
+ 210:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       } else {
+ 211:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         err_t ret;
+ 212:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         struct ip_hdr *iphdr = (struct ip_hdr *)p->payload;
+ 213:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         ip4_addr_copy(iphdr->src, *src);
+ 214:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         ip4_addr_copy(iphdr->dest, *ip4_current_src_addr());
+ 215:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         ICMPH_TYPE_SET(iecho, ICMP_ER);
+ 216:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if CHECKSUM_GEN_ICMP
+ 217:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         IF__NETIF_CHECKSUM_ENABLED(inp, NETIF_CHECKSUM_GEN_ICMP) {
+ 218:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           /* adjust the checksum */
+ 219:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           if (iecho->chksum > PP_HTONS(0xffffU - (ICMP_ECHO << 8))) {
+ 220:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****             iecho->chksum = (u16_t)(iecho->chksum + PP_HTONS((u16_t)(ICMP_ECHO << 8)) + 1);
+ 221:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           } else {
+ 222:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****             iecho->chksum = (u16_t)(iecho->chksum + PP_HTONS(ICMP_ECHO << 8));
+ 223:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           }
+ 224:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 225:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_CHECKSUM_CTRL_PER_NETIF
+ 226:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         else {
+ 227:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           iecho->chksum = 0;
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 6
+
+
+ 228:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 229:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif /* LWIP_CHECKSUM_CTRL_PER_NETIF */
+ 230:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #else /* CHECKSUM_GEN_ICMP */
+ 231:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         iecho->chksum = 0;
+ 232:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif /* CHECKSUM_GEN_ICMP */
+ 233:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 234:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* Set the correct TTL and recalculate the header checksum. */
+ 235:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         IPH_TTL_SET(iphdr, ICMP_TTL);
+ 236:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         IPH_CHKSUM_SET(iphdr, 0);
+ 237:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if CHECKSUM_GEN_IP
+ 238:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         IF__NETIF_CHECKSUM_ENABLED(inp, NETIF_CHECKSUM_GEN_IP) {
+ 239:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           IPH_CHKSUM_SET(iphdr, inet_chksum(iphdr, hlen));
+ 240:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 241:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif /* CHECKSUM_GEN_IP */
+ 242:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 243:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         ICMP_STATS_INC(icmp.xmit);
+ 244:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* increase number of messages attempted to send */
+ 245:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         MIB2_STATS_INC(mib2.icmpoutmsgs);
+ 246:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* increase number of echo replies attempted to send */
+ 247:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         MIB2_STATS_INC(mib2.icmpoutechoreps);
+ 248:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 249:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* send an ICMP packet */
+ 250:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         ret = ip4_output_if(p, src, LWIP_IP_HDRINCL,
+ 251:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****                             ICMP_TTL, 0, IP_PROTO_ICMP, inp);
+ 252:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         if (ret != ERR_OK) {
+ 253:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: ip_output_if returned an error: %s\n", lwip_strerr(
+ 254:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 255:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       }
+ 256:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       break;
+ 257:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     default:
+ 258:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       if (type == ICMP_DUR) {
+ 259:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         MIB2_STATS_INC(mib2.icmpindestunreachs);
+ 260:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       } else if (type == ICMP_TE) {
+ 261:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         MIB2_STATS_INC(mib2.icmpintimeexcds);
+ 262:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       } else if (type == ICMP_PP) {
+ 263:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         MIB2_STATS_INC(mib2.icmpinparmprobs);
+ 264:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       } else if (type == ICMP_SQ) {
+ 265:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         MIB2_STATS_INC(mib2.icmpinsrcquenchs);
+ 266:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       } else if (type == ICMP_RD) {
+ 267:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         MIB2_STATS_INC(mib2.icmpinredirects);
+ 268:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       } else if (type == ICMP_TS) {
+ 269:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         MIB2_STATS_INC(mib2.icmpintimestamps);
+ 270:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       } else if (type == ICMP_TSR) {
+ 271:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         MIB2_STATS_INC(mib2.icmpintimestampreps);
+ 272:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       } else if (type == ICMP_AM) {
+ 273:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         MIB2_STATS_INC(mib2.icmpinaddrmasks);
+ 274:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       } else if (type == ICMP_AMR) {
+ 275:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         MIB2_STATS_INC(mib2.icmpinaddrmaskreps);
+ 276:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       }
+ 277:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: ICMP type %"S16_F" code %"S16_F" not supported.\n",
+ 278:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****                                (s16_t)type, (s16_t)code));
+ 279:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       ICMP_STATS_INC(icmp.proterr);
+ 280:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       ICMP_STATS_INC(icmp.drop);
+ 281:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   }
+ 282:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   pbuf_free(p);
+ 283:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   return;
+ 284:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** lenerr:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 7
+
+
+ 285:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   pbuf_free(p);
+ 286:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   ICMP_STATS_INC(icmp.lenerr);
+ 287:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   MIB2_STATS_INC(mib2.icmpinerrors);
+ 288:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   return;
+ 289:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN || !LWIP_MULTICAST_PING || !LWIP_BROADCAST_PING
+ 290:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** icmperr:
+ 291:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   pbuf_free(p);
+ 292:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   ICMP_STATS_INC(icmp.err);
+ 293:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   MIB2_STATS_INC(mib2.icmpinerrors);
+ 294:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   return;
+ 295:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif /* LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN || !LWIP_MULTICAST_PING || !LWIP_BROADCAST_PING */
+ 296:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** }
+ 297:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 298:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** /**
+ 299:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * Send an icmp 'destination unreachable' packet, called from ip_input() if
+ 300:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * the transport layer protocol is unknown and from udp_input() if the local
+ 301:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * port is not bound.
+ 302:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *
+ 303:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * @param p the input packet for which the 'unreachable' should be sent,
+ 304:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *          p->payload pointing to the IP header
+ 305:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * @param t type of the 'unreachable' packet
+ 306:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  */
+ 307:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** void
+ 308:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** icmp_dest_unreach(struct pbuf *p, enum icmp_dur_type t)
+ 309:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** {
+ 310:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   MIB2_STATS_INC(mib2.icmpoutdestunreachs);
+ 311:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   icmp_send_response(p, ICMP_DUR, t);
+ 312:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** }
+ 313:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 314:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if IP_FORWARD || IP_REASSEMBLY
+ 315:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** /**
+ 316:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * Send a 'time exceeded' packet, called from ip_forward() if TTL is 0.
+ 317:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *
+ 318:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * @param p the input packet for which the 'time exceeded' should be sent,
+ 319:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *          p->payload pointing to the IP header
+ 320:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * @param t type of the 'time exceeded' packet
+ 321:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  */
+ 322:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** void
+ 323:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** icmp_time_exceeded(struct pbuf *p, enum icmp_te_type t)
+ 324:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** {
+ 325:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   MIB2_STATS_INC(mib2.icmpouttimeexcds);
+ 326:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   icmp_send_response(p, ICMP_TE, t);
+ 327:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** }
+ 328:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 329:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif /* IP_FORWARD || IP_REASSEMBLY */
+ 330:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 331:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** /**
+ 332:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * Send an icmp packet in response to an incoming packet.
+ 333:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *
+ 334:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * @param p the input packet for which the 'unreachable' should be sent,
+ 335:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  *          p->payload pointing to the IP header
+ 336:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * @param type Type of the ICMP header
+ 337:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  * @param code Code of the ICMP header
+ 338:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****  */
+ 339:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** static void
+ 340:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** icmp_send_response(struct pbuf *p, u8_t type, u8_t code)
+ 341:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** {
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 8
+
+
+  41              		.loc 1 341 1 view -0
+  42              		.cfi_startproc
+  43              		@ args = 0, pretend = 0, frame = 8
+  44              		@ frame_needed = 0, uses_anonymous_args = 0
+  45              		.loc 1 341 1 is_stmt 0 view .LVU1
+  46 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  47              	.LCFI0:
+  48              		.cfi_def_cfa_offset 24
+  49              		.cfi_offset 4, -24
+  50              		.cfi_offset 5, -20
+  51              		.cfi_offset 6, -16
+  52              		.cfi_offset 7, -12
+  53              		.cfi_offset 8, -8
+  54              		.cfi_offset 14, -4
+  55 0004 86B0     		sub	sp, sp, #24
+  56              	.LCFI1:
+  57              		.cfi_def_cfa_offset 48
+  58 0006 0646     		mov	r6, r0
+  59 0008 8846     		mov	r8, r1
+  60 000a 1746     		mov	r7, r2
+ 342:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   struct pbuf *q;
+  61              		.loc 1 342 3 is_stmt 1 view .LVU2
+ 343:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   struct ip_hdr *iphdr;
+  62              		.loc 1 343 3 view .LVU3
+ 344:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   /* we can use the echo header here */
+ 345:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   struct icmp_echo_hdr *icmphdr;
+  63              		.loc 1 345 3 view .LVU4
+ 346:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   ip4_addr_t iphdr_src;
+  64              		.loc 1 346 3 view .LVU5
+ 347:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   struct netif *netif;
+  65              		.loc 1 347 3 view .LVU6
+ 348:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 349:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   /* increase number of messages attempted to send */
+ 350:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   MIB2_STATS_INC(mib2.icmpoutmsgs);
+  66              		.loc 1 350 35 view .LVU7
+ 351:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 352:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   /* ICMP header + IP header + 8 bytes of data */
+ 353:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   q = pbuf_alloc(PBUF_IP, sizeof(struct icmp_echo_hdr) + IP_HLEN + ICMP_DEST_UNREACH_DATASIZE,
+  67              		.loc 1 353 3 view .LVU8
+  68              		.loc 1 353 7 is_stmt 0 view .LVU9
+  69 000c 4FF42072 		mov	r2, #640
+  70              	.LVL1:
+  71              		.loc 1 353 7 view .LVU10
+  72 0010 2421     		movs	r1, #36
+  73              	.LVL2:
+  74              		.loc 1 353 7 view .LVU11
+  75 0012 2220     		movs	r0, #34
+  76              	.LVL3:
+  77              		.loc 1 353 7 view .LVU12
+  78 0014 FFF7FEFF 		bl	pbuf_alloc
+  79              	.LVL4:
+ 354:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****                  PBUF_RAM);
+ 355:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   if (q == NULL) {
+  80              		.loc 1 355 3 is_stmt 1 view .LVU13
+  81              		.loc 1 355 6 is_stmt 0 view .LVU14
+  82 0018 A0B3     		cbz	r0, .L1
+  83 001a 0546     		mov	r5, r0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 9
+
+
+ 356:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     LWIP_DEBUGF(ICMP_DEBUG, ("icmp_time_exceeded: failed to allocate pbuf for ICMP packet.\n"));
+ 357:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     MIB2_STATS_INC(mib2.icmpouterrors);
+ 358:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     return;
+ 359:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   }
+ 360:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   LWIP_ASSERT("check that first pbuf can hold icmp message",
+  84              		.loc 1 360 3 is_stmt 1 view .LVU15
+  85              		.loc 1 360 3 view .LVU16
+  86 001c 4389     		ldrh	r3, [r0, #10]
+  87 001e 232B     		cmp	r3, #35
+  88 0020 33D9     		bls	.L7
+  89              	.LVL5:
+  90              	.L4:
+  91              		.loc 1 360 3 discriminator 3 view .LVU17
+  92              		.loc 1 360 3 discriminator 3 view .LVU18
+ 361:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****               (q->len >= (sizeof(struct icmp_echo_hdr) + IP_HLEN + ICMP_DEST_UNREACH_DATASIZE)));
+ 362:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 363:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   iphdr = (struct ip_hdr *)p->payload;
+  93              		.loc 1 363 3 discriminator 3 view .LVU19
+  94              		.loc 1 363 9 is_stmt 0 discriminator 3 view .LVU20
+  95 0022 D6F804C0 		ldr	ip, [r6, #4]
+  96              	.LVL6:
+ 364:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   LWIP_DEBUGF(ICMP_DEBUG, ("icmp_time_exceeded from "));
+  97              		.loc 1 364 56 is_stmt 1 discriminator 3 view .LVU21
+ 365:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   ip4_addr_debug_print_val(ICMP_DEBUG, iphdr->src);
+  98              		.loc 1 365 51 discriminator 3 view .LVU22
+ 366:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   LWIP_DEBUGF(ICMP_DEBUG, (" to "));
+  99              		.loc 1 366 36 discriminator 3 view .LVU23
+ 367:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   ip4_addr_debug_print_val(ICMP_DEBUG, iphdr->dest);
+ 100              		.loc 1 367 52 discriminator 3 view .LVU24
+ 368:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   LWIP_DEBUGF(ICMP_DEBUG, ("\n"));
+ 101              		.loc 1 368 34 discriminator 3 view .LVU25
+ 369:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 370:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   icmphdr = (struct icmp_echo_hdr *)q->payload;
+ 102              		.loc 1 370 3 discriminator 3 view .LVU26
+ 103              		.loc 1 370 11 is_stmt 0 discriminator 3 view .LVU27
+ 104 0026 6C68     		ldr	r4, [r5, #4]
+ 105              	.LVL7:
+ 371:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   icmphdr->type = type;
+ 106              		.loc 1 371 3 is_stmt 1 discriminator 3 view .LVU28
+ 107              		.loc 1 371 17 is_stmt 0 discriminator 3 view .LVU29
+ 108 0028 84F80080 		strb	r8, [r4]
+ 372:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   icmphdr->code = code;
+ 109              		.loc 1 372 3 is_stmt 1 discriminator 3 view .LVU30
+ 110              		.loc 1 372 17 is_stmt 0 discriminator 3 view .LVU31
+ 111 002c 6770     		strb	r7, [r4, #1]
+ 373:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   icmphdr->id = 0;
+ 112              		.loc 1 373 3 is_stmt 1 discriminator 3 view .LVU32
+ 113              		.loc 1 373 15 is_stmt 0 discriminator 3 view .LVU33
+ 114 002e 0023     		movs	r3, #0
+ 115 0030 2371     		strb	r3, [r4, #4]
+ 116 0032 6371     		strb	r3, [r4, #5]
+ 374:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   icmphdr->seqno = 0;
+ 117              		.loc 1 374 3 is_stmt 1 discriminator 3 view .LVU34
+ 118              		.loc 1 374 18 is_stmt 0 discriminator 3 view .LVU35
+ 119 0034 A371     		strb	r3, [r4, #6]
+ 120 0036 E371     		strb	r3, [r4, #7]
+ 375:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 10
+
+
+ 376:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   /* copy fields from original packet */
+ 377:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   SMEMCPY((u8_t *)q->payload + sizeof(struct icmp_echo_hdr), (u8_t *)p->payload,
+ 121              		.loc 1 377 3 is_stmt 1 discriminator 3 view .LVU36
+ 122 0038 6B68     		ldr	r3, [r5, #4]
+ 123 003a 7268     		ldr	r2, [r6, #4]
+ 124 003c 1668     		ldr	r6, [r2]	@ unaligned
+ 125              	.LVL8:
+ 126              		.loc 1 377 3 is_stmt 0 discriminator 3 view .LVU37
+ 127 003e 5068     		ldr	r0, [r2, #4]	@ unaligned
+ 128 0040 9168     		ldr	r1, [r2, #8]	@ unaligned
+ 129 0042 D768     		ldr	r7, [r2, #12]	@ unaligned
+ 130 0044 9E60     		str	r6, [r3, #8]	@ unaligned
+ 131 0046 D860     		str	r0, [r3, #12]	@ unaligned
+ 132 0048 1961     		str	r1, [r3, #16]	@ unaligned
+ 133 004a 5F61     		str	r7, [r3, #20]	@ unaligned
+ 134 004c 1669     		ldr	r6, [r2, #16]	@ unaligned
+ 135 004e 5069     		ldr	r0, [r2, #20]	@ unaligned
+ 136 0050 9169     		ldr	r1, [r2, #24]	@ unaligned
+ 137 0052 9E61     		str	r6, [r3, #24]	@ unaligned
+ 138 0054 D861     		str	r0, [r3, #28]	@ unaligned
+ 139 0056 1962     		str	r1, [r3, #32]	@ unaligned
+ 378:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           IP_HLEN + ICMP_DEST_UNREACH_DATASIZE);
+ 379:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 380:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   ip4_addr_copy(iphdr_src, iphdr->src);
+ 140              		.loc 1 380 3 is_stmt 1 discriminator 3 view .LVU38
+ 141 0058 DCF80C30 		ldr	r3, [ip, #12]	@ unaligned
+ 142 005c 0593     		str	r3, [sp, #20]
+ 381:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #ifdef LWIP_HOOK_IP4_ROUTE_SRC
+ 382:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   {
+ 383:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     ip4_addr_t iphdr_dst;
+ 384:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     ip4_addr_copy(iphdr_dst, iphdr->dest);
+ 385:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     netif = ip4_route_src(&iphdr_dst, &iphdr_src);
+ 386:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   }
+ 387:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #else
+ 388:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   netif = ip4_route(&iphdr_src);
+ 143              		.loc 1 388 3 discriminator 3 view .LVU39
+ 144              		.loc 1 388 11 is_stmt 0 discriminator 3 view .LVU40
+ 145 005e 05A8     		add	r0, sp, #20
+ 146 0060 FFF7FEFF 		bl	ip4_route
+ 147              	.LVL9:
+ 389:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif
+ 390:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   if (netif != NULL) {
+ 148              		.loc 1 390 3 is_stmt 1 discriminator 3 view .LVU41
+ 149              		.loc 1 390 6 is_stmt 0 discriminator 3 view .LVU42
+ 150 0064 58B1     		cbz	r0, .L5
+ 391:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     /* calculate checksum */
+ 392:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     icmphdr->chksum = 0;
+ 151              		.loc 1 392 5 is_stmt 1 view .LVU43
+ 152              		.loc 1 392 21 is_stmt 0 view .LVU44
+ 153 0066 0021     		movs	r1, #0
+ 154 0068 A170     		strb	r1, [r4, #2]
+ 155 006a E170     		strb	r1, [r4, #3]
+ 393:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if CHECKSUM_GEN_ICMP
+ 394:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     IF__NETIF_CHECKSUM_ENABLED(netif, NETIF_CHECKSUM_GEN_ICMP) {
+ 395:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       icmphdr->chksum = inet_chksum(icmphdr, q->len);
+ 396:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     }
+ 397:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 11
+
+
+ 398:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     ICMP_STATS_INC(icmp.xmit);
+ 156              		.loc 1 398 30 is_stmt 1 view .LVU45
+ 399:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     ip4_output_if(q, NULL, &iphdr_src, ICMP_TTL, 0, IP_PROTO_ICMP, netif);
+ 157              		.loc 1 399 5 view .LVU46
+ 158 006c 0290     		str	r0, [sp, #8]
+ 159 006e 0123     		movs	r3, #1
+ 160 0070 0193     		str	r3, [sp, #4]
+ 161 0072 0091     		str	r1, [sp]
+ 162 0074 FF23     		movs	r3, #255
+ 163 0076 05AA     		add	r2, sp, #20
+ 164 0078 2846     		mov	r0, r5
+ 165              	.LVL10:
+ 166              		.loc 1 399 5 is_stmt 0 view .LVU47
+ 167 007a FFF7FEFF 		bl	ip4_output_if
+ 168              	.LVL11:
+ 169              	.L5:
+ 400:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   }
+ 401:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   pbuf_free(q);
+ 170              		.loc 1 401 3 is_stmt 1 view .LVU48
+ 171 007e 2846     		mov	r0, r5
+ 172 0080 FFF7FEFF 		bl	pbuf_free
+ 173              	.LVL12:
+ 174              	.L1:
+ 402:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** }
+ 175              		.loc 1 402 1 is_stmt 0 view .LVU49
+ 176 0084 06B0     		add	sp, sp, #24
+ 177              	.LCFI2:
+ 178              		.cfi_remember_state
+ 179              		.cfi_def_cfa_offset 24
+ 180              		@ sp needed
+ 181 0086 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 182              	.LVL13:
+ 183              	.L7:
+ 184              	.LCFI3:
+ 185              		.cfi_restore_state
+ 360:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****               (q->len >= (sizeof(struct icmp_echo_hdr) + IP_HLEN + ICMP_DEST_UNREACH_DATASIZE)));
+ 186              		.loc 1 360 3 is_stmt 1 discriminator 1 view .LVU50
+ 360:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****               (q->len >= (sizeof(struct icmp_echo_hdr) + IP_HLEN + ICMP_DEST_UNREACH_DATASIZE)));
+ 187              		.loc 1 360 3 discriminator 1 view .LVU51
+ 188 008a 044B     		ldr	r3, .L8
+ 189 008c 4FF4B472 		mov	r2, #360
+ 190 0090 0349     		ldr	r1, .L8+4
+ 191 0092 0448     		ldr	r0, .L8+8
+ 192              	.LVL14:
+ 360:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****               (q->len >= (sizeof(struct icmp_echo_hdr) + IP_HLEN + ICMP_DEST_UNREACH_DATASIZE)));
+ 193              		.loc 1 360 3 is_stmt 0 discriminator 1 view .LVU52
+ 194 0094 FFF7FEFF 		bl	printf
+ 195              	.LVL15:
+ 196 0098 C3E7     		b	.L4
+ 197              	.L9:
+ 198 009a 00BF     		.align	2
+ 199              	.L8:
+ 200 009c 00000000 		.word	.LC0
+ 201 00a0 74000000 		.word	.LC1
+ 202 00a4 A0000000 		.word	.LC2
+ 203              		.cfi_endproc
+ 204              	.LFE159:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 12
+
+
+ 206              		.section	.rodata.icmp_input.str1.4,"aMS",%progbits,1
+ 207              		.align	2
+ 208              	.LC3:
+ 209 0000 69636D70 		.ascii	"icmp_input: moving r->payload to icmp header failed"
+ 209      5F696E70 
+ 209      75743A20 
+ 209      6D6F7669 
+ 209      6E672072 
+ 210 0033 0A00     		.ascii	"\012\000"
+ 211 0035 000000   		.align	2
+ 212              	.LC4:
+ 213 0038 69636D70 		.ascii	"icmp_input: restoring original p->payload failed\012"
+ 213      5F696E70 
+ 213      75743A20 
+ 213      72657374 
+ 213      6F72696E 
+ 214 0069 00       		.ascii	"\000"
+ 215              		.section	.text.icmp_input,"ax",%progbits
+ 216              		.align	1
+ 217              		.global	icmp_input
+ 218              		.syntax unified
+ 219              		.thumb
+ 220              		.thumb_func
+ 222              	icmp_input:
+ 223              	.LVL16:
+ 224              	.LFB156:
+  81:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   u8_t type;
+ 225              		.loc 1 81 1 is_stmt 1 view -0
+ 226              		.cfi_startproc
+ 227              		@ args = 0, pretend = 0, frame = 0
+ 228              		@ frame_needed = 0, uses_anonymous_args = 0
+  81:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   u8_t type;
+ 229              		.loc 1 81 1 is_stmt 0 view .LVU54
+ 230 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 231              	.LCFI4:
+ 232              		.cfi_def_cfa_offset 28
+ 233              		.cfi_offset 4, -28
+ 234              		.cfi_offset 5, -24
+ 235              		.cfi_offset 6, -20
+ 236              		.cfi_offset 7, -16
+ 237              		.cfi_offset 8, -12
+ 238              		.cfi_offset 9, -8
+ 239              		.cfi_offset 14, -4
+ 240 0004 85B0     		sub	sp, sp, #20
+ 241              	.LCFI5:
+ 242              		.cfi_def_cfa_offset 48
+ 243 0006 0546     		mov	r5, r0
+  82:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #ifdef LWIP_DEBUG
+ 244              		.loc 1 82 3 is_stmt 1 view .LVU55
+  86:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   const struct ip_hdr *iphdr_in;
+ 245              		.loc 1 86 3 view .LVU56
+  87:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   u16_t hlen;
+ 246              		.loc 1 87 3 view .LVU57
+  88:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   const ip4_addr_t *src;
+ 247              		.loc 1 88 3 view .LVU58
+  89:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 248              		.loc 1 89 3 view .LVU59
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 13
+
+
+  91:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   MIB2_STATS_INC(mib2.icmpinmsgs);
+ 249              		.loc 1 91 28 view .LVU60
+  92:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 250              		.loc 1 92 34 view .LVU61
+  94:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   hlen = IPH_HL_BYTES(iphdr_in);
+ 251              		.loc 1 94 3 view .LVU62
+  94:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   hlen = IPH_HL_BYTES(iphdr_in);
+ 252              		.loc 1 94 12 is_stmt 0 view .LVU63
+ 253 0008 4A4B     		ldr	r3, .L28
+ 254 000a 9F68     		ldr	r7, [r3, #8]
+ 255              	.LVL17:
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   if (hlen < IP_HLEN) {
+ 256              		.loc 1 95 3 is_stmt 1 view .LVU64
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   if (hlen < IP_HLEN) {
+ 257              		.loc 1 95 10 is_stmt 0 view .LVU65
+ 258 000c 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+ 259 000e 03F00F03 		and	r3, r3, #15
+ 260 0012 4FEA8308 		lsl	r8, r3, #2
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   if (hlen < IP_HLEN) {
+ 261              		.loc 1 95 8 view .LVU66
+ 262 0016 4446     		mov	r4, r8
+ 263              	.LVL18:
+  96:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: short IP header (%"S16_F" bytes) received\n", hlen));
+ 264              		.loc 1 96 3 is_stmt 1 view .LVU67
+  96:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: short IP header (%"S16_F" bytes) received\n", hlen));
+ 265              		.loc 1 96 6 is_stmt 0 view .LVU68
+ 266 0018 132C     		cmp	r4, #19
+ 267 001a 15D9     		bls	.L11
+ 268 001c 0E46     		mov	r6, r1
+ 100:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: short ICMP (%"U16_F" bytes) received\n", p->tot_len));
+ 269              		.loc 1 100 3 is_stmt 1 view .LVU69
+ 100:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: short ICMP (%"U16_F" bytes) received\n", p->tot_len));
+ 270              		.loc 1 100 8 is_stmt 0 view .LVU70
+ 271 001e 4389     		ldrh	r3, [r0, #10]
+ 100:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: short ICMP (%"U16_F" bytes) received\n", p->tot_len));
+ 272              		.loc 1 100 6 view .LVU71
+ 273 0020 032B     		cmp	r3, #3
+ 274 0022 11D9     		bls	.L11
+ 105:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #ifdef LWIP_DEBUG
+ 275              		.loc 1 105 3 is_stmt 1 view .LVU72
+ 105:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #ifdef LWIP_DEBUG
+ 276              		.loc 1 105 21 is_stmt 0 view .LVU73
+ 277 0024 4368     		ldr	r3, [r0, #4]
+ 105:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #ifdef LWIP_DEBUG
+ 278              		.loc 1 105 8 view .LVU74
+ 279 0026 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 280              	.LVL19:
+ 111:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****     case ICMP_ER:
+ 281              		.loc 1 111 3 is_stmt 1 view .LVU75
+ 282 0028 082B     		cmp	r3, #8
+ 283 002a 61D1     		bne	.L12
+ 118:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       src = ip4_current_dest_addr();
+ 284              		.loc 1 118 39 view .LVU76
+ 119:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       /* multicast destination address? */
+ 285              		.loc 1 119 7 view .LVU77
+ 286              	.LVL20:
+ 121:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_MULTICAST_PING
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 14
+
+
+ 287              		.loc 1 121 7 view .LVU78
+ 121:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_MULTICAST_PING
+ 288              		.loc 1 121 11 is_stmt 0 view .LVU79
+ 289 002c 414B     		ldr	r3, .L28
+ 290              	.LVL21:
+ 121:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_MULTICAST_PING
+ 291              		.loc 1 121 11 view .LVU80
+ 292 002e 5869     		ldr	r0, [r3, #20]
+ 293              	.LVL22:
+ 121:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_MULTICAST_PING
+ 294              		.loc 1 121 11 view .LVU81
+ 295 0030 00F0F003 		and	r3, r0, #240
+ 121:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_MULTICAST_PING
+ 296              		.loc 1 121 10 view .LVU82
+ 297 0034 E02B     		cmp	r3, #224
+ 298 0036 1AD0     		beq	.L13
+ 131:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_BROADCAST_PING
+ 299              		.loc 1 131 7 is_stmt 1 view .LVU83
+ 131:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_BROADCAST_PING
+ 300              		.loc 1 131 11 is_stmt 0 view .LVU84
+ 301 0038 3E4B     		ldr	r3, .L28
+ 302 003a 1968     		ldr	r1, [r3]
+ 303              	.LVL23:
+ 131:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_BROADCAST_PING
+ 304              		.loc 1 131 11 view .LVU85
+ 305 003c FFF7FEFF 		bl	ip4_addr_isbroadcast_u32
+ 306              	.LVL24:
+ 131:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_BROADCAST_PING
+ 307              		.loc 1 131 10 view .LVU86
+ 308 0040 A8B9     		cbnz	r0, .L13
+ 140:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       if (p->tot_len < sizeof(struct icmp_echo_hdr)) {
+ 309              		.loc 1 140 54 is_stmt 1 view .LVU87
+ 141:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: bad ICMP echo received\n"));
+ 310              		.loc 1 141 7 view .LVU88
+ 141:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: bad ICMP echo received\n"));
+ 311              		.loc 1 141 12 is_stmt 0 view .LVU89
+ 312 0042 2B89     		ldrh	r3, [r5, #8]
+ 141:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: bad ICMP echo received\n"));
+ 313              		.loc 1 141 10 view .LVU90
+ 314 0044 072B     		cmp	r3, #7
+ 315 0046 05D8     		bhi	.L21
+ 316              	.LVL25:
+ 317              	.L11:
+ 285:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   ICMP_STATS_INC(icmp.lenerr);
+ 318              		.loc 1 285 3 is_stmt 1 view .LVU91
+ 319 0048 2846     		mov	r0, r5
+ 320 004a FFF7FEFF 		bl	pbuf_free
+ 321              	.LVL26:
+ 286:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   MIB2_STATS_INC(mib2.icmpinerrors);
+ 322              		.loc 1 286 30 view .LVU92
+ 287:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   return;
+ 323              		.loc 1 287 36 view .LVU93
+ 288:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN || !LWIP_MULTICAST_PING || !LWIP_BROADCAST_PING
+ 324              		.loc 1 288 3 view .LVU94
+ 325              	.L10:
+ 296:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 326              		.loc 1 296 1 is_stmt 0 view .LVU95
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 15
+
+
+ 327 004e 05B0     		add	sp, sp, #20
+ 328              	.LCFI6:
+ 329              		.cfi_remember_state
+ 330              		.cfi_def_cfa_offset 28
+ 331              		@ sp needed
+ 332 0050 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 333              	.LVL27:
+ 334              	.L21:
+ 335              	.LCFI7:
+ 336              		.cfi_restore_state
+ 157:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* p is not big enough to contain link headers
+ 337              		.loc 1 157 7 is_stmt 1 view .LVU96
+ 157:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* p is not big enough to contain link headers
+ 338              		.loc 1 157 52 is_stmt 0 view .LVU97
+ 339 0054 08F10E09 		add	r9, r8, #14
+ 157:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* p is not big enough to contain link headers
+ 340              		.loc 1 157 11 view .LVU98
+ 341 0058 4946     		mov	r1, r9
+ 342 005a 2846     		mov	r0, r5
+ 343 005c FFF7FEFF 		bl	pbuf_add_header
+ 344              	.LVL28:
+ 157:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* p is not big enough to contain link headers
+ 345              		.loc 1 157 10 view .LVU99
+ 346 0060 0028     		cmp	r0, #0
+ 347 0062 3AD0     		beq	.L14
+ 348              	.LBB2:
+ 161:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         u16_t alloc_len = (u16_t)(p->tot_len + hlen);
+ 349              		.loc 1 161 9 is_stmt 1 view .LVU100
+ 162:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         if (alloc_len < p->tot_len) {
+ 350              		.loc 1 162 9 view .LVU101
+ 162:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         if (alloc_len < p->tot_len) {
+ 351              		.loc 1 162 36 is_stmt 0 view .LVU102
+ 352 0064 2A89     		ldrh	r2, [r5, #8]
+ 162:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         if (alloc_len < p->tot_len) {
+ 353              		.loc 1 162 15 view .LVU103
+ 354 0066 1319     		adds	r3, r2, r4
+ 355 0068 99B2     		uxth	r1, r3
+ 356              	.LVL29:
+ 163:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: allocating new pbuf failed (tot_len overflow)\n"));
+ 357              		.loc 1 163 9 is_stmt 1 view .LVU104
+ 163:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: allocating new pbuf failed (tot_len overflow)\n"));
+ 358              		.loc 1 163 12 is_stmt 0 view .LVU105
+ 359 006a 8A42     		cmp	r2, r1
+ 360 006c 03D9     		bls	.L22
+ 361              	.LVL30:
+ 362              	.L13:
+ 163:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: allocating new pbuf failed (tot_len overflow)\n"));
+ 363              		.loc 1 163 12 view .LVU106
+ 364              	.LBE2:
+ 291:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   ICMP_STATS_INC(icmp.err);
+ 365              		.loc 1 291 3 is_stmt 1 view .LVU107
+ 366 006e 2846     		mov	r0, r5
+ 367 0070 FFF7FEFF 		bl	pbuf_free
+ 368              	.LVL31:
+ 292:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   MIB2_STATS_INC(mib2.icmpinerrors);
+ 369              		.loc 1 292 27 view .LVU108
+ 293:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   return;
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 16
+
+
+ 370              		.loc 1 293 36 view .LVU109
+ 294:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif /* LWIP_ICMP_ECHO_CHECK_INPUT_PBUF_LEN || !LWIP_MULTICAST_PING || !LWIP_BROADCAST_PING */
+ 371              		.loc 1 294 3 view .LVU110
+ 372 0074 EBE7     		b	.L10
+ 373              	.LVL32:
+ 374              	.L22:
+ 375              	.LBB3:
+ 168:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         if (r == NULL) {
+ 376              		.loc 1 168 9 view .LVU111
+ 168:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         if (r == NULL) {
+ 377              		.loc 1 168 13 is_stmt 0 view .LVU112
+ 378 0076 4FF42072 		mov	r2, #640
+ 379 007a 0E20     		movs	r0, #14
+ 380 007c FFF7FEFF 		bl	pbuf_alloc
+ 381              	.LVL33:
+ 169:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: allocating new pbuf failed\n"));
+ 382              		.loc 1 169 9 is_stmt 1 view .LVU113
+ 169:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: allocating new pbuf failed\n"));
+ 383              		.loc 1 169 12 is_stmt 0 view .LVU114
+ 384 0080 0446     		mov	r4, r0
+ 385 0082 0028     		cmp	r0, #0
+ 386 0084 F3D0     		beq	.L13
+ 173:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("first pbuf cannot hold the ICMP header
+ 387              		.loc 1 173 9 is_stmt 1 view .LVU115
+ 173:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("first pbuf cannot hold the ICMP header
+ 388              		.loc 1 173 14 is_stmt 0 view .LVU116
+ 389 0086 4289     		ldrh	r2, [r0, #10]
+ 173:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("first pbuf cannot hold the ICMP header
+ 390              		.loc 1 173 27 view .LVU117
+ 391 0088 08F10803 		add	r3, r8, #8
+ 173:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("first pbuf cannot hold the ICMP header
+ 392              		.loc 1 173 12 view .LVU118
+ 393 008c 9A42     		cmp	r2, r3
+ 394 008e 13D3     		bcc	.L23
+ 179:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* switch r->payload back to icmp header (cannot fail) */
+ 395              		.loc 1 179 9 is_stmt 1 view .LVU119
+ 396 0090 4246     		mov	r2, r8
+ 397 0092 3946     		mov	r1, r7
+ 398 0094 4068     		ldr	r0, [r0, #4]
+ 399              	.LVL34:
+ 179:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* switch r->payload back to icmp header (cannot fail) */
+ 400              		.loc 1 179 9 is_stmt 0 view .LVU120
+ 401 0096 FFF7FEFF 		bl	memcpy
+ 402              	.LVL35:
+ 181:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_ASSERT("icmp_input: moving r->payload to icmp header failed\n", 0);
+ 403              		.loc 1 181 9 is_stmt 1 view .LVU121
+ 181:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_ASSERT("icmp_input: moving r->payload to icmp header failed\n", 0);
+ 404              		.loc 1 181 13 is_stmt 0 view .LVU122
+ 405 009a 4146     		mov	r1, r8
+ 406 009c 2046     		mov	r0, r4
+ 407 009e FFF7FEFF 		bl	pbuf_remove_header
+ 408              	.LVL36:
+ 181:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_ASSERT("icmp_input: moving r->payload to icmp header failed\n", 0);
+ 409              		.loc 1 181 12 view .LVU123
+ 410 00a2 60B9     		cbnz	r0, .L24
+ 187:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("icmp_input: copying to new pbuf failed
+ 411              		.loc 1 187 9 is_stmt 1 view .LVU124
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 17
+
+
+ 187:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("icmp_input: copying to new pbuf failed
+ 412              		.loc 1 187 13 is_stmt 0 view .LVU125
+ 413 00a4 2946     		mov	r1, r5
+ 414 00a6 2046     		mov	r0, r4
+ 415 00a8 FFF7FEFF 		bl	pbuf_copy
+ 416              	.LVL37:
+ 187:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("icmp_input: copying to new pbuf failed
+ 417              		.loc 1 187 12 view .LVU126
+ 418 00ac 88B9     		cbnz	r0, .L25
+ 193:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* we now have an identical copy of p that has room for link headers */
+ 419              		.loc 1 193 9 is_stmt 1 view .LVU127
+ 420 00ae 2846     		mov	r0, r5
+ 421 00b0 FFF7FEFF 		bl	pbuf_free
+ 422              	.LVL38:
+ 195:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       } else {
+ 423              		.loc 1 195 9 view .LVU128
+ 195:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       } else {
+ 424              		.loc 1 195 11 is_stmt 0 view .LVU129
+ 425 00b4 2546     		mov	r5, r4
+ 426              	.LBE3:
+ 427 00b6 15E0     		b	.L18
+ 428              	.LVL39:
+ 429              	.L23:
+ 430              	.LBB4:
+ 174:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           pbuf_free(r);
+ 431              		.loc 1 174 103 is_stmt 1 view .LVU130
+ 175:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 432              		.loc 1 175 11 view .LVU131
+ 433 00b8 FFF7FEFF 		bl	pbuf_free
+ 434              	.LVL40:
+ 176:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 435              		.loc 1 176 11 view .LVU132
+ 436 00bc D7E7     		b	.L13
+ 437              	.L24:
+ 182:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           pbuf_free(r);
+ 438              		.loc 1 182 11 discriminator 1 view .LVU133
+ 182:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           pbuf_free(r);
+ 439              		.loc 1 182 11 discriminator 1 view .LVU134
+ 182:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           pbuf_free(r);
+ 440              		.loc 1 182 11 discriminator 1 view .LVU135
+ 182:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           pbuf_free(r);
+ 441              		.loc 1 182 11 discriminator 1 view .LVU136
+ 442 00be 1E4B     		ldr	r3, .L28+4
+ 443 00c0 B622     		movs	r2, #182
+ 444 00c2 1E49     		ldr	r1, .L28+8
+ 445 00c4 1E48     		ldr	r0, .L28+12
+ 446 00c6 FFF7FEFF 		bl	printf
+ 447              	.LVL41:
+ 182:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           pbuf_free(r);
+ 448              		.loc 1 182 11 discriminator 1 view .LVU137
+ 182:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           pbuf_free(r);
+ 449              		.loc 1 182 11 discriminator 1 view .LVU138
+ 183:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 450              		.loc 1 183 11 discriminator 1 view .LVU139
+ 451 00ca 2046     		mov	r0, r4
+ 452 00cc FFF7FEFF 		bl	pbuf_free
+ 453              	.LVL42:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 18
+
+
+ 184:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 454              		.loc 1 184 11 discriminator 1 view .LVU140
+ 455 00d0 CDE7     		b	.L13
+ 456              	.L25:
+ 188:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           pbuf_free(r);
+ 457              		.loc 1 188 103 view .LVU141
+ 189:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 458              		.loc 1 189 11 view .LVU142
+ 459 00d2 2046     		mov	r0, r4
+ 460 00d4 FFF7FEFF 		bl	pbuf_free
+ 461              	.LVL43:
+ 190:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 462              		.loc 1 190 11 view .LVU143
+ 463 00d8 C9E7     		b	.L13
+ 464              	.LVL44:
+ 465              	.L14:
+ 190:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 466              		.loc 1 190 11 is_stmt 0 view .LVU144
+ 467              	.LBE4:
+ 198:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_ASSERT("icmp_input: restoring original p->payload failed\n", 0);
+ 468              		.loc 1 198 9 is_stmt 1 view .LVU145
+ 198:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_ASSERT("icmp_input: restoring original p->payload failed\n", 0);
+ 469              		.loc 1 198 13 is_stmt 0 view .LVU146
+ 470 00da 4946     		mov	r1, r9
+ 471 00dc 2846     		mov	r0, r5
+ 472 00de FFF7FEFF 		bl	pbuf_remove_header
+ 473              	.LVL45:
+ 198:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_ASSERT("icmp_input: restoring original p->payload failed\n", 0);
+ 474              		.loc 1 198 12 view .LVU147
+ 475 00e2 48B9     		cbnz	r0, .L26
+ 476              	.L18:
+ 207:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       if (pbuf_add_header(p, hlen)) {
+ 477              		.loc 1 207 7 is_stmt 1 view .LVU148
+ 207:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       if (pbuf_add_header(p, hlen)) {
+ 478              		.loc 1 207 13 is_stmt 0 view .LVU149
+ 479 00e4 6C68     		ldr	r4, [r5, #4]
+ 480              	.LVL46:
+ 208:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         LWIP_DEBUGF(ICMP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("Can't move over header in packet"));
+ 481              		.loc 1 208 7 is_stmt 1 view .LVU150
+ 208:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         LWIP_DEBUGF(ICMP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("Can't move over header in packet"));
+ 482              		.loc 1 208 11 is_stmt 0 view .LVU151
+ 483 00e6 4146     		mov	r1, r8
+ 484 00e8 2846     		mov	r0, r5
+ 485 00ea FFF7FEFF 		bl	pbuf_add_header
+ 486              	.LVL47:
+ 208:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         LWIP_DEBUGF(ICMP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("Can't move over header in packet"));
+ 487              		.loc 1 208 10 view .LVU152
+ 488 00ee 50B1     		cbz	r0, .L27
+ 489              	.LVL48:
+ 490              	.L12:
+ 275:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       }
+ 491              		.loc 1 275 48 is_stmt 1 view .LVU153
+ 278:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       ICMP_STATS_INC(icmp.proterr);
+ 492              		.loc 1 278 58 view .LVU154
+ 279:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****       ICMP_STATS_INC(icmp.drop);
+ 493              		.loc 1 279 35 view .LVU155
+ 280:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   }
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 19
+
+
+ 494              		.loc 1 280 32 view .LVU156
+ 282:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   return;
+ 495              		.loc 1 282 3 view .LVU157
+ 496 00f0 2846     		mov	r0, r5
+ 497 00f2 FFF7FEFF 		bl	pbuf_free
+ 498              	.LVL49:
+ 283:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** lenerr:
+ 499              		.loc 1 283 3 view .LVU158
+ 500 00f6 AAE7     		b	.L10
+ 501              	.LVL50:
+ 502              	.L26:
+ 199:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 503              		.loc 1 199 11 discriminator 1 view .LVU159
+ 199:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 504              		.loc 1 199 11 discriminator 1 view .LVU160
+ 199:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 505              		.loc 1 199 11 discriminator 1 view .LVU161
+ 199:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 506              		.loc 1 199 11 discriminator 1 view .LVU162
+ 507 00f8 0F4B     		ldr	r3, .L28+4
+ 508 00fa C722     		movs	r2, #199
+ 509 00fc 1149     		ldr	r1, .L28+16
+ 510 00fe 1048     		ldr	r0, .L28+12
+ 511 0100 FFF7FEFF 		bl	printf
+ 512              	.LVL51:
+ 199:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 513              		.loc 1 199 11 discriminator 1 view .LVU163
+ 199:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           goto icmperr;
+ 514              		.loc 1 199 11 discriminator 1 view .LVU164
+ 200:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         }
+ 515              		.loc 1 200 11 discriminator 1 view .LVU165
+ 516 0104 B3E7     		b	.L13
+ 517              	.LVL52:
+ 518              	.L27:
+ 519              	.LBB5:
+ 211:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         struct ip_hdr *iphdr = (struct ip_hdr *)p->payload;
+ 520              		.loc 1 211 9 view .LVU166
+ 212:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         ip4_addr_copy(iphdr->src, *src);
+ 521              		.loc 1 212 9 view .LVU167
+ 212:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         ip4_addr_copy(iphdr->src, *src);
+ 522              		.loc 1 212 24 is_stmt 0 view .LVU168
+ 523 0106 6868     		ldr	r0, [r5, #4]
+ 524              	.LVL53:
+ 213:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         ip4_addr_copy(iphdr->dest, *ip4_current_src_addr());
+ 525              		.loc 1 213 9 is_stmt 1 view .LVU169
+ 526 0108 0A49     		ldr	r1, .L28
+ 527 010a 4B69     		ldr	r3, [r1, #20]
+ 528 010c C360     		str	r3, [r0, #12]	@ unaligned
+ 214:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         ICMPH_TYPE_SET(iecho, ICMP_ER);
+ 529              		.loc 1 214 9 view .LVU170
+ 530 010e 0B69     		ldr	r3, [r1, #16]
+ 531 0110 0361     		str	r3, [r0, #16]	@ unaligned
+ 215:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if CHECKSUM_GEN_ICMP
+ 532              		.loc 1 215 9 view .LVU171
+ 533 0112 0022     		movs	r2, #0
+ 534 0114 2270     		strb	r2, [r4]
+ 231:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif /* CHECKSUM_GEN_ICMP */
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 20
+
+
+ 535              		.loc 1 231 9 view .LVU172
+ 231:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #endif /* CHECKSUM_GEN_ICMP */
+ 536              		.loc 1 231 23 is_stmt 0 view .LVU173
+ 537 0116 A270     		strb	r2, [r4, #2]
+ 538 0118 E270     		strb	r2, [r4, #3]
+ 235:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         IPH_CHKSUM_SET(iphdr, 0);
+ 539              		.loc 1 235 9 is_stmt 1 view .LVU174
+ 540 011a FF23     		movs	r3, #255
+ 541 011c 0372     		strb	r3, [r0, #8]
+ 236:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** #if CHECKSUM_GEN_IP
+ 542              		.loc 1 236 9 view .LVU175
+ 543 011e 8272     		strb	r2, [r0, #10]
+ 544 0120 C272     		strb	r2, [r0, #11]
+ 243:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* increase number of messages attempted to send */
+ 545              		.loc 1 243 34 view .LVU176
+ 245:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****         /* increase number of echo replies attempted to send */
+ 546              		.loc 1 245 41 view .LVU177
+ 247:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 547              		.loc 1 247 45 view .LVU178
+ 250:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****                             ICMP_TTL, 0, IP_PROTO_ICMP, inp);
+ 548              		.loc 1 250 9 view .LVU179
+ 250:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****                             ICMP_TTL, 0, IP_PROTO_ICMP, inp);
+ 549              		.loc 1 250 15 is_stmt 0 view .LVU180
+ 550 0122 0296     		str	r6, [sp, #8]
+ 551 0124 0120     		movs	r0, #1
+ 552              	.LVL54:
+ 250:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****                             ICMP_TTL, 0, IP_PROTO_ICMP, inp);
+ 553              		.loc 1 250 15 view .LVU181
+ 554 0126 0190     		str	r0, [sp, #4]
+ 555 0128 0092     		str	r2, [sp]
+ 556 012a 1431     		adds	r1, r1, #20
+ 557 012c 2846     		mov	r0, r5
+ 558 012e FFF7FEFF 		bl	ip4_output_if
+ 559              	.LVL55:
+ 252:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****           LWIP_DEBUGF(ICMP_DEBUG, ("icmp_input: ip_output_if returned an error: %s\n", lwip_strerr(
+ 560              		.loc 1 252 9 is_stmt 1 view .LVU182
+ 561 0132 DDE7     		b	.L12
+ 562              	.L29:
+ 563              		.align	2
+ 564              	.L28:
+ 565 0134 00000000 		.word	ip_data
+ 566 0138 00000000 		.word	.LC0
+ 567 013c 00000000 		.word	.LC3
+ 568 0140 A0000000 		.word	.LC2
+ 569 0144 38000000 		.word	.LC4
+ 570              	.LBE5:
+ 571              		.cfi_endproc
+ 572              	.LFE156:
+ 574              		.section	.text.icmp_dest_unreach,"ax",%progbits
+ 575              		.align	1
+ 576              		.global	icmp_dest_unreach
+ 577              		.syntax unified
+ 578              		.thumb
+ 579              		.thumb_func
+ 581              	icmp_dest_unreach:
+ 582              	.LVL56:
+ 583              	.LFB157:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 21
+
+
+ 309:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   MIB2_STATS_INC(mib2.icmpoutdestunreachs);
+ 584              		.loc 1 309 1 view -0
+ 585              		.cfi_startproc
+ 586              		@ args = 0, pretend = 0, frame = 0
+ 587              		@ frame_needed = 0, uses_anonymous_args = 0
+ 309:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   MIB2_STATS_INC(mib2.icmpoutdestunreachs);
+ 588              		.loc 1 309 1 is_stmt 0 view .LVU184
+ 589 0000 08B5     		push	{r3, lr}
+ 590              	.LCFI8:
+ 591              		.cfi_def_cfa_offset 8
+ 592              		.cfi_offset 3, -8
+ 593              		.cfi_offset 14, -4
+ 594 0002 0A46     		mov	r2, r1
+ 310:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   icmp_send_response(p, ICMP_DUR, t);
+ 595              		.loc 1 310 43 is_stmt 1 view .LVU185
+ 311:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** }
+ 596              		.loc 1 311 3 view .LVU186
+ 597 0004 0321     		movs	r1, #3
+ 598              	.LVL57:
+ 311:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** }
+ 599              		.loc 1 311 3 is_stmt 0 view .LVU187
+ 600 0006 FFF7FEFF 		bl	icmp_send_response
+ 601              	.LVL58:
+ 312:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 602              		.loc 1 312 1 view .LVU188
+ 603 000a 08BD     		pop	{r3, pc}
+ 604              		.cfi_endproc
+ 605              	.LFE157:
+ 607              		.section	.text.icmp_time_exceeded,"ax",%progbits
+ 608              		.align	1
+ 609              		.global	icmp_time_exceeded
+ 610              		.syntax unified
+ 611              		.thumb
+ 612              		.thumb_func
+ 614              	icmp_time_exceeded:
+ 615              	.LVL59:
+ 616              	.LFB158:
+ 324:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   MIB2_STATS_INC(mib2.icmpouttimeexcds);
+ 617              		.loc 1 324 1 is_stmt 1 view -0
+ 618              		.cfi_startproc
+ 619              		@ args = 0, pretend = 0, frame = 0
+ 620              		@ frame_needed = 0, uses_anonymous_args = 0
+ 324:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   MIB2_STATS_INC(mib2.icmpouttimeexcds);
+ 621              		.loc 1 324 1 is_stmt 0 view .LVU190
+ 622 0000 08B5     		push	{r3, lr}
+ 623              	.LCFI9:
+ 624              		.cfi_def_cfa_offset 8
+ 625              		.cfi_offset 3, -8
+ 626              		.cfi_offset 14, -4
+ 627 0002 0A46     		mov	r2, r1
+ 325:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c ****   icmp_send_response(p, ICMP_TE, t);
+ 628              		.loc 1 325 40 is_stmt 1 view .LVU191
+ 326:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** }
+ 629              		.loc 1 326 3 view .LVU192
+ 630 0004 0B21     		movs	r1, #11
+ 631              	.LVL60:
+ 326:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** }
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 22
+
+
+ 632              		.loc 1 326 3 is_stmt 0 view .LVU193
+ 633 0006 FFF7FEFF 		bl	icmp_send_response
+ 634              	.LVL61:
+ 327:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\icmp.c **** 
+ 635              		.loc 1 327 1 view .LVU194
+ 636 000a 08BD     		pop	{r3, pc}
+ 637              		.cfi_endproc
+ 638              	.LFE158:
+ 640              		.text
+ 641              	.Letext0:
+ 642              		.file 2 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\machine\\_default_typ
+ 643              		.file 3 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 644              		.file 4 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 645              		.file 5 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 646              		.file 6 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 647              		.file 7 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 648              		.file 8 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 649              		.file 9 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 650              		.file 10 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party
+ 651              		.file 11 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party
+ 652              		.file 12 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party
+ 653              		.file 13 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party
+ 654              		.file 14 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party
+ 655              		.file 15 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\stdio.h"
+ 656              		.file 16 "<built-in>"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s 			page 23
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 icmp.c
+C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s:20     .rodata.icmp_send_response.str1.4:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s:32     .text.icmp_send_response:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s:37     .text.icmp_send_response:00000000 icmp_send_response
+C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s:200    .text.icmp_send_response:0000009c $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s:207    .rodata.icmp_input.str1.4:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s:216    .text.icmp_input:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s:222    .text.icmp_input:00000000 icmp_input
+C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s:565    .text.icmp_input:00000134 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s:575    .text.icmp_dest_unreach:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s:581    .text.icmp_dest_unreach:00000000 icmp_dest_unreach
+C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s:608    .text.icmp_time_exceeded:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccEVGYPT.s:614    .text.icmp_time_exceeded:00000000 icmp_time_exceeded
+
+UNDEFINED SYMBOLS
+pbuf_alloc
+ip4_route
+ip4_output_if
+pbuf_free
+printf
+ip4_addr_isbroadcast_u32
+pbuf_add_header
+memcpy
+pbuf_remove_header
+pbuf_copy
+ip_data

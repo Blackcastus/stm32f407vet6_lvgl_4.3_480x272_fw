@@ -1,0 +1,834 @@
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"i2c.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.MX_I2C1_Init,"ax",%progbits
+  20              		.align	1
+  21              		.global	MX_I2C1_Init
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	MX_I2C1_Init:
+  27              	.LFB130:
+  28              		.file 1 "Src/i2c.c"
+   1:Src/i2c.c     **** /**
+   2:Src/i2c.c     ****   ******************************************************************************
+   3:Src/i2c.c     ****   * @file    i2c.c
+   4:Src/i2c.c     ****   * @brief   This file provides code for the configuration
+   5:Src/i2c.c     ****   *          of the I2C instances.
+   6:Src/i2c.c     ****   ******************************************************************************
+   7:Src/i2c.c     ****   * @attention
+   8:Src/i2c.c     ****   *
+   9:Src/i2c.c     ****   * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
+  10:Src/i2c.c     ****   * All rights reserved.</center></h2>
+  11:Src/i2c.c     ****   *
+  12:Src/i2c.c     ****   * This software component is licensed by ST under Ultimate Liberty license
+  13:Src/i2c.c     ****   * SLA0044, the "License"; You may not use this file except in compliance with
+  14:Src/i2c.c     ****   * the License. You may obtain a copy of the License at:
+  15:Src/i2c.c     ****   *                             www.st.com/SLA0044
+  16:Src/i2c.c     ****   *
+  17:Src/i2c.c     ****   ******************************************************************************
+  18:Src/i2c.c     ****   */
+  19:Src/i2c.c     **** 
+  20:Src/i2c.c     **** /* Includes ------------------------------------------------------------------*/
+  21:Src/i2c.c     **** #include "i2c.h"
+  22:Src/i2c.c     **** 
+  23:Src/i2c.c     **** /* USER CODE BEGIN 0 */
+  24:Src/i2c.c     **** 
+  25:Src/i2c.c     **** /* USER CODE END 0 */
+  26:Src/i2c.c     **** 
+  27:Src/i2c.c     **** I2C_HandleTypeDef hi2c1;
+  28:Src/i2c.c     **** I2C_HandleTypeDef hi2c3;
+  29:Src/i2c.c     **** 
+  30:Src/i2c.c     **** /* I2C1 init function */
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 2
+
+
+  31:Src/i2c.c     **** void MX_I2C1_Init(void)
+  32:Src/i2c.c     **** {
+  29              		.loc 1 32 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+  33:Src/i2c.c     **** 
+  34:Src/i2c.c     ****   hi2c1.Instance = I2C1;
+  38              		.loc 1 34 3 view .LVU1
+  39              		.loc 1 34 18 is_stmt 0 view .LVU2
+  40 0002 0B48     		ldr	r0, .L5
+  41 0004 0B4B     		ldr	r3, .L5+4
+  42 0006 0360     		str	r3, [r0]
+  35:Src/i2c.c     ****   hi2c1.Init.ClockSpeed = 100000;
+  43              		.loc 1 35 3 is_stmt 1 view .LVU3
+  44              		.loc 1 35 25 is_stmt 0 view .LVU4
+  45 0008 0B4B     		ldr	r3, .L5+8
+  46 000a 4360     		str	r3, [r0, #4]
+  36:Src/i2c.c     ****   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  47              		.loc 1 36 3 is_stmt 1 view .LVU5
+  48              		.loc 1 36 24 is_stmt 0 view .LVU6
+  49 000c 0023     		movs	r3, #0
+  50 000e 8360     		str	r3, [r0, #8]
+  37:Src/i2c.c     ****   hi2c1.Init.OwnAddress1 = 0;
+  51              		.loc 1 37 3 is_stmt 1 view .LVU7
+  52              		.loc 1 37 26 is_stmt 0 view .LVU8
+  53 0010 C360     		str	r3, [r0, #12]
+  38:Src/i2c.c     ****   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  54              		.loc 1 38 3 is_stmt 1 view .LVU9
+  55              		.loc 1 38 29 is_stmt 0 view .LVU10
+  56 0012 4FF48042 		mov	r2, #16384
+  57 0016 0261     		str	r2, [r0, #16]
+  39:Src/i2c.c     ****   hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  58              		.loc 1 39 3 is_stmt 1 view .LVU11
+  59              		.loc 1 39 30 is_stmt 0 view .LVU12
+  60 0018 4361     		str	r3, [r0, #20]
+  40:Src/i2c.c     ****   hi2c1.Init.OwnAddress2 = 0;
+  61              		.loc 1 40 3 is_stmt 1 view .LVU13
+  62              		.loc 1 40 26 is_stmt 0 view .LVU14
+  63 001a 8361     		str	r3, [r0, #24]
+  41:Src/i2c.c     ****   hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  64              		.loc 1 41 3 is_stmt 1 view .LVU15
+  65              		.loc 1 41 30 is_stmt 0 view .LVU16
+  66 001c C361     		str	r3, [r0, #28]
+  42:Src/i2c.c     ****   hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  67              		.loc 1 42 3 is_stmt 1 view .LVU17
+  68              		.loc 1 42 28 is_stmt 0 view .LVU18
+  69 001e 0362     		str	r3, [r0, #32]
+  43:Src/i2c.c     ****   if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+  70              		.loc 1 43 3 is_stmt 1 view .LVU19
+  71              		.loc 1 43 7 is_stmt 0 view .LVU20
+  72 0020 FFF7FEFF 		bl	HAL_I2C_Init
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 3
+
+
+  73              	.LVL0:
+  74              		.loc 1 43 6 view .LVU21
+  75 0024 00B9     		cbnz	r0, .L4
+  76              	.L1:
+  44:Src/i2c.c     ****   {
+  45:Src/i2c.c     ****     Error_Handler();
+  46:Src/i2c.c     ****   }
+  47:Src/i2c.c     **** 
+  48:Src/i2c.c     **** }
+  77              		.loc 1 48 1 view .LVU22
+  78 0026 08BD     		pop	{r3, pc}
+  79              	.L4:
+  45:Src/i2c.c     ****   }
+  80              		.loc 1 45 5 is_stmt 1 view .LVU23
+  81 0028 FFF7FEFF 		bl	Error_Handler
+  82              	.LVL1:
+  83              		.loc 1 48 1 is_stmt 0 view .LVU24
+  84 002c FBE7     		b	.L1
+  85              	.L6:
+  86 002e 00BF     		.align	2
+  87              	.L5:
+  88 0030 00000000 		.word	.LANCHOR0
+  89 0034 00540040 		.word	1073763328
+  90 0038 A0860100 		.word	100000
+  91              		.cfi_endproc
+  92              	.LFE130:
+  94              		.section	.text.MX_I2C3_Init,"ax",%progbits
+  95              		.align	1
+  96              		.global	MX_I2C3_Init
+  97              		.syntax unified
+  98              		.thumb
+  99              		.thumb_func
+ 101              	MX_I2C3_Init:
+ 102              	.LFB131:
+  49:Src/i2c.c     **** /* I2C3 init function */
+  50:Src/i2c.c     **** void MX_I2C3_Init(void)
+  51:Src/i2c.c     **** {
+ 103              		.loc 1 51 1 is_stmt 1 view -0
+ 104              		.cfi_startproc
+ 105              		@ args = 0, pretend = 0, frame = 0
+ 106              		@ frame_needed = 0, uses_anonymous_args = 0
+ 107 0000 08B5     		push	{r3, lr}
+ 108              	.LCFI1:
+ 109              		.cfi_def_cfa_offset 8
+ 110              		.cfi_offset 3, -8
+ 111              		.cfi_offset 14, -4
+  52:Src/i2c.c     **** 
+  53:Src/i2c.c     ****   hi2c3.Instance = I2C3;
+ 112              		.loc 1 53 3 view .LVU26
+ 113              		.loc 1 53 18 is_stmt 0 view .LVU27
+ 114 0002 0B48     		ldr	r0, .L11
+ 115 0004 0B4B     		ldr	r3, .L11+4
+ 116 0006 0360     		str	r3, [r0]
+  54:Src/i2c.c     ****   hi2c3.Init.ClockSpeed = 100000;
+ 117              		.loc 1 54 3 is_stmt 1 view .LVU28
+ 118              		.loc 1 54 25 is_stmt 0 view .LVU29
+ 119 0008 0B4B     		ldr	r3, .L11+8
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 4
+
+
+ 120 000a 4360     		str	r3, [r0, #4]
+  55:Src/i2c.c     ****   hi2c3.Init.DutyCycle = I2C_DUTYCYCLE_2;
+ 121              		.loc 1 55 3 is_stmt 1 view .LVU30
+ 122              		.loc 1 55 24 is_stmt 0 view .LVU31
+ 123 000c 0023     		movs	r3, #0
+ 124 000e 8360     		str	r3, [r0, #8]
+  56:Src/i2c.c     ****   hi2c3.Init.OwnAddress1 = 0;
+ 125              		.loc 1 56 3 is_stmt 1 view .LVU32
+ 126              		.loc 1 56 26 is_stmt 0 view .LVU33
+ 127 0010 C360     		str	r3, [r0, #12]
+  57:Src/i2c.c     ****   hi2c3.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+ 128              		.loc 1 57 3 is_stmt 1 view .LVU34
+ 129              		.loc 1 57 29 is_stmt 0 view .LVU35
+ 130 0012 4FF48042 		mov	r2, #16384
+ 131 0016 0261     		str	r2, [r0, #16]
+  58:Src/i2c.c     ****   hi2c3.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+ 132              		.loc 1 58 3 is_stmt 1 view .LVU36
+ 133              		.loc 1 58 30 is_stmt 0 view .LVU37
+ 134 0018 4361     		str	r3, [r0, #20]
+  59:Src/i2c.c     ****   hi2c3.Init.OwnAddress2 = 0;
+ 135              		.loc 1 59 3 is_stmt 1 view .LVU38
+ 136              		.loc 1 59 26 is_stmt 0 view .LVU39
+ 137 001a 8361     		str	r3, [r0, #24]
+  60:Src/i2c.c     ****   hi2c3.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+ 138              		.loc 1 60 3 is_stmt 1 view .LVU40
+ 139              		.loc 1 60 30 is_stmt 0 view .LVU41
+ 140 001c C361     		str	r3, [r0, #28]
+  61:Src/i2c.c     ****   hi2c3.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+ 141              		.loc 1 61 3 is_stmt 1 view .LVU42
+ 142              		.loc 1 61 28 is_stmt 0 view .LVU43
+ 143 001e 0362     		str	r3, [r0, #32]
+  62:Src/i2c.c     ****   if (HAL_I2C_Init(&hi2c3) != HAL_OK)
+ 144              		.loc 1 62 3 is_stmt 1 view .LVU44
+ 145              		.loc 1 62 7 is_stmt 0 view .LVU45
+ 146 0020 FFF7FEFF 		bl	HAL_I2C_Init
+ 147              	.LVL2:
+ 148              		.loc 1 62 6 view .LVU46
+ 149 0024 00B9     		cbnz	r0, .L10
+ 150              	.L7:
+  63:Src/i2c.c     ****   {
+  64:Src/i2c.c     ****     Error_Handler();
+  65:Src/i2c.c     ****   }
+  66:Src/i2c.c     **** 
+  67:Src/i2c.c     **** }
+ 151              		.loc 1 67 1 view .LVU47
+ 152 0026 08BD     		pop	{r3, pc}
+ 153              	.L10:
+  64:Src/i2c.c     ****   }
+ 154              		.loc 1 64 5 is_stmt 1 view .LVU48
+ 155 0028 FFF7FEFF 		bl	Error_Handler
+ 156              	.LVL3:
+ 157              		.loc 1 67 1 is_stmt 0 view .LVU49
+ 158 002c FBE7     		b	.L7
+ 159              	.L12:
+ 160 002e 00BF     		.align	2
+ 161              	.L11:
+ 162 0030 00000000 		.word	.LANCHOR1
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 5
+
+
+ 163 0034 005C0040 		.word	1073765376
+ 164 0038 A0860100 		.word	100000
+ 165              		.cfi_endproc
+ 166              	.LFE131:
+ 168              		.section	.text.HAL_I2C_MspInit,"ax",%progbits
+ 169              		.align	1
+ 170              		.global	HAL_I2C_MspInit
+ 171              		.syntax unified
+ 172              		.thumb
+ 173              		.thumb_func
+ 175              	HAL_I2C_MspInit:
+ 176              	.LVL4:
+ 177              	.LFB132:
+  68:Src/i2c.c     **** 
+  69:Src/i2c.c     **** void HAL_I2C_MspInit(I2C_HandleTypeDef* i2cHandle)
+  70:Src/i2c.c     **** {
+ 178              		.loc 1 70 1 is_stmt 1 view -0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 40
+ 181              		@ frame_needed = 0, uses_anonymous_args = 0
+ 182              		.loc 1 70 1 is_stmt 0 view .LVU51
+ 183 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 184              	.LCFI2:
+ 185              		.cfi_def_cfa_offset 28
+ 186              		.cfi_offset 4, -28
+ 187              		.cfi_offset 5, -24
+ 188              		.cfi_offset 6, -20
+ 189              		.cfi_offset 7, -16
+ 190              		.cfi_offset 8, -12
+ 191              		.cfi_offset 9, -8
+ 192              		.cfi_offset 14, -4
+ 193 0004 8BB0     		sub	sp, sp, #44
+ 194              	.LCFI3:
+ 195              		.cfi_def_cfa_offset 72
+  71:Src/i2c.c     **** 
+  72:Src/i2c.c     ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
+ 196              		.loc 1 72 3 is_stmt 1 view .LVU52
+ 197              		.loc 1 72 20 is_stmt 0 view .LVU53
+ 198 0006 0023     		movs	r3, #0
+ 199 0008 0593     		str	r3, [sp, #20]
+ 200 000a 0693     		str	r3, [sp, #24]
+ 201 000c 0793     		str	r3, [sp, #28]
+ 202 000e 0893     		str	r3, [sp, #32]
+ 203 0010 0993     		str	r3, [sp, #36]
+  73:Src/i2c.c     ****   if(i2cHandle->Instance==I2C1)
+ 204              		.loc 1 73 3 is_stmt 1 view .LVU54
+ 205              		.loc 1 73 15 is_stmt 0 view .LVU55
+ 206 0012 0368     		ldr	r3, [r0]
+ 207              		.loc 1 73 5 view .LVU56
+ 208 0014 374A     		ldr	r2, .L19
+ 209 0016 9342     		cmp	r3, r2
+ 210 0018 05D0     		beq	.L17
+  74:Src/i2c.c     ****   {
+  75:Src/i2c.c     ****   /* USER CODE BEGIN I2C1_MspInit 0 */
+  76:Src/i2c.c     **** 
+  77:Src/i2c.c     ****   /* USER CODE END I2C1_MspInit 0 */
+  78:Src/i2c.c     **** 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 6
+
+
+  79:Src/i2c.c     ****     __HAL_RCC_GPIOB_CLK_ENABLE();
+  80:Src/i2c.c     ****     /**I2C1 GPIO Configuration
+  81:Src/i2c.c     ****     PB6     ------> I2C1_SCL
+  82:Src/i2c.c     ****     PB7     ------> I2C1_SDA
+  83:Src/i2c.c     ****     */
+  84:Src/i2c.c     ****     GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
+  85:Src/i2c.c     ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+  86:Src/i2c.c     ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+  87:Src/i2c.c     ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  88:Src/i2c.c     ****     GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+  89:Src/i2c.c     ****     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  90:Src/i2c.c     **** 
+  91:Src/i2c.c     ****     /* I2C1 clock enable */
+  92:Src/i2c.c     ****     __HAL_RCC_I2C1_CLK_ENABLE();
+  93:Src/i2c.c     ****   /* USER CODE BEGIN I2C1_MspInit 1 */
+  94:Src/i2c.c     **** 
+  95:Src/i2c.c     ****   /* USER CODE END I2C1_MspInit 1 */
+  96:Src/i2c.c     ****   }
+  97:Src/i2c.c     ****   else if(i2cHandle->Instance==I2C3)
+ 211              		.loc 1 97 8 is_stmt 1 view .LVU57
+ 212              		.loc 1 97 10 is_stmt 0 view .LVU58
+ 213 001a 374A     		ldr	r2, .L19+4
+ 214 001c 9342     		cmp	r3, r2
+ 215 001e 27D0     		beq	.L18
+ 216              	.LVL5:
+ 217              	.L13:
+  98:Src/i2c.c     ****   {
+  99:Src/i2c.c     ****   /* USER CODE BEGIN I2C3_MspInit 0 */
+ 100:Src/i2c.c     **** 
+ 101:Src/i2c.c     ****   /* USER CODE END I2C3_MspInit 0 */
+ 102:Src/i2c.c     **** 
+ 103:Src/i2c.c     ****     __HAL_RCC_GPIOC_CLK_ENABLE();
+ 104:Src/i2c.c     ****     __HAL_RCC_GPIOA_CLK_ENABLE();
+ 105:Src/i2c.c     ****     /**I2C3 GPIO Configuration
+ 106:Src/i2c.c     ****     PC9     ------> I2C3_SDA
+ 107:Src/i2c.c     ****     PA8     ------> I2C3_SCL
+ 108:Src/i2c.c     ****     */
+ 109:Src/i2c.c     ****     GPIO_InitStruct.Pin = GPIO_PIN_9;
+ 110:Src/i2c.c     ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+ 111:Src/i2c.c     ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 112:Src/i2c.c     ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 113:Src/i2c.c     ****     GPIO_InitStruct.Alternate = GPIO_AF4_I2C3;
+ 114:Src/i2c.c     ****     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+ 115:Src/i2c.c     **** 
+ 116:Src/i2c.c     ****     GPIO_InitStruct.Pin = GPIO_PIN_8;
+ 117:Src/i2c.c     ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+ 118:Src/i2c.c     ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 119:Src/i2c.c     ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 120:Src/i2c.c     ****     GPIO_InitStruct.Alternate = GPIO_AF4_I2C3;
+ 121:Src/i2c.c     ****     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 122:Src/i2c.c     **** 
+ 123:Src/i2c.c     ****     /* I2C3 clock enable */
+ 124:Src/i2c.c     ****     __HAL_RCC_I2C3_CLK_ENABLE();
+ 125:Src/i2c.c     ****   /* USER CODE BEGIN I2C3_MspInit 1 */
+ 126:Src/i2c.c     **** 
+ 127:Src/i2c.c     ****   /* USER CODE END I2C3_MspInit 1 */
+ 128:Src/i2c.c     ****   }
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 7
+
+
+ 129:Src/i2c.c     **** }
+ 218              		.loc 1 129 1 view .LVU59
+ 219 0020 0BB0     		add	sp, sp, #44
+ 220              	.LCFI4:
+ 221              		.cfi_remember_state
+ 222              		.cfi_def_cfa_offset 28
+ 223              		@ sp needed
+ 224 0022 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 225              	.LVL6:
+ 226              	.L17:
+ 227              	.LCFI5:
+ 228              		.cfi_restore_state
+  79:Src/i2c.c     ****     /**I2C1 GPIO Configuration
+ 229              		.loc 1 79 5 is_stmt 1 view .LVU60
+ 230              	.LBB2:
+  79:Src/i2c.c     ****     /**I2C1 GPIO Configuration
+ 231              		.loc 1 79 5 view .LVU61
+ 232 0026 0025     		movs	r5, #0
+ 233 0028 0095     		str	r5, [sp]
+  79:Src/i2c.c     ****     /**I2C1 GPIO Configuration
+ 234              		.loc 1 79 5 view .LVU62
+ 235 002a 344C     		ldr	r4, .L19+8
+ 236 002c 236B     		ldr	r3, [r4, #48]
+ 237 002e 43F00203 		orr	r3, r3, #2
+ 238 0032 2363     		str	r3, [r4, #48]
+  79:Src/i2c.c     ****     /**I2C1 GPIO Configuration
+ 239              		.loc 1 79 5 view .LVU63
+ 240 0034 236B     		ldr	r3, [r4, #48]
+ 241 0036 03F00203 		and	r3, r3, #2
+ 242 003a 0093     		str	r3, [sp]
+  79:Src/i2c.c     ****     /**I2C1 GPIO Configuration
+ 243              		.loc 1 79 5 view .LVU64
+ 244 003c 009B     		ldr	r3, [sp]
+ 245              	.LBE2:
+  79:Src/i2c.c     ****     /**I2C1 GPIO Configuration
+ 246              		.loc 1 79 5 view .LVU65
+  84:Src/i2c.c     ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+ 247              		.loc 1 84 5 view .LVU66
+  84:Src/i2c.c     ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+ 248              		.loc 1 84 25 is_stmt 0 view .LVU67
+ 249 003e C023     		movs	r3, #192
+ 250 0040 0593     		str	r3, [sp, #20]
+  85:Src/i2c.c     ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 251              		.loc 1 85 5 is_stmt 1 view .LVU68
+  85:Src/i2c.c     ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 252              		.loc 1 85 26 is_stmt 0 view .LVU69
+ 253 0042 1223     		movs	r3, #18
+ 254 0044 0693     		str	r3, [sp, #24]
+  86:Src/i2c.c     ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 255              		.loc 1 86 5 is_stmt 1 view .LVU70
+  86:Src/i2c.c     ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 256              		.loc 1 86 26 is_stmt 0 view .LVU71
+ 257 0046 0123     		movs	r3, #1
+ 258 0048 0793     		str	r3, [sp, #28]
+  87:Src/i2c.c     ****     GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+ 259              		.loc 1 87 5 is_stmt 1 view .LVU72
+  87:Src/i2c.c     ****     GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 8
+
+
+ 260              		.loc 1 87 27 is_stmt 0 view .LVU73
+ 261 004a 0323     		movs	r3, #3
+ 262 004c 0893     		str	r3, [sp, #32]
+  88:Src/i2c.c     ****     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+ 263              		.loc 1 88 5 is_stmt 1 view .LVU74
+  88:Src/i2c.c     ****     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+ 264              		.loc 1 88 31 is_stmt 0 view .LVU75
+ 265 004e 0423     		movs	r3, #4
+ 266 0050 0993     		str	r3, [sp, #36]
+  89:Src/i2c.c     **** 
+ 267              		.loc 1 89 5 is_stmt 1 view .LVU76
+ 268 0052 05A9     		add	r1, sp, #20
+ 269 0054 2A48     		ldr	r0, .L19+12
+ 270              	.LVL7:
+  89:Src/i2c.c     **** 
+ 271              		.loc 1 89 5 is_stmt 0 view .LVU77
+ 272 0056 FFF7FEFF 		bl	HAL_GPIO_Init
+ 273              	.LVL8:
+  92:Src/i2c.c     ****   /* USER CODE BEGIN I2C1_MspInit 1 */
+ 274              		.loc 1 92 5 is_stmt 1 view .LVU78
+ 275              	.LBB3:
+  92:Src/i2c.c     ****   /* USER CODE BEGIN I2C1_MspInit 1 */
+ 276              		.loc 1 92 5 view .LVU79
+ 277 005a 0195     		str	r5, [sp, #4]
+  92:Src/i2c.c     ****   /* USER CODE BEGIN I2C1_MspInit 1 */
+ 278              		.loc 1 92 5 view .LVU80
+ 279 005c 236C     		ldr	r3, [r4, #64]
+ 280 005e 43F40013 		orr	r3, r3, #2097152
+ 281 0062 2364     		str	r3, [r4, #64]
+  92:Src/i2c.c     ****   /* USER CODE BEGIN I2C1_MspInit 1 */
+ 282              		.loc 1 92 5 view .LVU81
+ 283 0064 236C     		ldr	r3, [r4, #64]
+ 284 0066 03F40013 		and	r3, r3, #2097152
+ 285 006a 0193     		str	r3, [sp, #4]
+  92:Src/i2c.c     ****   /* USER CODE BEGIN I2C1_MspInit 1 */
+ 286              		.loc 1 92 5 view .LVU82
+ 287 006c 019B     		ldr	r3, [sp, #4]
+ 288              	.LBE3:
+  92:Src/i2c.c     ****   /* USER CODE BEGIN I2C1_MspInit 1 */
+ 289              		.loc 1 92 5 view .LVU83
+ 290 006e D7E7     		b	.L13
+ 291              	.LVL9:
+ 292              	.L18:
+ 103:Src/i2c.c     ****     __HAL_RCC_GPIOA_CLK_ENABLE();
+ 293              		.loc 1 103 5 view .LVU84
+ 294              	.LBB4:
+ 103:Src/i2c.c     ****     __HAL_RCC_GPIOA_CLK_ENABLE();
+ 295              		.loc 1 103 5 view .LVU85
+ 296 0070 0025     		movs	r5, #0
+ 297 0072 0295     		str	r5, [sp, #8]
+ 103:Src/i2c.c     ****     __HAL_RCC_GPIOA_CLK_ENABLE();
+ 298              		.loc 1 103 5 view .LVU86
+ 299 0074 214C     		ldr	r4, .L19+8
+ 300 0076 236B     		ldr	r3, [r4, #48]
+ 301 0078 43F00403 		orr	r3, r3, #4
+ 302 007c 2363     		str	r3, [r4, #48]
+ 103:Src/i2c.c     ****     __HAL_RCC_GPIOA_CLK_ENABLE();
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 9
+
+
+ 303              		.loc 1 103 5 view .LVU87
+ 304 007e 236B     		ldr	r3, [r4, #48]
+ 305 0080 03F00403 		and	r3, r3, #4
+ 306 0084 0293     		str	r3, [sp, #8]
+ 103:Src/i2c.c     ****     __HAL_RCC_GPIOA_CLK_ENABLE();
+ 307              		.loc 1 103 5 view .LVU88
+ 308 0086 029B     		ldr	r3, [sp, #8]
+ 309              	.LBE4:
+ 103:Src/i2c.c     ****     __HAL_RCC_GPIOA_CLK_ENABLE();
+ 310              		.loc 1 103 5 view .LVU89
+ 104:Src/i2c.c     ****     /**I2C3 GPIO Configuration
+ 311              		.loc 1 104 5 view .LVU90
+ 312              	.LBB5:
+ 104:Src/i2c.c     ****     /**I2C3 GPIO Configuration
+ 313              		.loc 1 104 5 view .LVU91
+ 314 0088 0395     		str	r5, [sp, #12]
+ 104:Src/i2c.c     ****     /**I2C3 GPIO Configuration
+ 315              		.loc 1 104 5 view .LVU92
+ 316 008a 236B     		ldr	r3, [r4, #48]
+ 317 008c 43F00103 		orr	r3, r3, #1
+ 318 0090 2363     		str	r3, [r4, #48]
+ 104:Src/i2c.c     ****     /**I2C3 GPIO Configuration
+ 319              		.loc 1 104 5 view .LVU93
+ 320 0092 236B     		ldr	r3, [r4, #48]
+ 321 0094 03F00103 		and	r3, r3, #1
+ 322 0098 0393     		str	r3, [sp, #12]
+ 104:Src/i2c.c     ****     /**I2C3 GPIO Configuration
+ 323              		.loc 1 104 5 view .LVU94
+ 324 009a 039B     		ldr	r3, [sp, #12]
+ 325              	.LBE5:
+ 104:Src/i2c.c     ****     /**I2C3 GPIO Configuration
+ 326              		.loc 1 104 5 view .LVU95
+ 109:Src/i2c.c     ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+ 327              		.loc 1 109 5 view .LVU96
+ 109:Src/i2c.c     ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+ 328              		.loc 1 109 25 is_stmt 0 view .LVU97
+ 329 009c 4FF40073 		mov	r3, #512
+ 330 00a0 0593     		str	r3, [sp, #20]
+ 110:Src/i2c.c     ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 331              		.loc 1 110 5 is_stmt 1 view .LVU98
+ 110:Src/i2c.c     ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 332              		.loc 1 110 26 is_stmt 0 view .LVU99
+ 333 00a2 4FF01209 		mov	r9, #18
+ 334 00a6 CDF81890 		str	r9, [sp, #24]
+ 111:Src/i2c.c     ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 335              		.loc 1 111 5 is_stmt 1 view .LVU100
+ 111:Src/i2c.c     ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 336              		.loc 1 111 26 is_stmt 0 view .LVU101
+ 337 00aa 4FF00108 		mov	r8, #1
+ 338 00ae CDF81C80 		str	r8, [sp, #28]
+ 112:Src/i2c.c     ****     GPIO_InitStruct.Alternate = GPIO_AF4_I2C3;
+ 339              		.loc 1 112 5 is_stmt 1 view .LVU102
+ 112:Src/i2c.c     ****     GPIO_InitStruct.Alternate = GPIO_AF4_I2C3;
+ 340              		.loc 1 112 27 is_stmt 0 view .LVU103
+ 341 00b2 0327     		movs	r7, #3
+ 342 00b4 0897     		str	r7, [sp, #32]
+ 113:Src/i2c.c     ****     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 10
+
+
+ 343              		.loc 1 113 5 is_stmt 1 view .LVU104
+ 113:Src/i2c.c     ****     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+ 344              		.loc 1 113 31 is_stmt 0 view .LVU105
+ 345 00b6 0426     		movs	r6, #4
+ 346 00b8 0996     		str	r6, [sp, #36]
+ 114:Src/i2c.c     **** 
+ 347              		.loc 1 114 5 is_stmt 1 view .LVU106
+ 348 00ba 05A9     		add	r1, sp, #20
+ 349 00bc 1148     		ldr	r0, .L19+16
+ 350              	.LVL10:
+ 114:Src/i2c.c     **** 
+ 351              		.loc 1 114 5 is_stmt 0 view .LVU107
+ 352 00be FFF7FEFF 		bl	HAL_GPIO_Init
+ 353              	.LVL11:
+ 116:Src/i2c.c     ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+ 354              		.loc 1 116 5 is_stmt 1 view .LVU108
+ 116:Src/i2c.c     ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+ 355              		.loc 1 116 25 is_stmt 0 view .LVU109
+ 356 00c2 4FF48073 		mov	r3, #256
+ 357 00c6 0593     		str	r3, [sp, #20]
+ 117:Src/i2c.c     ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 358              		.loc 1 117 5 is_stmt 1 view .LVU110
+ 117:Src/i2c.c     ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 359              		.loc 1 117 26 is_stmt 0 view .LVU111
+ 360 00c8 CDF81890 		str	r9, [sp, #24]
+ 118:Src/i2c.c     ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 361              		.loc 1 118 5 is_stmt 1 view .LVU112
+ 118:Src/i2c.c     ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 362              		.loc 1 118 26 is_stmt 0 view .LVU113
+ 363 00cc CDF81C80 		str	r8, [sp, #28]
+ 119:Src/i2c.c     ****     GPIO_InitStruct.Alternate = GPIO_AF4_I2C3;
+ 364              		.loc 1 119 5 is_stmt 1 view .LVU114
+ 119:Src/i2c.c     ****     GPIO_InitStruct.Alternate = GPIO_AF4_I2C3;
+ 365              		.loc 1 119 27 is_stmt 0 view .LVU115
+ 366 00d0 0897     		str	r7, [sp, #32]
+ 120:Src/i2c.c     ****     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 367              		.loc 1 120 5 is_stmt 1 view .LVU116
+ 120:Src/i2c.c     ****     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 368              		.loc 1 120 31 is_stmt 0 view .LVU117
+ 369 00d2 0996     		str	r6, [sp, #36]
+ 121:Src/i2c.c     **** 
+ 370              		.loc 1 121 5 is_stmt 1 view .LVU118
+ 371 00d4 05A9     		add	r1, sp, #20
+ 372 00d6 0C48     		ldr	r0, .L19+20
+ 373 00d8 FFF7FEFF 		bl	HAL_GPIO_Init
+ 374              	.LVL12:
+ 124:Src/i2c.c     ****   /* USER CODE BEGIN I2C3_MspInit 1 */
+ 375              		.loc 1 124 5 view .LVU119
+ 376              	.LBB6:
+ 124:Src/i2c.c     ****   /* USER CODE BEGIN I2C3_MspInit 1 */
+ 377              		.loc 1 124 5 view .LVU120
+ 378 00dc 0495     		str	r5, [sp, #16]
+ 124:Src/i2c.c     ****   /* USER CODE BEGIN I2C3_MspInit 1 */
+ 379              		.loc 1 124 5 view .LVU121
+ 380 00de 236C     		ldr	r3, [r4, #64]
+ 381 00e0 43F40003 		orr	r3, r3, #8388608
+ 382 00e4 2364     		str	r3, [r4, #64]
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 11
+
+
+ 124:Src/i2c.c     ****   /* USER CODE BEGIN I2C3_MspInit 1 */
+ 383              		.loc 1 124 5 view .LVU122
+ 384 00e6 236C     		ldr	r3, [r4, #64]
+ 385 00e8 03F40003 		and	r3, r3, #8388608
+ 386 00ec 0493     		str	r3, [sp, #16]
+ 124:Src/i2c.c     ****   /* USER CODE BEGIN I2C3_MspInit 1 */
+ 387              		.loc 1 124 5 view .LVU123
+ 388 00ee 049B     		ldr	r3, [sp, #16]
+ 389              	.LBE6:
+ 124:Src/i2c.c     ****   /* USER CODE BEGIN I2C3_MspInit 1 */
+ 390              		.loc 1 124 5 view .LVU124
+ 391              		.loc 1 129 1 is_stmt 0 view .LVU125
+ 392 00f0 96E7     		b	.L13
+ 393              	.L20:
+ 394 00f2 00BF     		.align	2
+ 395              	.L19:
+ 396 00f4 00540040 		.word	1073763328
+ 397 00f8 005C0040 		.word	1073765376
+ 398 00fc 00380240 		.word	1073887232
+ 399 0100 00040240 		.word	1073873920
+ 400 0104 00080240 		.word	1073874944
+ 401 0108 00000240 		.word	1073872896
+ 402              		.cfi_endproc
+ 403              	.LFE132:
+ 405              		.section	.text.HAL_I2C_MspDeInit,"ax",%progbits
+ 406              		.align	1
+ 407              		.global	HAL_I2C_MspDeInit
+ 408              		.syntax unified
+ 409              		.thumb
+ 410              		.thumb_func
+ 412              	HAL_I2C_MspDeInit:
+ 413              	.LVL13:
+ 414              	.LFB133:
+ 130:Src/i2c.c     **** 
+ 131:Src/i2c.c     **** void HAL_I2C_MspDeInit(I2C_HandleTypeDef* i2cHandle)
+ 132:Src/i2c.c     **** {
+ 415              		.loc 1 132 1 is_stmt 1 view -0
+ 416              		.cfi_startproc
+ 417              		@ args = 0, pretend = 0, frame = 0
+ 418              		@ frame_needed = 0, uses_anonymous_args = 0
+ 419              		.loc 1 132 1 is_stmt 0 view .LVU127
+ 420 0000 10B5     		push	{r4, lr}
+ 421              	.LCFI6:
+ 422              		.cfi_def_cfa_offset 8
+ 423              		.cfi_offset 4, -8
+ 424              		.cfi_offset 14, -4
+ 133:Src/i2c.c     **** 
+ 134:Src/i2c.c     ****   if(i2cHandle->Instance==I2C1)
+ 425              		.loc 1 134 3 is_stmt 1 view .LVU128
+ 426              		.loc 1 134 15 is_stmt 0 view .LVU129
+ 427 0002 0368     		ldr	r3, [r0]
+ 428              		.loc 1 134 5 view .LVU130
+ 429 0004 134A     		ldr	r2, .L27
+ 430 0006 9342     		cmp	r3, r2
+ 431 0008 03D0     		beq	.L25
+ 135:Src/i2c.c     ****   {
+ 136:Src/i2c.c     ****   /* USER CODE BEGIN I2C1_MspDeInit 0 */
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 12
+
+
+ 137:Src/i2c.c     **** 
+ 138:Src/i2c.c     ****   /* USER CODE END I2C1_MspDeInit 0 */
+ 139:Src/i2c.c     ****     /* Peripheral clock disable */
+ 140:Src/i2c.c     ****     __HAL_RCC_I2C1_CLK_DISABLE();
+ 141:Src/i2c.c     **** 
+ 142:Src/i2c.c     ****     /**I2C1 GPIO Configuration
+ 143:Src/i2c.c     ****     PB6     ------> I2C1_SCL
+ 144:Src/i2c.c     ****     PB7     ------> I2C1_SDA
+ 145:Src/i2c.c     ****     */
+ 146:Src/i2c.c     ****     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_6);
+ 147:Src/i2c.c     **** 
+ 148:Src/i2c.c     ****     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_7);
+ 149:Src/i2c.c     **** 
+ 150:Src/i2c.c     ****   /* USER CODE BEGIN I2C1_MspDeInit 1 */
+ 151:Src/i2c.c     **** 
+ 152:Src/i2c.c     ****   /* USER CODE END I2C1_MspDeInit 1 */
+ 153:Src/i2c.c     ****   }
+ 154:Src/i2c.c     ****   else if(i2cHandle->Instance==I2C3)
+ 432              		.loc 1 154 8 is_stmt 1 view .LVU131
+ 433              		.loc 1 154 10 is_stmt 0 view .LVU132
+ 434 000a 134A     		ldr	r2, .L27+4
+ 435 000c 9342     		cmp	r3, r2
+ 436 000e 10D0     		beq	.L26
+ 437              	.LVL14:
+ 438              	.L21:
+ 155:Src/i2c.c     ****   {
+ 156:Src/i2c.c     ****   /* USER CODE BEGIN I2C3_MspDeInit 0 */
+ 157:Src/i2c.c     **** 
+ 158:Src/i2c.c     ****   /* USER CODE END I2C3_MspDeInit 0 */
+ 159:Src/i2c.c     ****     /* Peripheral clock disable */
+ 160:Src/i2c.c     ****     __HAL_RCC_I2C3_CLK_DISABLE();
+ 161:Src/i2c.c     **** 
+ 162:Src/i2c.c     ****     /**I2C3 GPIO Configuration
+ 163:Src/i2c.c     ****     PC9     ------> I2C3_SDA
+ 164:Src/i2c.c     ****     PA8     ------> I2C3_SCL
+ 165:Src/i2c.c     ****     */
+ 166:Src/i2c.c     ****     HAL_GPIO_DeInit(GPIOC, GPIO_PIN_9);
+ 167:Src/i2c.c     **** 
+ 168:Src/i2c.c     ****     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_8);
+ 169:Src/i2c.c     **** 
+ 170:Src/i2c.c     ****   /* USER CODE BEGIN I2C3_MspDeInit 1 */
+ 171:Src/i2c.c     **** 
+ 172:Src/i2c.c     ****   /* USER CODE END I2C3_MspDeInit 1 */
+ 173:Src/i2c.c     ****   }
+ 174:Src/i2c.c     **** }
+ 439              		.loc 1 174 1 view .LVU133
+ 440 0010 10BD     		pop	{r4, pc}
+ 441              	.LVL15:
+ 442              	.L25:
+ 140:Src/i2c.c     **** 
+ 443              		.loc 1 140 5 is_stmt 1 view .LVU134
+ 444 0012 02F5F232 		add	r2, r2, #123904
+ 445 0016 136C     		ldr	r3, [r2, #64]
+ 446 0018 23F40013 		bic	r3, r3, #2097152
+ 447 001c 1364     		str	r3, [r2, #64]
+ 146:Src/i2c.c     **** 
+ 448              		.loc 1 146 5 view .LVU135
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 13
+
+
+ 449 001e 0F4C     		ldr	r4, .L27+8
+ 450 0020 4021     		movs	r1, #64
+ 451 0022 2046     		mov	r0, r4
+ 452              	.LVL16:
+ 146:Src/i2c.c     **** 
+ 453              		.loc 1 146 5 is_stmt 0 view .LVU136
+ 454 0024 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 455              	.LVL17:
+ 148:Src/i2c.c     **** 
+ 456              		.loc 1 148 5 is_stmt 1 view .LVU137
+ 457 0028 8021     		movs	r1, #128
+ 458 002a 2046     		mov	r0, r4
+ 459 002c FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 460              	.LVL18:
+ 461 0030 EEE7     		b	.L21
+ 462              	.LVL19:
+ 463              	.L26:
+ 160:Src/i2c.c     **** 
+ 464              		.loc 1 160 5 view .LVU138
+ 465 0032 02F5EE32 		add	r2, r2, #121856
+ 466 0036 136C     		ldr	r3, [r2, #64]
+ 467 0038 23F40003 		bic	r3, r3, #8388608
+ 468 003c 1364     		str	r3, [r2, #64]
+ 166:Src/i2c.c     **** 
+ 469              		.loc 1 166 5 view .LVU139
+ 470 003e 4FF40071 		mov	r1, #512
+ 471 0042 0748     		ldr	r0, .L27+12
+ 472              	.LVL20:
+ 166:Src/i2c.c     **** 
+ 473              		.loc 1 166 5 is_stmt 0 view .LVU140
+ 474 0044 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 475              	.LVL21:
+ 168:Src/i2c.c     **** 
+ 476              		.loc 1 168 5 is_stmt 1 view .LVU141
+ 477 0048 4FF48071 		mov	r1, #256
+ 478 004c 0548     		ldr	r0, .L27+16
+ 479 004e FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 480              	.LVL22:
+ 481              		.loc 1 174 1 is_stmt 0 view .LVU142
+ 482 0052 DDE7     		b	.L21
+ 483              	.L28:
+ 484              		.align	2
+ 485              	.L27:
+ 486 0054 00540040 		.word	1073763328
+ 487 0058 005C0040 		.word	1073765376
+ 488 005c 00040240 		.word	1073873920
+ 489 0060 00080240 		.word	1073874944
+ 490 0064 00000240 		.word	1073872896
+ 491              		.cfi_endproc
+ 492              	.LFE133:
+ 494              		.global	hi2c3
+ 495              		.global	hi2c1
+ 496              		.section	.bss.hi2c1,"aw",%nobits
+ 497              		.align	2
+ 498              		.set	.LANCHOR0,. + 0
+ 501              	hi2c1:
+ 502 0000 00000000 		.space	84
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 14
+
+
+ 502      00000000 
+ 502      00000000 
+ 502      00000000 
+ 502      00000000 
+ 503              		.section	.bss.hi2c3,"aw",%nobits
+ 504              		.align	2
+ 505              		.set	.LANCHOR1,. + 0
+ 508              	hi2c3:
+ 509 0000 00000000 		.space	84
+ 509      00000000 
+ 509      00000000 
+ 509      00000000 
+ 509      00000000 
+ 510              		.text
+ 511              	.Letext0:
+ 512              		.file 2 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\machine\\_default_typ
+ 513              		.file 3 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 514              		.file 4 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/CMSIS/Device/ST/
+ 515              		.file 5 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Dr
+ 516              		.file 6 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Dr
+ 517              		.file 7 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Dr
+ 518              		.file 8 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Dr
+ 519              		.file 9 "Inc/i2c.h"
+ 520              		.file 10 "Inc/main.h"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 i2c.c
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:20     .text.MX_I2C1_Init:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:26     .text.MX_I2C1_Init:00000000 MX_I2C1_Init
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:88     .text.MX_I2C1_Init:00000030 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:95     .text.MX_I2C3_Init:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:101    .text.MX_I2C3_Init:00000000 MX_I2C3_Init
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:162    .text.MX_I2C3_Init:00000030 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:169    .text.HAL_I2C_MspInit:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:175    .text.HAL_I2C_MspInit:00000000 HAL_I2C_MspInit
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:396    .text.HAL_I2C_MspInit:000000f4 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:406    .text.HAL_I2C_MspDeInit:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:412    .text.HAL_I2C_MspDeInit:00000000 HAL_I2C_MspDeInit
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:486    .text.HAL_I2C_MspDeInit:00000054 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:508    .bss.hi2c3:00000000 hi2c3
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:501    .bss.hi2c1:00000000 hi2c1
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:497    .bss.hi2c1:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgim84d.s:504    .bss.hi2c3:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_I2C_Init
+Error_Handler
+HAL_GPIO_Init
+HAL_GPIO_DeInit

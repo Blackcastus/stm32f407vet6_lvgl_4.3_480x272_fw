@@ -1,0 +1,678 @@
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"lv_driver.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.DMA_TransferError,"ax",%progbits
+  20              		.align	1
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	DMA_TransferError:
+  26              	.LFB319:
+  27              		.file 1 "Src/lv_driver.c"
+   1:Src/lv_driver.c **** #include "ssd1963_fsmc.h"
+   2:Src/lv_driver.c **** #include "lv_driver.h"
+   3:Src/lv_driver.c **** #include <stdio.h>
+   4:Src/lv_driver.c **** #include "dma.h"
+   5:Src/lv_driver.c **** 
+   6:Src/lv_driver.c **** static void tft_flush_cb(lv_disp_drv_t * drv, const lv_area_t * area,  lv_color_t * color_p);
+   7:Src/lv_driver.c **** void monitor_cb(lv_disp_drv_t * d, uint32_t time, uint32_t px);
+   8:Src/lv_driver.c **** static lv_disp_drv_t disp_drv;
+   9:Src/lv_driver.c **** static volatile int32_t x1_flush;
+  10:Src/lv_driver.c **** static volatile int32_t y1_flush;
+  11:Src/lv_driver.c **** static volatile int32_t x2_flush;
+  12:Src/lv_driver.c **** static volatile int32_t y2_flush;
+  13:Src/lv_driver.c **** static volatile int32_t y_flush_act;
+  14:Src/lv_driver.c **** static volatile const lv_color_t * buf_to_flush;
+  15:Src/lv_driver.c **** 
+  16:Src/lv_driver.c **** static volatile bool refr_qry;
+  17:Src/lv_driver.c **** static volatile uint32_t t_last = 0;
+  18:Src/lv_driver.c **** 
+  19:Src/lv_driver.c **** static void DMA_TransferComplete(DMA_HandleTypeDef *han);
+  20:Src/lv_driver.c **** static void DMA_TransferError(DMA_HandleTypeDef *han);
+  21:Src/lv_driver.c **** 
+  22:Src/lv_driver.c **** void tft_init(void)
+  23:Src/lv_driver.c **** {
+  24:Src/lv_driver.c ****   	MX_DMA_Init();
+  25:Src/lv_driver.c ****   	HAL_DMA_RegisterCallback(&hdma_memtomem_dma2_stream0, HAL_DMA_XFER_CPLT_CB_ID, DMA_TransferCompl
+  26:Src/lv_driver.c ****   	HAL_DMA_RegisterCallback(&hdma_memtomem_dma2_stream0, HAL_DMA_XFER_ERROR_CB_ID, DMA_TransferErro
+  27:Src/lv_driver.c **** 
+  28:Src/lv_driver.c ****   	HAL_NVIC_SetPriority(DMA2_Stream0_IRQn, 0, 0);
+  29:Src/lv_driver.c ****  	HAL_NVIC_EnableIRQ(DMA2_Stream0_IRQn);
+  30:Src/lv_driver.c ****   	
+  31:Src/lv_driver.c ****   	LCD_Init();
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s 			page 2
+
+
+  32:Src/lv_driver.c ****   	static lv_disp_draw_buf_t disp_buf;
+  33:Src/lv_driver.c ****   	static lv_color_t buf_1[480 * 10];
+  34:Src/lv_driver.c ****  	static lv_color_t buf_2[480 * 10];
+  35:Src/lv_driver.c ****   	lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, 480 * 10);
+  36:Src/lv_driver.c ****   	lv_disp_drv_init(&disp_drv);
+  37:Src/lv_driver.c ****   	disp_drv.draw_buf = &disp_buf;
+  38:Src/lv_driver.c ****   	disp_drv.monitor_cb = monitor_cb;
+  39:Src/lv_driver.c ****   	disp_drv.flush_cb = SSD1963_flush;
+  40:Src/lv_driver.c ****   	disp_drv.hor_res = 480;
+  41:Src/lv_driver.c ****   	disp_drv.ver_res = 272;
+  42:Src/lv_driver.c ****   	lv_disp_drv_register(&disp_drv);
+  43:Src/lv_driver.c **** }
+  44:Src/lv_driver.c **** 
+  45:Src/lv_driver.c **** /* TFT DMA buffsize: 480 */
+  46:Src/lv_driver.c **** 
+  47:Src/lv_driver.c **** // static void tft_flush_cb(lv_disp_drv_t * drv, const lv_area_t * area,  lv_color_t * color_p)
+  48:Src/lv_driver.c **** // {
+  49:Src/lv_driver.c **** // 	int32_t act_x1 = area->x1 < 0 ? 0 : area->x1;
+  50:Src/lv_driver.c **** // 	int32_t act_y1 = area->y1 < 0 ? 0 : area->y1;
+  51:Src/lv_driver.c **** // 	int32_t act_x2 = area->x2 > (480-1) ? (480-1) : area->x2;
+  52:Src/lv_driver.c **** // 	int32_t act_y2 = area->y2 > (272-1) ? (272-1) : area->y2;
+  53:Src/lv_driver.c **** 
+  54:Src/lv_driver.c **** // 	x1_flush = act_x1;
+  55:Src/lv_driver.c **** // 	y1_flush = act_y1;
+  56:Src/lv_driver.c **** // 	x2_flush = act_x2;
+  57:Src/lv_driver.c **** // 	y2_flush = act_y2;
+  58:Src/lv_driver.c **** // 	y_flush_act = act_y1;
+  59:Src/lv_driver.c **** // 	buf_to_flush = color_p;
+  60:Src/lv_driver.c **** // 	HAL_StatusTypeDef err;
+  61:Src/lv_driver.c **** 
+  62:Src/lv_driver.c **** // 	LCD_Window(y_flush_act, x1_flush, y_flush_act+1, x2_flush);
+  63:Src/lv_driver.c **** 
+  64:Src/lv_driver.c **** // 	// uint32_t size = (area->x2 - area->x1 + 1) * (area->y2 - area->y1 + 1);
+  65:Src/lv_driver.c **** // 	// err = HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream0, (uint32_t)buf_to_flush, (uint32_t)&DAT, 
+  66:Src/lv_driver.c **** // 	err = HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream0, (uint32_t)buf_to_flush, (uint32_t)&DAT, (x2
+  67:Src/lv_driver.c **** // 	printf("size: %d\n", (x2_flush - x1_flush + 1));
+  68:Src/lv_driver.c **** // 	if(err != HAL_OK)
+  69:Src/lv_driver.c **** // 	{
+  70:Src/lv_driver.c **** // 		while(1);
+  71:Src/lv_driver.c **** // 	}
+  72:Src/lv_driver.c **** 
+  73:Src/lv_driver.c **** // }
+  74:Src/lv_driver.c **** 
+  75:Src/lv_driver.c **** // static void DMA_TransferComplete(DMA_HandleTypeDef *han)
+  76:Src/lv_driver.c **** // {
+  77:Src/lv_driver.c **** // 	y_flush_act++;
+  78:Src/lv_driver.c **** // 	if(y_flush_act > y2_flush) {
+  79:Src/lv_driver.c **** // 		lv_disp_flush_ready(&disp_drv);
+  80:Src/lv_driver.c **** // 	} else {
+  81:Src/lv_driver.c **** // 		buf_to_flush += x2_flush - x1_flush + 1;
+  82:Src/lv_driver.c **** // 		HAL_StatusTypeDef err;
+  83:Src/lv_driver.c **** // 		LCD_Window(y_flush_act, x1_flush, y_flush_act + 1, x2_flush);
+  84:Src/lv_driver.c **** // 		err = HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream0, (uint32_t)buf_to_flush, (uint32_t)&DAT, (x
+  85:Src/lv_driver.c **** // 		if(err != HAL_OK)
+  86:Src/lv_driver.c **** // 		{
+  87:Src/lv_driver.c **** // 			while(1);
+  88:Src/lv_driver.c **** // 		}
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s 			page 3
+
+
+  89:Src/lv_driver.c **** // 	}
+  90:Src/lv_driver.c **** // }
+  91:Src/lv_driver.c **** 
+  92:Src/lv_driver.c **** static void DMA_TransferComplete(DMA_HandleTypeDef *han)
+  93:Src/lv_driver.c **** {
+  94:Src/lv_driver.c **** 	lv_disp_flush_ready(&disp_drv);
+  95:Src/lv_driver.c **** }
+  96:Src/lv_driver.c **** 
+  97:Src/lv_driver.c **** static void DMA_TransferError(DMA_HandleTypeDef *han)
+  98:Src/lv_driver.c **** {
+  28              		.loc 1 98 1 view -0
+  29              		.cfi_startproc
+  30              		@ Volatile: function does not return.
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34              	.LVL0:
+  35              	.L2:
+  99:Src/lv_driver.c **** 	while(1);
+  36              		.loc 1 99 2 discriminator 1 view .LVU1
+  37              		.loc 1 99 10 discriminator 1 view .LVU2
+  38              		.loc 1 99 7 discriminator 1 view .LVU3
+  39 0000 FEE7     		b	.L2
+  40              		.cfi_endproc
+  41              	.LFE319:
+  43              		.section	.text.DMA_TransferComplete,"ax",%progbits
+  44              		.align	1
+  45              		.syntax unified
+  46              		.thumb
+  47              		.thumb_func
+  49              	DMA_TransferComplete:
+  50              	.LVL1:
+  51              	.LFB318:
+  93:Src/lv_driver.c **** 	lv_disp_flush_ready(&disp_drv);
+  52              		.loc 1 93 1 view -0
+  53              		.cfi_startproc
+  54              		@ args = 0, pretend = 0, frame = 0
+  55              		@ frame_needed = 0, uses_anonymous_args = 0
+  93:Src/lv_driver.c **** 	lv_disp_flush_ready(&disp_drv);
+  56              		.loc 1 93 1 is_stmt 0 view .LVU5
+  57 0000 08B5     		push	{r3, lr}
+  58              	.LCFI0:
+  59              		.cfi_def_cfa_offset 8
+  60              		.cfi_offset 3, -8
+  61              		.cfi_offset 14, -4
+  94:Src/lv_driver.c **** }
+  62              		.loc 1 94 2 is_stmt 1 view .LVU6
+  63 0002 0248     		ldr	r0, .L5
+  64              	.LVL2:
+  94:Src/lv_driver.c **** }
+  65              		.loc 1 94 2 is_stmt 0 view .LVU7
+  66 0004 FFF7FEFF 		bl	lv_disp_flush_ready
+  67              	.LVL3:
+  95:Src/lv_driver.c **** 
+  68              		.loc 1 95 1 view .LVU8
+  69 0008 08BD     		pop	{r3, pc}
+  70              	.L6:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s 			page 4
+
+
+  71 000a 00BF     		.align	2
+  72              	.L5:
+  73 000c 00000000 		.word	.LANCHOR0
+  74              		.cfi_endproc
+  75              	.LFE318:
+  77              		.section	.text.SSD1963_flush,"ax",%progbits
+  78              		.align	1
+  79              		.global	SSD1963_flush
+  80              		.syntax unified
+  81              		.thumb
+  82              		.thumb_func
+  84              	SSD1963_flush:
+  85              	.LVL4:
+  86              	.LFB321:
+ 100:Src/lv_driver.c **** }
+ 101:Src/lv_driver.c **** 
+ 102:Src/lv_driver.c **** void DMA_STREAM_IRQHANDLER(void)
+ 103:Src/lv_driver.c **** {
+ 104:Src/lv_driver.c ****     /* Check the interrupt and clear flag */
+ 105:Src/lv_driver.c ****     HAL_DMA_IRQHandler(&hdma_memtomem_dma2_stream0);
+ 106:Src/lv_driver.c **** }
+ 107:Src/lv_driver.c **** 
+ 108:Src/lv_driver.c **** void SSD1963_flush(lv_disp_drv_t * drv, const lv_area_t * area,  lv_color_t * color_map)
+ 109:Src/lv_driver.c **** {
+  87              		.loc 1 109 1 is_stmt 1 view -0
+  88              		.cfi_startproc
+  89              		@ args = 0, pretend = 0, frame = 0
+  90              		@ frame_needed = 0, uses_anonymous_args = 0
+  91              		.loc 1 109 1 is_stmt 0 view .LVU10
+  92 0000 38B5     		push	{r3, r4, r5, lr}
+  93              	.LCFI1:
+  94              		.cfi_def_cfa_offset 16
+  95              		.cfi_offset 3, -16
+  96              		.cfi_offset 4, -12
+  97              		.cfi_offset 5, -8
+  98              		.cfi_offset 14, -4
+  99 0002 0C46     		mov	r4, r1
+ 100 0004 1546     		mov	r5, r2
+ 110:Src/lv_driver.c **** 	LCD_Window((uint16_t)area->y1, (uint16_t)area->x1, (uint16_t)area->y2, (uint16_t)area->x2);
+ 101              		.loc 1 110 2 is_stmt 1 view .LVU11
+ 102              		.loc 1 110 27 is_stmt 0 view .LVU12
+ 103 0006 B1F90200 		ldrsh	r0, [r1, #2]
+ 104              	.LVL5:
+ 105              		.loc 1 110 47 view .LVU13
+ 106 000a B1F90010 		ldrsh	r1, [r1]
+ 107              	.LVL6:
+ 108              		.loc 1 110 67 view .LVU14
+ 109 000e B4F90620 		ldrsh	r2, [r4, #6]
+ 110              	.LVL7:
+ 111              		.loc 1 110 87 view .LVU15
+ 112 0012 B4F90430 		ldrsh	r3, [r4, #4]
+ 113              		.loc 1 110 2 view .LVU16
+ 114 0016 9BB2     		uxth	r3, r3
+ 115 0018 92B2     		uxth	r2, r2
+ 116 001a 89B2     		uxth	r1, r1
+ 117 001c 80B2     		uxth	r0, r0
+ 118 001e FFF7FEFF 		bl	LCD_Window
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s 			page 5
+
+
+ 119              	.LVL8:
+ 111:Src/lv_driver.c **** 	uint32_t size = (area->x2 - area->x1 + 1) * (area->y2 - area->y1 + 1);
+ 120              		.loc 1 111 2 is_stmt 1 view .LVU17
+ 121              		.loc 1 111 23 is_stmt 0 view .LVU18
+ 122 0022 B4F90420 		ldrsh	r2, [r4, #4]
+ 123              		.loc 1 111 34 view .LVU19
+ 124 0026 B4F90030 		ldrsh	r3, [r4]
+ 125              		.loc 1 111 28 view .LVU20
+ 126 002a D21A     		subs	r2, r2, r3
+ 127              		.loc 1 111 51 view .LVU21
+ 128 002c B4F90630 		ldrsh	r3, [r4, #6]
+ 129              		.loc 1 111 62 view .LVU22
+ 130 0030 B4F90210 		ldrsh	r1, [r4, #2]
+ 131              		.loc 1 111 56 view .LVU23
+ 132 0034 5B1A     		subs	r3, r3, r1
+ 133              		.loc 1 111 67 view .LVU24
+ 134 0036 0133     		adds	r3, r3, #1
+ 135              	.LVL9:
+ 112:Src/lv_driver.c **** 	//printf("size: %d\n", size);
+ 113:Src/lv_driver.c **** 	buf_to_flush = color_map;
+ 136              		.loc 1 113 2 is_stmt 1 view .LVU25
+ 137              		.loc 1 113 15 is_stmt 0 view .LVU26
+ 138 0038 0449     		ldr	r1, .L9
+ 139 003a 0D60     		str	r5, [r1]
+ 114:Src/lv_driver.c **** 	/* Flush color data used DMA */
+ 115:Src/lv_driver.c **** 	HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream0, (uint32_t)buf_to_flush, (uint32_t)&DAT, size);
+ 140              		.loc 1 115 2 is_stmt 1 view .LVU27
+ 141 003c 02FB0333 		mla	r3, r2, r3, r3
+ 142              	.LVL10:
+ 143              		.loc 1 115 2 is_stmt 0 view .LVU28
+ 144 0040 034A     		ldr	r2, .L9+4
+ 145 0042 2946     		mov	r1, r5
+ 146 0044 0348     		ldr	r0, .L9+8
+ 147 0046 FFF7FEFF 		bl	HAL_DMA_Start_IT
+ 148              	.LVL11:
+ 116:Src/lv_driver.c **** 
+ 117:Src/lv_driver.c **** 	/* Flush color data not used DMA */
+ 118:Src/lv_driver.c **** 	// for(uint32_t i = 0; i < size; i++)
+ 119:Src/lv_driver.c **** 	// {
+ 120:Src/lv_driver.c **** 	// 	//LCD_Send_Dat(H24_RGB565(1, *(color_map+i)));
+ 121:Src/lv_driver.c **** 	// 	LCD_Send_Dat(*(color_map+i));
+ 122:Src/lv_driver.c **** 	// }
+ 123:Src/lv_driver.c ****     // lv_disp_flush_ready(drv);
+ 124:Src/lv_driver.c **** }
+ 149              		.loc 1 124 1 view .LVU29
+ 150 004a 38BD     		pop	{r3, r4, r5, pc}
+ 151              	.LVL12:
+ 152              	.L10:
+ 153              		.loc 1 124 1 view .LVU30
+ 154              		.align	2
+ 155              	.L9:
+ 156 004c 00000000 		.word	.LANCHOR1
+ 157 0050 00000860 		.word	1611137024
+ 158 0054 00000000 		.word	hdma_memtomem_dma2_stream0
+ 159              		.cfi_endproc
+ 160              	.LFE321:
+ 162              		.section	.rodata.monitor_cb.str1.4,"aMS",%progbits,1
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s 			page 6
+
+
+ 163              		.align	2
+ 164              	.LC0:
+ 165 0000 25642070 		.ascii	"%d px refreshed in %d ms\012\000"
+ 165      78207265 
+ 165      66726573 
+ 165      68656420 
+ 165      696E2025 
+ 166              		.section	.text.monitor_cb,"ax",%progbits
+ 167              		.align	1
+ 168              		.global	monitor_cb
+ 169              		.syntax unified
+ 170              		.thumb
+ 171              		.thumb_func
+ 173              	monitor_cb:
+ 174              	.LVL13:
+ 175              	.LFB322:
+ 125:Src/lv_driver.c **** 
+ 126:Src/lv_driver.c **** void monitor_cb(lv_disp_drv_t * d, uint32_t time, uint32_t px)
+ 127:Src/lv_driver.c **** {
+ 176              		.loc 1 127 1 is_stmt 1 view -0
+ 177              		.cfi_startproc
+ 178              		@ args = 0, pretend = 0, frame = 0
+ 179              		@ frame_needed = 0, uses_anonymous_args = 0
+ 180              		.loc 1 127 1 is_stmt 0 view .LVU32
+ 181 0000 08B5     		push	{r3, lr}
+ 182              	.LCFI2:
+ 183              		.cfi_def_cfa_offset 8
+ 184              		.cfi_offset 3, -8
+ 185              		.cfi_offset 14, -4
+ 186 0002 1346     		mov	r3, r2
+ 128:Src/lv_driver.c **** 	printf("%d px refreshed in %d ms\n", px, time);
+ 187              		.loc 1 128 2 is_stmt 1 view .LVU33
+ 188 0004 0A46     		mov	r2, r1
+ 189              	.LVL14:
+ 190              		.loc 1 128 2 is_stmt 0 view .LVU34
+ 191 0006 1946     		mov	r1, r3
+ 192              	.LVL15:
+ 193              		.loc 1 128 2 view .LVU35
+ 194 0008 0148     		ldr	r0, .L13
+ 195              	.LVL16:
+ 196              		.loc 1 128 2 view .LVU36
+ 197 000a FFF7FEFF 		bl	printf
+ 198              	.LVL17:
+ 129:Src/lv_driver.c **** }
+ 199              		.loc 1 129 1 view .LVU37
+ 200 000e 08BD     		pop	{r3, pc}
+ 201              	.L14:
+ 202              		.align	2
+ 203              	.L13:
+ 204 0010 00000000 		.word	.LC0
+ 205              		.cfi_endproc
+ 206              	.LFE322:
+ 208              		.section	.text.tft_init,"ax",%progbits
+ 209              		.align	1
+ 210              		.global	tft_init
+ 211              		.syntax unified
+ 212              		.thumb
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s 			page 7
+
+
+ 213              		.thumb_func
+ 215              	tft_init:
+ 216              	.LFB317:
+  23:Src/lv_driver.c ****   	MX_DMA_Init();
+ 217              		.loc 1 23 1 is_stmt 1 view -0
+ 218              		.cfi_startproc
+ 219              		@ args = 0, pretend = 0, frame = 0
+ 220              		@ frame_needed = 0, uses_anonymous_args = 0
+ 221 0000 38B5     		push	{r3, r4, r5, lr}
+ 222              	.LCFI3:
+ 223              		.cfi_def_cfa_offset 16
+ 224              		.cfi_offset 3, -16
+ 225              		.cfi_offset 4, -12
+ 226              		.cfi_offset 5, -8
+ 227              		.cfi_offset 14, -4
+  24:Src/lv_driver.c ****   	HAL_DMA_RegisterCallback(&hdma_memtomem_dma2_stream0, HAL_DMA_XFER_CPLT_CB_ID, DMA_TransferCompl
+ 228              		.loc 1 24 4 view .LVU39
+ 229 0002 FFF7FEFF 		bl	MX_DMA_Init
+ 230              	.LVL18:
+  25:Src/lv_driver.c ****   	HAL_DMA_RegisterCallback(&hdma_memtomem_dma2_stream0, HAL_DMA_XFER_ERROR_CB_ID, DMA_TransferErro
+ 231              		.loc 1 25 4 view .LVU40
+ 232 0006 184C     		ldr	r4, .L17
+ 233 0008 184A     		ldr	r2, .L17+4
+ 234 000a 0021     		movs	r1, #0
+ 235 000c 2046     		mov	r0, r4
+ 236 000e FFF7FEFF 		bl	HAL_DMA_RegisterCallback
+ 237              	.LVL19:
+  26:Src/lv_driver.c **** 
+ 238              		.loc 1 26 4 view .LVU41
+ 239 0012 174A     		ldr	r2, .L17+8
+ 240 0014 0421     		movs	r1, #4
+ 241 0016 2046     		mov	r0, r4
+ 242 0018 FFF7FEFF 		bl	HAL_DMA_RegisterCallback
+ 243              	.LVL20:
+  28:Src/lv_driver.c ****  	HAL_NVIC_EnableIRQ(DMA2_Stream0_IRQn);
+ 244              		.loc 1 28 4 view .LVU42
+ 245 001c 0022     		movs	r2, #0
+ 246 001e 1146     		mov	r1, r2
+ 247 0020 3820     		movs	r0, #56
+ 248 0022 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 249              	.LVL21:
+  29:Src/lv_driver.c ****   	
+ 250              		.loc 1 29 3 view .LVU43
+ 251 0026 3820     		movs	r0, #56
+ 252 0028 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 253              	.LVL22:
+  31:Src/lv_driver.c ****   	static lv_disp_draw_buf_t disp_buf;
+ 254              		.loc 1 31 4 view .LVU44
+ 255 002c FFF7FEFF 		bl	LCD_Init
+ 256              	.LVL23:
+  32:Src/lv_driver.c ****   	static lv_color_t buf_1[480 * 10];
+ 257              		.loc 1 32 4 view .LVU45
+  33:Src/lv_driver.c ****  	static lv_color_t buf_2[480 * 10];
+ 258              		.loc 1 33 4 view .LVU46
+  34:Src/lv_driver.c ****   	lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, 480 * 10);
+ 259              		.loc 1 34 3 view .LVU47
+  35:Src/lv_driver.c ****   	lv_disp_drv_init(&disp_drv);
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s 			page 8
+
+
+ 260              		.loc 1 35 4 view .LVU48
+ 261 0030 104D     		ldr	r5, .L17+12
+ 262 0032 4FF49653 		mov	r3, #4800
+ 263 0036 104A     		ldr	r2, .L17+16
+ 264 0038 1049     		ldr	r1, .L17+20
+ 265 003a 2846     		mov	r0, r5
+ 266 003c FFF7FEFF 		bl	lv_disp_draw_buf_init
+ 267              	.LVL24:
+  36:Src/lv_driver.c ****   	disp_drv.draw_buf = &disp_buf;
+ 268              		.loc 1 36 4 view .LVU49
+ 269 0040 0F4C     		ldr	r4, .L17+24
+ 270 0042 2046     		mov	r0, r4
+ 271 0044 FFF7FEFF 		bl	lv_disp_drv_init
+ 272              	.LVL25:
+  37:Src/lv_driver.c ****   	disp_drv.monitor_cb = monitor_cb;
+ 273              		.loc 1 37 4 view .LVU50
+  37:Src/lv_driver.c ****   	disp_drv.monitor_cb = monitor_cb;
+ 274              		.loc 1 37 22 is_stmt 0 view .LVU51
+ 275 0048 6560     		str	r5, [r4, #4]
+  38:Src/lv_driver.c ****   	disp_drv.flush_cb = SSD1963_flush;
+ 276              		.loc 1 38 4 is_stmt 1 view .LVU52
+  38:Src/lv_driver.c ****   	disp_drv.flush_cb = SSD1963_flush;
+ 277              		.loc 1 38 24 is_stmt 0 view .LVU53
+ 278 004a 0E4B     		ldr	r3, .L17+28
+ 279 004c A361     		str	r3, [r4, #24]
+  39:Src/lv_driver.c ****   	disp_drv.hor_res = 480;
+ 280              		.loc 1 39 4 is_stmt 1 view .LVU54
+  39:Src/lv_driver.c ****   	disp_drv.hor_res = 480;
+ 281              		.loc 1 39 22 is_stmt 0 view .LVU55
+ 282 004e 0E4B     		ldr	r3, .L17+32
+ 283 0050 E360     		str	r3, [r4, #12]
+  40:Src/lv_driver.c ****   	disp_drv.ver_res = 272;
+ 284              		.loc 1 40 4 is_stmt 1 view .LVU56
+  40:Src/lv_driver.c ****   	disp_drv.ver_res = 272;
+ 285              		.loc 1 40 21 is_stmt 0 view .LVU57
+ 286 0052 4FF4F073 		mov	r3, #480
+ 287 0056 2380     		strh	r3, [r4]	@ movhi
+  41:Src/lv_driver.c ****   	lv_disp_drv_register(&disp_drv);
+ 288              		.loc 1 41 4 is_stmt 1 view .LVU58
+  41:Src/lv_driver.c ****   	lv_disp_drv_register(&disp_drv);
+ 289              		.loc 1 41 21 is_stmt 0 view .LVU59
+ 290 0058 4FF48873 		mov	r3, #272
+ 291 005c 6380     		strh	r3, [r4, #2]	@ movhi
+  42:Src/lv_driver.c **** }
+ 292              		.loc 1 42 4 is_stmt 1 view .LVU60
+ 293 005e 2046     		mov	r0, r4
+ 294 0060 FFF7FEFF 		bl	lv_disp_drv_register
+ 295              	.LVL26:
+  43:Src/lv_driver.c **** 
+ 296              		.loc 1 43 1 is_stmt 0 view .LVU61
+ 297 0064 38BD     		pop	{r3, r4, r5, pc}
+ 298              	.L18:
+ 299 0066 00BF     		.align	2
+ 300              	.L17:
+ 301 0068 00000000 		.word	hdma_memtomem_dma2_stream0
+ 302 006c 00000000 		.word	DMA_TransferComplete
+ 303 0070 00000000 		.word	DMA_TransferError
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s 			page 9
+
+
+ 304 0074 00000000 		.word	.LANCHOR2
+ 305 0078 00000000 		.word	buf_2.0
+ 306 007c 00000000 		.word	buf_1.1
+ 307 0080 00000000 		.word	.LANCHOR0
+ 308 0084 00000000 		.word	monitor_cb
+ 309 0088 00000000 		.word	SSD1963_flush
+ 310              		.cfi_endproc
+ 311              	.LFE317:
+ 313              		.section	.text.DMA_STREAM_IRQHANDLER,"ax",%progbits
+ 314              		.align	1
+ 315              		.global	DMA_STREAM_IRQHANDLER
+ 316              		.syntax unified
+ 317              		.thumb
+ 318              		.thumb_func
+ 320              	DMA_STREAM_IRQHANDLER:
+ 321              	.LFB320:
+ 103:Src/lv_driver.c ****     /* Check the interrupt and clear flag */
+ 322              		.loc 1 103 1 is_stmt 1 view -0
+ 323              		.cfi_startproc
+ 324              		@ args = 0, pretend = 0, frame = 0
+ 325              		@ frame_needed = 0, uses_anonymous_args = 0
+ 326 0000 08B5     		push	{r3, lr}
+ 327              	.LCFI4:
+ 328              		.cfi_def_cfa_offset 8
+ 329              		.cfi_offset 3, -8
+ 330              		.cfi_offset 14, -4
+ 105:Src/lv_driver.c **** }
+ 331              		.loc 1 105 5 view .LVU63
+ 332 0002 0248     		ldr	r0, .L21
+ 333 0004 FFF7FEFF 		bl	HAL_DMA_IRQHandler
+ 334              	.LVL27:
+ 106:Src/lv_driver.c **** 
+ 335              		.loc 1 106 1 is_stmt 0 view .LVU64
+ 336 0008 08BD     		pop	{r3, pc}
+ 337              	.L22:
+ 338 000a 00BF     		.align	2
+ 339              	.L21:
+ 340 000c 00000000 		.word	hdma_memtomem_dma2_stream0
+ 341              		.cfi_endproc
+ 342              	.LFE320:
+ 344              		.section	.bss.buf_1.1,"aw",%nobits
+ 345              		.align	2
+ 348              	buf_1.1:
+ 349 0000 00000000 		.space	9600
+ 349      00000000 
+ 349      00000000 
+ 349      00000000 
+ 349      00000000 
+ 350              		.section	.bss.buf_2.0,"aw",%nobits
+ 351              		.align	2
+ 354              	buf_2.0:
+ 355 0000 00000000 		.space	9600
+ 355      00000000 
+ 355      00000000 
+ 355      00000000 
+ 355      00000000 
+ 356              		.section	.bss.buf_to_flush,"aw",%nobits
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s 			page 10
+
+
+ 357              		.align	2
+ 358              		.set	.LANCHOR1,. + 0
+ 361              	buf_to_flush:
+ 362 0000 00000000 		.space	4
+ 363              		.section	.bss.disp_buf.2,"aw",%nobits
+ 364              		.align	2
+ 365              		.set	.LANCHOR2,. + 0
+ 368              	disp_buf.2:
+ 369 0000 00000000 		.space	36
+ 369      00000000 
+ 369      00000000 
+ 369      00000000 
+ 369      00000000 
+ 370              		.section	.bss.disp_drv,"aw",%nobits
+ 371              		.align	2
+ 372              		.set	.LANCHOR0,. + 0
+ 375              	disp_drv:
+ 376 0000 00000000 		.space	56
+ 376      00000000 
+ 376      00000000 
+ 376      00000000 
+ 376      00000000 
+ 377              		.section	.bss.refr_qry,"aw",%nobits
+ 380              	refr_qry:
+ 381 0000 00       		.space	1
+ 382              		.section	.bss.t_last,"aw",%nobits
+ 383              		.align	2
+ 386              	t_last:
+ 387 0000 00000000 		.space	4
+ 388              		.section	.bss.x1_flush,"aw",%nobits
+ 389              		.align	2
+ 392              	x1_flush:
+ 393 0000 00000000 		.space	4
+ 394              		.section	.bss.x2_flush,"aw",%nobits
+ 395              		.align	2
+ 398              	x2_flush:
+ 399 0000 00000000 		.space	4
+ 400              		.section	.bss.y1_flush,"aw",%nobits
+ 401              		.align	2
+ 404              	y1_flush:
+ 405 0000 00000000 		.space	4
+ 406              		.section	.bss.y2_flush,"aw",%nobits
+ 407              		.align	2
+ 410              	y2_flush:
+ 411 0000 00000000 		.space	4
+ 412              		.section	.bss.y_flush_act,"aw",%nobits
+ 413              		.align	2
+ 416              	y_flush_act:
+ 417 0000 00000000 		.space	4
+ 418              		.text
+ 419              	.Letext0:
+ 420              		.file 2 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\machine\\_default_typ
+ 421              		.file 3 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 422              		.file 4 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/CMSIS/Device/ST/
+ 423              		.file 5 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Dr
+ 424              		.file 6 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Dr
+ 425              		.file 7 "Inc/../lvgl/src/hal/../misc/lv_color.h"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s 			page 11
+
+
+ 426              		.file 8 "Inc/../lvgl/src/hal/../misc/lv_area.h"
+ 427              		.file 9 "Inc/../lvgl/src/hal/lv_hal_disp.h"
+ 428              		.file 10 "Inc/../lvgl/src/core/lv_obj.h"
+ 429              		.file 11 "Inc/../lvgl/src/widgets/lv_bar.h"
+ 430              		.file 12 "Inc/../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h"
+ 431              		.file 13 "Inc/dma.h"
+ 432              		.file 14 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\stdio.h"
+ 433              		.file 15 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_D
+ 434              		.file 16 "Inc/ssd1963_fsmc.h"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 lv_driver.c
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:20     .text.DMA_TransferError:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:25     .text.DMA_TransferError:00000000 DMA_TransferError
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:44     .text.DMA_TransferComplete:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:49     .text.DMA_TransferComplete:00000000 DMA_TransferComplete
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:73     .text.DMA_TransferComplete:0000000c $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:78     .text.SSD1963_flush:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:84     .text.SSD1963_flush:00000000 SSD1963_flush
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:156    .text.SSD1963_flush:0000004c $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:163    .rodata.monitor_cb.str1.4:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:167    .text.monitor_cb:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:173    .text.monitor_cb:00000000 monitor_cb
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:204    .text.monitor_cb:00000010 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:209    .text.tft_init:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:215    .text.tft_init:00000000 tft_init
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:301    .text.tft_init:00000068 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:354    .bss.buf_2.0:00000000 buf_2.0
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:348    .bss.buf_1.1:00000000 buf_1.1
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:314    .text.DMA_STREAM_IRQHANDLER:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:320    .text.DMA_STREAM_IRQHANDLER:00000000 DMA_STREAM_IRQHANDLER
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:340    .text.DMA_STREAM_IRQHANDLER:0000000c $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:345    .bss.buf_1.1:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:351    .bss.buf_2.0:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:357    .bss.buf_to_flush:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:361    .bss.buf_to_flush:00000000 buf_to_flush
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:364    .bss.disp_buf.2:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:368    .bss.disp_buf.2:00000000 disp_buf.2
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:371    .bss.disp_drv:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:375    .bss.disp_drv:00000000 disp_drv
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:380    .bss.refr_qry:00000000 refr_qry
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:381    .bss.refr_qry:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:383    .bss.t_last:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:386    .bss.t_last:00000000 t_last
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:389    .bss.x1_flush:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:392    .bss.x1_flush:00000000 x1_flush
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:395    .bss.x2_flush:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:398    .bss.x2_flush:00000000 x2_flush
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:401    .bss.y1_flush:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:404    .bss.y1_flush:00000000 y1_flush
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:407    .bss.y2_flush:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:410    .bss.y2_flush:00000000 y2_flush
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:413    .bss.y_flush_act:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s:416    .bss.y_flush_act:00000000 y_flush_act
+
+UNDEFINED SYMBOLS
+lv_disp_flush_ready
+LCD_Window
+HAL_DMA_Start_IT
+hdma_memtomem_dma2_stream0
+printf
+MX_DMA_Init
+HAL_DMA_RegisterCallback
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+LCD_Init
+lv_disp_draw_buf_init
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccgmybHK.s 			page 13
+
+
+lv_disp_drv_init
+lv_disp_drv_register
+HAL_DMA_IRQHandler

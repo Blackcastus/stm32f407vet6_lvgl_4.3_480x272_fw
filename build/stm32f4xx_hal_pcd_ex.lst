@@ -1,0 +1,584 @@
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f4xx_hal_pcd_ex.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.HAL_PCDEx_SetTxFiFo,"ax",%progbits
+  20              		.align	1
+  21              		.global	HAL_PCDEx_SetTxFiFo
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	HAL_PCDEx_SetTxFiFo:
+  27              	.LVL0:
+  28              	.LFB130:
+  29              		.file 1 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Dr
+   1:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /**
+   2:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   ******************************************************************************
+   3:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @file    stm32f4xx_hal_pcd_ex.c
+   4:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @author  MCD Application Team
+   5:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @brief   PCD Extended HAL module driver.
+   6:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   *          This file provides firmware functions to manage the following
+   7:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   *          functionalities of the USB Peripheral Controller:
+   8:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   *           + Extended features functions
+   9:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   *
+  10:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   ******************************************************************************
+  11:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @attention
+  12:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   *
+  13:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
+  14:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * All rights reserved.</center></h2>
+  15:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   *
+  16:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  17:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * the "License"; You may not use this file except in compliance with the
+  18:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * License. You may obtain a copy of the License at:
+  19:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  20:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   *
+  21:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   ******************************************************************************
+  22:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   */
+  23:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+  24:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /* Includes ------------------------------------------------------------------*/
+  25:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #include "stm32f4xx_hal.h"
+  26:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+  27:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /** @addtogroup STM32F4xx_HAL_Driver
+  28:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @{
+  29:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   */
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s 			page 2
+
+
+  30:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+  31:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /** @defgroup PCDEx PCDEx
+  32:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @brief PCD Extended HAL module driver
+  33:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @{
+  34:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   */
+  35:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+  36:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #ifdef HAL_PCD_MODULE_ENABLED
+  37:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+  38:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #if defined (USB_OTG_FS) || defined (USB_OTG_HS)
+  39:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /* Private types -------------------------------------------------------------*/
+  40:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /* Private variables ---------------------------------------------------------*/
+  41:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /* Private constants ---------------------------------------------------------*/
+  42:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /* Private macros ------------------------------------------------------------*/
+  43:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /* Private functions ---------------------------------------------------------*/
+  44:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /* Exported functions --------------------------------------------------------*/
+  45:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+  46:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /** @defgroup PCDEx_Exported_Functions PCDEx Exported Functions
+  47:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @{
+  48:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   */
+  49:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+  50:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /** @defgroup PCDEx_Exported_Functions_Group1 Peripheral Control functions
+  51:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @brief    PCDEx control functions
+  52:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   *
+  53:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** @verbatim
+  54:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****  ===============================================================================
+  55:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****                  ##### Extended features functions #####
+  56:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****  ===============================================================================
+  57:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     [..]  This section provides functions allowing to:
+  58:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****       (+) Update FIFO configuration
+  59:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+  60:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** @endverbatim
+  61:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @{
+  62:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   */
+  63:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #if defined (USB_OTG_FS) || defined (USB_OTG_HS)
+  64:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /**
+  65:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @brief  Set Tx FIFO
+  66:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @param  hpcd PCD handle
+  67:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @param  fifo The number of Tx fifo
+  68:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @param  size Fifo size
+  69:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @retval HAL status
+  70:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   */
+  71:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** HAL_StatusTypeDef HAL_PCDEx_SetTxFiFo(PCD_HandleTypeDef *hpcd, uint8_t fifo, uint16_t size)
+  72:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** {
+  30              		.loc 1 72 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  35              		.loc 1 72 1 is_stmt 0 view .LVU1
+  36 0000 10B4     		push	{r4}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 4
+  39              		.cfi_offset 4, -4
+  73:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   uint8_t i;
+  40              		.loc 1 73 3 is_stmt 1 view .LVU2
+  74:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   uint32_t Tx_Offset;
+  41              		.loc 1 74 3 view .LVU3
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s 			page 3
+
+
+  75:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+  76:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   /*  TXn min size = 16 words. (n  : Transmit FIFO index)
+  77:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****       When a TxFIFO is not used, the Configuration should be as follows:
+  78:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****           case 1 :  n > m    and Txn is not used    (n,m  : Transmit FIFO indexes)
+  79:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****          --> Txm can use the space allocated for Txn.
+  80:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****          case2  :  n < m    and Txn is not used    (n,m  : Transmit FIFO indexes)
+  81:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****          --> Txn should be configured with the minimum space of 16 words
+  82:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****      The FIFO is used optimally when used TxFIFOs are allocated in the top
+  83:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****          of the FIFO.Ex: use EP1 and EP2 as IN instead of EP1 and EP3 as IN ones.
+  84:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****      When DMA is used 3n * FIFO locations should be reserved for internal DMA registers */
+  85:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+  86:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   Tx_Offset = hpcd->Instance->GRXFSIZ;
+  42              		.loc 1 86 3 view .LVU4
+  43              		.loc 1 86 19 is_stmt 0 view .LVU5
+  44 0002 0468     		ldr	r4, [r0]
+  45              		.loc 1 86 13 view .LVU6
+  46 0004 606A     		ldr	r0, [r4, #36]
+  47              	.LVL1:
+  87:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+  88:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   if (fifo == 0U)
+  48              		.loc 1 88 3 is_stmt 1 view .LVU7
+  49              		.loc 1 88 6 is_stmt 0 view .LVU8
+  50 0006 31B9     		cbnz	r1, .L2
+  89:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   {
+  90:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     hpcd->Instance->DIEPTXF0_HNPTXFSIZ = ((uint32_t)size << 16) | Tx_Offset;
+  51              		.loc 1 90 5 is_stmt 1 view .LVU9
+  52              		.loc 1 90 65 is_stmt 0 view .LVU10
+  53 0008 40EA0240 		orr	r0, r0, r2, lsl #16
+  54              	.LVL2:
+  55              		.loc 1 90 40 view .LVU11
+  56 000c A062     		str	r0, [r4, #40]
+  57              	.LVL3:
+  58              	.L3:
+  91:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   }
+  92:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   else
+  93:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   {
+  94:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     Tx_Offset += (hpcd->Instance->DIEPTXF0_HNPTXFSIZ) >> 16;
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     for (i = 0U; i < (fifo - 1U); i++)
+  96:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     {
+  97:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****       Tx_Offset += (hpcd->Instance->DIEPTXF[i] >> 16);
+  98:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     }
+  99:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 100:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     /* Multiply Tx_Size by 2 to get higher performance */
+ 101:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     hpcd->Instance->DIEPTXF[fifo - 1U] = ((uint32_t)size << 16) | Tx_Offset;
+ 102:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   }
+ 103:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 104:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   return HAL_OK;
+  59              		.loc 1 104 3 is_stmt 1 view .LVU12
+ 105:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** }
+  60              		.loc 1 105 1 is_stmt 0 view .LVU13
+  61 000e 0020     		movs	r0, #0
+  62 0010 5DF8044B 		ldr	r4, [sp], #4
+  63              	.LCFI1:
+  64              		.cfi_remember_state
+  65              		.cfi_restore 4
+  66              		.cfi_def_cfa_offset 0
+  67 0014 7047     		bx	lr
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s 			page 4
+
+
+  68              	.LVL4:
+  69              	.L2:
+  70              	.LCFI2:
+  71              		.cfi_restore_state
+  72              		.loc 1 105 1 view .LVU14
+  73 0016 8C46     		mov	ip, r1
+  94:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     for (i = 0U; i < (fifo - 1U); i++)
+  74              		.loc 1 94 5 is_stmt 1 view .LVU15
+  94:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     for (i = 0U; i < (fifo - 1U); i++)
+  75              		.loc 1 94 33 is_stmt 0 view .LVU16
+  76 0018 A36A     		ldr	r3, [r4, #40]
+  94:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     for (i = 0U; i < (fifo - 1U); i++)
+  77              		.loc 1 94 15 view .LVU17
+  78 001a 00EB1340 		add	r0, r0, r3, lsr #16
+  79              	.LVL5:
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     {
+  80              		.loc 1 95 5 is_stmt 1 view .LVU18
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     {
+  81              		.loc 1 95 12 is_stmt 0 view .LVU19
+  82 001e 0023     		movs	r3, #0
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     {
+  83              		.loc 1 95 5 view .LVU20
+  84 0020 08E0     		b	.L4
+  85              	.LVL6:
+  86              	.L5:
+  97:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     }
+  87              		.loc 1 97 7 is_stmt 1 discriminator 3 view .LVU21
+  97:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     }
+  88              		.loc 1 97 44 is_stmt 0 discriminator 3 view .LVU22
+  89 0022 03F14001 		add	r1, r3, #64
+  90 0026 04EB8101 		add	r1, r4, r1, lsl #2
+  91 002a 4968     		ldr	r1, [r1, #4]
+  97:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     }
+  92              		.loc 1 97 17 discriminator 3 view .LVU23
+  93 002c 00EB1140 		add	r0, r0, r1, lsr #16
+  94              	.LVL7:
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     {
+  95              		.loc 1 95 35 is_stmt 1 discriminator 3 view .LVU24
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     {
+  96              		.loc 1 95 36 is_stmt 0 discriminator 3 view .LVU25
+  97 0030 0133     		adds	r3, r3, #1
+  98              	.LVL8:
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     {
+  99              		.loc 1 95 36 discriminator 3 view .LVU26
+ 100 0032 DBB2     		uxtb	r3, r3
+ 101              	.LVL9:
+ 102              	.L4:
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     {
+ 103              		.loc 1 95 18 is_stmt 1 discriminator 1 view .LVU27
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     {
+ 104              		.loc 1 95 28 is_stmt 0 discriminator 1 view .LVU28
+ 105 0034 0CF1FF31 		add	r1, ip, #-1
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     {
+ 106              		.loc 1 95 5 discriminator 1 view .LVU29
+ 107 0038 8B42     		cmp	r3, r1
+ 108 003a F2D3     		bcc	.L5
+ 101:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   }
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s 			page 5
+
+
+ 109              		.loc 1 101 5 is_stmt 1 view .LVU30
+ 101:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   }
+ 110              		.loc 1 101 65 is_stmt 0 view .LVU31
+ 111 003c 40EA0240 		orr	r0, r0, r2, lsl #16
+ 112              	.LVL10:
+ 101:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   }
+ 113              		.loc 1 101 40 view .LVU32
+ 114 0040 0CF13F01 		add	r1, ip, #63
+ 115 0044 04EB8101 		add	r1, r4, r1, lsl #2
+ 116 0048 4860     		str	r0, [r1, #4]
+ 117 004a E0E7     		b	.L3
+ 118              		.cfi_endproc
+ 119              	.LFE130:
+ 121              		.section	.text.HAL_PCDEx_SetRxFiFo,"ax",%progbits
+ 122              		.align	1
+ 123              		.global	HAL_PCDEx_SetRxFiFo
+ 124              		.syntax unified
+ 125              		.thumb
+ 126              		.thumb_func
+ 128              	HAL_PCDEx_SetRxFiFo:
+ 129              	.LVL11:
+ 130              	.LFB131:
+ 106:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 107:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /**
+ 108:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @brief  Set Rx FIFO
+ 109:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @param  hpcd PCD handle
+ 110:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @param  size Size of Rx fifo
+ 111:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @retval HAL status
+ 112:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   */
+ 113:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** HAL_StatusTypeDef HAL_PCDEx_SetRxFiFo(PCD_HandleTypeDef *hpcd, uint16_t size)
+ 114:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** {
+ 131              		.loc 1 114 1 is_stmt 1 view -0
+ 132              		.cfi_startproc
+ 133              		@ args = 0, pretend = 0, frame = 0
+ 134              		@ frame_needed = 0, uses_anonymous_args = 0
+ 135              		@ link register save eliminated.
+ 115:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   hpcd->Instance->GRXFSIZ = size;
+ 136              		.loc 1 115 3 view .LVU34
+ 137              		.loc 1 115 7 is_stmt 0 view .LVU35
+ 138 0000 0368     		ldr	r3, [r0]
+ 139              		.loc 1 115 27 view .LVU36
+ 140 0002 5962     		str	r1, [r3, #36]
+ 116:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 117:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   return HAL_OK;
+ 141              		.loc 1 117 3 is_stmt 1 view .LVU37
+ 118:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** }
+ 142              		.loc 1 118 1 is_stmt 0 view .LVU38
+ 143 0004 0020     		movs	r0, #0
+ 144              	.LVL12:
+ 145              		.loc 1 118 1 view .LVU39
+ 146 0006 7047     		bx	lr
+ 147              		.cfi_endproc
+ 148              	.LFE131:
+ 150              		.section	.text.HAL_PCDEx_LPM_Callback,"ax",%progbits
+ 151              		.align	1
+ 152              		.weak	HAL_PCDEx_LPM_Callback
+ 153              		.syntax unified
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s 			page 6
+
+
+ 154              		.thumb
+ 155              		.thumb_func
+ 157              	HAL_PCDEx_LPM_Callback:
+ 158              	.LVL13:
+ 159              	.LFB132:
+ 119:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #if defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx) || defined(STM32F412Zx) ||
+ 120:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /**
+ 121:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @brief  Activate LPM feature.
+ 122:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @param  hpcd PCD handle
+ 123:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @retval HAL status
+ 124:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   */
+ 125:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** HAL_StatusTypeDef HAL_PCDEx_ActivateLPM(PCD_HandleTypeDef *hpcd)
+ 126:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** {
+ 127:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USB_OTG_GlobalTypeDef *USBx = hpcd->Instance;
+ 128:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 129:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   hpcd->lpm_active = 1U;
+ 130:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   hpcd->LPM_State = LPM_L0;
+ 131:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USBx->GINTMSK |= USB_OTG_GINTMSK_LPMINTM;
+ 132:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USBx->GLPMCFG |= (USB_OTG_GLPMCFG_LPMEN | USB_OTG_GLPMCFG_LPMACK | USB_OTG_GLPMCFG_ENBESL);
+ 133:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 134:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   return HAL_OK;
+ 135:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** }
+ 136:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 137:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /**
+ 138:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @brief  Deactivate LPM feature.
+ 139:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @param  hpcd PCD handle
+ 140:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @retval HAL status
+ 141:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   */
+ 142:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** HAL_StatusTypeDef HAL_PCDEx_DeActivateLPM(PCD_HandleTypeDef *hpcd)
+ 143:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** {
+ 144:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USB_OTG_GlobalTypeDef *USBx = hpcd->Instance;
+ 145:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 146:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   hpcd->lpm_active = 0U;
+ 147:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USBx->GINTMSK &= ~USB_OTG_GINTMSK_LPMINTM;
+ 148:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USBx->GLPMCFG &= ~(USB_OTG_GLPMCFG_LPMEN | USB_OTG_GLPMCFG_LPMACK | USB_OTG_GLPMCFG_ENBESL);
+ 149:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 150:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   return HAL_OK;
+ 151:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** }
+ 152:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #endif /* defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx) || defined(STM32F412
+ 153:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #if defined(STM32F412Zx) || defined(STM32F412Vx) || defined(STM32F412Rx) || defined(STM32F412Cx) ||
+ 154:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /**
+ 155:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @brief  Handle BatteryCharging Process.
+ 156:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @param  hpcd PCD handle
+ 157:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @retval HAL status
+ 158:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   */
+ 159:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** void HAL_PCDEx_BCD_VBUSDetect(PCD_HandleTypeDef *hpcd)
+ 160:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** {
+ 161:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USB_OTG_GlobalTypeDef *USBx = hpcd->Instance;
+ 162:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   uint32_t tickstart = HAL_GetTick();
+ 163:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 164:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   /* Enable DCD : Data Contact Detect */
+ 165:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USBx->GCCFG |= USB_OTG_GCCFG_DCDEN;
+ 166:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 167:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   /* Wait Detect flag or a timeout is happen */
+ 168:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   while ((USBx->GCCFG & USB_OTG_GCCFG_DCDET) == 0U)
+ 169:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   {
+ 170:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     /* Check for the Timeout */
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s 			page 7
+
+
+ 171:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     if ((HAL_GetTick() - tickstart) > 1000U)
+ 172:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     {
+ 173:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
+ 174:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****       hpcd->BCDCallback(hpcd, PCD_BCD_ERROR);
+ 175:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #else
+ 176:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****       HAL_PCDEx_BCD_Callback(hpcd, PCD_BCD_ERROR);
+ 177:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
+ 178:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 179:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****       return;
+ 180:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     }
+ 181:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   }
+ 182:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 183:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   /* Right response got */
+ 184:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   HAL_Delay(200U);
+ 185:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 186:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   /* Check Detect flag*/
+ 187:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   if ((USBx->GCCFG & USB_OTG_GCCFG_DCDET) == USB_OTG_GCCFG_DCDET)
+ 188:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   {
+ 189:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
+ 190:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     hpcd->BCDCallback(hpcd, PCD_BCD_CONTACT_DETECTION);
+ 191:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #else
+ 192:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     HAL_PCDEx_BCD_Callback(hpcd, PCD_BCD_CONTACT_DETECTION);
+ 193:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
+ 194:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   }
+ 195:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 196:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   /*Primary detection: checks if connected to Standard Downstream Port
+ 197:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   (without charging capability) */
+ 198:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USBx->GCCFG &= ~ USB_OTG_GCCFG_DCDEN;
+ 199:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   HAL_Delay(50U);
+ 200:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USBx->GCCFG |=  USB_OTG_GCCFG_PDEN;
+ 201:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   HAL_Delay(50U);
+ 202:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 203:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   if ((USBx->GCCFG & USB_OTG_GCCFG_PDET) == 0U)
+ 204:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   {
+ 205:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     /* Case of Standard Downstream Port */
+ 206:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
+ 207:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     hpcd->BCDCallback(hpcd, PCD_BCD_STD_DOWNSTREAM_PORT);
+ 208:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #else
+ 209:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     HAL_PCDEx_BCD_Callback(hpcd, PCD_BCD_STD_DOWNSTREAM_PORT);
+ 210:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
+ 211:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   }
+ 212:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   else
+ 213:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   {
+ 214:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     /* start secondary detection to check connection to Charging Downstream
+ 215:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     Port or Dedicated Charging Port */
+ 216:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     USBx->GCCFG &= ~ USB_OTG_GCCFG_PDEN;
+ 217:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     HAL_Delay(50U);
+ 218:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     USBx->GCCFG |=  USB_OTG_GCCFG_SDEN;
+ 219:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     HAL_Delay(50U);
+ 220:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 221:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     if ((USBx->GCCFG & USB_OTG_GCCFG_SDET) == USB_OTG_GCCFG_SDET)
+ 222:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     {
+ 223:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****       /* case Dedicated Charging Port  */
+ 224:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
+ 225:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****       hpcd->BCDCallback(hpcd, PCD_BCD_DEDICATED_CHARGING_PORT);
+ 226:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #else
+ 227:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****       HAL_PCDEx_BCD_Callback(hpcd, PCD_BCD_DEDICATED_CHARGING_PORT);
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s 			page 8
+
+
+ 228:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
+ 229:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     }
+ 230:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     else
+ 231:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     {
+ 232:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****       /* case Charging Downstream Port  */
+ 233:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
+ 234:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****       hpcd->BCDCallback(hpcd, PCD_BCD_CHARGING_DOWNSTREAM_PORT);
+ 235:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #else
+ 236:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****       HAL_PCDEx_BCD_Callback(hpcd, PCD_BCD_CHARGING_DOWNSTREAM_PORT);
+ 237:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
+ 238:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****     }
+ 239:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   }
+ 240:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 241:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   /* Battery Charging capability discovery finished */
+ 242:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   (void)HAL_PCDEx_DeActivateBCD(hpcd);
+ 243:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 244:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
+ 245:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   hpcd->BCDCallback(hpcd, PCD_BCD_DISCOVERY_COMPLETED);
+ 246:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #else
+ 247:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   HAL_PCDEx_BCD_Callback(hpcd, PCD_BCD_DISCOVERY_COMPLETED);
+ 248:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
+ 249:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** }
+ 250:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 251:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /**
+ 252:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @brief  Activate BatteryCharging feature.
+ 253:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @param  hpcd PCD handle
+ 254:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @retval HAL status
+ 255:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   */
+ 256:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** HAL_StatusTypeDef HAL_PCDEx_ActivateBCD(PCD_HandleTypeDef *hpcd)
+ 257:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** {
+ 258:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USB_OTG_GlobalTypeDef *USBx = hpcd->Instance;
+ 259:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 260:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USBx->GCCFG &= ~(USB_OTG_GCCFG_PDEN);
+ 261:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USBx->GCCFG &= ~(USB_OTG_GCCFG_SDEN);
+ 262:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 263:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   /* Power Down USB transceiver  */
+ 264:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USBx->GCCFG &= ~(USB_OTG_GCCFG_PWRDWN);
+ 265:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 266:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   /* Enable Battery charging */
+ 267:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USBx->GCCFG |= USB_OTG_GCCFG_BCDEN;
+ 268:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 269:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   hpcd->battery_charging_active = 1U;
+ 270:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 271:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   return HAL_OK;
+ 272:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** }
+ 273:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 274:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /**
+ 275:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @brief  Deactivate BatteryCharging feature.
+ 276:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @param  hpcd PCD handle
+ 277:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @retval HAL status
+ 278:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   */
+ 279:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** HAL_StatusTypeDef HAL_PCDEx_DeActivateBCD(PCD_HandleTypeDef *hpcd)
+ 280:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** {
+ 281:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USB_OTG_GlobalTypeDef *USBx = hpcd->Instance;
+ 282:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 283:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USBx->GCCFG &= ~(USB_OTG_GCCFG_SDEN);
+ 284:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USBx->GCCFG &= ~(USB_OTG_GCCFG_PDEN);
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s 			page 9
+
+
+ 285:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 286:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   /* Disable Battery charging */
+ 287:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   USBx->GCCFG &= ~(USB_OTG_GCCFG_BCDEN);
+ 288:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 289:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   hpcd->battery_charging_active = 0U;
+ 290:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 291:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   return HAL_OK;
+ 292:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** }
+ 293:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #endif /* defined(STM32F412Zx) || defined(STM32F412Vx) || defined(STM32F412Rx) || defined(STM32F412
+ 294:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** #endif /* defined (USB_OTG_FS) || defined (USB_OTG_HS) */
+ 295:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 296:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /**
+ 297:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @brief  Send LPM message to user layer callback.
+ 298:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @param  hpcd PCD handle
+ 299:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @param  msg LPM message
+ 300:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @retval HAL status
+ 301:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   */
+ 302:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** __weak void HAL_PCDEx_LPM_Callback(PCD_HandleTypeDef *hpcd, PCD_LPM_MsgTypeDef msg)
+ 303:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** {
+ 160              		.loc 1 303 1 is_stmt 1 view -0
+ 161              		.cfi_startproc
+ 162              		@ args = 0, pretend = 0, frame = 0
+ 163              		@ frame_needed = 0, uses_anonymous_args = 0
+ 164              		@ link register save eliminated.
+ 304:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   /* Prevent unused argument(s) compilation warning */
+ 305:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   UNUSED(hpcd);
+ 165              		.loc 1 305 3 view .LVU41
+ 306:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   UNUSED(msg);
+ 166              		.loc 1 306 3 view .LVU42
+ 307:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 308:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   /* NOTE : This function should not be modified, when the callback is needed,
+ 309:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****             the HAL_PCDEx_LPM_Callback could be implemented in the user file
+ 310:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****    */
+ 311:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** }
+ 167              		.loc 1 311 1 is_stmt 0 view .LVU43
+ 168 0000 7047     		bx	lr
+ 169              		.cfi_endproc
+ 170              	.LFE132:
+ 172              		.section	.text.HAL_PCDEx_BCD_Callback,"ax",%progbits
+ 173              		.align	1
+ 174              		.weak	HAL_PCDEx_BCD_Callback
+ 175              		.syntax unified
+ 176              		.thumb
+ 177              		.thumb_func
+ 179              	HAL_PCDEx_BCD_Callback:
+ 180              	.LVL14:
+ 181              	.LFB133:
+ 312:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 313:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** /**
+ 314:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @brief  Send BatteryCharging message to user layer callback.
+ 315:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @param  hpcd PCD handle
+ 316:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @param  msg LPM message
+ 317:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   * @retval HAL status
+ 318:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   */
+ 319:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** __weak void HAL_PCDEx_BCD_Callback(PCD_HandleTypeDef *hpcd, PCD_BCD_MsgTypeDef msg)
+ 320:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** {
+ 182              		.loc 1 320 1 is_stmt 1 view -0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s 			page 10
+
+
+ 183              		.cfi_startproc
+ 184              		@ args = 0, pretend = 0, frame = 0
+ 185              		@ frame_needed = 0, uses_anonymous_args = 0
+ 186              		@ link register save eliminated.
+ 321:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   /* Prevent unused argument(s) compilation warning */
+ 322:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   UNUSED(hpcd);
+ 187              		.loc 1 322 3 view .LVU45
+ 323:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   UNUSED(msg);
+ 188              		.loc 1 323 3 view .LVU46
+ 324:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** 
+ 325:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****   /* NOTE : This function should not be modified, when the callback is needed,
+ 326:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****             the HAL_PCDEx_BCD_Callback could be implemented in the user file
+ 327:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c ****    */
+ 328:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Driver/Src\stm32f4xx_hal_pcd_ex.c **** }
+ 189              		.loc 1 328 1 is_stmt 0 view .LVU47
+ 190 0000 7047     		bx	lr
+ 191              		.cfi_endproc
+ 192              	.LFE133:
+ 194              		.text
+ 195              	.Letext0:
+ 196              		.file 2 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\machine\\_default_typ
+ 197              		.file 3 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 198              		.file 4 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/CMSIS/Device/ST/
+ 199              		.file 5 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Dr
+ 200              		.file 6 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Dr
+ 201              		.file 7 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Dr
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_hal_pcd_ex.c
+C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s:20     .text.HAL_PCDEx_SetTxFiFo:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s:26     .text.HAL_PCDEx_SetTxFiFo:00000000 HAL_PCDEx_SetTxFiFo
+C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s:122    .text.HAL_PCDEx_SetRxFiFo:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s:128    .text.HAL_PCDEx_SetRxFiFo:00000000 HAL_PCDEx_SetRxFiFo
+C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s:151    .text.HAL_PCDEx_LPM_Callback:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s:157    .text.HAL_PCDEx_LPM_Callback:00000000 HAL_PCDEx_LPM_Callback
+C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s:173    .text.HAL_PCDEx_BCD_Callback:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\cc6Kqokk.s:179    .text.HAL_PCDEx_BCD_Callback:00000000 HAL_PCDEx_BCD_Callback
+
+NO UNDEFINED SYMBOLS

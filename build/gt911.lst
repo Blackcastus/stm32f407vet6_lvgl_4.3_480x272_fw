@@ -1,0 +1,1987 @@
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"gt911.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.GT911_CalculateCheckSum,"ax",%progbits
+  20              		.align	1
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	GT911_CalculateCheckSum:
+  26              	.LFB133:
+  27              		.file 1 "Src/gt911.c"
+   1:Src/gt911.c   **** /* Includes ------------------------------------------------------------------*/
+   2:Src/gt911.c   **** #include <string.h>
+   3:Src/gt911.c   **** #include "gt911.h"
+   4:Src/gt911.c   **** #include "main.h"
+   5:Src/gt911.c   **** #include "i2c.h"
+   6:Src/gt911.c   **** /* Private typedef -----------------------------------------------------------*/
+   7:Src/gt911.c   **** 
+   8:Src/gt911.c   **** /* Private define ------------------------------------------------------------*/
+   9:Src/gt911.c   **** 
+  10:Src/gt911.c   **** /* Private macro -------------------------------------------------------------*/
+  11:Src/gt911.c   **** 
+  12:Src/gt911.c   **** 
+  13:Src/gt911.c   **** /* Private variables ---------------------------------------------------------*/
+  14:Src/gt911.c   **** static uint8_t GT911_Config[] = {
+  15:Src/gt911.c   **** 		0x81, 0x00, 0x04, 0x58, 0x02, 0x0A, 0x0C, 0x20, 0x01, 0x08, 0x28, 0x05, 0x50, // 0x8047 - 0x8053
+  16:Src/gt911.c   **** 		0x3C, 0x0F, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // 0x8054 - 0x8060
+  17:Src/gt911.c   **** 		0x00, 0x89, 0x2A, 0x0B, 0x2D, 0x2B, 0x0F, 0x0A, 0x00, 0x00, 0x01, 0xA9, 0x03, // 0x8061 - 0x806D
+  18:Src/gt911.c   **** 		0x2D, 0x00, 0x01, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x21, // 0x806E - 0x807A
+  19:Src/gt911.c   **** 		0x59, 0x94, 0xC5, 0x02, 0x07, 0x00, 0x00, 0x04, 0x93, 0x24, 0x00, 0x7D, 0x2C, // 0x807B - 0x8087
+  20:Src/gt911.c   **** 		0x00, 0x6B, 0x36, 0x00, 0x5D, 0x42, 0x00, 0x53, 0x50, 0x00, 0x53, 0x00, 0x00, // 0x8088	- 0x8094
+  21:Src/gt911.c   **** 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // 0x8095 - 0x80A1
+  22:Src/gt911.c   **** 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // 0x80A2 - 0x80AD
+  23:Src/gt911.c   **** 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x04, 0x06, 0x08, 0x0A, // 0x80AE - 0x80BA
+  24:Src/gt911.c   **** 		0x0C, 0x0E, 0x10, 0x12, 0x14, 0x16, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, // 0x80BB - 0x80C7
+  25:Src/gt911.c   **** 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // 0x80C8 - 0x80D4
+  26:Src/gt911.c   **** 		0x02, 0x04, 0x06, 0x08, 0x0A, 0x0F, 0x10, 0x12, 0x16, 0x18, 0x1C, 0x1D, 0x1E, // 0x80D5 - 0x80E1
+  27:Src/gt911.c   **** 		0x1F, 0x20, 0x21, 0x22, 0x24, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, // 0x80E2 - 0x80EE
+  28:Src/gt911.c   **** 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // 0x80EF - 0x80FB
+  29:Src/gt911.c   **** 		0x00, 0x00, 0xD6, 0x01 }; // 0x80FC - 0x8100
+  30:Src/gt911.c   **** static GT911_Status_t CommunicationResult;
+  31:Src/gt911.c   **** static uint8_t TxBuffer[200];
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 2
+
+
+  32:Src/gt911.c   **** static uint8_t RxBuffer[200];
+  33:Src/gt911.c   **** /* Private function prototypes -----------------------------------------------*/
+  34:Src/gt911.c   **** static void GT911_Reset(void);
+  35:Src/gt911.c   **** static void GT911_CalculateCheckSum(void);
+  36:Src/gt911.c   **** static GT911_Status_t GT911_SetCommandRegister(uint8_t command);
+  37:Src/gt911.c   **** static GT911_Status_t GT911_GetProductID(uint32_t* id);
+  38:Src/gt911.c   **** static GT911_Status_t GT911_SendConfig(void);
+  39:Src/gt911.c   **** static GT911_Status_t GT911_GetStatus(uint8_t* status);
+  40:Src/gt911.c   **** static GT911_Status_t GT911_SetStatus(uint8_t status);
+  41:Src/gt911.c   **** /* API Implementation --------------------------------------------------------*/
+  42:Src/gt911.c   **** GT911_Status_t GT911_Init(GT911_Config_t config){
+  43:Src/gt911.c   **** 	GPIO_InitTypeDef GPIO_InitStruct = {0};
+  44:Src/gt911.c   **** 	__HAL_RCC_GPIOE_CLK_ENABLE();
+  45:Src/gt911.c   **** 	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_RESET);
+  46:Src/gt911.c   **** 	GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
+  47:Src/gt911.c   ****   	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  48:Src/gt911.c   ****   	GPIO_InitStruct.Pull = GPIO_NOPULL;
+  49:Src/gt911.c   ****   	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  50:Src/gt911.c   ****   	HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+  51:Src/gt911.c   **** //	Set X resolution
+  52:Src/gt911.c   **** 	GT911_Config[1] = config.X_Resolution & 0x00FF;
+  53:Src/gt911.c   **** 	GT911_Config[2] = (config.X_Resolution >> 8) & 0x00FF;
+  54:Src/gt911.c   **** //	Set Y resolution
+  55:Src/gt911.c   **** 	GT911_Config[3] = config.Y_Resolution & 0x00FF;
+  56:Src/gt911.c   **** 	GT911_Config[4] = (config.Y_Resolution >> 8) & 0x00FF;
+  57:Src/gt911.c   **** //  Set touch number
+  58:Src/gt911.c   **** 	GT911_Config[5] = config.Number_Of_Touch_Support;
+  59:Src/gt911.c   **** //  set reverse Y
+  60:Src/gt911.c   **** 	GT911_Config[6] = 0;
+  61:Src/gt911.c   **** 	GT911_Config[6] |= config.ReverseY << 7;
+  62:Src/gt911.c   **** //  set reverse X
+  63:Src/gt911.c   **** 	GT911_Config[6] |= config.ReverseX << 6;
+  64:Src/gt911.c   **** //  set switch X2Y
+  65:Src/gt911.c   **** 	GT911_Config[6] |= config.SwithX2Y << 3;
+  66:Src/gt911.c   **** //  set Sito
+  67:Src/gt911.c   **** 	GT911_Config[6] |= config.SoftwareNoiseReduction << 2;
+  68:Src/gt911.c   **** 
+  69:Src/gt911.c   **** 	//Reset chip
+  70:Src/gt911.c   **** 	GT911_Reset();
+  71:Src/gt911.c   **** 	//Get product ID
+  72:Src/gt911.c   **** 	uint32_t productID = 0;
+  73:Src/gt911.c   **** 	CommunicationResult = GT911_GetProductID(&productID);
+  74:Src/gt911.c   **** 	if(CommunicationResult != GT911_OK){
+  75:Src/gt911.c   **** 		return CommunicationResult;
+  76:Src/gt911.c   **** 	}
+  77:Src/gt911.c   **** 	if(productID == 0){
+  78:Src/gt911.c   **** 		return GT911_NotResponse;
+  79:Src/gt911.c   **** 	}
+  80:Src/gt911.c   **** 	//Reset chip
+  81:Src/gt911.c   **** 	GT911_Reset();
+  82:Src/gt911.c   **** 	CommunicationResult = GT911_SendConfig();
+  83:Src/gt911.c   **** 	if(CommunicationResult != GT911_OK){
+  84:Src/gt911.c   **** 		return CommunicationResult;
+  85:Src/gt911.c   **** 	}
+  86:Src/gt911.c   **** 	GT911_SetCommandRegister(0x00);
+  87:Src/gt911.c   **** 
+  88:Src/gt911.c   **** 	HAL_GPIO_DeInit(GPIOE, GPIO_PIN_0);
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 3
+
+
+  89:Src/gt911.c   **** 	GPIO_InitStruct.Pin = GPIO_PIN_0;
+  90:Src/gt911.c   **** 	GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  91:Src/gt911.c   **** 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+  92:Src/gt911.c   **** 	HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+  93:Src/gt911.c   **** 	HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
+  94:Src/gt911.c   **** 	HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+  95:Src/gt911.c   **** 
+  96:Src/gt911.c   **** 	return GT911_OK;
+  97:Src/gt911.c   **** }
+  98:Src/gt911.c   **** 
+  99:Src/gt911.c   **** GT911_Status_t GT911_ReadTouch(TouchCordinate_t *cordinate, uint8_t *number_of_cordinate) {
+ 100:Src/gt911.c   **** 	uint8_t StatusRegister;
+ 101:Src/gt911.c   **** 	GT911_Status_t Result = GT911_NotResponse;
+ 102:Src/gt911.c   **** 	Result = GT911_GetStatus(&StatusRegister);
+ 103:Src/gt911.c   **** 	if (Result != GT911_OK) {
+ 104:Src/gt911.c   **** 		return Result;
+ 105:Src/gt911.c   **** 	}
+ 106:Src/gt911.c   **** 	if ((StatusRegister & 0x80) != 0) {
+ 107:Src/gt911.c   **** 		*number_of_cordinate = StatusRegister & 0x0F;
+ 108:Src/gt911.c   **** 		if (*number_of_cordinate != 0) {
+ 109:Src/gt911.c   **** 			for (uint8_t i = 0; i < *number_of_cordinate; i++) {
+ 110:Src/gt911.c   **** 				TxBuffer[0] = ((GOODIX_POINT1_X_ADDR + (i* 8)) & 0xFF00) >> 8;
+ 111:Src/gt911.c   **** 				TxBuffer[1] = (GOODIX_POINT1_X_ADDR + (i* 8)) & 0xFF;
+ 112:Src/gt911.c   **** 				GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 2);
+ 113:Src/gt911.c   **** 				GT911_I2C_Read(GOODIX_ADDRESS, RxBuffer, 6);
+ 114:Src/gt911.c   **** 				cordinate[i].x = RxBuffer[0];
+ 115:Src/gt911.c   **** 				cordinate[i].x = (RxBuffer[1] << 8) + cordinate[i].x;
+ 116:Src/gt911.c   **** 				cordinate[i].y = RxBuffer[2];
+ 117:Src/gt911.c   **** 				cordinate[i].y = (RxBuffer[3] << 8) + cordinate[i].y;
+ 118:Src/gt911.c   **** 			}
+ 119:Src/gt911.c   **** 		}
+ 120:Src/gt911.c   **** 		GT911_SetStatus(0);
+ 121:Src/gt911.c   **** 	}
+ 122:Src/gt911.c   **** 	return GT911_OK;
+ 123:Src/gt911.c   **** }
+ 124:Src/gt911.c   **** 
+ 125:Src/gt911.c   **** //Private functions Implementation ---------------------------------------------------------*/
+ 126:Src/gt911.c   **** static void GT911_Reset(void){
+ 127:Src/gt911.c   **** 	GT911_INT_Input();
+ 128:Src/gt911.c   **** 	GT911_RST_Control(0);
+ 129:Src/gt911.c   **** 	GT911_Delay(20);
+ 130:Src/gt911.c   **** 	GT911_INT_Control(0);
+ 131:Src/gt911.c   **** 	GT911_Delay(50);
+ 132:Src/gt911.c   **** 	GT911_RST_Control(1);
+ 133:Src/gt911.c   **** 	GT911_Delay(100);
+ 134:Src/gt911.c   **** 	GT911_INT_Output();
+ 135:Src/gt911.c   **** 	GT911_Delay(100);
+ 136:Src/gt911.c   **** }
+ 137:Src/gt911.c   **** 
+ 138:Src/gt911.c   **** static void GT911_CalculateCheckSum(void){
+  28              		.loc 1 138 42 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+ 139:Src/gt911.c   **** 	GT911_Config[184] = 0;
+  33              		.loc 1 139 2 view .LVU1
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 4
+
+
+  34              		.loc 1 139 20 is_stmt 0 view .LVU2
+  35 0000 0023     		movs	r3, #0
+  36 0002 0B4A     		ldr	r2, .L4
+  37 0004 82F8B830 		strb	r3, [r2, #184]
+ 140:Src/gt911.c   **** 	for(uint8_t i = 0 ; i < 184 ; i++){
+  38              		.loc 1 140 2 is_stmt 1 view .LVU3
+  39              	.LBB2:
+  40              		.loc 1 140 6 view .LVU4
+  41              	.LVL0:
+  42              		.loc 1 140 2 is_stmt 0 view .LVU5
+  43 0008 08E0     		b	.L2
+  44              	.LVL1:
+  45              	.L3:
+ 141:Src/gt911.c   **** 		GT911_Config[184] += GT911_Config[i];
+  46              		.loc 1 141 3 is_stmt 1 discriminator 3 view .LVU6
+  47              		.loc 1 141 36 is_stmt 0 discriminator 3 view .LVU7
+  48 000a 094A     		ldr	r2, .L4
+  49 000c D15C     		ldrb	r1, [r2, r3]	@ zero_extendqisi2
+  50              		.loc 1 141 21 discriminator 3 view .LVU8
+  51 000e 92F8B800 		ldrb	r0, [r2, #184]	@ zero_extendqisi2
+  52 0012 0144     		add	r1, r1, r0
+  53 0014 82F8B810 		strb	r1, [r2, #184]
+ 140:Src/gt911.c   **** 	for(uint8_t i = 0 ; i < 184 ; i++){
+  54              		.loc 1 140 32 is_stmt 1 discriminator 3 view .LVU9
+ 140:Src/gt911.c   **** 	for(uint8_t i = 0 ; i < 184 ; i++){
+  55              		.loc 1 140 33 is_stmt 0 discriminator 3 view .LVU10
+  56 0018 0133     		adds	r3, r3, #1
+  57              	.LVL2:
+ 140:Src/gt911.c   **** 	for(uint8_t i = 0 ; i < 184 ; i++){
+  58              		.loc 1 140 33 discriminator 3 view .LVU11
+  59 001a DBB2     		uxtb	r3, r3
+  60              	.LVL3:
+  61              	.L2:
+ 140:Src/gt911.c   **** 	for(uint8_t i = 0 ; i < 184 ; i++){
+  62              		.loc 1 140 22 is_stmt 1 discriminator 1 view .LVU12
+ 140:Src/gt911.c   **** 	for(uint8_t i = 0 ; i < 184 ; i++){
+  63              		.loc 1 140 2 is_stmt 0 discriminator 1 view .LVU13
+  64 001c B72B     		cmp	r3, #183
+  65 001e F4D9     		bls	.L3
+  66              	.LBE2:
+ 142:Src/gt911.c   **** 	}
+ 143:Src/gt911.c   **** 	GT911_Config[184] = (~GT911_Config[184]) + 1;
+  67              		.loc 1 143 2 is_stmt 1 view .LVU14
+  68              		.loc 1 143 36 is_stmt 0 view .LVU15
+  69 0020 034A     		ldr	r2, .L4
+  70 0022 92F8B830 		ldrb	r3, [r2, #184]	@ zero_extendqisi2
+  71              	.LVL4:
+  72              		.loc 1 143 20 view .LVU16
+  73 0026 5B42     		rsbs	r3, r3, #0
+  74 0028 82F8B830 		strb	r3, [r2, #184]
+ 144:Src/gt911.c   **** }
+  75              		.loc 1 144 1 view .LVU17
+  76 002c 7047     		bx	lr
+  77              	.L5:
+  78 002e 00BF     		.align	2
+  79              	.L4:
+  80 0030 00000000 		.word	.LANCHOR0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 5
+
+
+  81              		.cfi_endproc
+  82              	.LFE133:
+  84              		.section	.text.GT911_INT_Input,"ax",%progbits
+  85              		.align	1
+  86              		.global	GT911_INT_Input
+  87              		.syntax unified
+  88              		.thumb
+  89              		.thumb_func
+  91              	GT911_INT_Input:
+  92              	.LFB139:
+ 145:Src/gt911.c   **** 
+ 146:Src/gt911.c   **** static GT911_Status_t GT911_SetCommandRegister(uint8_t command){
+ 147:Src/gt911.c   **** 	TxBuffer[0] = (GOODIX_REG_COMMAND & 0xFF00) >> 8;
+ 148:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_REG_COMMAND & 0xFF;
+ 149:Src/gt911.c   **** 	TxBuffer[2] = command;
+ 150:Src/gt911.c   **** 	return GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 3);
+ 151:Src/gt911.c   **** }
+ 152:Src/gt911.c   **** 
+ 153:Src/gt911.c   **** static GT911_Status_t GT911_GetProductID(uint32_t* id){
+ 154:Src/gt911.c   **** 	TxBuffer[0] = (GOODIX_REG_ID & 0xFF00) >> 8;
+ 155:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_REG_ID & 0xFF;
+ 156:Src/gt911.c   **** 	GT911_Status_t Result = GT911_NotResponse;
+ 157:Src/gt911.c   **** 	Result = GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 2);
+ 158:Src/gt911.c   **** 	if(Result == GT911_OK){
+ 159:Src/gt911.c   **** 		Result = GT911_I2C_Read(GOODIX_ADDRESS, RxBuffer, 4);
+ 160:Src/gt911.c   **** 		if( Result == GT911_OK){
+ 161:Src/gt911.c   **** 			memcpy(id, RxBuffer, 4);
+ 162:Src/gt911.c   **** 		}
+ 163:Src/gt911.c   **** 	}
+ 164:Src/gt911.c   **** 	return Result;
+ 165:Src/gt911.c   **** }
+ 166:Src/gt911.c   **** 
+ 167:Src/gt911.c   **** static GT911_Status_t GT911_SendConfig(void){
+ 168:Src/gt911.c   **** 	GT911_CalculateCheckSum();
+ 169:Src/gt911.c   **** 	TxBuffer[0] = (GOODIX_REG_CONFIG_DATA & 0xFF00) >> 8;
+ 170:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_REG_CONFIG_DATA & 0xFF;
+ 171:Src/gt911.c   **** 	memcpy(&TxBuffer[2], GT911_Config, sizeof(GT911_Config));
+ 172:Src/gt911.c   **** 	return GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, sizeof(GT911_Config) + 2);
+ 173:Src/gt911.c   **** }
+ 174:Src/gt911.c   **** 
+ 175:Src/gt911.c   **** static GT911_Status_t GT911_GetStatus(uint8_t* status){
+ 176:Src/gt911.c   **** 	TxBuffer[0] = (GOODIX_READ_COORD_ADDR & 0xFF00) >> 8;
+ 177:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_READ_COORD_ADDR & 0xFF;
+ 178:Src/gt911.c   **** 	GT911_Status_t Result = GT911_NotResponse;
+ 179:Src/gt911.c   **** 	Result = GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 2);
+ 180:Src/gt911.c   **** 	if(Result == GT911_OK){
+ 181:Src/gt911.c   **** 		Result = GT911_I2C_Read(GOODIX_ADDRESS, RxBuffer, 1);
+ 182:Src/gt911.c   **** 		if( Result == GT911_OK){
+ 183:Src/gt911.c   **** 			*status = RxBuffer[0];
+ 184:Src/gt911.c   **** 		}
+ 185:Src/gt911.c   **** 	}
+ 186:Src/gt911.c   **** 	return Result;
+ 187:Src/gt911.c   **** }
+ 188:Src/gt911.c   **** 
+ 189:Src/gt911.c   **** static GT911_Status_t GT911_SetStatus(uint8_t status){
+ 190:Src/gt911.c   **** 	TxBuffer[0] = (GOODIX_READ_COORD_ADDR & 0xFF00) >> 8;
+ 191:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_READ_COORD_ADDR & 0xFF;
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 6
+
+
+ 192:Src/gt911.c   **** 	TxBuffer[2] = status;
+ 193:Src/gt911.c   **** 	return GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 3);
+ 194:Src/gt911.c   **** }
+ 195:Src/gt911.c   **** 
+ 196:Src/gt911.c   **** void GT911_INT_Input(void){
+  93              		.loc 1 196 27 is_stmt 1 view -0
+  94              		.cfi_startproc
+  95              		@ args = 0, pretend = 0, frame = 24
+  96              		@ frame_needed = 0, uses_anonymous_args = 0
+  97 0000 00B5     		push	{lr}
+  98              	.LCFI0:
+  99              		.cfi_def_cfa_offset 4
+ 100              		.cfi_offset 14, -4
+ 101 0002 87B0     		sub	sp, sp, #28
+ 102              	.LCFI1:
+ 103              		.cfi_def_cfa_offset 32
+ 197:Src/gt911.c   **** 	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
+ 104              		.loc 1 197 2 view .LVU19
+ 105              		.loc 1 197 19 is_stmt 0 view .LVU20
+ 106 0004 0023     		movs	r3, #0
+ 107 0006 0193     		str	r3, [sp, #4]
+ 108 0008 0293     		str	r3, [sp, #8]
+ 109 000a 0393     		str	r3, [sp, #12]
+ 110 000c 0493     		str	r3, [sp, #16]
+ 111 000e 0593     		str	r3, [sp, #20]
+ 198:Src/gt911.c   **** 	GPIO_InitStruct.Pin = CTP_INT_Pin;
+ 112              		.loc 1 198 2 is_stmt 1 view .LVU21
+ 113              		.loc 1 198 22 is_stmt 0 view .LVU22
+ 114 0010 0123     		movs	r3, #1
+ 115 0012 0193     		str	r3, [sp, #4]
+ 199:Src/gt911.c   **** 	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+ 116              		.loc 1 199 2 is_stmt 1 view .LVU23
+ 200:Src/gt911.c   **** 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 117              		.loc 1 200 2 view .LVU24
+ 201:Src/gt911.c   **** 	HAL_GPIO_Init(CTP_INT_GPIO_Port, &GPIO_InitStruct);
+ 118              		.loc 1 201 2 view .LVU25
+ 119 0014 01A9     		add	r1, sp, #4
+ 120 0016 0348     		ldr	r0, .L8
+ 121 0018 FFF7FEFF 		bl	HAL_GPIO_Init
+ 122              	.LVL5:
+ 202:Src/gt911.c   **** }
+ 123              		.loc 1 202 1 is_stmt 0 view .LVU26
+ 124 001c 07B0     		add	sp, sp, #28
+ 125              	.LCFI2:
+ 126              		.cfi_def_cfa_offset 4
+ 127              		@ sp needed
+ 128 001e 5DF804FB 		ldr	pc, [sp], #4
+ 129              	.L9:
+ 130 0022 00BF     		.align	2
+ 131              	.L8:
+ 132 0024 00100240 		.word	1073876992
+ 133              		.cfi_endproc
+ 134              	.LFE139:
+ 136              		.section	.text.GT911_INT_Output,"ax",%progbits
+ 137              		.align	1
+ 138              		.global	GT911_INT_Output
+ 139              		.syntax unified
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 7
+
+
+ 140              		.thumb
+ 141              		.thumb_func
+ 143              	GT911_INT_Output:
+ 144              	.LFB140:
+ 203:Src/gt911.c   **** 
+ 204:Src/gt911.c   **** void GT911_INT_Output(void) {
+ 145              		.loc 1 204 29 is_stmt 1 view -0
+ 146              		.cfi_startproc
+ 147              		@ args = 0, pretend = 0, frame = 24
+ 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 149 0000 00B5     		push	{lr}
+ 150              	.LCFI3:
+ 151              		.cfi_def_cfa_offset 4
+ 152              		.cfi_offset 14, -4
+ 153 0002 87B0     		sub	sp, sp, #28
+ 154              	.LCFI4:
+ 155              		.cfi_def_cfa_offset 32
+ 205:Src/gt911.c   **** 	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
+ 156              		.loc 1 205 2 view .LVU28
+ 157              		.loc 1 205 19 is_stmt 0 view .LVU29
+ 158 0004 0023     		movs	r3, #0
+ 159 0006 0193     		str	r3, [sp, #4]
+ 160 0008 0293     		str	r3, [sp, #8]
+ 161 000a 0393     		str	r3, [sp, #12]
+ 162 000c 0493     		str	r3, [sp, #16]
+ 163 000e 0593     		str	r3, [sp, #20]
+ 206:Src/gt911.c   **** 	GPIO_InitStruct.Pin = CTP_INT_Pin;
+ 164              		.loc 1 206 2 is_stmt 1 view .LVU30
+ 165              		.loc 1 206 22 is_stmt 0 view .LVU31
+ 166 0010 0123     		movs	r3, #1
+ 167 0012 0193     		str	r3, [sp, #4]
+ 207:Src/gt911.c   **** 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 168              		.loc 1 207 2 is_stmt 1 view .LVU32
+ 169              		.loc 1 207 23 is_stmt 0 view .LVU33
+ 170 0014 0293     		str	r3, [sp, #8]
+ 208:Src/gt911.c   **** 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 171              		.loc 1 208 2 is_stmt 1 view .LVU34
+ 209:Src/gt911.c   **** 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+ 172              		.loc 1 209 2 view .LVU35
+ 210:Src/gt911.c   **** 	HAL_GPIO_Init(CTP_INT_GPIO_Port, &GPIO_InitStruct);
+ 173              		.loc 1 210 2 view .LVU36
+ 174 0016 01A9     		add	r1, sp, #4
+ 175 0018 0248     		ldr	r0, .L12
+ 176 001a FFF7FEFF 		bl	HAL_GPIO_Init
+ 177              	.LVL6:
+ 211:Src/gt911.c   **** }
+ 178              		.loc 1 211 1 is_stmt 0 view .LVU37
+ 179 001e 07B0     		add	sp, sp, #28
+ 180              	.LCFI5:
+ 181              		.cfi_def_cfa_offset 4
+ 182              		@ sp needed
+ 183 0020 5DF804FB 		ldr	pc, [sp], #4
+ 184              	.L13:
+ 185              		.align	2
+ 186              	.L12:
+ 187 0024 00100240 		.word	1073876992
+ 188              		.cfi_endproc
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 8
+
+
+ 189              	.LFE140:
+ 191              		.section	.text.GT911_RST_Control,"ax",%progbits
+ 192              		.align	1
+ 193              		.global	GT911_RST_Control
+ 194              		.syntax unified
+ 195              		.thumb
+ 196              		.thumb_func
+ 198              	GT911_RST_Control:
+ 199              	.LVL7:
+ 200              	.LFB141:
+ 212:Src/gt911.c   **** 
+ 213:Src/gt911.c   **** void GT911_RST_Control(bool high_or_low){
+ 201              		.loc 1 213 41 is_stmt 1 view -0
+ 202              		.cfi_startproc
+ 203              		@ args = 0, pretend = 0, frame = 0
+ 204              		@ frame_needed = 0, uses_anonymous_args = 0
+ 205              		.loc 1 213 41 is_stmt 0 view .LVU39
+ 206 0000 08B5     		push	{r3, lr}
+ 207              	.LCFI6:
+ 208              		.cfi_def_cfa_offset 8
+ 209              		.cfi_offset 3, -8
+ 210              		.cfi_offset 14, -4
+ 214:Src/gt911.c   **** 	switch(high_or_low){
+ 211              		.loc 1 214 2 is_stmt 1 view .LVU40
+ 212 0002 28B1     		cbz	r0, .L15
+ 215:Src/gt911.c   **** 	case true:
+ 216:Src/gt911.c   **** 		HAL_GPIO_WritePin(CTP_RST_GPIO_Port, CTP_RST_Pin, GPIO_PIN_SET);
+ 213              		.loc 1 216 3 view .LVU41
+ 214 0004 0122     		movs	r2, #1
+ 215 0006 0221     		movs	r1, #2
+ 216 0008 0448     		ldr	r0, .L18
+ 217              	.LVL8:
+ 218              		.loc 1 216 3 is_stmt 0 view .LVU42
+ 219 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 220              	.LVL9:
+ 217:Src/gt911.c   **** 		break;
+ 221              		.loc 1 217 3 is_stmt 1 view .LVU43
+ 222              	.L14:
+ 218:Src/gt911.c   **** 	case false:
+ 219:Src/gt911.c   **** 		HAL_GPIO_WritePin(CTP_RST_GPIO_Port, CTP_RST_Pin, GPIO_PIN_RESET);
+ 220:Src/gt911.c   **** 		break;
+ 221:Src/gt911.c   **** 	}
+ 222:Src/gt911.c   **** }
+ 223              		.loc 1 222 1 is_stmt 0 view .LVU44
+ 224 000e 08BD     		pop	{r3, pc}
+ 225              	.LVL10:
+ 226              	.L15:
+ 219:Src/gt911.c   **** 		break;
+ 227              		.loc 1 219 3 is_stmt 1 view .LVU45
+ 228 0010 0022     		movs	r2, #0
+ 229 0012 0221     		movs	r1, #2
+ 230 0014 0148     		ldr	r0, .L18
+ 231              	.LVL11:
+ 219:Src/gt911.c   **** 		break;
+ 232              		.loc 1 219 3 is_stmt 0 view .LVU46
+ 233 0016 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 234              	.LVL12:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 9
+
+
+ 220:Src/gt911.c   **** 	}
+ 235              		.loc 1 220 3 is_stmt 1 view .LVU47
+ 236              		.loc 1 222 1 is_stmt 0 view .LVU48
+ 237 001a F8E7     		b	.L14
+ 238              	.L19:
+ 239              		.align	2
+ 240              	.L18:
+ 241 001c 00100240 		.word	1073876992
+ 242              		.cfi_endproc
+ 243              	.LFE141:
+ 245              		.section	.text.GT911_INT_Control,"ax",%progbits
+ 246              		.align	1
+ 247              		.global	GT911_INT_Control
+ 248              		.syntax unified
+ 249              		.thumb
+ 250              		.thumb_func
+ 252              	GT911_INT_Control:
+ 253              	.LVL13:
+ 254              	.LFB142:
+ 223:Src/gt911.c   **** void GT911_INT_Control(bool high_or_low){
+ 255              		.loc 1 223 41 is_stmt 1 view -0
+ 256              		.cfi_startproc
+ 257              		@ args = 0, pretend = 0, frame = 0
+ 258              		@ frame_needed = 0, uses_anonymous_args = 0
+ 259              		.loc 1 223 41 is_stmt 0 view .LVU50
+ 260 0000 08B5     		push	{r3, lr}
+ 261              	.LCFI7:
+ 262              		.cfi_def_cfa_offset 8
+ 263              		.cfi_offset 3, -8
+ 264              		.cfi_offset 14, -4
+ 224:Src/gt911.c   **** 	switch(high_or_low){
+ 265              		.loc 1 224 2 is_stmt 1 view .LVU51
+ 266 0002 28B1     		cbz	r0, .L21
+ 225:Src/gt911.c   **** 	case true:
+ 226:Src/gt911.c   **** 		HAL_GPIO_WritePin(CTP_INT_GPIO_Port, CTP_INT_Pin, GPIO_PIN_SET);
+ 267              		.loc 1 226 3 view .LVU52
+ 268 0004 0122     		movs	r2, #1
+ 269 0006 1146     		mov	r1, r2
+ 270 0008 0448     		ldr	r0, .L24
+ 271              	.LVL14:
+ 272              		.loc 1 226 3 is_stmt 0 view .LVU53
+ 273 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 274              	.LVL15:
+ 227:Src/gt911.c   **** 		break;
+ 275              		.loc 1 227 3 is_stmt 1 view .LVU54
+ 276              	.L20:
+ 228:Src/gt911.c   **** 	case false:
+ 229:Src/gt911.c   **** 		HAL_GPIO_WritePin(CTP_INT_GPIO_Port, CTP_INT_Pin, GPIO_PIN_RESET);
+ 230:Src/gt911.c   **** 		break;
+ 231:Src/gt911.c   **** 	}
+ 232:Src/gt911.c   **** }
+ 277              		.loc 1 232 1 is_stmt 0 view .LVU55
+ 278 000e 08BD     		pop	{r3, pc}
+ 279              	.LVL16:
+ 280              	.L21:
+ 229:Src/gt911.c   **** 		break;
+ 281              		.loc 1 229 3 is_stmt 1 view .LVU56
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 10
+
+
+ 282 0010 0022     		movs	r2, #0
+ 283 0012 0121     		movs	r1, #1
+ 284 0014 0148     		ldr	r0, .L24
+ 285              	.LVL17:
+ 229:Src/gt911.c   **** 		break;
+ 286              		.loc 1 229 3 is_stmt 0 view .LVU57
+ 287 0016 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 288              	.LVL18:
+ 230:Src/gt911.c   **** 	}
+ 289              		.loc 1 230 3 is_stmt 1 view .LVU58
+ 290              		.loc 1 232 1 is_stmt 0 view .LVU59
+ 291 001a F8E7     		b	.L20
+ 292              	.L25:
+ 293              		.align	2
+ 294              	.L24:
+ 295 001c 00100240 		.word	1073876992
+ 296              		.cfi_endproc
+ 297              	.LFE142:
+ 299              		.section	.text.GT911_Delay,"ax",%progbits
+ 300              		.align	1
+ 301              		.global	GT911_Delay
+ 302              		.syntax unified
+ 303              		.thumb
+ 304              		.thumb_func
+ 306              	GT911_Delay:
+ 307              	.LVL19:
+ 308              	.LFB143:
+ 233:Src/gt911.c   **** 
+ 234:Src/gt911.c   **** 
+ 235:Src/gt911.c   **** void GT911_Delay(uint16_t ms){
+ 309              		.loc 1 235 30 is_stmt 1 view -0
+ 310              		.cfi_startproc
+ 311              		@ args = 0, pretend = 0, frame = 0
+ 312              		@ frame_needed = 0, uses_anonymous_args = 0
+ 313              		.loc 1 235 30 is_stmt 0 view .LVU61
+ 314 0000 08B5     		push	{r3, lr}
+ 315              	.LCFI8:
+ 316              		.cfi_def_cfa_offset 8
+ 317              		.cfi_offset 3, -8
+ 318              		.cfi_offset 14, -4
+ 236:Src/gt911.c   **** 	HAL_Delay(ms);
+ 319              		.loc 1 236 2 is_stmt 1 view .LVU62
+ 320 0002 FFF7FEFF 		bl	HAL_Delay
+ 321              	.LVL20:
+ 237:Src/gt911.c   **** }
+ 322              		.loc 1 237 1 is_stmt 0 view .LVU63
+ 323 0006 08BD     		pop	{r3, pc}
+ 324              		.cfi_endproc
+ 325              	.LFE143:
+ 327              		.section	.text.GT911_Reset,"ax",%progbits
+ 328              		.align	1
+ 329              		.syntax unified
+ 330              		.thumb
+ 331              		.thumb_func
+ 333              	GT911_Reset:
+ 334              	.LFB132:
+ 126:Src/gt911.c   **** 	GT911_INT_Input();
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 11
+
+
+ 335              		.loc 1 126 30 is_stmt 1 view -0
+ 336              		.cfi_startproc
+ 337              		@ args = 0, pretend = 0, frame = 0
+ 338              		@ frame_needed = 0, uses_anonymous_args = 0
+ 339 0000 08B5     		push	{r3, lr}
+ 340              	.LCFI9:
+ 341              		.cfi_def_cfa_offset 8
+ 342              		.cfi_offset 3, -8
+ 343              		.cfi_offset 14, -4
+ 127:Src/gt911.c   **** 	GT911_RST_Control(0);
+ 344              		.loc 1 127 2 view .LVU65
+ 345 0002 FFF7FEFF 		bl	GT911_INT_Input
+ 346              	.LVL21:
+ 128:Src/gt911.c   **** 	GT911_Delay(20);
+ 347              		.loc 1 128 2 view .LVU66
+ 348 0006 0020     		movs	r0, #0
+ 349 0008 FFF7FEFF 		bl	GT911_RST_Control
+ 350              	.LVL22:
+ 129:Src/gt911.c   **** 	GT911_INT_Control(0);
+ 351              		.loc 1 129 2 view .LVU67
+ 352 000c 1420     		movs	r0, #20
+ 353 000e FFF7FEFF 		bl	GT911_Delay
+ 354              	.LVL23:
+ 130:Src/gt911.c   **** 	GT911_Delay(50);
+ 355              		.loc 1 130 2 view .LVU68
+ 356 0012 0020     		movs	r0, #0
+ 357 0014 FFF7FEFF 		bl	GT911_INT_Control
+ 358              	.LVL24:
+ 131:Src/gt911.c   **** 	GT911_RST_Control(1);
+ 359              		.loc 1 131 2 view .LVU69
+ 360 0018 3220     		movs	r0, #50
+ 361 001a FFF7FEFF 		bl	GT911_Delay
+ 362              	.LVL25:
+ 132:Src/gt911.c   **** 	GT911_Delay(100);
+ 363              		.loc 1 132 2 view .LVU70
+ 364 001e 0120     		movs	r0, #1
+ 365 0020 FFF7FEFF 		bl	GT911_RST_Control
+ 366              	.LVL26:
+ 133:Src/gt911.c   **** 	GT911_INT_Output();
+ 367              		.loc 1 133 2 view .LVU71
+ 368 0024 6420     		movs	r0, #100
+ 369 0026 FFF7FEFF 		bl	GT911_Delay
+ 370              	.LVL27:
+ 134:Src/gt911.c   **** 	GT911_Delay(100);
+ 371              		.loc 1 134 2 view .LVU72
+ 372 002a FFF7FEFF 		bl	GT911_INT_Output
+ 373              	.LVL28:
+ 135:Src/gt911.c   **** }
+ 374              		.loc 1 135 2 view .LVU73
+ 375 002e 6420     		movs	r0, #100
+ 376 0030 FFF7FEFF 		bl	GT911_Delay
+ 377              	.LVL29:
+ 136:Src/gt911.c   **** 
+ 378              		.loc 1 136 1 is_stmt 0 view .LVU74
+ 379 0034 08BD     		pop	{r3, pc}
+ 380              		.cfi_endproc
+ 381              	.LFE132:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 12
+
+
+ 383              		.section	.text.GT911_I2C_Init,"ax",%progbits
+ 384              		.align	1
+ 385              		.global	GT911_I2C_Init
+ 386              		.syntax unified
+ 387              		.thumb
+ 388              		.thumb_func
+ 390              	GT911_I2C_Init:
+ 391              	.LFB144:
+ 238:Src/gt911.c   **** 
+ 239:Src/gt911.c   **** GT911_Status_t GT911_I2C_Init(void){
+ 392              		.loc 1 239 36 is_stmt 1 view -0
+ 393              		.cfi_startproc
+ 394              		@ args = 0, pretend = 0, frame = 0
+ 395              		@ frame_needed = 0, uses_anonymous_args = 0
+ 396              		@ link register save eliminated.
+ 240:Src/gt911.c   **** 	return GT911_OK;
+ 397              		.loc 1 240 2 view .LVU76
+ 241:Src/gt911.c   **** }
+ 398              		.loc 1 241 1 is_stmt 0 view .LVU77
+ 399 0000 0020     		movs	r0, #0
+ 400 0002 7047     		bx	lr
+ 401              		.cfi_endproc
+ 402              	.LFE144:
+ 404              		.section	.text.GT911_I2C_Write,"ax",%progbits
+ 405              		.align	1
+ 406              		.global	GT911_I2C_Write
+ 407              		.syntax unified
+ 408              		.thumb
+ 409              		.thumb_func
+ 411              	GT911_I2C_Write:
+ 412              	.LVL30:
+ 413              	.LFB145:
+ 242:Src/gt911.c   **** 
+ 243:Src/gt911.c   **** GT911_Status_t GT911_I2C_Write(uint8_t Addr, uint8_t *write_data, uint16_t write_length) {
+ 414              		.loc 1 243 90 is_stmt 1 view -0
+ 415              		.cfi_startproc
+ 416              		@ args = 0, pretend = 0, frame = 0
+ 417              		@ frame_needed = 0, uses_anonymous_args = 0
+ 418              		.loc 1 243 90 is_stmt 0 view .LVU79
+ 419 0000 00B5     		push	{lr}
+ 420              	.LCFI10:
+ 421              		.cfi_def_cfa_offset 4
+ 422              		.cfi_offset 14, -4
+ 423 0002 83B0     		sub	sp, sp, #12
+ 424              	.LCFI11:
+ 425              		.cfi_def_cfa_offset 16
+ 426 0004 1346     		mov	r3, r2
+ 244:Src/gt911.c   **** 	uint8_t Address = Addr << 1;
+ 427              		.loc 1 244 2 is_stmt 1 view .LVU80
+ 428              		.loc 1 244 10 is_stmt 0 view .LVU81
+ 429 0006 4000     		lsls	r0, r0, #1
+ 430              	.LVL31:
+ 245:Src/gt911.c   **** 	switch (HAL_I2C_Master_Transmit(&hi2c1, Address, write_data, write_length, HAL_MAX_DELAY)) {
+ 431              		.loc 1 245 2 is_stmt 1 view .LVU82
+ 432              		.loc 1 245 10 is_stmt 0 view .LVU83
+ 433 0008 4FF0FF32 		mov	r2, #-1
+ 434              	.LVL32:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 13
+
+
+ 435              		.loc 1 245 10 view .LVU84
+ 436 000c 0092     		str	r2, [sp]
+ 437 000e 0A46     		mov	r2, r1
+ 438 0010 00F0FE01 		and	r1, r0, #254
+ 439              	.LVL33:
+ 440              		.loc 1 245 10 view .LVU85
+ 441 0014 0948     		ldr	r0, .L39
+ 442              	.LVL34:
+ 443              		.loc 1 245 10 view .LVU86
+ 444 0016 FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 445              	.LVL35:
+ 446              		.loc 1 245 2 view .LVU87
+ 447 001a 0128     		cmp	r0, #1
+ 448 001c 01D0     		beq	.L32
+ 449 001e 03D8     		bhi	.L33
+ 450 0020 50B9     		cbnz	r0, .L37
+ 451              	.L32:
+ 246:Src/gt911.c   **** 	case HAL_OK:
+ 247:Src/gt911.c   **** 		return GT911_OK;
+ 248:Src/gt911.c   **** 		break;
+ 249:Src/gt911.c   **** 	case HAL_ERROR:
+ 250:Src/gt911.c   **** 		return GT911_Error;
+ 251:Src/gt911.c   **** 		break;
+ 252:Src/gt911.c   **** 	case HAL_BUSY:
+ 253:Src/gt911.c   **** 	case HAL_TIMEOUT:
+ 254:Src/gt911.c   **** 		return GT911_NotResponse;
+ 255:Src/gt911.c   **** 		break;
+ 256:Src/gt911.c   **** 	}
+ 257:Src/gt911.c   **** 	return GT911_Error;
+ 258:Src/gt911.c   **** }
+ 452              		.loc 1 258 1 view .LVU88
+ 453 0022 03B0     		add	sp, sp, #12
+ 454              	.LCFI12:
+ 455              		.cfi_remember_state
+ 456              		.cfi_def_cfa_offset 4
+ 457              		@ sp needed
+ 458 0024 5DF804FB 		ldr	pc, [sp], #4
+ 459              	.L33:
+ 460              	.LCFI13:
+ 461              		.cfi_restore_state
+ 245:Src/gt911.c   **** 	switch (HAL_I2C_Master_Transmit(&hi2c1, Address, write_data, write_length, HAL_MAX_DELAY)) {
+ 462              		.loc 1 245 2 view .LVU89
+ 463 0028 0238     		subs	r0, r0, #2
+ 464 002a C0B2     		uxtb	r0, r0
+ 465 002c 0128     		cmp	r0, #1
+ 466 002e 01D8     		bhi	.L38
+ 254:Src/gt911.c   **** 		break;
+ 467              		.loc 1 254 10 view .LVU90
+ 468 0030 0220     		movs	r0, #2
+ 469 0032 F6E7     		b	.L32
+ 470              	.L38:
+ 257:Src/gt911.c   **** }
+ 471              		.loc 1 257 9 view .LVU91
+ 472 0034 0120     		movs	r0, #1
+ 473 0036 F4E7     		b	.L32
+ 474              	.L37:
+ 475 0038 0120     		movs	r0, #1
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 14
+
+
+ 476 003a F2E7     		b	.L32
+ 477              	.L40:
+ 478              		.align	2
+ 479              	.L39:
+ 480 003c 00000000 		.word	hi2c1
+ 481              		.cfi_endproc
+ 482              	.LFE145:
+ 484              		.section	.text.GT911_SendConfig,"ax",%progbits
+ 485              		.align	1
+ 486              		.syntax unified
+ 487              		.thumb
+ 488              		.thumb_func
+ 490              	GT911_SendConfig:
+ 491              	.LFB136:
+ 167:Src/gt911.c   **** 	GT911_CalculateCheckSum();
+ 492              		.loc 1 167 45 is_stmt 1 view -0
+ 493              		.cfi_startproc
+ 494              		@ args = 0, pretend = 0, frame = 0
+ 495              		@ frame_needed = 0, uses_anonymous_args = 0
+ 496 0000 10B5     		push	{r4, lr}
+ 497              	.LCFI14:
+ 498              		.cfi_def_cfa_offset 8
+ 499              		.cfi_offset 4, -8
+ 500              		.cfi_offset 14, -4
+ 168:Src/gt911.c   **** 	TxBuffer[0] = (GOODIX_REG_CONFIG_DATA & 0xFF00) >> 8;
+ 501              		.loc 1 168 2 view .LVU93
+ 502 0002 FFF7FEFF 		bl	GT911_CalculateCheckSum
+ 503              	.LVL36:
+ 169:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_REG_CONFIG_DATA & 0xFF;
+ 504              		.loc 1 169 2 view .LVU94
+ 169:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_REG_CONFIG_DATA & 0xFF;
+ 505              		.loc 1 169 14 is_stmt 0 view .LVU95
+ 506 0006 084C     		ldr	r4, .L43
+ 507 0008 8023     		movs	r3, #128
+ 508 000a 2370     		strb	r3, [r4]
+ 170:Src/gt911.c   **** 	memcpy(&TxBuffer[2], GT911_Config, sizeof(GT911_Config));
+ 509              		.loc 1 170 2 is_stmt 1 view .LVU96
+ 170:Src/gt911.c   **** 	memcpy(&TxBuffer[2], GT911_Config, sizeof(GT911_Config));
+ 510              		.loc 1 170 14 is_stmt 0 view .LVU97
+ 511 000c 4723     		movs	r3, #71
+ 512 000e 6370     		strb	r3, [r4, #1]
+ 171:Src/gt911.c   **** 	return GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, sizeof(GT911_Config) + 2);
+ 513              		.loc 1 171 2 is_stmt 1 view .LVU98
+ 514 0010 BA22     		movs	r2, #186
+ 515 0012 0649     		ldr	r1, .L43+4
+ 516 0014 A01C     		adds	r0, r4, #2
+ 517 0016 FFF7FEFF 		bl	memcpy
+ 518              	.LVL37:
+ 172:Src/gt911.c   **** }
+ 519              		.loc 1 172 2 view .LVU99
+ 172:Src/gt911.c   **** }
+ 520              		.loc 1 172 9 is_stmt 0 view .LVU100
+ 521 001a BC22     		movs	r2, #188
+ 522 001c 2146     		mov	r1, r4
+ 523 001e 1420     		movs	r0, #20
+ 524 0020 FFF7FEFF 		bl	GT911_I2C_Write
+ 525              	.LVL38:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 15
+
+
+ 173:Src/gt911.c   **** 
+ 526              		.loc 1 173 1 view .LVU101
+ 527 0024 10BD     		pop	{r4, pc}
+ 528              	.L44:
+ 529 0026 00BF     		.align	2
+ 530              	.L43:
+ 531 0028 00000000 		.word	.LANCHOR1
+ 532 002c 00000000 		.word	.LANCHOR0
+ 533              		.cfi_endproc
+ 534              	.LFE136:
+ 536              		.section	.text.GT911_SetCommandRegister,"ax",%progbits
+ 537              		.align	1
+ 538              		.syntax unified
+ 539              		.thumb
+ 540              		.thumb_func
+ 542              	GT911_SetCommandRegister:
+ 543              	.LVL39:
+ 544              	.LFB134:
+ 146:Src/gt911.c   **** 	TxBuffer[0] = (GOODIX_REG_COMMAND & 0xFF00) >> 8;
+ 545              		.loc 1 146 64 is_stmt 1 view -0
+ 546              		.cfi_startproc
+ 547              		@ args = 0, pretend = 0, frame = 0
+ 548              		@ frame_needed = 0, uses_anonymous_args = 0
+ 146:Src/gt911.c   **** 	TxBuffer[0] = (GOODIX_REG_COMMAND & 0xFF00) >> 8;
+ 549              		.loc 1 146 64 is_stmt 0 view .LVU103
+ 550 0000 08B5     		push	{r3, lr}
+ 551              	.LCFI15:
+ 552              		.cfi_def_cfa_offset 8
+ 553              		.cfi_offset 3, -8
+ 554              		.cfi_offset 14, -4
+ 147:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_REG_COMMAND & 0xFF;
+ 555              		.loc 1 147 2 is_stmt 1 view .LVU104
+ 147:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_REG_COMMAND & 0xFF;
+ 556              		.loc 1 147 14 is_stmt 0 view .LVU105
+ 557 0002 0549     		ldr	r1, .L47
+ 558 0004 8023     		movs	r3, #128
+ 559 0006 0B70     		strb	r3, [r1]
+ 148:Src/gt911.c   **** 	TxBuffer[2] = command;
+ 560              		.loc 1 148 2 is_stmt 1 view .LVU106
+ 148:Src/gt911.c   **** 	TxBuffer[2] = command;
+ 561              		.loc 1 148 14 is_stmt 0 view .LVU107
+ 562 0008 4023     		movs	r3, #64
+ 563 000a 4B70     		strb	r3, [r1, #1]
+ 149:Src/gt911.c   **** 	return GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 3);
+ 564              		.loc 1 149 2 is_stmt 1 view .LVU108
+ 149:Src/gt911.c   **** 	return GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 3);
+ 565              		.loc 1 149 14 is_stmt 0 view .LVU109
+ 566 000c 8870     		strb	r0, [r1, #2]
+ 150:Src/gt911.c   **** }
+ 567              		.loc 1 150 2 is_stmt 1 view .LVU110
+ 150:Src/gt911.c   **** }
+ 568              		.loc 1 150 9 is_stmt 0 view .LVU111
+ 569 000e 0322     		movs	r2, #3
+ 570 0010 1420     		movs	r0, #20
+ 571              	.LVL40:
+ 150:Src/gt911.c   **** }
+ 572              		.loc 1 150 9 view .LVU112
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 16
+
+
+ 573 0012 FFF7FEFF 		bl	GT911_I2C_Write
+ 574              	.LVL41:
+ 151:Src/gt911.c   **** 
+ 575              		.loc 1 151 1 view .LVU113
+ 576 0016 08BD     		pop	{r3, pc}
+ 577              	.L48:
+ 578              		.align	2
+ 579              	.L47:
+ 580 0018 00000000 		.word	.LANCHOR1
+ 581              		.cfi_endproc
+ 582              	.LFE134:
+ 584              		.section	.text.GT911_SetStatus,"ax",%progbits
+ 585              		.align	1
+ 586              		.syntax unified
+ 587              		.thumb
+ 588              		.thumb_func
+ 590              	GT911_SetStatus:
+ 591              	.LVL42:
+ 592              	.LFB138:
+ 189:Src/gt911.c   **** 	TxBuffer[0] = (GOODIX_READ_COORD_ADDR & 0xFF00) >> 8;
+ 593              		.loc 1 189 54 is_stmt 1 view -0
+ 594              		.cfi_startproc
+ 595              		@ args = 0, pretend = 0, frame = 0
+ 596              		@ frame_needed = 0, uses_anonymous_args = 0
+ 189:Src/gt911.c   **** 	TxBuffer[0] = (GOODIX_READ_COORD_ADDR & 0xFF00) >> 8;
+ 597              		.loc 1 189 54 is_stmt 0 view .LVU115
+ 598 0000 08B5     		push	{r3, lr}
+ 599              	.LCFI16:
+ 600              		.cfi_def_cfa_offset 8
+ 601              		.cfi_offset 3, -8
+ 602              		.cfi_offset 14, -4
+ 190:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_READ_COORD_ADDR & 0xFF;
+ 603              		.loc 1 190 2 is_stmt 1 view .LVU116
+ 190:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_READ_COORD_ADDR & 0xFF;
+ 604              		.loc 1 190 14 is_stmt 0 view .LVU117
+ 605 0002 0549     		ldr	r1, .L51
+ 606 0004 8123     		movs	r3, #129
+ 607 0006 0B70     		strb	r3, [r1]
+ 191:Src/gt911.c   **** 	TxBuffer[2] = status;
+ 608              		.loc 1 191 2 is_stmt 1 view .LVU118
+ 191:Src/gt911.c   **** 	TxBuffer[2] = status;
+ 609              		.loc 1 191 14 is_stmt 0 view .LVU119
+ 610 0008 4E23     		movs	r3, #78
+ 611 000a 4B70     		strb	r3, [r1, #1]
+ 192:Src/gt911.c   **** 	return GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 3);
+ 612              		.loc 1 192 2 is_stmt 1 view .LVU120
+ 192:Src/gt911.c   **** 	return GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 3);
+ 613              		.loc 1 192 14 is_stmt 0 view .LVU121
+ 614 000c 8870     		strb	r0, [r1, #2]
+ 193:Src/gt911.c   **** }
+ 615              		.loc 1 193 2 is_stmt 1 view .LVU122
+ 193:Src/gt911.c   **** }
+ 616              		.loc 1 193 9 is_stmt 0 view .LVU123
+ 617 000e 0322     		movs	r2, #3
+ 618 0010 1420     		movs	r0, #20
+ 619              	.LVL43:
+ 193:Src/gt911.c   **** }
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 17
+
+
+ 620              		.loc 1 193 9 view .LVU124
+ 621 0012 FFF7FEFF 		bl	GT911_I2C_Write
+ 622              	.LVL44:
+ 194:Src/gt911.c   **** 
+ 623              		.loc 1 194 1 view .LVU125
+ 624 0016 08BD     		pop	{r3, pc}
+ 625              	.L52:
+ 626              		.align	2
+ 627              	.L51:
+ 628 0018 00000000 		.word	.LANCHOR1
+ 629              		.cfi_endproc
+ 630              	.LFE138:
+ 632              		.section	.text.GT911_I2C_Read,"ax",%progbits
+ 633              		.align	1
+ 634              		.global	GT911_I2C_Read
+ 635              		.syntax unified
+ 636              		.thumb
+ 637              		.thumb_func
+ 639              	GT911_I2C_Read:
+ 640              	.LVL45:
+ 641              	.LFB146:
+ 259:Src/gt911.c   **** 
+ 260:Src/gt911.c   **** GT911_Status_t GT911_I2C_Read(uint8_t Addr, uint8_t* read_data, uint16_t read_length){
+ 642              		.loc 1 260 86 is_stmt 1 view -0
+ 643              		.cfi_startproc
+ 644              		@ args = 0, pretend = 0, frame = 0
+ 645              		@ frame_needed = 0, uses_anonymous_args = 0
+ 646              		.loc 1 260 86 is_stmt 0 view .LVU127
+ 647 0000 00B5     		push	{lr}
+ 648              	.LCFI17:
+ 649              		.cfi_def_cfa_offset 4
+ 650              		.cfi_offset 14, -4
+ 651 0002 83B0     		sub	sp, sp, #12
+ 652              	.LCFI18:
+ 653              		.cfi_def_cfa_offset 16
+ 654 0004 1346     		mov	r3, r2
+ 261:Src/gt911.c   **** 	uint8_t Address = Addr << 1;
+ 655              		.loc 1 261 2 is_stmt 1 view .LVU128
+ 656              		.loc 1 261 10 is_stmt 0 view .LVU129
+ 657 0006 4000     		lsls	r0, r0, #1
+ 658              	.LVL46:
+ 262:Src/gt911.c   **** 	switch (HAL_I2C_Master_Receive(&hi2c1, Address, read_data, read_length, HAL_MAX_DELAY)) {
+ 659              		.loc 1 262 2 is_stmt 1 view .LVU130
+ 660              		.loc 1 262 10 is_stmt 0 view .LVU131
+ 661 0008 4FF0FF32 		mov	r2, #-1
+ 662              	.LVL47:
+ 663              		.loc 1 262 10 view .LVU132
+ 664 000c 0092     		str	r2, [sp]
+ 665 000e 0A46     		mov	r2, r1
+ 666 0010 00F0FE01 		and	r1, r0, #254
+ 667              	.LVL48:
+ 668              		.loc 1 262 10 view .LVU133
+ 669 0014 0948     		ldr	r0, .L61
+ 670              	.LVL49:
+ 671              		.loc 1 262 10 view .LVU134
+ 672 0016 FFF7FEFF 		bl	HAL_I2C_Master_Receive
+ 673              	.LVL50:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 18
+
+
+ 674              		.loc 1 262 2 view .LVU135
+ 675 001a 0128     		cmp	r0, #1
+ 676 001c 01D0     		beq	.L54
+ 677 001e 03D8     		bhi	.L55
+ 678 0020 50B9     		cbnz	r0, .L59
+ 679              	.L54:
+ 263:Src/gt911.c   **** 	case HAL_OK:
+ 264:Src/gt911.c   **** 		return GT911_OK;
+ 265:Src/gt911.c   **** 		break;
+ 266:Src/gt911.c   **** 	case HAL_ERROR:
+ 267:Src/gt911.c   **** 		return GT911_Error;
+ 268:Src/gt911.c   **** 		break;
+ 269:Src/gt911.c   **** 	case HAL_BUSY:
+ 270:Src/gt911.c   **** 	case HAL_TIMEOUT:
+ 271:Src/gt911.c   **** 		return GT911_NotResponse;
+ 272:Src/gt911.c   **** 		break;
+ 273:Src/gt911.c   **** 	}
+ 274:Src/gt911.c   **** 	return HAL_ERROR;
+ 275:Src/gt911.c   **** }...
+ 680              		.loc 1 275 1 view .LVU136
+ 681 0022 03B0     		add	sp, sp, #12
+ 682              	.LCFI19:
+ 683              		.cfi_remember_state
+ 684              		.cfi_def_cfa_offset 4
+ 685              		@ sp needed
+ 686 0024 5DF804FB 		ldr	pc, [sp], #4
+ 687              	.L55:
+ 688              	.LCFI20:
+ 689              		.cfi_restore_state
+ 262:Src/gt911.c   **** 	switch (HAL_I2C_Master_Receive(&hi2c1, Address, read_data, read_length, HAL_MAX_DELAY)) {
+ 690              		.loc 1 262 2 view .LVU137
+ 691 0028 0238     		subs	r0, r0, #2
+ 692 002a C0B2     		uxtb	r0, r0
+ 693 002c 0128     		cmp	r0, #1
+ 694 002e 01D8     		bhi	.L60
+ 271:Src/gt911.c   **** 		return GT911_NotResponse;
+ 695              		.loc 1 271 10 view .LVU138
+ 696 0030 0220     		movs	r0, #2
+ 697 0032 F6E7     		b	.L54
+ 698              	.L60:
+ 274:Src/gt911.c   **** 	return HAL_ERROR;
+ 699              		.loc 1 274 9 view .LVU139
+ 700 0034 0120     		movs	r0, #1
+ 701 0036 F4E7     		b	.L54
+ 702              	.L59:
+ 703 0038 0120     		movs	r0, #1
+ 704 003a F2E7     		b	.L54
+ 705              	.L62:
+ 706              		.align	2
+ 707              	.L61:
+ 708 003c 00000000 		.word	hi2c1
+ 709              		.cfi_endproc
+ 710              	.LFE146:
+ 712              		.section	.text.GT911_GetProductID,"ax",%progbits
+ 713              		.align	1
+ 714              		.syntax unified
+ 715              		.thumb
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 19
+
+
+ 716              		.thumb_func
+ 718              	GT911_GetProductID:
+ 719              	.LVL51:
+ 720              	.LFB135:
+ 153:Src/gt911.c   **** static GT911_Status_t GT911_GetProductID(uint32_t* id){
+ 721              		.loc 1 153 55 is_stmt 1 view -0
+ 722              		.cfi_startproc
+ 723              		@ args = 0, pretend = 0, frame = 0
+ 724              		@ frame_needed = 0, uses_anonymous_args = 0
+ 153:Src/gt911.c   **** static GT911_Status_t GT911_GetProductID(uint32_t* id){
+ 725              		.loc 1 153 55 is_stmt 0 view .LVU141
+ 726 0000 10B5     		push	{r4, lr}
+ 727              	.LCFI21:
+ 728              		.cfi_def_cfa_offset 8
+ 729              		.cfi_offset 4, -8
+ 730              		.cfi_offset 14, -4
+ 731 0002 0446     		mov	r4, r0
+ 154:Src/gt911.c   **** 	TxBuffer[0] = (GOODIX_REG_ID & 0xFF00) >> 8;
+ 732              		.loc 1 154 2 is_stmt 1 view .LVU142
+ 154:Src/gt911.c   **** 	TxBuffer[0] = (GOODIX_REG_ID & 0xFF00) >> 8;
+ 733              		.loc 1 154 14 is_stmt 0 view .LVU143
+ 734 0004 0A49     		ldr	r1, .L67
+ 735 0006 8123     		movs	r3, #129
+ 736 0008 0B70     		strb	r3, [r1]
+ 155:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_REG_ID & 0xFF;
+ 737              		.loc 1 155 2 is_stmt 1 view .LVU144
+ 155:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_REG_ID & 0xFF;
+ 738              		.loc 1 155 14 is_stmt 0 view .LVU145
+ 739 000a 4023     		movs	r3, #64
+ 740 000c 4B70     		strb	r3, [r1, #1]
+ 156:Src/gt911.c   **** 	GT911_Status_t Result = GT911_NotResponse;
+ 741              		.loc 1 156 2 is_stmt 1 view .LVU146
+ 742              	.LVL52:
+ 157:Src/gt911.c   **** 	Result = GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 2);
+ 743              		.loc 1 157 2 view .LVU147
+ 157:Src/gt911.c   **** 	Result = GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 2);
+ 744              		.loc 1 157 11 is_stmt 0 view .LVU148
+ 745 000e 0222     		movs	r2, #2
+ 746 0010 1420     		movs	r0, #20
+ 747              	.LVL53:
+ 157:Src/gt911.c   **** 	Result = GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 2);
+ 748              		.loc 1 157 11 view .LVU149
+ 749 0012 FFF7FEFF 		bl	GT911_I2C_Write
+ 750              	.LVL54:
+ 158:Src/gt911.c   **** 	if(Result == GT911_OK){
+ 751              		.loc 1 158 2 is_stmt 1 view .LVU150
+ 158:Src/gt911.c   **** 	if(Result == GT911_OK){
+ 752              		.loc 1 158 4 is_stmt 0 view .LVU151
+ 753 0016 00B1     		cbz	r0, .L66
+ 754              	.LVL55:
+ 755              	.L64:
+ 164:Src/gt911.c   **** 	return Result;
+ 756              		.loc 1 164 2 is_stmt 1 view .LVU152
+ 165:Src/gt911.c   **** }
+ 757              		.loc 1 165 1 is_stmt 0 view .LVU153
+ 758 0018 10BD     		pop	{r4, pc}
+ 759              	.LVL56:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 20
+
+
+ 760              	.L66:
+ 159:Src/gt911.c   **** 		Result = GT911_I2C_Read(GOODIX_ADDRESS, RxBuffer, 4);
+ 761              		.loc 1 159 3 is_stmt 1 view .LVU154
+ 159:Src/gt911.c   **** 		Result = GT911_I2C_Read(GOODIX_ADDRESS, RxBuffer, 4);
+ 762              		.loc 1 159 12 is_stmt 0 view .LVU155
+ 763 001a 0422     		movs	r2, #4
+ 764 001c 0549     		ldr	r1, .L67+4
+ 765 001e 1420     		movs	r0, #20
+ 766 0020 FFF7FEFF 		bl	GT911_I2C_Read
+ 767              	.LVL57:
+ 160:Src/gt911.c   **** 		if( Result == GT911_OK){
+ 768              		.loc 1 160 3 is_stmt 1 view .LVU156
+ 160:Src/gt911.c   **** 		if( Result == GT911_OK){
+ 769              		.loc 1 160 5 is_stmt 0 view .LVU157
+ 770 0024 0028     		cmp	r0, #0
+ 771 0026 F7D1     		bne	.L64
+ 161:Src/gt911.c   **** 			memcpy(id, RxBuffer, 4);
+ 772              		.loc 1 161 4 is_stmt 1 view .LVU158
+ 773 0028 024B     		ldr	r3, .L67+4
+ 774 002a 1B68     		ldr	r3, [r3]
+ 775 002c 2360     		str	r3, [r4]	@ unaligned
+ 776 002e F3E7     		b	.L64
+ 777              	.L68:
+ 778              		.align	2
+ 779              	.L67:
+ 780 0030 00000000 		.word	.LANCHOR1
+ 781 0034 00000000 		.word	.LANCHOR2
+ 782              		.cfi_endproc
+ 783              	.LFE135:
+ 785              		.section	.text.GT911_Init,"ax",%progbits
+ 786              		.align	1
+ 787              		.global	GT911_Init
+ 788              		.syntax unified
+ 789              		.thumb
+ 790              		.thumb_func
+ 792              	GT911_Init:
+ 793              	.LFB130:
+  42:Src/gt911.c   **** GT911_Status_t GT911_Init(GT911_Config_t config){
+ 794              		.loc 1 42 49 view -0
+ 795              		.cfi_startproc
+ 796              		@ args = 0, pretend = 0, frame = 48
+ 797              		@ frame_needed = 0, uses_anonymous_args = 0
+ 798 0000 70B5     		push	{r4, r5, r6, lr}
+ 799              	.LCFI22:
+ 800              		.cfi_def_cfa_offset 16
+ 801              		.cfi_offset 4, -16
+ 802              		.cfi_offset 5, -12
+ 803              		.cfi_offset 6, -8
+ 804              		.cfi_offset 14, -4
+ 805 0002 8CB0     		sub	sp, sp, #48
+ 806              	.LCFI23:
+ 807              		.cfi_def_cfa_offset 64
+ 808 0004 01AB     		add	r3, sp, #4
+ 809 0006 83E80700 		stm	r3, {r0, r1, r2}
+  43:Src/gt911.c   **** 	GPIO_InitTypeDef GPIO_InitStruct = {0};
+ 810              		.loc 1 43 2 view .LVU160
+  43:Src/gt911.c   **** 	GPIO_InitTypeDef GPIO_InitStruct = {0};
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 21
+
+
+ 811              		.loc 1 43 19 is_stmt 0 view .LVU161
+ 812 000a 0024     		movs	r4, #0
+ 813 000c 0794     		str	r4, [sp, #28]
+ 814 000e 0894     		str	r4, [sp, #32]
+ 815 0010 0994     		str	r4, [sp, #36]
+ 816 0012 0A94     		str	r4, [sp, #40]
+ 817 0014 0B94     		str	r4, [sp, #44]
+  44:Src/gt911.c   **** 	__HAL_RCC_GPIOE_CLK_ENABLE();
+ 818              		.loc 1 44 2 is_stmt 1 view .LVU162
+ 819              	.LBB3:
+  44:Src/gt911.c   **** 	__HAL_RCC_GPIOE_CLK_ENABLE();
+ 820              		.loc 1 44 2 view .LVU163
+ 821 0016 0594     		str	r4, [sp, #20]
+  44:Src/gt911.c   **** 	__HAL_RCC_GPIOE_CLK_ENABLE();
+ 822              		.loc 1 44 2 view .LVU164
+ 823 0018 394B     		ldr	r3, .L73
+ 824 001a 1A6B     		ldr	r2, [r3, #48]
+ 825 001c 42F01002 		orr	r2, r2, #16
+ 826 0020 1A63     		str	r2, [r3, #48]
+  44:Src/gt911.c   **** 	__HAL_RCC_GPIOE_CLK_ENABLE();
+ 827              		.loc 1 44 2 view .LVU165
+ 828 0022 1B6B     		ldr	r3, [r3, #48]
+ 829 0024 03F01003 		and	r3, r3, #16
+ 830 0028 0593     		str	r3, [sp, #20]
+  44:Src/gt911.c   **** 	__HAL_RCC_GPIOE_CLK_ENABLE();
+ 831              		.loc 1 44 2 view .LVU166
+ 832 002a 059B     		ldr	r3, [sp, #20]
+ 833              	.LBE3:
+  44:Src/gt911.c   **** 	__HAL_RCC_GPIOE_CLK_ENABLE();
+ 834              		.loc 1 44 2 view .LVU167
+  45:Src/gt911.c   **** 	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_RESET);
+ 835              		.loc 1 45 2 view .LVU168
+ 836 002c 354D     		ldr	r5, .L73+4
+ 837 002e 2246     		mov	r2, r4
+ 838 0030 0321     		movs	r1, #3
+ 839 0032 2846     		mov	r0, r5
+ 840 0034 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 841              	.LVL58:
+  46:Src/gt911.c   **** 	GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
+ 842              		.loc 1 46 2 view .LVU169
+  46:Src/gt911.c   **** 	GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
+ 843              		.loc 1 46 22 is_stmt 0 view .LVU170
+ 844 0038 0323     		movs	r3, #3
+ 845 003a 0793     		str	r3, [sp, #28]
+  47:Src/gt911.c   ****   	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 846              		.loc 1 47 4 is_stmt 1 view .LVU171
+  47:Src/gt911.c   ****   	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 847              		.loc 1 47 25 is_stmt 0 view .LVU172
+ 848 003c 0123     		movs	r3, #1
+ 849 003e 0893     		str	r3, [sp, #32]
+  48:Src/gt911.c   ****   	GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 850              		.loc 1 48 4 is_stmt 1 view .LVU173
+  48:Src/gt911.c   ****   	GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 851              		.loc 1 48 25 is_stmt 0 view .LVU174
+ 852 0040 0994     		str	r4, [sp, #36]
+  49:Src/gt911.c   ****   	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+ 853              		.loc 1 49 4 is_stmt 1 view .LVU175
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 22
+
+
+  49:Src/gt911.c   ****   	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+ 854              		.loc 1 49 26 is_stmt 0 view .LVU176
+ 855 0042 0A94     		str	r4, [sp, #40]
+  50:Src/gt911.c   ****   	HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+ 856              		.loc 1 50 4 is_stmt 1 view .LVU177
+ 857 0044 07A9     		add	r1, sp, #28
+ 858 0046 2846     		mov	r0, r5
+ 859 0048 FFF7FEFF 		bl	HAL_GPIO_Init
+ 860              	.LVL59:
+  52:Src/gt911.c   **** 	GT911_Config[1] = config.X_Resolution & 0x00FF;
+ 861              		.loc 1 52 2 view .LVU178
+  52:Src/gt911.c   **** 	GT911_Config[1] = config.X_Resolution & 0x00FF;
+ 862              		.loc 1 52 26 is_stmt 0 view .LVU179
+ 863 004c BDF80430 		ldrh	r3, [sp, #4]
+  52:Src/gt911.c   **** 	GT911_Config[1] = config.X_Resolution & 0x00FF;
+ 864              		.loc 1 52 18 view .LVU180
+ 865 0050 2D4A     		ldr	r2, .L73+8
+ 866 0052 5370     		strb	r3, [r2, #1]
+  53:Src/gt911.c   **** 	GT911_Config[2] = (config.X_Resolution >> 8) & 0x00FF;
+ 867              		.loc 1 53 2 is_stmt 1 view .LVU181
+  53:Src/gt911.c   **** 	GT911_Config[2] = (config.X_Resolution >> 8) & 0x00FF;
+ 868              		.loc 1 53 18 is_stmt 0 view .LVU182
+ 869 0054 1B0A     		lsrs	r3, r3, #8
+ 870 0056 9370     		strb	r3, [r2, #2]
+  55:Src/gt911.c   **** 	GT911_Config[3] = config.Y_Resolution & 0x00FF;
+ 871              		.loc 1 55 2 is_stmt 1 view .LVU183
+  55:Src/gt911.c   **** 	GT911_Config[3] = config.Y_Resolution & 0x00FF;
+ 872              		.loc 1 55 26 is_stmt 0 view .LVU184
+ 873 0058 BDF80630 		ldrh	r3, [sp, #6]
+  55:Src/gt911.c   **** 	GT911_Config[3] = config.Y_Resolution & 0x00FF;
+ 874              		.loc 1 55 18 view .LVU185
+ 875 005c D370     		strb	r3, [r2, #3]
+  56:Src/gt911.c   **** 	GT911_Config[4] = (config.Y_Resolution >> 8) & 0x00FF;
+ 876              		.loc 1 56 2 is_stmt 1 view .LVU186
+  56:Src/gt911.c   **** 	GT911_Config[4] = (config.Y_Resolution >> 8) & 0x00FF;
+ 877              		.loc 1 56 18 is_stmt 0 view .LVU187
+ 878 005e 1B0A     		lsrs	r3, r3, #8
+ 879 0060 1371     		strb	r3, [r2, #4]
+  58:Src/gt911.c   **** 	GT911_Config[5] = config.Number_Of_Touch_Support;
+ 880              		.loc 1 58 2 is_stmt 1 view .LVU188
+  58:Src/gt911.c   **** 	GT911_Config[5] = config.Number_Of_Touch_Support;
+ 881              		.loc 1 58 26 is_stmt 0 view .LVU189
+ 882 0062 9DF80830 		ldrb	r3, [sp, #8]	@ zero_extendqisi2
+  58:Src/gt911.c   **** 	GT911_Config[5] = config.Number_Of_Touch_Support;
+ 883              		.loc 1 58 18 view .LVU190
+ 884 0066 5371     		strb	r3, [r2, #5]
+  60:Src/gt911.c   **** 	GT911_Config[6] = 0;
+ 885              		.loc 1 60 2 is_stmt 1 view .LVU191
+  60:Src/gt911.c   **** 	GT911_Config[6] = 0;
+ 886              		.loc 1 60 18 is_stmt 0 view .LVU192
+ 887 0068 9471     		strb	r4, [r2, #6]
+  61:Src/gt911.c   **** 	GT911_Config[6] |= config.ReverseY << 7;
+ 888              		.loc 1 61 2 is_stmt 1 view .LVU193
+  61:Src/gt911.c   **** 	GT911_Config[6] |= config.ReverseY << 7;
+ 889              		.loc 1 61 27 is_stmt 0 view .LVU194
+ 890 006a 9DF80A30 		ldrb	r3, [sp, #10]	@ zero_extendqisi2
+  61:Src/gt911.c   **** 	GT911_Config[6] |= config.ReverseY << 7;
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 23
+
+
+ 891              		.loc 1 61 37 view .LVU195
+ 892 006e DB01     		lsls	r3, r3, #7
+  61:Src/gt911.c   **** 	GT911_Config[6] |= config.ReverseY << 7;
+ 893              		.loc 1 61 18 view .LVU196
+ 894 0070 5BB2     		sxtb	r3, r3
+ 895 0072 9371     		strb	r3, [r2, #6]
+  63:Src/gt911.c   **** 	GT911_Config[6] |= config.ReverseX << 6;
+ 896              		.loc 1 63 2 is_stmt 1 view .LVU197
+  63:Src/gt911.c   **** 	GT911_Config[6] |= config.ReverseX << 6;
+ 897              		.loc 1 63 27 is_stmt 0 view .LVU198
+ 898 0074 9DF80910 		ldrb	r1, [sp, #9]	@ zero_extendqisi2
+  63:Src/gt911.c   **** 	GT911_Config[6] |= config.ReverseX << 6;
+ 899              		.loc 1 63 18 view .LVU199
+ 900 0078 43EA8113 		orr	r3, r3, r1, lsl #6
+ 901 007c 5BB2     		sxtb	r3, r3
+ 902 007e 9371     		strb	r3, [r2, #6]
+  65:Src/gt911.c   **** 	GT911_Config[6] |= config.SwithX2Y << 3;
+ 903              		.loc 1 65 2 is_stmt 1 view .LVU200
+  65:Src/gt911.c   **** 	GT911_Config[6] |= config.SwithX2Y << 3;
+ 904              		.loc 1 65 27 is_stmt 0 view .LVU201
+ 905 0080 9DF80B10 		ldrb	r1, [sp, #11]	@ zero_extendqisi2
+  65:Src/gt911.c   **** 	GT911_Config[6] |= config.SwithX2Y << 3;
+ 906              		.loc 1 65 18 view .LVU202
+ 907 0084 43EAC103 		orr	r3, r3, r1, lsl #3
+ 908 0088 5BB2     		sxtb	r3, r3
+ 909 008a 9371     		strb	r3, [r2, #6]
+  67:Src/gt911.c   **** 	GT911_Config[6] |= config.SoftwareNoiseReduction << 2;
+ 910              		.loc 1 67 2 is_stmt 1 view .LVU203
+  67:Src/gt911.c   **** 	GT911_Config[6] |= config.SoftwareNoiseReduction << 2;
+ 911              		.loc 1 67 27 is_stmt 0 view .LVU204
+ 912 008c 9DF80C10 		ldrb	r1, [sp, #12]	@ zero_extendqisi2
+  67:Src/gt911.c   **** 	GT911_Config[6] |= config.SoftwareNoiseReduction << 2;
+ 913              		.loc 1 67 18 view .LVU205
+ 914 0090 43EA8103 		orr	r3, r3, r1, lsl #2
+ 915 0094 9371     		strb	r3, [r2, #6]
+  70:Src/gt911.c   **** 	GT911_Reset();
+ 916              		.loc 1 70 2 is_stmt 1 view .LVU206
+ 917 0096 FFF7FEFF 		bl	GT911_Reset
+ 918              	.LVL60:
+  72:Src/gt911.c   **** 	uint32_t productID = 0;
+ 919              		.loc 1 72 2 view .LVU207
+  72:Src/gt911.c   **** 	uint32_t productID = 0;
+ 920              		.loc 1 72 11 is_stmt 0 view .LVU208
+ 921 009a 0694     		str	r4, [sp, #24]
+  73:Src/gt911.c   **** 	CommunicationResult = GT911_GetProductID(&productID);
+ 922              		.loc 1 73 2 is_stmt 1 view .LVU209
+  73:Src/gt911.c   **** 	CommunicationResult = GT911_GetProductID(&productID);
+ 923              		.loc 1 73 24 is_stmt 0 view .LVU210
+ 924 009c 06A8     		add	r0, sp, #24
+ 925 009e FFF7FEFF 		bl	GT911_GetProductID
+ 926              	.LVL61:
+ 927 00a2 0446     		mov	r4, r0
+  73:Src/gt911.c   **** 	CommunicationResult = GT911_GetProductID(&productID);
+ 928              		.loc 1 73 22 view .LVU211
+ 929 00a4 194B     		ldr	r3, .L73+12
+ 930 00a6 1870     		strb	r0, [r3]
+  74:Src/gt911.c   **** 	if(CommunicationResult != GT911_OK){
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 24
+
+
+ 931              		.loc 1 74 2 is_stmt 1 view .LVU212
+  74:Src/gt911.c   **** 	if(CommunicationResult != GT911_OK){
+ 932              		.loc 1 74 4 is_stmt 0 view .LVU213
+ 933 00a8 30BB     		cbnz	r0, .L70
+  77:Src/gt911.c   **** 	if(productID == 0){
+ 934              		.loc 1 77 2 is_stmt 1 view .LVU214
+  77:Src/gt911.c   **** 	if(productID == 0){
+ 935              		.loc 1 77 15 is_stmt 0 view .LVU215
+ 936 00aa 069B     		ldr	r3, [sp, #24]
+  77:Src/gt911.c   **** 	if(productID == 0){
+ 937              		.loc 1 77 4 view .LVU216
+ 938 00ac 1BB3     		cbz	r3, .L71
+  81:Src/gt911.c   **** 	GT911_Reset();
+ 939              		.loc 1 81 2 is_stmt 1 view .LVU217
+ 940 00ae FFF7FEFF 		bl	GT911_Reset
+ 941              	.LVL62:
+  82:Src/gt911.c   **** 	CommunicationResult = GT911_SendConfig();
+ 942              		.loc 1 82 2 view .LVU218
+  82:Src/gt911.c   **** 	CommunicationResult = GT911_SendConfig();
+ 943              		.loc 1 82 24 is_stmt 0 view .LVU219
+ 944 00b2 FFF7FEFF 		bl	GT911_SendConfig
+ 945              	.LVL63:
+ 946 00b6 0446     		mov	r4, r0
+  82:Src/gt911.c   **** 	CommunicationResult = GT911_SendConfig();
+ 947              		.loc 1 82 22 view .LVU220
+ 948 00b8 144B     		ldr	r3, .L73+12
+ 949 00ba 1870     		strb	r0, [r3]
+  83:Src/gt911.c   **** 	if(CommunicationResult != GT911_OK){
+ 950              		.loc 1 83 2 is_stmt 1 view .LVU221
+  83:Src/gt911.c   **** 	if(CommunicationResult != GT911_OK){
+ 951              		.loc 1 83 4 is_stmt 0 view .LVU222
+ 952 00bc E0B9     		cbnz	r0, .L70
+  86:Src/gt911.c   **** 	GT911_SetCommandRegister(0x00);
+ 953              		.loc 1 86 2 is_stmt 1 view .LVU223
+ 954 00be 0020     		movs	r0, #0
+ 955 00c0 FFF7FEFF 		bl	GT911_SetCommandRegister
+ 956              	.LVL64:
+  88:Src/gt911.c   **** 	HAL_GPIO_DeInit(GPIOE, GPIO_PIN_0);
+ 957              		.loc 1 88 2 view .LVU224
+ 958 00c4 2E46     		mov	r6, r5
+ 959 00c6 0121     		movs	r1, #1
+ 960 00c8 2846     		mov	r0, r5
+ 961 00ca FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 962              	.LVL65:
+  89:Src/gt911.c   **** 	GPIO_InitStruct.Pin = GPIO_PIN_0;
+ 963              		.loc 1 89 2 view .LVU225
+  89:Src/gt911.c   **** 	GPIO_InitStruct.Pin = GPIO_PIN_0;
+ 964              		.loc 1 89 22 is_stmt 0 view .LVU226
+ 965 00ce 0123     		movs	r3, #1
+ 966 00d0 0793     		str	r3, [sp, #28]
+  90:Src/gt911.c   **** 	GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+ 967              		.loc 1 90 2 is_stmt 1 view .LVU227
+  90:Src/gt911.c   **** 	GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+ 968              		.loc 1 90 23 is_stmt 0 view .LVU228
+ 969 00d2 4FF48813 		mov	r3, #1114112
+ 970 00d6 0893     		str	r3, [sp, #32]
+  91:Src/gt911.c   **** 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 25
+
+
+ 971              		.loc 1 91 2 is_stmt 1 view .LVU229
+  91:Src/gt911.c   **** 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 972              		.loc 1 91 23 is_stmt 0 view .LVU230
+ 973 00d8 0025     		movs	r5, #0
+ 974 00da 0995     		str	r5, [sp, #36]
+  92:Src/gt911.c   **** 	HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+ 975              		.loc 1 92 2 is_stmt 1 view .LVU231
+ 976 00dc 07A9     		add	r1, sp, #28
+ 977 00de 3046     		mov	r0, r6
+ 978 00e0 FFF7FEFF 		bl	HAL_GPIO_Init
+ 979              	.LVL66:
+  93:Src/gt911.c   **** 	HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
+ 980              		.loc 1 93 2 view .LVU232
+ 981 00e4 2A46     		mov	r2, r5
+ 982 00e6 2946     		mov	r1, r5
+ 983 00e8 0620     		movs	r0, #6
+ 984 00ea FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 985              	.LVL67:
+  94:Src/gt911.c   **** 	HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+ 986              		.loc 1 94 2 view .LVU233
+ 987 00ee 0620     		movs	r0, #6
+ 988 00f0 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 989              	.LVL68:
+  96:Src/gt911.c   **** 	return GT911_OK;
+ 990              		.loc 1 96 2 view .LVU234
+  96:Src/gt911.c   **** 	return GT911_OK;
+ 991              		.loc 1 96 9 is_stmt 0 view .LVU235
+ 992 00f4 00E0     		b	.L70
+ 993              	.L71:
+  78:Src/gt911.c   **** 		return GT911_NotResponse;
+ 994              		.loc 1 78 10 view .LVU236
+ 995 00f6 0224     		movs	r4, #2
+ 996              	.L70:
+  97:Src/gt911.c   **** }
+ 997              		.loc 1 97 1 view .LVU237
+ 998 00f8 2046     		mov	r0, r4
+ 999 00fa 0CB0     		add	sp, sp, #48
+ 1000              	.LCFI24:
+ 1001              		.cfi_def_cfa_offset 16
+ 1002              		@ sp needed
+ 1003 00fc 70BD     		pop	{r4, r5, r6, pc}
+ 1004              	.L74:
+ 1005 00fe 00BF     		.align	2
+ 1006              	.L73:
+ 1007 0100 00380240 		.word	1073887232
+ 1008 0104 00100240 		.word	1073876992
+ 1009 0108 00000000 		.word	.LANCHOR0
+ 1010 010c 00000000 		.word	.LANCHOR3
+ 1011              		.cfi_endproc
+ 1012              	.LFE130:
+ 1014              		.section	.text.GT911_GetStatus,"ax",%progbits
+ 1015              		.align	1
+ 1016              		.syntax unified
+ 1017              		.thumb
+ 1018              		.thumb_func
+ 1020              	GT911_GetStatus:
+ 1021              	.LVL69:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 26
+
+
+ 1022              	.LFB137:
+ 175:Src/gt911.c   **** static GT911_Status_t GT911_GetStatus(uint8_t* status){
+ 1023              		.loc 1 175 55 is_stmt 1 view -0
+ 1024              		.cfi_startproc
+ 1025              		@ args = 0, pretend = 0, frame = 0
+ 1026              		@ frame_needed = 0, uses_anonymous_args = 0
+ 175:Src/gt911.c   **** static GT911_Status_t GT911_GetStatus(uint8_t* status){
+ 1027              		.loc 1 175 55 is_stmt 0 view .LVU239
+ 1028 0000 10B5     		push	{r4, lr}
+ 1029              	.LCFI25:
+ 1030              		.cfi_def_cfa_offset 8
+ 1031              		.cfi_offset 4, -8
+ 1032              		.cfi_offset 14, -4
+ 1033 0002 0446     		mov	r4, r0
+ 176:Src/gt911.c   **** 	TxBuffer[0] = (GOODIX_READ_COORD_ADDR & 0xFF00) >> 8;
+ 1034              		.loc 1 176 2 is_stmt 1 view .LVU240
+ 176:Src/gt911.c   **** 	TxBuffer[0] = (GOODIX_READ_COORD_ADDR & 0xFF00) >> 8;
+ 1035              		.loc 1 176 14 is_stmt 0 view .LVU241
+ 1036 0004 0A49     		ldr	r1, .L79
+ 1037 0006 8123     		movs	r3, #129
+ 1038 0008 0B70     		strb	r3, [r1]
+ 177:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_READ_COORD_ADDR & 0xFF;
+ 1039              		.loc 1 177 2 is_stmt 1 view .LVU242
+ 177:Src/gt911.c   **** 	TxBuffer[1] = GOODIX_READ_COORD_ADDR & 0xFF;
+ 1040              		.loc 1 177 14 is_stmt 0 view .LVU243
+ 1041 000a 4E23     		movs	r3, #78
+ 1042 000c 4B70     		strb	r3, [r1, #1]
+ 178:Src/gt911.c   **** 	GT911_Status_t Result = GT911_NotResponse;
+ 1043              		.loc 1 178 2 is_stmt 1 view .LVU244
+ 1044              	.LVL70:
+ 179:Src/gt911.c   **** 	Result = GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 2);
+ 1045              		.loc 1 179 2 view .LVU245
+ 179:Src/gt911.c   **** 	Result = GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 2);
+ 1046              		.loc 1 179 11 is_stmt 0 view .LVU246
+ 1047 000e 0222     		movs	r2, #2
+ 1048 0010 1420     		movs	r0, #20
+ 1049              	.LVL71:
+ 179:Src/gt911.c   **** 	Result = GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 2);
+ 1050              		.loc 1 179 11 view .LVU247
+ 1051 0012 FFF7FEFF 		bl	GT911_I2C_Write
+ 1052              	.LVL72:
+ 180:Src/gt911.c   **** 	if(Result == GT911_OK){
+ 1053              		.loc 1 180 2 is_stmt 1 view .LVU248
+ 180:Src/gt911.c   **** 	if(Result == GT911_OK){
+ 1054              		.loc 1 180 4 is_stmt 0 view .LVU249
+ 1055 0016 00B1     		cbz	r0, .L78
+ 1056              	.LVL73:
+ 1057              	.L76:
+ 186:Src/gt911.c   **** 	return Result;
+ 1058              		.loc 1 186 2 is_stmt 1 view .LVU250
+ 187:Src/gt911.c   **** }
+ 1059              		.loc 1 187 1 is_stmt 0 view .LVU251
+ 1060 0018 10BD     		pop	{r4, pc}
+ 1061              	.LVL74:
+ 1062              	.L78:
+ 181:Src/gt911.c   **** 		Result = GT911_I2C_Read(GOODIX_ADDRESS, RxBuffer, 1);
+ 1063              		.loc 1 181 3 is_stmt 1 view .LVU252
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 27
+
+
+ 181:Src/gt911.c   **** 		Result = GT911_I2C_Read(GOODIX_ADDRESS, RxBuffer, 1);
+ 1064              		.loc 1 181 12 is_stmt 0 view .LVU253
+ 1065 001a 0122     		movs	r2, #1
+ 1066 001c 0549     		ldr	r1, .L79+4
+ 1067 001e 1420     		movs	r0, #20
+ 1068 0020 FFF7FEFF 		bl	GT911_I2C_Read
+ 1069              	.LVL75:
+ 182:Src/gt911.c   **** 		if( Result == GT911_OK){
+ 1070              		.loc 1 182 3 is_stmt 1 view .LVU254
+ 182:Src/gt911.c   **** 		if( Result == GT911_OK){
+ 1071              		.loc 1 182 5 is_stmt 0 view .LVU255
+ 1072 0024 0028     		cmp	r0, #0
+ 1073 0026 F7D1     		bne	.L76
+ 183:Src/gt911.c   **** 			*status = RxBuffer[0];
+ 1074              		.loc 1 183 4 is_stmt 1 view .LVU256
+ 183:Src/gt911.c   **** 			*status = RxBuffer[0];
+ 1075              		.loc 1 183 22 is_stmt 0 view .LVU257
+ 1076 0028 024B     		ldr	r3, .L79+4
+ 1077 002a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 183:Src/gt911.c   **** 			*status = RxBuffer[0];
+ 1078              		.loc 1 183 12 view .LVU258
+ 1079 002c 2370     		strb	r3, [r4]
+ 1080 002e F3E7     		b	.L76
+ 1081              	.L80:
+ 1082              		.align	2
+ 1083              	.L79:
+ 1084 0030 00000000 		.word	.LANCHOR1
+ 1085 0034 00000000 		.word	.LANCHOR2
+ 1086              		.cfi_endproc
+ 1087              	.LFE137:
+ 1089              		.section	.text.GT911_ReadTouch,"ax",%progbits
+ 1090              		.align	1
+ 1091              		.global	GT911_ReadTouch
+ 1092              		.syntax unified
+ 1093              		.thumb
+ 1094              		.thumb_func
+ 1096              	GT911_ReadTouch:
+ 1097              	.LVL76:
+ 1098              	.LFB131:
+  99:Src/gt911.c   **** GT911_Status_t GT911_ReadTouch(TouchCordinate_t *cordinate, uint8_t *number_of_cordinate) {
+ 1099              		.loc 1 99 91 is_stmt 1 view -0
+ 1100              		.cfi_startproc
+ 1101              		@ args = 0, pretend = 0, frame = 8
+ 1102              		@ frame_needed = 0, uses_anonymous_args = 0
+  99:Src/gt911.c   **** GT911_Status_t GT911_ReadTouch(TouchCordinate_t *cordinate, uint8_t *number_of_cordinate) {
+ 1103              		.loc 1 99 91 is_stmt 0 view .LVU260
+ 1104 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1105              	.LCFI26:
+ 1106              		.cfi_def_cfa_offset 24
+ 1107              		.cfi_offset 4, -24
+ 1108              		.cfi_offset 5, -20
+ 1109              		.cfi_offset 6, -16
+ 1110              		.cfi_offset 7, -12
+ 1111              		.cfi_offset 8, -8
+ 1112              		.cfi_offset 14, -4
+ 1113 0004 82B0     		sub	sp, sp, #8
+ 1114              	.LCFI27:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 28
+
+
+ 1115              		.cfi_def_cfa_offset 32
+ 1116 0006 0646     		mov	r6, r0
+ 1117 0008 0F46     		mov	r7, r1
+ 100:Src/gt911.c   **** 	uint8_t StatusRegister;
+ 1118              		.loc 1 100 2 is_stmt 1 view .LVU261
+ 101:Src/gt911.c   **** 	GT911_Status_t Result = GT911_NotResponse;
+ 1119              		.loc 1 101 2 view .LVU262
+ 1120              	.LVL77:
+ 102:Src/gt911.c   **** 	Result = GT911_GetStatus(&StatusRegister);
+ 1121              		.loc 1 102 2 view .LVU263
+ 102:Src/gt911.c   **** 	Result = GT911_GetStatus(&StatusRegister);
+ 1122              		.loc 1 102 11 is_stmt 0 view .LVU264
+ 1123 000a 0DF10700 		add	r0, sp, #7
+ 1124              	.LVL78:
+ 102:Src/gt911.c   **** 	Result = GT911_GetStatus(&StatusRegister);
+ 1125              		.loc 1 102 11 view .LVU265
+ 1126 000e FFF7FEFF 		bl	GT911_GetStatus
+ 1127              	.LVL79:
+ 103:Src/gt911.c   **** 	if (Result != GT911_OK) {
+ 1128              		.loc 1 103 2 is_stmt 1 view .LVU266
+ 103:Src/gt911.c   **** 	if (Result != GT911_OK) {
+ 1129              		.loc 1 103 5 is_stmt 0 view .LVU267
+ 1130 0012 8046     		mov	r8, r0
+ 1131 0014 28B9     		cbnz	r0, .L82
+ 106:Src/gt911.c   **** 	if ((StatusRegister & 0x80) != 0) {
+ 1132              		.loc 1 106 2 is_stmt 1 view .LVU268
+ 106:Src/gt911.c   **** 	if ((StatusRegister & 0x80) != 0) {
+ 1133              		.loc 1 106 30 is_stmt 0 view .LVU269
+ 1134 0016 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1135 001a 9DF90720 		ldrsb	r2, [sp, #7]
+ 106:Src/gt911.c   **** 	if ((StatusRegister & 0x80) != 0) {
+ 1136              		.loc 1 106 5 view .LVU270
+ 1137 001e 002A     		cmp	r2, #0
+ 1138 0020 03DB     		blt	.L88
+ 1139              	.LVL80:
+ 1140              	.L82:
+ 123:Src/gt911.c   **** }
+ 1141              		.loc 1 123 1 view .LVU271
+ 1142 0022 4046     		mov	r0, r8
+ 1143 0024 02B0     		add	sp, sp, #8
+ 1144              	.LCFI28:
+ 1145              		.cfi_remember_state
+ 1146              		.cfi_def_cfa_offset 24
+ 1147              		@ sp needed
+ 1148 0026 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1149              	.LVL81:
+ 1150              	.L88:
+ 1151              	.LCFI29:
+ 1152              		.cfi_restore_state
+ 107:Src/gt911.c   **** 		*number_of_cordinate = StatusRegister & 0x0F;
+ 1153              		.loc 1 107 3 is_stmt 1 view .LVU272
+ 107:Src/gt911.c   **** 		*number_of_cordinate = StatusRegister & 0x0F;
+ 1154              		.loc 1 107 41 is_stmt 0 view .LVU273
+ 1155 002a 03F00F03 		and	r3, r3, #15
+ 107:Src/gt911.c   **** 		*number_of_cordinate = StatusRegister & 0x0F;
+ 1156              		.loc 1 107 24 view .LVU274
+ 1157 002e 3B70     		strb	r3, [r7]
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 29
+
+
+ 108:Src/gt911.c   **** 		if (*number_of_cordinate != 0) {
+ 1158              		.loc 1 108 3 is_stmt 1 view .LVU275
+ 108:Src/gt911.c   **** 		if (*number_of_cordinate != 0) {
+ 1159              		.loc 1 108 6 is_stmt 0 view .LVU276
+ 1160 0030 73BB     		cbnz	r3, .L86
+ 1161              	.LVL82:
+ 1162              	.L84:
+ 120:Src/gt911.c   **** 		GT911_SetStatus(0);
+ 1163              		.loc 1 120 3 is_stmt 1 view .LVU277
+ 1164 0032 0020     		movs	r0, #0
+ 1165 0034 FFF7FEFF 		bl	GT911_SetStatus
+ 1166              	.LVL83:
+ 1167 0038 F3E7     		b	.L82
+ 1168              	.LVL84:
+ 1169              	.L85:
+ 1170              	.LBB4:
+ 110:Src/gt911.c   **** 				TxBuffer[0] = ((GOODIX_POINT1_X_ADDR + (i* 8)) & 0xFF00) >> 8;
+ 1171              		.loc 1 110 5 discriminator 3 view .LVU278
+ 110:Src/gt911.c   **** 				TxBuffer[0] = ((GOODIX_POINT1_X_ADDR + (i* 8)) & 0xFF00) >> 8;
+ 1172              		.loc 1 110 42 is_stmt 0 discriminator 3 view .LVU279
+ 1173 003a 04F58153 		add	r3, r4, #4128
+ 1174 003e 0A33     		adds	r3, r3, #10
+ 110:Src/gt911.c   **** 				TxBuffer[0] = ((GOODIX_POINT1_X_ADDR + (i* 8)) & 0xFF00) >> 8;
+ 1175              		.loc 1 110 62 discriminator 3 view .LVU280
+ 1176 0040 43F35713 		sbfx	r3, r3, #5, #24
+ 110:Src/gt911.c   **** 				TxBuffer[0] = ((GOODIX_POINT1_X_ADDR + (i* 8)) & 0xFF00) >> 8;
+ 1177              		.loc 1 110 17 discriminator 3 view .LVU281
+ 1178 0044 1349     		ldr	r1, .L89
+ 1179 0046 0B70     		strb	r3, [r1]
+ 111:Src/gt911.c   **** 				TxBuffer[1] = (GOODIX_POINT1_X_ADDR + (i* 8)) & 0xFF;
+ 1180              		.loc 1 111 5 is_stmt 1 discriminator 3 view .LVU282
+ 111:Src/gt911.c   **** 				TxBuffer[1] = (GOODIX_POINT1_X_ADDR + (i* 8)) & 0xFF;
+ 1181              		.loc 1 111 17 is_stmt 0 discriminator 3 view .LVU283
+ 1182 0048 04F12A03 		add	r3, r4, #42
+ 1183 004c DB00     		lsls	r3, r3, #3
+ 1184 004e 4B70     		strb	r3, [r1, #1]
+ 112:Src/gt911.c   **** 				GT911_I2C_Write(GOODIX_ADDRESS, TxBuffer, 2);
+ 1185              		.loc 1 112 5 is_stmt 1 discriminator 3 view .LVU284
+ 1186 0050 0222     		movs	r2, #2
+ 1187 0052 1420     		movs	r0, #20
+ 1188 0054 FFF7FEFF 		bl	GT911_I2C_Write
+ 1189              	.LVL85:
+ 113:Src/gt911.c   **** 				GT911_I2C_Read(GOODIX_ADDRESS, RxBuffer, 6);
+ 1190              		.loc 1 113 5 discriminator 3 view .LVU285
+ 1191 0058 0F4D     		ldr	r5, .L89+4
+ 1192 005a 0622     		movs	r2, #6
+ 1193 005c 2946     		mov	r1, r5
+ 1194 005e 1420     		movs	r0, #20
+ 1195 0060 FFF7FEFF 		bl	GT911_I2C_Read
+ 1196              	.LVL86:
+ 114:Src/gt911.c   **** 				cordinate[i].x = RxBuffer[0];
+ 1197              		.loc 1 114 5 discriminator 3 view .LVU286
+ 114:Src/gt911.c   **** 				cordinate[i].x = RxBuffer[0];
+ 1198              		.loc 1 114 14 is_stmt 0 discriminator 3 view .LVU287
+ 1199 0064 06EB8402 		add	r2, r6, r4, lsl #2
+ 114:Src/gt911.c   **** 				cordinate[i].x = RxBuffer[0];
+ 1200              		.loc 1 114 30 discriminator 3 view .LVU288
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 30
+
+
+ 1201 0068 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 114:Src/gt911.c   **** 				cordinate[i].x = RxBuffer[0];
+ 1202              		.loc 1 114 20 discriminator 3 view .LVU289
+ 1203 006a 26F82430 		strh	r3, [r6, r4, lsl #2]	@ movhi
+ 115:Src/gt911.c   **** 				cordinate[i].x = (RxBuffer[1] << 8) + cordinate[i].x;
+ 1204              		.loc 1 115 5 is_stmt 1 discriminator 3 view .LVU290
+ 115:Src/gt911.c   **** 				cordinate[i].x = (RxBuffer[1] << 8) + cordinate[i].x;
+ 1205              		.loc 1 115 31 is_stmt 0 discriminator 3 view .LVU291
+ 1206 006e 6978     		ldrb	r1, [r5, #1]	@ zero_extendqisi2
+ 115:Src/gt911.c   **** 				cordinate[i].x = (RxBuffer[1] << 8) + cordinate[i].x;
+ 1207              		.loc 1 115 41 discriminator 3 view .LVU292
+ 1208 0070 03EB0123 		add	r3, r3, r1, lsl #8
+ 115:Src/gt911.c   **** 				cordinate[i].x = (RxBuffer[1] << 8) + cordinate[i].x;
+ 1209              		.loc 1 115 20 discriminator 3 view .LVU293
+ 1210 0074 26F82430 		strh	r3, [r6, r4, lsl #2]	@ movhi
+ 116:Src/gt911.c   **** 				cordinate[i].y = RxBuffer[2];
+ 1211              		.loc 1 116 5 is_stmt 1 discriminator 3 view .LVU294
+ 116:Src/gt911.c   **** 				cordinate[i].y = RxBuffer[2];
+ 1212              		.loc 1 116 30 is_stmt 0 discriminator 3 view .LVU295
+ 1213 0078 AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 116:Src/gt911.c   **** 				cordinate[i].y = RxBuffer[2];
+ 1214              		.loc 1 116 20 discriminator 3 view .LVU296
+ 1215 007a 5380     		strh	r3, [r2, #2]	@ movhi
+ 117:Src/gt911.c   **** 				cordinate[i].y = (RxBuffer[3] << 8) + cordinate[i].y;
+ 1216              		.loc 1 117 5 is_stmt 1 discriminator 3 view .LVU297
+ 117:Src/gt911.c   **** 				cordinate[i].y = (RxBuffer[3] << 8) + cordinate[i].y;
+ 1217              		.loc 1 117 31 is_stmt 0 discriminator 3 view .LVU298
+ 1218 007c E978     		ldrb	r1, [r5, #3]	@ zero_extendqisi2
+ 117:Src/gt911.c   **** 				cordinate[i].y = (RxBuffer[3] << 8) + cordinate[i].y;
+ 1219              		.loc 1 117 41 discriminator 3 view .LVU299
+ 1220 007e 03EB0123 		add	r3, r3, r1, lsl #8
+ 117:Src/gt911.c   **** 				cordinate[i].y = (RxBuffer[3] << 8) + cordinate[i].y;
+ 1221              		.loc 1 117 20 discriminator 3 view .LVU300
+ 1222 0082 5380     		strh	r3, [r2, #2]	@ movhi
+ 109:Src/gt911.c   **** 			for (uint8_t i = 0; i < *number_of_cordinate; i++) {
+ 1223              		.loc 1 109 50 is_stmt 1 discriminator 3 view .LVU301
+ 109:Src/gt911.c   **** 			for (uint8_t i = 0; i < *number_of_cordinate; i++) {
+ 1224              		.loc 1 109 51 is_stmt 0 discriminator 3 view .LVU302
+ 1225 0084 0134     		adds	r4, r4, #1
+ 1226              	.LVL87:
+ 109:Src/gt911.c   **** 			for (uint8_t i = 0; i < *number_of_cordinate; i++) {
+ 1227              		.loc 1 109 51 discriminator 3 view .LVU303
+ 1228 0086 E4B2     		uxtb	r4, r4
+ 1229              	.LVL88:
+ 1230              	.L83:
+ 109:Src/gt911.c   **** 			for (uint8_t i = 0; i < *number_of_cordinate; i++) {
+ 1231              		.loc 1 109 24 is_stmt 1 discriminator 1 view .LVU304
+ 109:Src/gt911.c   **** 			for (uint8_t i = 0; i < *number_of_cordinate; i++) {
+ 1232              		.loc 1 109 28 is_stmt 0 discriminator 1 view .LVU305
+ 1233 0088 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+ 109:Src/gt911.c   **** 			for (uint8_t i = 0; i < *number_of_cordinate; i++) {
+ 1234              		.loc 1 109 4 discriminator 1 view .LVU306
+ 1235 008a A342     		cmp	r3, r4
+ 1236 008c D5D8     		bhi	.L85
+ 1237 008e D0E7     		b	.L84
+ 1238              	.LVL89:
+ 1239              	.L86:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 31
+
+
+ 109:Src/gt911.c   **** 			for (uint8_t i = 0; i < *number_of_cordinate; i++) {
+ 1240              		.loc 1 109 17 view .LVU307
+ 1241 0090 0446     		mov	r4, r0
+ 1242 0092 F9E7     		b	.L83
+ 1243              	.L90:
+ 1244              		.align	2
+ 1245              	.L89:
+ 1246 0094 00000000 		.word	.LANCHOR1
+ 1247 0098 00000000 		.word	.LANCHOR2
+ 1248              	.LBE4:
+ 1249              		.cfi_endproc
+ 1250              	.LFE131:
+ 1252              		.section	.bss.CommunicationResult,"aw",%nobits
+ 1253              		.set	.LANCHOR3,. + 0
+ 1256              	CommunicationResult:
+ 1257 0000 00       		.space	1
+ 1258              		.section	.bss.RxBuffer,"aw",%nobits
+ 1259              		.align	2
+ 1260              		.set	.LANCHOR2,. + 0
+ 1263              	RxBuffer:
+ 1264 0000 00000000 		.space	200
+ 1264      00000000 
+ 1264      00000000 
+ 1264      00000000 
+ 1264      00000000 
+ 1265              		.section	.bss.TxBuffer,"aw",%nobits
+ 1266              		.align	2
+ 1267              		.set	.LANCHOR1,. + 0
+ 1270              	TxBuffer:
+ 1271 0000 00000000 		.space	200
+ 1271      00000000 
+ 1271      00000000 
+ 1271      00000000 
+ 1271      00000000 
+ 1272              		.section	.data.GT911_Config,"aw"
+ 1273              		.align	2
+ 1274              		.set	.LANCHOR0,. + 0
+ 1277              	GT911_Config:
+ 1278 0000 81000458 		.ascii	"\201\000\004X\002\012\014 \001\010(\005P<\017\005\000"
+ 1278      020A0C20 
+ 1278      01082805 
+ 1278      503C0F05 
+ 1278      00
+ 1279 0011 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\211*\013-+"
+ 1279      00000000 
+ 1279      0000892A 
+ 1279      0B2D2B
+ 1280 0020 0F0A0000 		.ascii	"\017\012\000\000\001\251\003-\000\001\000\000\000\003"
+ 1280      01A9032D 
+ 1280      00010000 
+ 1280      0003
+ 1281 002e 00000000 		.ascii	"\000\000\000\000\000!Y\224\305\002\007\000\000\004\223"
+ 1281      00215994 
+ 1281      C5020700 
+ 1281      000493
+ 1282 003d 24007D2C 		.ascii	"$\000},\000k6\000]B\000SP\000S\000\000\000\000\000\000"
+ 1282      006B3600 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 32
+
+
+ 1282      5D420053 
+ 1282      50005300 
+ 1282      00000000 
+ 1283 0052 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1283      00000000 
+ 1283      00000000 
+ 1283      00
+ 1284 005f 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1284      00000000 
+ 1284      00000000 
+ 1284      00
+ 1285 006c 00000000 		.ascii	"\000\000\000\000\002\004\006\010\012\014\016\020\022"
+ 1285      02040608 
+ 1285      0A0C0E10 
+ 1285      12
+ 1286 0079 1416FFFF 		.ascii	"\024\026\377\377\377\000\000\000\000\000\000\000\000"
+ 1286      FF000000 
+ 1286      00000000 
+ 1286      00
+ 1287 0086 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\002\004\006\010"
+ 1287      00000000 
+ 1287      00020406 
+ 1287      08
+ 1288 0093 0A0F1012 		.ascii	"\012\017\020\022\026\030\034\035\036\037 !\"$\377\377"
+ 1288      16181C1D 
+ 1288      1E1F2021 
+ 1288      2224FFFF 
+ 1289 00a3 FFFFFFFF 		.ascii	"\377\377\377\377\377\000\000\000\000\000\000\000\000"
+ 1289      FF000000 
+ 1289      00000000 
+ 1289      00
+ 1290 00b0 00000000 		.ascii	"\000\000\000\000\000\000\000\000\326\001"
+ 1290      00000000 
+ 1290      D601
+ 1291              		.text
+ 1292              	.Letext0:
+ 1293              		.file 2 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\machine\\_default_typ
+ 1294              		.file 3 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1295              		.file 4 "Inc/gt911.h"
+ 1296              		.file 5 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/CMSIS/Device/ST/
+ 1297              		.file 6 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Dr
+ 1298              		.file 7 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Dr
+ 1299              		.file 8 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Dr
+ 1300              		.file 9 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_Dr
+ 1301              		.file 10 "Inc/i2c.h"
+ 1302              		.file 11 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_D
+ 1303              		.file 12 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Drivers/STM32F4xx_HAL_D
+ 1304              		.file 13 "<built-in>"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 33
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 gt911.c
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:20     .text.GT911_CalculateCheckSum:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:25     .text.GT911_CalculateCheckSum:00000000 GT911_CalculateCheckSum
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:80     .text.GT911_CalculateCheckSum:00000030 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:85     .text.GT911_INT_Input:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:91     .text.GT911_INT_Input:00000000 GT911_INT_Input
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:132    .text.GT911_INT_Input:00000024 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:137    .text.GT911_INT_Output:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:143    .text.GT911_INT_Output:00000000 GT911_INT_Output
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:187    .text.GT911_INT_Output:00000024 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:192    .text.GT911_RST_Control:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:198    .text.GT911_RST_Control:00000000 GT911_RST_Control
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:241    .text.GT911_RST_Control:0000001c $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:246    .text.GT911_INT_Control:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:252    .text.GT911_INT_Control:00000000 GT911_INT_Control
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:295    .text.GT911_INT_Control:0000001c $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:300    .text.GT911_Delay:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:306    .text.GT911_Delay:00000000 GT911_Delay
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:328    .text.GT911_Reset:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:333    .text.GT911_Reset:00000000 GT911_Reset
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:384    .text.GT911_I2C_Init:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:390    .text.GT911_I2C_Init:00000000 GT911_I2C_Init
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:405    .text.GT911_I2C_Write:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:411    .text.GT911_I2C_Write:00000000 GT911_I2C_Write
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:480    .text.GT911_I2C_Write:0000003c $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:485    .text.GT911_SendConfig:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:490    .text.GT911_SendConfig:00000000 GT911_SendConfig
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:531    .text.GT911_SendConfig:00000028 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:537    .text.GT911_SetCommandRegister:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:542    .text.GT911_SetCommandRegister:00000000 GT911_SetCommandRegister
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:580    .text.GT911_SetCommandRegister:00000018 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:585    .text.GT911_SetStatus:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:590    .text.GT911_SetStatus:00000000 GT911_SetStatus
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:628    .text.GT911_SetStatus:00000018 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:633    .text.GT911_I2C_Read:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:639    .text.GT911_I2C_Read:00000000 GT911_I2C_Read
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:708    .text.GT911_I2C_Read:0000003c $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:713    .text.GT911_GetProductID:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:718    .text.GT911_GetProductID:00000000 GT911_GetProductID
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:780    .text.GT911_GetProductID:00000030 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:786    .text.GT911_Init:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:792    .text.GT911_Init:00000000 GT911_Init
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1007   .text.GT911_Init:00000100 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1015   .text.GT911_GetStatus:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1020   .text.GT911_GetStatus:00000000 GT911_GetStatus
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1084   .text.GT911_GetStatus:00000030 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1090   .text.GT911_ReadTouch:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1096   .text.GT911_ReadTouch:00000000 GT911_ReadTouch
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1246   .text.GT911_ReadTouch:00000094 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1256   .bss.CommunicationResult:00000000 CommunicationResult
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1257   .bss.CommunicationResult:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1259   .bss.RxBuffer:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1263   .bss.RxBuffer:00000000 RxBuffer
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1266   .bss.TxBuffer:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1270   .bss.TxBuffer:00000000 TxBuffer
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1273   .data.GT911_Config:00000000 $d
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s 			page 34
+
+
+C:\Users\BLACK_~1\AppData\Local\Temp\ccGX63W5.s:1277   .data.GT911_Config:00000000 GT911_Config
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+HAL_GPIO_WritePin
+HAL_Delay
+HAL_I2C_Master_Transmit
+hi2c1
+memcpy
+HAL_I2C_Master_Receive
+HAL_GPIO_DeInit
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ

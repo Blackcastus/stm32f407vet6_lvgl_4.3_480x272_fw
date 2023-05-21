@@ -1,0 +1,1313 @@
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"lv_bio_safety_main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.rodata.home_create.str1.4,"aMS",%progbits,1
+  20              		.align	2
+  21              	.LC0:
+  22 0000 4974656D 		.ascii	"Item: %d\000"
+  22      3A202564 
+  22      00
+  23              		.section	.text.home_create,"ax",%progbits
+  24              		.align	1
+  25              		.syntax unified
+  26              		.thumb
+  27              		.thumb_func
+  29              	home_create:
+  30              	.LVL0:
+  31              	.LFB185:
+  32              		.file 1 "lv_bio_safety/lv_bio_safety_main.c"
+   1:lv_bio_safety/lv_bio_safety_main.c **** #include "lv_bio_safety_main.h"
+   2:lv_bio_safety/lv_bio_safety_main.c **** #include "lvgl.h"
+   3:lv_bio_safety/lv_bio_safety_main.c **** 
+   4:lv_bio_safety/lv_bio_safety_main.c **** typedef enum {
+   5:lv_bio_safety/lv_bio_safety_main.c ****     DISP_SMALL,
+   6:lv_bio_safety/lv_bio_safety_main.c ****     DISP_MEDIUM,
+   7:lv_bio_safety/lv_bio_safety_main.c ****     DISP_LARGE,
+   8:lv_bio_safety/lv_bio_safety_main.c **** }disp_size_t;
+   9:lv_bio_safety/lv_bio_safety_main.c **** 
+  10:lv_bio_safety/lv_bio_safety_main.c **** /**********************
+  11:lv_bio_safety/lv_bio_safety_main.c ****  *  STATIC VARIABLES
+  12:lv_bio_safety/lv_bio_safety_main.c ****  **********************/
+  13:lv_bio_safety/lv_bio_safety_main.c **** static disp_size_t disp_size;
+  14:lv_bio_safety/lv_bio_safety_main.c **** static lv_obj_t * tv;
+  15:lv_bio_safety/lv_bio_safety_main.c **** static lv_obj_t * calendar;
+  16:lv_bio_safety/lv_bio_safety_main.c **** static lv_obj_t * calendar_header;
+  17:lv_bio_safety/lv_bio_safety_main.c **** static lv_style_t style_text_muted;
+  18:lv_bio_safety/lv_bio_safety_main.c **** static lv_style_t style_title;
+  19:lv_bio_safety/lv_bio_safety_main.c **** static lv_style_t style_icon;
+  20:lv_bio_safety/lv_bio_safety_main.c **** static lv_style_t style_bullet;
+  21:lv_bio_safety/lv_bio_safety_main.c **** 
+  22:lv_bio_safety/lv_bio_safety_main.c **** static lv_obj_t * meter1;
+  23:lv_bio_safety/lv_bio_safety_main.c **** static lv_obj_t * meter2;
+  24:lv_bio_safety/lv_bio_safety_main.c **** static lv_obj_t * meter3;
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 2
+
+
+  25:lv_bio_safety/lv_bio_safety_main.c **** 
+  26:lv_bio_safety/lv_bio_safety_main.c **** static lv_obj_t * chart1;
+  27:lv_bio_safety/lv_bio_safety_main.c **** static lv_obj_t * chart2;
+  28:lv_bio_safety/lv_bio_safety_main.c **** static lv_obj_t * chart3;
+  29:lv_bio_safety/lv_bio_safety_main.c **** 
+  30:lv_bio_safety/lv_bio_safety_main.c **** static lv_chart_series_t * ser1;
+  31:lv_bio_safety/lv_bio_safety_main.c **** static lv_chart_series_t * ser2;
+  32:lv_bio_safety/lv_bio_safety_main.c **** static lv_chart_series_t * ser3;
+  33:lv_bio_safety/lv_bio_safety_main.c **** static lv_chart_series_t * ser4;
+  34:lv_bio_safety/lv_bio_safety_main.c **** static const lv_font_t * font_large;
+  35:lv_bio_safety/lv_bio_safety_main.c **** static const lv_font_t * font_normal;
+  36:lv_bio_safety/lv_bio_safety_main.c **** 
+  37:lv_bio_safety/lv_bio_safety_main.c **** static void home_create(lv_obj_t * parent);
+  38:lv_bio_safety/lv_bio_safety_main.c **** 
+  39:lv_bio_safety/lv_bio_safety_main.c **** void lv_bio_safety(void)
+  40:lv_bio_safety/lv_bio_safety_main.c **** {
+  41:lv_bio_safety/lv_bio_safety_main.c **** 	if(LV_HOR_RES <= 320) disp_size = DISP_SMALL;
+  42:lv_bio_safety/lv_bio_safety_main.c ****     else if(LV_HOR_RES < 720) disp_size = DISP_MEDIUM;
+  43:lv_bio_safety/lv_bio_safety_main.c ****     else disp_size = DISP_LARGE;
+  44:lv_bio_safety/lv_bio_safety_main.c **** 
+  45:lv_bio_safety/lv_bio_safety_main.c ****     font_large = LV_FONT_DEFAULT;
+  46:lv_bio_safety/lv_bio_safety_main.c ****     font_normal = LV_FONT_DEFAULT;
+  47:lv_bio_safety/lv_bio_safety_main.c ****     lv_coord_t tab_h;
+  48:lv_bio_safety/lv_bio_safety_main.c ****     if(disp_size == DISP_LARGE) 
+  49:lv_bio_safety/lv_bio_safety_main.c ****     {
+  50:lv_bio_safety/lv_bio_safety_main.c ****     	tab_h = 70;
+  51:lv_bio_safety/lv_bio_safety_main.c **** #if LV_FONT_MONTSERRAT_24
+  52:lv_bio_safety/lv_bio_safety_main.c ****         font_large     =  &lv_font_montserrat_24;
+  53:lv_bio_safety/lv_bio_safety_main.c **** #else
+  54:lv_bio_safety/lv_bio_safety_main.c ****         LV_LOG_WARN("LV_FONT_MONTSERRAT_24 is not enabled for the widgets demo. Using LV_FONT_DEFAU
+  55:lv_bio_safety/lv_bio_safety_main.c **** #endif
+  56:lv_bio_safety/lv_bio_safety_main.c **** #if LV_FONT_MONTSERRAT_16
+  57:lv_bio_safety/lv_bio_safety_main.c ****         font_normal    =  &lv_font_montserrat_16;
+  58:lv_bio_safety/lv_bio_safety_main.c **** #else
+  59:lv_bio_safety/lv_bio_safety_main.c ****         LV_LOG_WARN("LV_FONT_MONTSERRAT_16 is not enabled for the widgets demo. Using LV_FONT_DEFAU
+  60:lv_bio_safety/lv_bio_safety_main.c **** #endif
+  61:lv_bio_safety/lv_bio_safety_main.c ****     } 
+  62:lv_bio_safety/lv_bio_safety_main.c ****     else if(disp_size == DISP_MEDIUM) 
+  63:lv_bio_safety/lv_bio_safety_main.c ****     {
+  64:lv_bio_safety/lv_bio_safety_main.c ****         tab_h = 45;
+  65:lv_bio_safety/lv_bio_safety_main.c **** #if LV_FONT_MONTSERRAT_20
+  66:lv_bio_safety/lv_bio_safety_main.c ****         font_large     =  &lv_font_montserrat_20;
+  67:lv_bio_safety/lv_bio_safety_main.c **** #else
+  68:lv_bio_safety/lv_bio_safety_main.c ****         LV_LOG_WARN("LV_FONT_MONTSERRAT_20 is not enabled for the widgets demo. Using LV_FONT_DEFAU
+  69:lv_bio_safety/lv_bio_safety_main.c **** #endif
+  70:lv_bio_safety/lv_bio_safety_main.c **** #if LV_FONT_MONTSERRAT_14
+  71:lv_bio_safety/lv_bio_safety_main.c ****         font_normal    =  &lv_font_montserrat_14;
+  72:lv_bio_safety/lv_bio_safety_main.c **** #else
+  73:lv_bio_safety/lv_bio_safety_main.c ****         LV_LOG_WARN("LV_FONT_MONTSERRAT_14 is not enabled for the widgets demo. Using LV_FONT_DEFAU
+  74:lv_bio_safety/lv_bio_safety_main.c **** #endif
+  75:lv_bio_safety/lv_bio_safety_main.c ****     } 
+  76:lv_bio_safety/lv_bio_safety_main.c ****     else 
+  77:lv_bio_safety/lv_bio_safety_main.c ****     { /* disp_size == DISP_SMALL */
+  78:lv_bio_safety/lv_bio_safety_main.c ****         tab_h = 45;
+  79:lv_bio_safety/lv_bio_safety_main.c **** #if LV_FONT_MONTSERRAT_18
+  80:lv_bio_safety/lv_bio_safety_main.c ****         font_large     =  &lv_font_montserrat_18;
+  81:lv_bio_safety/lv_bio_safety_main.c **** #else
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 3
+
+
+  82:lv_bio_safety/lv_bio_safety_main.c ****     LV_LOG_WARN("LV_FONT_MONTSERRAT_18 is not enabled for the widgets demo. Using LV_FONT_DEFAULT i
+  83:lv_bio_safety/lv_bio_safety_main.c **** #endif
+  84:lv_bio_safety/lv_bio_safety_main.c **** #if LV_FONT_MONTSERRAT_12
+  85:lv_bio_safety/lv_bio_safety_main.c ****         font_normal    =  &lv_font_montserrat_12;
+  86:lv_bio_safety/lv_bio_safety_main.c **** #else
+  87:lv_bio_safety/lv_bio_safety_main.c ****     LV_LOG_WARN("LV_FONT_MONTSERRAT_12 is not enabled for the widgets demo. Using LV_FONT_DEFAULT i
+  88:lv_bio_safety/lv_bio_safety_main.c **** #endif
+  89:lv_bio_safety/lv_bio_safety_main.c ****     }
+  90:lv_bio_safety/lv_bio_safety_main.c **** #if LV_USE_THEME_DEFAULT
+  91:lv_bio_safety/lv_bio_safety_main.c ****     lv_theme_default_init(NULL, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), 
+  92:lv_bio_safety/lv_bio_safety_main.c **** #endif
+  93:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_init(&style_text_muted);
+  94:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_set_text_opa(&style_text_muted, LV_OPA_50);
+  95:lv_bio_safety/lv_bio_safety_main.c **** 
+  96:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_init(&style_title);
+  97:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_set_text_font(&style_title, font_large);
+  98:lv_bio_safety/lv_bio_safety_main.c **** 
+  99:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_init(&style_icon);
+ 100:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_set_text_color(&style_icon, lv_theme_get_color_primary(NULL));
+ 101:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_set_text_font(&style_icon, font_large);
+ 102:lv_bio_safety/lv_bio_safety_main.c **** 
+ 103:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_init(&style_bullet);
+ 104:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_set_border_width(&style_bullet, 0);
+ 105:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_set_radius(&style_bullet, LV_RADIUS_CIRCLE);
+ 106:lv_bio_safety/lv_bio_safety_main.c **** 
+ 107:lv_bio_safety/lv_bio_safety_main.c ****     tv = lv_tabview_create(lv_scr_act(), LV_DIR_TOP, tab_h);
+ 108:lv_bio_safety/lv_bio_safety_main.c **** 
+ 109:lv_bio_safety/lv_bio_safety_main.c ****     lv_obj_set_style_text_font(lv_scr_act(), font_normal, 0);
+ 110:lv_bio_safety/lv_bio_safety_main.c **** 
+ 111:lv_bio_safety/lv_bio_safety_main.c ****     if(disp_size == DISP_LARGE) {
+ 112:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_t * tab_btns = lv_tabview_get_tab_btns(tv);
+ 113:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_set_style_pad_left(tab_btns, LV_HOR_RES / 2, 0);
+ 114:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_t * logo = lv_img_create(tab_btns);
+ 115:lv_bio_safety/lv_bio_safety_main.c ****         LV_IMG_DECLARE(img_lvgl_logo);
+ 116:lv_bio_safety/lv_bio_safety_main.c ****         lv_img_set_src(logo, &img_lvgl_logo);
+ 117:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_align(logo, LV_ALIGN_LEFT_MID, -LV_HOR_RES / 2 + 25, 0);
+ 118:lv_bio_safety/lv_bio_safety_main.c **** 
+ 119:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_t * label = lv_label_create(tab_btns);
+ 120:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_add_style(label, &style_title, 0);
+ 121:lv_bio_safety/lv_bio_safety_main.c ****         lv_label_set_text(label, "LVGL v8");
+ 122:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_align_to(label, logo, LV_ALIGN_OUT_RIGHT_TOP, 10, 0);
+ 123:lv_bio_safety/lv_bio_safety_main.c **** 
+ 124:lv_bio_safety/lv_bio_safety_main.c ****         label = lv_label_create(tab_btns);
+ 125:lv_bio_safety/lv_bio_safety_main.c ****         lv_label_set_text(label, "Widgets demo");
+ 126:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_add_style(label, &style_text_muted, 0);
+ 127:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_align_to(label, logo, LV_ALIGN_OUT_RIGHT_BOTTOM, 10, 0);
+ 128:lv_bio_safety/lv_bio_safety_main.c ****     }
+ 129:lv_bio_safety/lv_bio_safety_main.c ****     //lv_obj_t * t1 = lv_tabview_add_tab(tv, "Home");
+ 130:lv_bio_safety/lv_bio_safety_main.c ****     //lv_obj_t * t2 = lv_tabview_add_tab(tv, "Settings");
+ 131:lv_bio_safety/lv_bio_safety_main.c ****     //lv_obj_t * t3 = lv_tabview_add_tab(tv, "Visuals");
+ 132:lv_bio_safety/lv_bio_safety_main.c ****     home_create(lv_scr_act());
+ 133:lv_bio_safety/lv_bio_safety_main.c **** }
+ 134:lv_bio_safety/lv_bio_safety_main.c **** 
+ 135:lv_bio_safety/lv_bio_safety_main.c **** static void home_create(lv_obj_t * parent)
+ 136:lv_bio_safety/lv_bio_safety_main.c **** {
+  33              		.loc 1 136 1 view -0
+  34              		.cfi_startproc
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 4
+
+
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 0, uses_anonymous_args = 0
+  37              		.loc 1 136 1 is_stmt 0 view .LVU1
+  38 0000 70B5     		push	{r4, r5, r6, lr}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 16
+  41              		.cfi_offset 4, -16
+  42              		.cfi_offset 5, -12
+  43              		.cfi_offset 6, -8
+  44              		.cfi_offset 14, -4
+ 137:lv_bio_safety/lv_bio_safety_main.c **** 	lv_obj_t * cont_row = lv_obj_create(parent);
+  45              		.loc 1 137 2 is_stmt 1 view .LVU2
+  46              		.loc 1 137 24 is_stmt 0 view .LVU3
+  47 0002 FFF7FEFF 		bl	lv_obj_create
+  48              	.LVL1:
+  49              		.loc 1 137 24 view .LVU4
+  50 0006 0646     		mov	r6, r0
+  51              	.LVL2:
+ 138:lv_bio_safety/lv_bio_safety_main.c **** 	lv_obj_set_size(cont_row, 480, 100);
+  52              		.loc 1 138 2 is_stmt 1 view .LVU5
+  53 0008 6422     		movs	r2, #100
+  54 000a 4FF4F071 		mov	r1, #480
+  55 000e FFF7FEFF 		bl	lv_obj_set_size
+  56              	.LVL3:
+ 139:lv_bio_safety/lv_bio_safety_main.c **** 	lv_obj_align(cont_row, LV_ALIGN_BOTTOM_MID, 0, 5);
+  57              		.loc 1 139 2 view .LVU6
+  58 0012 0523     		movs	r3, #5
+  59 0014 0022     		movs	r2, #0
+  60 0016 1946     		mov	r1, r3
+  61 0018 3046     		mov	r0, r6
+  62 001a FFF7FEFF 		bl	lv_obj_align
+  63              	.LVL4:
+ 140:lv_bio_safety/lv_bio_safety_main.c **** 	lv_obj_set_flex_flow(cont_row, LV_FLEX_FLOW_ROW);
+  64              		.loc 1 140 2 view .LVU7
+  65 001e 0021     		movs	r1, #0
+  66 0020 3046     		mov	r0, r6
+  67 0022 FFF7FEFF 		bl	lv_obj_set_flex_flow
+  68              	.LVL5:
+ 141:lv_bio_safety/lv_bio_safety_main.c **** 
+ 142:lv_bio_safety/lv_bio_safety_main.c **** 	/* Create a container with COLUMN flex direction*/
+ 143:lv_bio_safety/lv_bio_safety_main.c **** 	// lv_obj_t * cont_col = lv_obj_create(parent);
+ 144:lv_bio_safety/lv_bio_safety_main.c **** 	// lv_obj_set_size(cont_col, 200, 150);
+ 145:lv_bio_safety/lv_bio_safety_main.c **** 	// lv_obj_align_to(cont_col, cont_row, LV_ALIGN_OUT_BOTTOM_MID, 0, 5);
+ 146:lv_bio_safety/lv_bio_safety_main.c **** 	// lv_obj_set_flex_flow(cont_col, LV_FLEX_FLOW_COLUMN);
+ 147:lv_bio_safety/lv_bio_safety_main.c **** 
+ 148:lv_bio_safety/lv_bio_safety_main.c **** 	for(int i = 0; i < 5; i++)
+  69              		.loc 1 148 2 view .LVU8
+  70              	.LBB6:
+  71              		.loc 1 148 6 view .LVU9
+  72              		.loc 1 148 10 is_stmt 0 view .LVU10
+  73 0026 0024     		movs	r4, #0
+  74              		.loc 1 148 2 view .LVU11
+  75 0028 17E0     		b	.L2
+  76              	.LVL6:
+  77              	.L3:
+  78              	.LBB7:
+ 149:lv_bio_safety/lv_bio_safety_main.c **** 	{
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 5
+
+
+ 150:lv_bio_safety/lv_bio_safety_main.c **** 		lv_obj_t * obj;
+  79              		.loc 1 150 3 is_stmt 1 discriminator 3 view .LVU12
+ 151:lv_bio_safety/lv_bio_safety_main.c **** 		lv_obj_t * label;
+  80              		.loc 1 151 3 discriminator 3 view .LVU13
+ 152:lv_bio_safety/lv_bio_safety_main.c **** 		/*Add items to row*/
+ 153:lv_bio_safety/lv_bio_safety_main.c **** 		obj = lv_btn_create(cont_row);
+  81              		.loc 1 153 3 discriminator 3 view .LVU14
+  82              		.loc 1 153 9 is_stmt 0 discriminator 3 view .LVU15
+  83 002a 3046     		mov	r0, r6
+  84 002c FFF7FEFF 		bl	lv_btn_create
+  85              	.LVL7:
+  86 0030 0546     		mov	r5, r0
+  87              	.LVL8:
+ 154:lv_bio_safety/lv_bio_safety_main.c **** 		lv_obj_set_size(obj, 80, LV_PCT(100));
+  88              		.loc 1 154 3 is_stmt 1 discriminator 3 view .LVU16
+  89 0032 42F26402 		movw	r2, #8292
+  90 0036 5021     		movs	r1, #80
+  91 0038 FFF7FEFF 		bl	lv_obj_set_size
+  92              	.LVL9:
+ 155:lv_bio_safety/lv_bio_safety_main.c **** 
+ 156:lv_bio_safety/lv_bio_safety_main.c **** 		label = lv_label_create(obj);
+  93              		.loc 1 156 3 discriminator 3 view .LVU17
+  94              		.loc 1 156 11 is_stmt 0 discriminator 3 view .LVU18
+  95 003c 2846     		mov	r0, r5
+  96 003e FFF7FEFF 		bl	lv_label_create
+  97              	.LVL10:
+  98 0042 0546     		mov	r5, r0
+  99              	.LVL11:
+ 157:lv_bio_safety/lv_bio_safety_main.c **** 		lv_label_set_text_fmt(label, "Item: %d", i);
+ 100              		.loc 1 157 3 is_stmt 1 discriminator 3 view .LVU19
+ 101 0044 2246     		mov	r2, r4
+ 102 0046 0649     		ldr	r1, .L5
+ 103 0048 FFF7FEFF 		bl	lv_label_set_text_fmt
+ 104              	.LVL12:
+ 158:lv_bio_safety/lv_bio_safety_main.c **** 		lv_obj_center(label);
+ 105              		.loc 1 158 3 discriminator 3 view .LVU20
+ 106              	.LBB8:
+ 107              	.LBI8:
+ 108              		.file 2 "lvgl/src/core/lv_obj_pos.h"
+   1:lvgl/src/core/lv_obj_pos.h **** /**
+   2:lvgl/src/core/lv_obj_pos.h ****  * @file lv_obj_pos.h
+   3:lvgl/src/core/lv_obj_pos.h ****  *
+   4:lvgl/src/core/lv_obj_pos.h ****  */
+   5:lvgl/src/core/lv_obj_pos.h **** 
+   6:lvgl/src/core/lv_obj_pos.h **** #ifndef LV_OBJ_POS_H
+   7:lvgl/src/core/lv_obj_pos.h **** #define LV_OBJ_POS_H
+   8:lvgl/src/core/lv_obj_pos.h **** 
+   9:lvgl/src/core/lv_obj_pos.h **** #ifdef __cplusplus
+  10:lvgl/src/core/lv_obj_pos.h **** extern "C" {
+  11:lvgl/src/core/lv_obj_pos.h **** #endif
+  12:lvgl/src/core/lv_obj_pos.h **** 
+  13:lvgl/src/core/lv_obj_pos.h **** /*********************
+  14:lvgl/src/core/lv_obj_pos.h ****  *      INCLUDES
+  15:lvgl/src/core/lv_obj_pos.h ****  *********************/
+  16:lvgl/src/core/lv_obj_pos.h **** #include "../misc/lv_area.h"
+  17:lvgl/src/core/lv_obj_pos.h **** 
+  18:lvgl/src/core/lv_obj_pos.h **** /*********************
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 6
+
+
+  19:lvgl/src/core/lv_obj_pos.h ****  *      DEFINES
+  20:lvgl/src/core/lv_obj_pos.h ****  *********************/
+  21:lvgl/src/core/lv_obj_pos.h **** 
+  22:lvgl/src/core/lv_obj_pos.h **** /**********************
+  23:lvgl/src/core/lv_obj_pos.h ****  *      TYPEDEFS
+  24:lvgl/src/core/lv_obj_pos.h ****  **********************/
+  25:lvgl/src/core/lv_obj_pos.h **** struct _lv_obj_t;
+  26:lvgl/src/core/lv_obj_pos.h **** 
+  27:lvgl/src/core/lv_obj_pos.h **** typedef void (*lv_layout_update_cb_t)(struct _lv_obj_t *, void * user_data);
+  28:lvgl/src/core/lv_obj_pos.h **** typedef struct {
+  29:lvgl/src/core/lv_obj_pos.h ****     lv_layout_update_cb_t cb;
+  30:lvgl/src/core/lv_obj_pos.h ****     void * user_data;
+  31:lvgl/src/core/lv_obj_pos.h **** }lv_layout_dsc_t;
+  32:lvgl/src/core/lv_obj_pos.h **** 
+  33:lvgl/src/core/lv_obj_pos.h **** /**********************
+  34:lvgl/src/core/lv_obj_pos.h ****  * GLOBAL PROTOTYPES
+  35:lvgl/src/core/lv_obj_pos.h ****  **********************/
+  36:lvgl/src/core/lv_obj_pos.h **** 
+  37:lvgl/src/core/lv_obj_pos.h **** /**
+  38:lvgl/src/core/lv_obj_pos.h ****  * Set the relative the position of an object (relative to the parent's top left corner)
+  39:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+  40:lvgl/src/core/lv_obj_pos.h ****  * @param x         new distance from the left side of the parent plus the parent's left padding
+  41:lvgl/src/core/lv_obj_pos.h ****  * @param y         new distance from the top side of the parent  plus the parent's right padding
+  42:lvgl/src/core/lv_obj_pos.h ****  */
+  43:lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_pos(struct _lv_obj_t * obj, lv_coord_t x, lv_coord_t y);
+  44:lvgl/src/core/lv_obj_pos.h **** 
+  45:lvgl/src/core/lv_obj_pos.h **** /**
+  46:lvgl/src/core/lv_obj_pos.h ****  * Set the x coordinate of a object
+  47:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+  48:lvgl/src/core/lv_obj_pos.h ****  * @param x         new distance from the left side from the parent plus the parent's left padding
+  49:lvgl/src/core/lv_obj_pos.h ****  */
+  50:lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_x(struct _lv_obj_t * obj, lv_coord_t x);
+  51:lvgl/src/core/lv_obj_pos.h **** 
+  52:lvgl/src/core/lv_obj_pos.h **** /**
+  53:lvgl/src/core/lv_obj_pos.h ****  * Set the y coordinate of a object
+  54:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+  55:lvgl/src/core/lv_obj_pos.h ****  * @param y         new distance from the top of the parent  plus the parent's top padding
+  56:lvgl/src/core/lv_obj_pos.h ****  */
+  57:lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_y(struct _lv_obj_t * obj, lv_coord_t y);
+  58:lvgl/src/core/lv_obj_pos.h **** 
+  59:lvgl/src/core/lv_obj_pos.h **** /**
+  60:lvgl/src/core/lv_obj_pos.h ****  * Set the size of an object.
+  61:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+  62:lvgl/src/core/lv_obj_pos.h ****  * @param w         the new width
+  63:lvgl/src/core/lv_obj_pos.h ****  * @param h         the new height
+  64:lvgl/src/core/lv_obj_pos.h ****  * @note            possible values are:
+  65:lvgl/src/core/lv_obj_pos.h ****  *                  pixel               simple set the size accordingly
+  66:lvgl/src/core/lv_obj_pos.h ****  *                  LV_SIZE_CONTENT     set the size to involve all children in the given direction
+  67:lvgl/src/core/lv_obj_pos.h ****  *                  LV_SIZE_PCT(x)     to set size in percentage of the parent's content area size 
+  68:lvgl/src/core/lv_obj_pos.h ****  *                                      x should be in [0..1000]% range
+  69:lvgl/src/core/lv_obj_pos.h ****  */
+  70:lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_size(struct _lv_obj_t * obj, lv_coord_t w, lv_coord_t h);
+  71:lvgl/src/core/lv_obj_pos.h **** 
+  72:lvgl/src/core/lv_obj_pos.h **** /**
+  73:lvgl/src/core/lv_obj_pos.h ****  * Recalculate the size of the object
+  74:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+  75:lvgl/src/core/lv_obj_pos.h ****  * @return          true: the size has been changed
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 7
+
+
+  76:lvgl/src/core/lv_obj_pos.h ****  */
+  77:lvgl/src/core/lv_obj_pos.h **** bool lv_obj_refr_size(struct _lv_obj_t * obj);
+  78:lvgl/src/core/lv_obj_pos.h **** 
+  79:lvgl/src/core/lv_obj_pos.h **** /**
+  80:lvgl/src/core/lv_obj_pos.h ****  * Set the width of an object
+  81:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+  82:lvgl/src/core/lv_obj_pos.h ****  * @param w         the new width
+  83:lvgl/src/core/lv_obj_pos.h ****  * @note            possible values are:
+  84:lvgl/src/core/lv_obj_pos.h ****  *                  pixel               simple set the size accordingly
+  85:lvgl/src/core/lv_obj_pos.h ****  *                  LV_SIZE_CONTENT     set the size to involve all children in the given direction
+  86:lvgl/src/core/lv_obj_pos.h ****  *                  lv_pct(x)           to set size in percentage of the parent's content area size
+  87:lvgl/src/core/lv_obj_pos.h ****  *                                      x should be in [0..1000]% range
+  88:lvgl/src/core/lv_obj_pos.h ****  */
+  89:lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_width(struct _lv_obj_t * obj, lv_coord_t w);
+  90:lvgl/src/core/lv_obj_pos.h **** 
+  91:lvgl/src/core/lv_obj_pos.h **** /**
+  92:lvgl/src/core/lv_obj_pos.h ****  * Set the height of an object
+  93:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+  94:lvgl/src/core/lv_obj_pos.h ****  * @param h         the new height
+  95:lvgl/src/core/lv_obj_pos.h ****  * @note            possible values are:
+  96:lvgl/src/core/lv_obj_pos.h ****  *                  pixel               simple set the size accordingly
+  97:lvgl/src/core/lv_obj_pos.h ****  *                  LV_SIZE_CONTENT     set the size to involve all children in the given direction
+  98:lvgl/src/core/lv_obj_pos.h ****  *                  lv_pct(x)           to set size in percentage of the parent's content area size
+  99:lvgl/src/core/lv_obj_pos.h ****  *                                      x should be in [0..1000]% range
+ 100:lvgl/src/core/lv_obj_pos.h ****  */
+ 101:lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_height(struct _lv_obj_t * obj, lv_coord_t h);
+ 102:lvgl/src/core/lv_obj_pos.h **** 
+ 103:lvgl/src/core/lv_obj_pos.h **** /**
+ 104:lvgl/src/core/lv_obj_pos.h ****  * Set the width reduced by the left and right padding and the border width.
+ 105:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+ 106:lvgl/src/core/lv_obj_pos.h ****  * @param w         the width without paddings in pixels
+ 107:lvgl/src/core/lv_obj_pos.h ****  */
+ 108:lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_content_width(struct _lv_obj_t * obj, lv_coord_t w);
+ 109:lvgl/src/core/lv_obj_pos.h **** 
+ 110:lvgl/src/core/lv_obj_pos.h **** /**
+ 111:lvgl/src/core/lv_obj_pos.h ****  * Set the height reduced by the top and bottom padding and the border width.
+ 112:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+ 113:lvgl/src/core/lv_obj_pos.h ****  * @param h         the height without paddings in pixels
+ 114:lvgl/src/core/lv_obj_pos.h ****  */
+ 115:lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_content_height(struct _lv_obj_t * obj, lv_coord_t h);
+ 116:lvgl/src/core/lv_obj_pos.h **** 
+ 117:lvgl/src/core/lv_obj_pos.h **** /**
+ 118:lvgl/src/core/lv_obj_pos.h ****  * Set a layout for an object
+ 119:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object
+ 120:lvgl/src/core/lv_obj_pos.h ****  * @param layout    pointer to a layout descriptor to set
+ 121:lvgl/src/core/lv_obj_pos.h ****  */
+ 122:lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_layout(struct _lv_obj_t * obj, uint32_t layout);
+ 123:lvgl/src/core/lv_obj_pos.h **** 
+ 124:lvgl/src/core/lv_obj_pos.h **** /**
+ 125:lvgl/src/core/lv_obj_pos.h ****  * Test whether the and object is positioned by a layout or not
+ 126:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object to test
+ 127:lvgl/src/core/lv_obj_pos.h ****  * @return true:    positioned by a layout; false: not positioned by a layout
+ 128:lvgl/src/core/lv_obj_pos.h ****  */
+ 129:lvgl/src/core/lv_obj_pos.h **** bool lv_obj_is_layout_positioned(const struct _lv_obj_t * obj);
+ 130:lvgl/src/core/lv_obj_pos.h **** 
+ 131:lvgl/src/core/lv_obj_pos.h **** /**
+ 132:lvgl/src/core/lv_obj_pos.h ****  * Mark the object for layout update.
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 8
+
+
+ 133:lvgl/src/core/lv_obj_pos.h ****  * @param obj      pointer to an object whose children needs to be updated
+ 134:lvgl/src/core/lv_obj_pos.h ****  */
+ 135:lvgl/src/core/lv_obj_pos.h **** void lv_obj_mark_layout_as_dirty(struct _lv_obj_t * obj);
+ 136:lvgl/src/core/lv_obj_pos.h **** 
+ 137:lvgl/src/core/lv_obj_pos.h **** /**
+ 138:lvgl/src/core/lv_obj_pos.h ****  * Update the layout of an object.
+ 139:lvgl/src/core/lv_obj_pos.h ****  * @param obj      pointer to an object whose children needs to be updated
+ 140:lvgl/src/core/lv_obj_pos.h ****  */
+ 141:lvgl/src/core/lv_obj_pos.h **** void lv_obj_update_layout(const struct _lv_obj_t * obj);
+ 142:lvgl/src/core/lv_obj_pos.h **** 
+ 143:lvgl/src/core/lv_obj_pos.h **** /**
+ 144:lvgl/src/core/lv_obj_pos.h ****  * Regsiter a new layout
+ 145:lvgl/src/core/lv_obj_pos.h ****  * @param cb        the layout update callback
+ 146:lvgl/src/core/lv_obj_pos.h ****  * @param user_data custom data that will be passed to `cb`
+ 147:lvgl/src/core/lv_obj_pos.h ****  * @return          the ID of the new layout
+ 148:lvgl/src/core/lv_obj_pos.h ****  */
+ 149:lvgl/src/core/lv_obj_pos.h **** uint32_t lv_layout_register(lv_layout_update_cb_t cb, void * user_data);
+ 150:lvgl/src/core/lv_obj_pos.h **** 
+ 151:lvgl/src/core/lv_obj_pos.h **** /**
+ 152:lvgl/src/core/lv_obj_pos.h ****  * Change the alignment of an object.
+ 153:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object to align
+ 154:lvgl/src/core/lv_obj_pos.h ****  * @param align     type of alignment (see 'lv_align_t' enum) `LV_ALIGN_OUT_...` can't be used.
+ 155:lvgl/src/core/lv_obj_pos.h ****  */
+ 156:lvgl/src/core/lv_obj_pos.h **** void lv_obj_set_align(struct _lv_obj_t * obj, lv_align_t align);
+ 157:lvgl/src/core/lv_obj_pos.h **** 
+ 158:lvgl/src/core/lv_obj_pos.h **** /**
+ 159:lvgl/src/core/lv_obj_pos.h ****  * Change the alignment of an object and set new coordinates.
+ 160:lvgl/src/core/lv_obj_pos.h ****  * Equivalent to:
+ 161:lvgl/src/core/lv_obj_pos.h ****  * lv_obj_set_align(obj, align);
+ 162:lvgl/src/core/lv_obj_pos.h ****  * lv_obj_set_pos(obj, x_ofs, y_ofs);
+ 163:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object to align
+ 164:lvgl/src/core/lv_obj_pos.h ****  * @param align     type of alignment (see 'lv_align_t' enum) `LV_ALIGN_OUT_...` can't be used.
+ 165:lvgl/src/core/lv_obj_pos.h ****  * @param x_ofs     x coordinate offset after alignment
+ 166:lvgl/src/core/lv_obj_pos.h ****  * @param y_ofs     y coordinate offset after alignment
+ 167:lvgl/src/core/lv_obj_pos.h ****  */
+ 168:lvgl/src/core/lv_obj_pos.h **** void lv_obj_align(struct _lv_obj_t * obj, lv_align_t align, lv_coord_t x_ofs, lv_coord_t y_ofs);
+ 169:lvgl/src/core/lv_obj_pos.h **** 
+ 170:lvgl/src/core/lv_obj_pos.h **** /**
+ 171:lvgl/src/core/lv_obj_pos.h ****  * Align an object to an other object.
+ 172:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object to align
+ 173:lvgl/src/core/lv_obj_pos.h ****  * @param base      pointer to an other object (if NULL `obj`s parent is used). 'obj' will be align
+ 174:lvgl/src/core/lv_obj_pos.h ****  * @param align     type of alignment (see 'lv_align_t' enum)
+ 175:lvgl/src/core/lv_obj_pos.h ****  * @param x_ofs     x coordinate offset after alignment
+ 176:lvgl/src/core/lv_obj_pos.h ****  * @param y_ofs     y coordinate offset after alignment
+ 177:lvgl/src/core/lv_obj_pos.h ****  * @note            if the position or size of `base` changes `obj` needs to be aligned manually ag
+ 178:lvgl/src/core/lv_obj_pos.h ****  */
+ 179:lvgl/src/core/lv_obj_pos.h **** void lv_obj_align_to(struct _lv_obj_t * obj, const struct _lv_obj_t * base, lv_align_t align, lv_co
+ 180:lvgl/src/core/lv_obj_pos.h **** 
+ 181:lvgl/src/core/lv_obj_pos.h **** /**
+ 182:lvgl/src/core/lv_obj_pos.h ****  * Align an object to the center on its parent.
+ 183:lvgl/src/core/lv_obj_pos.h ****  * @param obj       pointer to an object to align
+ 184:lvgl/src/core/lv_obj_pos.h ****  * @note            if the parent size changes `obj` needs to be aligned manually again
+ 185:lvgl/src/core/lv_obj_pos.h ****  */
+ 186:lvgl/src/core/lv_obj_pos.h **** static inline void lv_obj_center(struct _lv_obj_t * obj)
+ 109              		.loc 2 186 20 discriminator 3 view .LVU21
+ 110              	.LBB9:
+ 187:lvgl/src/core/lv_obj_pos.h **** {
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 9
+
+
+ 188:lvgl/src/core/lv_obj_pos.h ****     lv_obj_align(obj, LV_ALIGN_CENTER, 0, 0);
+ 111              		.loc 2 188 5 discriminator 3 view .LVU22
+ 112 004c 0023     		movs	r3, #0
+ 113 004e 1A46     		mov	r2, r3
+ 114 0050 0921     		movs	r1, #9
+ 115 0052 2846     		mov	r0, r5
+ 116 0054 FFF7FEFF 		bl	lv_obj_align
+ 117              	.LVL13:
+ 118              		.loc 2 188 5 is_stmt 0 discriminator 3 view .LVU23
+ 119              	.LBE9:
+ 120              	.LBE8:
+ 121              	.LBE7:
+ 148:lv_bio_safety/lv_bio_safety_main.c **** 	{
+ 122              		.loc 1 148 24 is_stmt 1 discriminator 3 view .LVU24
+ 148:lv_bio_safety/lv_bio_safety_main.c **** 	{
+ 123              		.loc 1 148 25 is_stmt 0 discriminator 3 view .LVU25
+ 124 0058 0134     		adds	r4, r4, #1
+ 125              	.LVL14:
+ 126              	.L2:
+ 148:lv_bio_safety/lv_bio_safety_main.c **** 	{
+ 127              		.loc 1 148 17 is_stmt 1 discriminator 1 view .LVU26
+ 148:lv_bio_safety/lv_bio_safety_main.c **** 	{
+ 128              		.loc 1 148 2 is_stmt 0 discriminator 1 view .LVU27
+ 129 005a 042C     		cmp	r4, #4
+ 130 005c E5DD     		ble	.L3
+ 131              	.LBE6:
+ 159:lv_bio_safety/lv_bio_safety_main.c **** 
+ 160:lv_bio_safety/lv_bio_safety_main.c **** 		// /* Add items to the column*/
+ 161:lv_bio_safety/lv_bio_safety_main.c **** 		// obj = lv_btn_create(cont_col);
+ 162:lv_bio_safety/lv_bio_safety_main.c **** 		// lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
+ 163:lv_bio_safety/lv_bio_safety_main.c **** 
+ 164:lv_bio_safety/lv_bio_safety_main.c **** 		// label = lv_label_create(obj);
+ 165:lv_bio_safety/lv_bio_safety_main.c **** 		// lv_label_set_text_fmt(label, "Item: %d", i);
+ 166:lv_bio_safety/lv_bio_safety_main.c **** 		// lv_obj_center(label);
+ 167:lv_bio_safety/lv_bio_safety_main.c **** 	}
+ 168:lv_bio_safety/lv_bio_safety_main.c ****     
+ 169:lv_bio_safety/lv_bio_safety_main.c **** }...
+ 132              		.loc 1 169 1 view .LVU28
+ 133 005e 70BD     		pop	{r4, r5, r6, pc}
+ 134              	.LVL15:
+ 135              	.L6:
+ 136              		.loc 1 169 1 view .LVU29
+ 137              		.align	2
+ 138              	.L5:
+ 139 0060 00000000 		.word	.LC0
+ 140              		.cfi_endproc
+ 141              	.LFE185:
+ 143              		.section	.rodata.lv_bio_safety.str1.4,"aMS",%progbits,1
+ 144              		.align	2
+ 145              	.LC1:
+ 146 0000 4C56474C 		.ascii	"LVGL v8\000"
+ 146      20763800 
+ 147              		.align	2
+ 148              	.LC2:
+ 149 0008 57696467 		.ascii	"Widgets demo\000"
+ 149      65747320 
+ 149      64656D6F 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 10
+
+
+ 149      00
+ 150              		.section	.text.lv_bio_safety,"ax",%progbits
+ 151              		.align	1
+ 152              		.global	lv_bio_safety
+ 153              		.syntax unified
+ 154              		.thumb
+ 155              		.thumb_func
+ 157              	lv_bio_safety:
+ 158              	.LFB184:
+  40:lv_bio_safety/lv_bio_safety_main.c **** {
+ 159              		.loc 1 40 1 is_stmt 1 view -0
+ 160              		.cfi_startproc
+ 161              		@ args = 0, pretend = 0, frame = 0
+ 162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 163 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 164              	.LCFI1:
+ 165              		.cfi_def_cfa_offset 20
+ 166              		.cfi_offset 4, -20
+ 167              		.cfi_offset 5, -16
+ 168              		.cfi_offset 6, -12
+ 169              		.cfi_offset 7, -8
+ 170              		.cfi_offset 14, -4
+ 171 0002 83B0     		sub	sp, sp, #12
+ 172              	.LCFI2:
+ 173              		.cfi_def_cfa_offset 32
+  41:lv_bio_safety/lv_bio_safety_main.c **** 	if(LV_HOR_RES <= 320) disp_size = DISP_SMALL;
+ 174              		.loc 1 41 2 view .LVU31
+  41:lv_bio_safety/lv_bio_safety_main.c **** 	if(LV_HOR_RES <= 320) disp_size = DISP_SMALL;
+ 175              		.loc 1 41 5 is_stmt 0 view .LVU32
+ 176 0004 FFF7FEFF 		bl	lv_disp_get_default
+ 177              	.LVL16:
+ 178 0008 FFF7FEFF 		bl	lv_disp_get_hor_res
+ 179              	.LVL17:
+  41:lv_bio_safety/lv_bio_safety_main.c **** 	if(LV_HOR_RES <= 320) disp_size = DISP_SMALL;
+ 180              		.loc 1 41 4 view .LVU33
+ 181 000c B0F5A07F 		cmp	r0, #320
+ 182 0010 67DC     		bgt	.L8
+  41:lv_bio_safety/lv_bio_safety_main.c **** 	if(LV_HOR_RES <= 320) disp_size = DISP_SMALL;
+ 183              		.loc 1 41 24 is_stmt 1 discriminator 1 view .LVU34
+  41:lv_bio_safety/lv_bio_safety_main.c **** 	if(LV_HOR_RES <= 320) disp_size = DISP_SMALL;
+ 184              		.loc 1 41 34 is_stmt 0 discriminator 1 view .LVU35
+ 185 0012 644B     		ldr	r3, .L17
+ 186 0014 0022     		movs	r2, #0
+ 187 0016 1A70     		strb	r2, [r3]
+ 188              	.L9:
+  45:lv_bio_safety/lv_bio_safety_main.c ****     font_large = LV_FONT_DEFAULT;
+ 189              		.loc 1 45 5 is_stmt 1 view .LVU36
+  45:lv_bio_safety/lv_bio_safety_main.c ****     font_large = LV_FONT_DEFAULT;
+ 190              		.loc 1 45 16 is_stmt 0 view .LVU37
+ 191 0018 634B     		ldr	r3, .L17+4
+ 192 001a 644A     		ldr	r2, .L17+8
+ 193 001c 1360     		str	r3, [r2]
+  46:lv_bio_safety/lv_bio_safety_main.c ****     font_normal = LV_FONT_DEFAULT;
+ 194              		.loc 1 46 5 is_stmt 1 view .LVU38
+  46:lv_bio_safety/lv_bio_safety_main.c ****     font_normal = LV_FONT_DEFAULT;
+ 195              		.loc 1 46 17 is_stmt 0 view .LVU39
+ 196 001e 644A     		ldr	r2, .L17+12
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 11
+
+
+ 197 0020 1360     		str	r3, [r2]
+  47:lv_bio_safety/lv_bio_safety_main.c ****     lv_coord_t tab_h;
+ 198              		.loc 1 47 5 is_stmt 1 view .LVU40
+  48:lv_bio_safety/lv_bio_safety_main.c ****     if(disp_size == DISP_LARGE) 
+ 199              		.loc 1 48 5 view .LVU41
+  48:lv_bio_safety/lv_bio_safety_main.c ****     if(disp_size == DISP_LARGE) 
+ 200              		.loc 1 48 18 is_stmt 0 view .LVU42
+ 201 0022 604B     		ldr	r3, .L17
+ 202 0024 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  48:lv_bio_safety/lv_bio_safety_main.c ****     if(disp_size == DISP_LARGE) 
+ 203              		.loc 1 48 7 view .LVU43
+ 204 0026 022B     		cmp	r3, #2
+ 205 0028 6AD0     		beq	.L15
+  78:lv_bio_safety/lv_bio_safety_main.c ****         tab_h = 45;
+ 206              		.loc 1 78 15 view .LVU44
+ 207 002a 2D27     		movs	r7, #45
+ 208              	.L11:
+ 209              	.LVL18:
+  91:lv_bio_safety/lv_bio_safety_main.c ****     lv_theme_default_init(NULL, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), 
+ 210              		.loc 1 91 5 is_stmt 1 view .LVU45
+ 211 002c 0520     		movs	r0, #5
+ 212 002e FFF7FEFF 		bl	lv_palette_main
+ 213              	.LVL19:
+ 214 0032 0446     		mov	r4, r0	@ movhi
+ 215 0034 0020     		movs	r0, #0
+ 216 0036 FFF7FEFF 		bl	lv_palette_main
+ 217              	.LVL20:
+ 218 003a 0246     		mov	r2, r0	@ movhi
+ 219 003c 5C4D     		ldr	r5, .L17+12
+ 220 003e 2B68     		ldr	r3, [r5]
+ 221 0040 0093     		str	r3, [sp]
+ 222 0042 0023     		movs	r3, #0
+ 223 0044 2146     		mov	r1, r4	@ movhi
+ 224 0046 1846     		mov	r0, r3
+ 225 0048 FFF7FEFF 		bl	lv_theme_default_init
+ 226              	.LVL21:
+  93:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_init(&style_text_muted);
+ 227              		.loc 1 93 5 view .LVU46
+ 228 004c 594C     		ldr	r4, .L17+16
+ 229 004e 2046     		mov	r0, r4
+ 230 0050 FFF7FEFF 		bl	lv_style_init
+ 231              	.LVL22:
+  94:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_set_text_opa(&style_text_muted, LV_OPA_50);
+ 232              		.loc 1 94 5 view .LVU47
+ 233 0054 7F21     		movs	r1, #127
+ 234 0056 2046     		mov	r0, r4
+ 235 0058 FFF7FEFF 		bl	lv_style_set_text_opa
+ 236              	.LVL23:
+  96:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_init(&style_title);
+ 237              		.loc 1 96 5 view .LVU48
+ 238 005c 564C     		ldr	r4, .L17+20
+ 239 005e 2046     		mov	r0, r4
+ 240 0060 FFF7FEFF 		bl	lv_style_init
+ 241              	.LVL24:
+  97:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_set_text_font(&style_title, font_large);
+ 242              		.loc 1 97 5 view .LVU49
+ 243 0064 514E     		ldr	r6, .L17+8
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 12
+
+
+ 244 0066 3168     		ldr	r1, [r6]
+ 245 0068 2046     		mov	r0, r4
+ 246 006a FFF7FEFF 		bl	lv_style_set_text_font
+ 247              	.LVL25:
+  99:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_init(&style_icon);
+ 248              		.loc 1 99 5 view .LVU50
+ 249 006e 534C     		ldr	r4, .L17+24
+ 250 0070 2046     		mov	r0, r4
+ 251 0072 FFF7FEFF 		bl	lv_style_init
+ 252              	.LVL26:
+ 100:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_set_text_color(&style_icon, lv_theme_get_color_primary(NULL));
+ 253              		.loc 1 100 5 view .LVU51
+ 254 0076 0020     		movs	r0, #0
+ 255 0078 FFF7FEFF 		bl	lv_theme_get_color_primary
+ 256              	.LVL27:
+ 257 007c 0146     		mov	r1, r0	@ movhi
+ 258 007e 2046     		mov	r0, r4
+ 259 0080 FFF7FEFF 		bl	lv_style_set_text_color
+ 260              	.LVL28:
+ 101:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_set_text_font(&style_icon, font_large);
+ 261              		.loc 1 101 5 view .LVU52
+ 262 0084 3168     		ldr	r1, [r6]
+ 263 0086 2046     		mov	r0, r4
+ 264 0088 FFF7FEFF 		bl	lv_style_set_text_font
+ 265              	.LVL29:
+ 103:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_init(&style_bullet);
+ 266              		.loc 1 103 5 view .LVU53
+ 267 008c 4C4C     		ldr	r4, .L17+28
+ 268 008e 2046     		mov	r0, r4
+ 269 0090 FFF7FEFF 		bl	lv_style_init
+ 270              	.LVL30:
+ 104:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_set_border_width(&style_bullet, 0);
+ 271              		.loc 1 104 5 view .LVU54
+ 272 0094 0021     		movs	r1, #0
+ 273 0096 2046     		mov	r0, r4
+ 274 0098 FFF7FEFF 		bl	lv_style_set_border_width
+ 275              	.LVL31:
+ 105:lv_bio_safety/lv_bio_safety_main.c ****     lv_style_set_radius(&style_bullet, LV_RADIUS_CIRCLE);
+ 276              		.loc 1 105 5 view .LVU55
+ 277 009c 47F6FF71 		movw	r1, #32767
+ 278 00a0 2046     		mov	r0, r4
+ 279 00a2 FFF7FEFF 		bl	lv_style_set_radius
+ 280              	.LVL32:
+ 107:lv_bio_safety/lv_bio_safety_main.c ****     tv = lv_tabview_create(lv_scr_act(), LV_DIR_TOP, tab_h);
+ 281              		.loc 1 107 5 view .LVU56
+ 282              	.LBB17:
+ 283              	.LBI17:
+ 284              		.file 3 "lvgl/src/core/lv_disp.h"
+   1:lvgl/src/core/lv_disp.h **** /**
+   2:lvgl/src/core/lv_disp.h ****  * @file lv_disp.h
+   3:lvgl/src/core/lv_disp.h ****  *
+   4:lvgl/src/core/lv_disp.h ****  */
+   5:lvgl/src/core/lv_disp.h **** 
+   6:lvgl/src/core/lv_disp.h **** #ifndef LV_DISP_H
+   7:lvgl/src/core/lv_disp.h **** #define LV_DISP_H
+   8:lvgl/src/core/lv_disp.h **** 
+   9:lvgl/src/core/lv_disp.h **** #ifdef __cplusplus
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 13
+
+
+  10:lvgl/src/core/lv_disp.h **** extern "C" {
+  11:lvgl/src/core/lv_disp.h **** #endif
+  12:lvgl/src/core/lv_disp.h **** 
+  13:lvgl/src/core/lv_disp.h **** /*********************
+  14:lvgl/src/core/lv_disp.h ****  *      INCLUDES
+  15:lvgl/src/core/lv_disp.h ****  *********************/
+  16:lvgl/src/core/lv_disp.h **** #include "../hal/lv_hal.h"
+  17:lvgl/src/core/lv_disp.h **** #include "lv_obj.h"
+  18:lvgl/src/core/lv_disp.h **** #include "lv_theme.h"
+  19:lvgl/src/core/lv_disp.h **** 
+  20:lvgl/src/core/lv_disp.h **** /*********************
+  21:lvgl/src/core/lv_disp.h ****  *      DEFINES
+  22:lvgl/src/core/lv_disp.h ****  *********************/
+  23:lvgl/src/core/lv_disp.h **** 
+  24:lvgl/src/core/lv_disp.h **** /**********************
+  25:lvgl/src/core/lv_disp.h ****  *      TYPEDEFS
+  26:lvgl/src/core/lv_disp.h ****  **********************/
+  27:lvgl/src/core/lv_disp.h **** 
+  28:lvgl/src/core/lv_disp.h **** typedef enum {
+  29:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_NONE,
+  30:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_OVER_LEFT,
+  31:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_OVER_RIGHT,
+  32:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_OVER_TOP,
+  33:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_OVER_BOTTOM,
+  34:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_MOVE_LEFT,
+  35:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_MOVE_RIGHT,
+  36:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_MOVE_TOP,
+  37:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_MOVE_BOTTOM,
+  38:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_FADE_ON,
+  39:lvgl/src/core/lv_disp.h **** } lv_scr_load_anim_t;
+  40:lvgl/src/core/lv_disp.h **** 
+  41:lvgl/src/core/lv_disp.h **** /**********************
+  42:lvgl/src/core/lv_disp.h ****  * GLOBAL PROTOTYPES
+  43:lvgl/src/core/lv_disp.h ****  **********************/
+  44:lvgl/src/core/lv_disp.h **** 
+  45:lvgl/src/core/lv_disp.h **** /**
+  46:lvgl/src/core/lv_disp.h ****  * Return with a pointer to the active screen
+  47:lvgl/src/core/lv_disp.h ****  * @param disp pointer to display which active screen should be get. (NULL to use the default
+  48:lvgl/src/core/lv_disp.h ****  * screen)
+  49:lvgl/src/core/lv_disp.h ****  * @return pointer to the active screen object (loaded by 'lv_scr_load()')
+  50:lvgl/src/core/lv_disp.h ****  */
+  51:lvgl/src/core/lv_disp.h **** lv_obj_t * lv_disp_get_scr_act(lv_disp_t * disp);
+  52:lvgl/src/core/lv_disp.h **** 
+  53:lvgl/src/core/lv_disp.h **** /**
+  54:lvgl/src/core/lv_disp.h ****  * Return with a pointer to the previous screen. Only used during screen transitions.
+  55:lvgl/src/core/lv_disp.h ****  * @param disp pointer to display which previous screen should be get. (NULL to use the default
+  56:lvgl/src/core/lv_disp.h ****  * screen)
+  57:lvgl/src/core/lv_disp.h ****  * @return pointer to the previous screen object or NULL if not used now
+  58:lvgl/src/core/lv_disp.h ****  */
+  59:lvgl/src/core/lv_disp.h **** lv_obj_t * lv_disp_get_scr_prev(lv_disp_t * disp);
+  60:lvgl/src/core/lv_disp.h **** 
+  61:lvgl/src/core/lv_disp.h **** /**
+  62:lvgl/src/core/lv_disp.h ****  * Make a screen active
+  63:lvgl/src/core/lv_disp.h ****  * @param scr pointer to a screen
+  64:lvgl/src/core/lv_disp.h ****  */
+  65:lvgl/src/core/lv_disp.h **** void lv_disp_load_scr(lv_obj_t * scr);
+  66:lvgl/src/core/lv_disp.h **** 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 14
+
+
+  67:lvgl/src/core/lv_disp.h **** /**
+  68:lvgl/src/core/lv_disp.h ****  * Return with the top layer. (Same on every screen and it is above the normal screen layer)
+  69:lvgl/src/core/lv_disp.h ****  * @param disp pointer to display which top layer should be get. (NULL to use the default screen)
+  70:lvgl/src/core/lv_disp.h ****  * @return pointer to the top layer object  (transparent screen sized lv_obj)
+  71:lvgl/src/core/lv_disp.h ****  */
+  72:lvgl/src/core/lv_disp.h **** lv_obj_t * lv_disp_get_layer_top(lv_disp_t * disp);
+  73:lvgl/src/core/lv_disp.h **** 
+  74:lvgl/src/core/lv_disp.h **** /**
+  75:lvgl/src/core/lv_disp.h ****  * Return with the sys. layer. (Same on every screen and it is above the normal screen and the top
+  76:lvgl/src/core/lv_disp.h ****  * layer)
+  77:lvgl/src/core/lv_disp.h ****  * @param disp pointer to display which sys. layer  should be get. (NULL to use the default screen)
+  78:lvgl/src/core/lv_disp.h ****  * @return pointer to the sys layer object  (transparent screen sized lv_obj)
+  79:lvgl/src/core/lv_disp.h ****  */
+  80:lvgl/src/core/lv_disp.h **** lv_obj_t * lv_disp_get_layer_sys(lv_disp_t * disp);
+  81:lvgl/src/core/lv_disp.h **** 
+  82:lvgl/src/core/lv_disp.h **** /**
+  83:lvgl/src/core/lv_disp.h ****  * Get the theme of a display
+  84:lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+  85:lvgl/src/core/lv_disp.h ****  * @return the display's theme (can be NULL)
+  86:lvgl/src/core/lv_disp.h ****  */
+  87:lvgl/src/core/lv_disp.h **** void lv_disp_set_theme(lv_disp_t * disp, lv_theme_t * th);
+  88:lvgl/src/core/lv_disp.h **** 
+  89:lvgl/src/core/lv_disp.h **** /**
+  90:lvgl/src/core/lv_disp.h ****  * Get the theme of a display
+  91:lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+  92:lvgl/src/core/lv_disp.h ****  * @return the display's theme (can be NULL)
+  93:lvgl/src/core/lv_disp.h ****  */
+  94:lvgl/src/core/lv_disp.h **** lv_theme_t * lv_disp_get_theme(lv_disp_t * disp);
+  95:lvgl/src/core/lv_disp.h **** 
+  96:lvgl/src/core/lv_disp.h **** /**
+  97:lvgl/src/core/lv_disp.h ****  * Set the background color of a display
+  98:lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+  99:lvgl/src/core/lv_disp.h ****  * @param color color of the background
+ 100:lvgl/src/core/lv_disp.h ****  */
+ 101:lvgl/src/core/lv_disp.h **** void lv_disp_set_bg_color(lv_disp_t * disp, lv_color_t color);
+ 102:lvgl/src/core/lv_disp.h **** 
+ 103:lvgl/src/core/lv_disp.h **** /**
+ 104:lvgl/src/core/lv_disp.h ****  * Set the background image of a display
+ 105:lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+ 106:lvgl/src/core/lv_disp.h ****  * @param img_src path to file or pointer to an `lv_img_dsc_t` variable
+ 107:lvgl/src/core/lv_disp.h ****  */
+ 108:lvgl/src/core/lv_disp.h **** void lv_disp_set_bg_image(lv_disp_t * disp, const void  * img_src);
+ 109:lvgl/src/core/lv_disp.h **** 
+ 110:lvgl/src/core/lv_disp.h **** /**
+ 111:lvgl/src/core/lv_disp.h ****  * Opacity of the background
+ 112:lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+ 113:lvgl/src/core/lv_disp.h ****  * @param opa opacity (0..255)
+ 114:lvgl/src/core/lv_disp.h ****  */
+ 115:lvgl/src/core/lv_disp.h **** void lv_disp_set_bg_opa(lv_disp_t * disp, lv_opa_t opa);
+ 116:lvgl/src/core/lv_disp.h **** 
+ 117:lvgl/src/core/lv_disp.h **** /**
+ 118:lvgl/src/core/lv_disp.h ****  * Switch screen with animation
+ 119:lvgl/src/core/lv_disp.h ****  * @param scr pointer to the new screen to load
+ 120:lvgl/src/core/lv_disp.h ****  * @param anim_type type of the animation from `lv_scr_load_anim_t`. E.g.  `LV_SCR_LOAD_ANIM_MOVE_L
+ 121:lvgl/src/core/lv_disp.h ****  * @param time time of the animation
+ 122:lvgl/src/core/lv_disp.h ****  * @param delay delay before the transition
+ 123:lvgl/src/core/lv_disp.h ****  * @param auto_del true: automatically delete the old screen
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 15
+
+
+ 124:lvgl/src/core/lv_disp.h ****  */
+ 125:lvgl/src/core/lv_disp.h **** void lv_scr_load_anim(lv_obj_t * scr, lv_scr_load_anim_t anim_type, uint32_t time, uint32_t delay, 
+ 126:lvgl/src/core/lv_disp.h **** 
+ 127:lvgl/src/core/lv_disp.h **** /**
+ 128:lvgl/src/core/lv_disp.h ****  * Get elapsed time since last user activity on a display (e.g. click)
+ 129:lvgl/src/core/lv_disp.h ****  * @param disp pointer to an display (NULL to get the overall smallest inactivity)
+ 130:lvgl/src/core/lv_disp.h ****  * @return elapsed ticks (milliseconds) since the last activity
+ 131:lvgl/src/core/lv_disp.h ****  */
+ 132:lvgl/src/core/lv_disp.h **** uint32_t lv_disp_get_inactive_time(const lv_disp_t * disp);
+ 133:lvgl/src/core/lv_disp.h **** 
+ 134:lvgl/src/core/lv_disp.h **** /**
+ 135:lvgl/src/core/lv_disp.h ****  * Manually trigger an activity on a display
+ 136:lvgl/src/core/lv_disp.h ****  * @param disp pointer to an display (NULL to use the default display)
+ 137:lvgl/src/core/lv_disp.h ****  */
+ 138:lvgl/src/core/lv_disp.h **** void lv_disp_trig_activity(lv_disp_t * disp);
+ 139:lvgl/src/core/lv_disp.h **** 
+ 140:lvgl/src/core/lv_disp.h **** /**
+ 141:lvgl/src/core/lv_disp.h ****  * Clean any CPU cache that is related to the display.
+ 142:lvgl/src/core/lv_disp.h ****  * @param disp pointer to an display (NULL to use the default display)
+ 143:lvgl/src/core/lv_disp.h ****  */
+ 144:lvgl/src/core/lv_disp.h **** void lv_disp_clean_dcache(lv_disp_t * disp);
+ 145:lvgl/src/core/lv_disp.h **** 
+ 146:lvgl/src/core/lv_disp.h **** /**
+ 147:lvgl/src/core/lv_disp.h ****  * Get a pointer to the screen refresher timer to
+ 148:lvgl/src/core/lv_disp.h ****  * modify its parameters with `lv_timer_...` functions.
+ 149:lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+ 150:lvgl/src/core/lv_disp.h ****  * @return pointer to the display refresher timer. (NULL on error)
+ 151:lvgl/src/core/lv_disp.h ****  */
+ 152:lvgl/src/core/lv_disp.h **** lv_timer_t * _lv_disp_get_refr_timer(lv_disp_t * disp);
+ 153:lvgl/src/core/lv_disp.h **** 
+ 154:lvgl/src/core/lv_disp.h **** /*------------------------------------------------
+ 155:lvgl/src/core/lv_disp.h ****  * To improve backward compatibility
+ 156:lvgl/src/core/lv_disp.h ****  * Recommended only if you have one display
+ 157:lvgl/src/core/lv_disp.h ****  *------------------------------------------------*/
+ 158:lvgl/src/core/lv_disp.h **** 
+ 159:lvgl/src/core/lv_disp.h **** /**
+ 160:lvgl/src/core/lv_disp.h ****  * Get the active screen of the default display
+ 161:lvgl/src/core/lv_disp.h ****  * @return pointer to the active screen
+ 162:lvgl/src/core/lv_disp.h ****  */
+ 163:lvgl/src/core/lv_disp.h **** static inline lv_obj_t * lv_scr_act(void)
+ 285              		.loc 3 163 26 view .LVU57
+ 286              	.LBB18:
+ 164:lvgl/src/core/lv_disp.h **** {
+ 165:lvgl/src/core/lv_disp.h ****     return lv_disp_get_scr_act(lv_disp_get_default());
+ 287              		.loc 3 165 5 view .LVU58
+ 288              		.loc 3 165 12 is_stmt 0 view .LVU59
+ 289 00a6 FFF7FEFF 		bl	lv_disp_get_default
+ 290              	.LVL33:
+ 291 00aa FFF7FEFF 		bl	lv_disp_get_scr_act
+ 292              	.LVL34:
+ 293              	.LBE18:
+ 294              	.LBE17:
+ 107:lv_bio_safety/lv_bio_safety_main.c ****     tv = lv_tabview_create(lv_scr_act(), LV_DIR_TOP, tab_h);
+ 295              		.loc 1 107 10 view .LVU60
+ 296 00ae 3A46     		mov	r2, r7
+ 297 00b0 0421     		movs	r1, #4
+ 298 00b2 FFF7FEFF 		bl	lv_tabview_create
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 16
+
+
+ 299              	.LVL35:
+ 107:lv_bio_safety/lv_bio_safety_main.c ****     tv = lv_tabview_create(lv_scr_act(), LV_DIR_TOP, tab_h);
+ 300              		.loc 1 107 8 view .LVU61
+ 301 00b6 434B     		ldr	r3, .L17+32
+ 302 00b8 1860     		str	r0, [r3]
+ 109:lv_bio_safety/lv_bio_safety_main.c ****     lv_obj_set_style_text_font(lv_scr_act(), font_normal, 0);
+ 303              		.loc 1 109 5 is_stmt 1 view .LVU62
+ 304              	.LBB19:
+ 305              	.LBI19:
+ 163:lvgl/src/core/lv_disp.h **** {
+ 306              		.loc 3 163 26 view .LVU63
+ 307              	.LBB20:
+ 308              		.loc 3 165 5 view .LVU64
+ 309              		.loc 3 165 12 is_stmt 0 view .LVU65
+ 310 00ba FFF7FEFF 		bl	lv_disp_get_default
+ 311              	.LVL36:
+ 312 00be FFF7FEFF 		bl	lv_disp_get_scr_act
+ 313              	.LVL37:
+ 314              	.LBE20:
+ 315              	.LBE19:
+ 109:lv_bio_safety/lv_bio_safety_main.c ****     lv_obj_set_style_text_font(lv_scr_act(), font_normal, 0);
+ 316              		.loc 1 109 5 view .LVU66
+ 317 00c2 0022     		movs	r2, #0
+ 318 00c4 2968     		ldr	r1, [r5]
+ 319 00c6 FFF7FEFF 		bl	lv_obj_set_style_text_font
+ 320              	.LVL38:
+ 111:lv_bio_safety/lv_bio_safety_main.c ****     if(disp_size == DISP_LARGE) {
+ 321              		.loc 1 111 5 is_stmt 1 view .LVU67
+ 111:lv_bio_safety/lv_bio_safety_main.c ****     if(disp_size == DISP_LARGE) {
+ 322              		.loc 1 111 18 is_stmt 0 view .LVU68
+ 323 00ca 364B     		ldr	r3, .L17
+ 324 00cc 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 111:lv_bio_safety/lv_bio_safety_main.c ****     if(disp_size == DISP_LARGE) {
+ 325              		.loc 1 111 7 view .LVU69
+ 326 00ce 022B     		cmp	r3, #2
+ 327 00d0 18D0     		beq	.L16
+ 328              	.LVL39:
+ 329              	.L12:
+ 132:lv_bio_safety/lv_bio_safety_main.c ****     home_create(lv_scr_act());
+ 330              		.loc 1 132 5 is_stmt 1 view .LVU70
+ 331              	.LBB21:
+ 332              	.LBI21:
+ 163:lvgl/src/core/lv_disp.h **** {
+ 333              		.loc 3 163 26 view .LVU71
+ 334              	.LBB22:
+ 335              		.loc 3 165 5 view .LVU72
+ 336              		.loc 3 165 12 is_stmt 0 view .LVU73
+ 337 00d2 FFF7FEFF 		bl	lv_disp_get_default
+ 338              	.LVL40:
+ 339 00d6 FFF7FEFF 		bl	lv_disp_get_scr_act
+ 340              	.LVL41:
+ 341              	.LBE22:
+ 342              	.LBE21:
+ 132:lv_bio_safety/lv_bio_safety_main.c ****     home_create(lv_scr_act());
+ 343              		.loc 1 132 5 view .LVU74
+ 344 00da FFF7FEFF 		bl	home_create
+ 345              	.LVL42:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 17
+
+
+ 133:lv_bio_safety/lv_bio_safety_main.c **** }
+ 346              		.loc 1 133 1 view .LVU75
+ 347 00de 03B0     		add	sp, sp, #12
+ 348              	.LCFI3:
+ 349              		.cfi_remember_state
+ 350              		.cfi_def_cfa_offset 20
+ 351              		@ sp needed
+ 352 00e0 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 353              	.L8:
+ 354              	.LCFI4:
+ 355              		.cfi_restore_state
+  42:lv_bio_safety/lv_bio_safety_main.c ****     else if(LV_HOR_RES < 720) disp_size = DISP_MEDIUM;
+ 356              		.loc 1 42 10 is_stmt 1 view .LVU76
+  42:lv_bio_safety/lv_bio_safety_main.c ****     else if(LV_HOR_RES < 720) disp_size = DISP_MEDIUM;
+ 357              		.loc 1 42 13 is_stmt 0 view .LVU77
+ 358 00e2 FFF7FEFF 		bl	lv_disp_get_default
+ 359              	.LVL43:
+ 360 00e6 FFF7FEFF 		bl	lv_disp_get_hor_res
+ 361              	.LVL44:
+  42:lv_bio_safety/lv_bio_safety_main.c ****     else if(LV_HOR_RES < 720) disp_size = DISP_MEDIUM;
+ 362              		.loc 1 42 12 view .LVU78
+ 363 00ea B0F5347F 		cmp	r0, #720
+ 364 00ee 03DA     		bge	.L10
+  42:lv_bio_safety/lv_bio_safety_main.c ****     else if(LV_HOR_RES < 720) disp_size = DISP_MEDIUM;
+ 365              		.loc 1 42 31 is_stmt 1 discriminator 1 view .LVU79
+  42:lv_bio_safety/lv_bio_safety_main.c ****     else if(LV_HOR_RES < 720) disp_size = DISP_MEDIUM;
+ 366              		.loc 1 42 41 is_stmt 0 discriminator 1 view .LVU80
+ 367 00f0 2C4B     		ldr	r3, .L17
+ 368 00f2 0122     		movs	r2, #1
+ 369 00f4 1A70     		strb	r2, [r3]
+ 370 00f6 8FE7     		b	.L9
+ 371              	.L10:
+  43:lv_bio_safety/lv_bio_safety_main.c ****     else disp_size = DISP_LARGE;
+ 372              		.loc 1 43 10 is_stmt 1 view .LVU81
+  43:lv_bio_safety/lv_bio_safety_main.c ****     else disp_size = DISP_LARGE;
+ 373              		.loc 1 43 20 is_stmt 0 view .LVU82
+ 374 00f8 2A4B     		ldr	r3, .L17
+ 375 00fa 0222     		movs	r2, #2
+ 376 00fc 1A70     		strb	r2, [r3]
+ 377 00fe 8BE7     		b	.L9
+ 378              	.L15:
+  50:lv_bio_safety/lv_bio_safety_main.c ****     	tab_h = 70;
+ 379              		.loc 1 50 12 view .LVU83
+ 380 0100 4627     		movs	r7, #70
+ 381 0102 93E7     		b	.L11
+ 382              	.LVL45:
+ 383              	.L16:
+ 384              	.LBB23:
+ 112:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_t * tab_btns = lv_tabview_get_tab_btns(tv);
+ 385              		.loc 1 112 9 is_stmt 1 view .LVU84
+ 112:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_t * tab_btns = lv_tabview_get_tab_btns(tv);
+ 386              		.loc 1 112 31 is_stmt 0 view .LVU85
+ 387 0104 2F4B     		ldr	r3, .L17+32
+ 388 0106 1868     		ldr	r0, [r3]
+ 389 0108 FFF7FEFF 		bl	lv_tabview_get_tab_btns
+ 390              	.LVL46:
+ 391 010c 0446     		mov	r4, r0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 18
+
+
+ 392              	.LVL47:
+ 113:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_set_style_pad_left(tab_btns, LV_HOR_RES / 2, 0);
+ 393              		.loc 1 113 9 is_stmt 1 view .LVU86
+ 113:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_set_style_pad_left(tab_btns, LV_HOR_RES / 2, 0);
+ 394              		.loc 1 113 45 is_stmt 0 view .LVU87
+ 395 010e FFF7FEFF 		bl	lv_disp_get_default
+ 396              	.LVL48:
+ 113:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_set_style_pad_left(tab_btns, LV_HOR_RES / 2, 0);
+ 397              		.loc 1 113 45 view .LVU88
+ 398 0112 FFF7FEFF 		bl	lv_disp_get_hor_res
+ 399              	.LVL49:
+ 113:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_set_style_pad_left(tab_btns, LV_HOR_RES / 2, 0);
+ 400              		.loc 1 113 9 view .LVU89
+ 401 0116 00EBD070 		add	r0, r0, r0, lsr #31
+ 402 011a 0022     		movs	r2, #0
+ 403 011c 40F34F01 		sbfx	r1, r0, #1, #16
+ 404 0120 2046     		mov	r0, r4
+ 405 0122 FFF7FEFF 		bl	lv_obj_set_style_pad_left
+ 406              	.LVL50:
+ 114:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_t * logo = lv_img_create(tab_btns);
+ 407              		.loc 1 114 9 is_stmt 1 view .LVU90
+ 114:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_t * logo = lv_img_create(tab_btns);
+ 408              		.loc 1 114 27 is_stmt 0 view .LVU91
+ 409 0126 2046     		mov	r0, r4
+ 410 0128 FFF7FEFF 		bl	lv_img_create
+ 411              	.LVL51:
+ 412 012c 0546     		mov	r5, r0
+ 413              	.LVL52:
+ 115:lv_bio_safety/lv_bio_safety_main.c ****         LV_IMG_DECLARE(img_lvgl_logo);
+ 414              		.loc 1 115 9 is_stmt 1 view .LVU92
+ 115:lv_bio_safety/lv_bio_safety_main.c ****         LV_IMG_DECLARE(img_lvgl_logo);
+ 415              		.loc 1 115 38 view .LVU93
+ 116:lv_bio_safety/lv_bio_safety_main.c ****         lv_img_set_src(logo, &img_lvgl_logo);
+ 416              		.loc 1 116 9 view .LVU94
+ 417 012e 2649     		ldr	r1, .L17+36
+ 418 0130 FFF7FEFF 		bl	lv_img_set_src
+ 419              	.LVL53:
+ 117:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_align(logo, LV_ALIGN_LEFT_MID, -LV_HOR_RES / 2 + 25, 0);
+ 420              		.loc 1 117 9 view .LVU95
+ 117:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_align(logo, LV_ALIGN_LEFT_MID, -LV_HOR_RES / 2 + 25, 0);
+ 421              		.loc 1 117 48 is_stmt 0 view .LVU96
+ 422 0134 FFF7FEFF 		bl	lv_disp_get_default
+ 423              	.LVL54:
+ 424 0138 FFF7FEFF 		bl	lv_disp_get_hor_res
+ 425              	.LVL55:
+ 117:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_align(logo, LV_ALIGN_LEFT_MID, -LV_HOR_RES / 2 + 25, 0);
+ 426              		.loc 1 117 59 view .LVU97
+ 427 013c 00EBD072 		add	r2, r0, r0, lsr #31
+ 428 0140 5210     		asrs	r2, r2, #1
+ 429 0142 5242     		rsbs	r2, r2, #0
+ 430 0144 92B2     		uxth	r2, r2
+ 117:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_align(logo, LV_ALIGN_LEFT_MID, -LV_HOR_RES / 2 + 25, 0);
+ 431              		.loc 1 117 63 view .LVU98
+ 432 0146 1932     		adds	r2, r2, #25
+ 117:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_align(logo, LV_ALIGN_LEFT_MID, -LV_HOR_RES / 2 + 25, 0);
+ 433              		.loc 1 117 9 view .LVU99
+ 434 0148 0023     		movs	r3, #0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 19
+
+
+ 435 014a 12B2     		sxth	r2, r2
+ 436 014c 0721     		movs	r1, #7
+ 437 014e 2846     		mov	r0, r5
+ 438 0150 FFF7FEFF 		bl	lv_obj_align
+ 439              	.LVL56:
+ 119:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_t * label = lv_label_create(tab_btns);
+ 440              		.loc 1 119 9 is_stmt 1 view .LVU100
+ 119:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_t * label = lv_label_create(tab_btns);
+ 441              		.loc 1 119 28 is_stmt 0 view .LVU101
+ 442 0154 2046     		mov	r0, r4
+ 443 0156 FFF7FEFF 		bl	lv_label_create
+ 444              	.LVL57:
+ 445 015a 0646     		mov	r6, r0
+ 446              	.LVL58:
+ 120:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_add_style(label, &style_title, 0);
+ 447              		.loc 1 120 9 is_stmt 1 view .LVU102
+ 448 015c 0022     		movs	r2, #0
+ 449 015e 1649     		ldr	r1, .L17+20
+ 450 0160 FFF7FEFF 		bl	lv_obj_add_style
+ 451              	.LVL59:
+ 121:lv_bio_safety/lv_bio_safety_main.c ****         lv_label_set_text(label, "LVGL v8");
+ 452              		.loc 1 121 9 view .LVU103
+ 453 0164 1949     		ldr	r1, .L17+40
+ 454 0166 3046     		mov	r0, r6
+ 455 0168 FFF7FEFF 		bl	lv_label_set_text
+ 456              	.LVL60:
+ 122:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_align_to(label, logo, LV_ALIGN_OUT_RIGHT_TOP, 10, 0);
+ 457              		.loc 1 122 9 view .LVU104
+ 458 016c 0027     		movs	r7, #0
+ 459              	.LVL61:
+ 122:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_align_to(label, logo, LV_ALIGN_OUT_RIGHT_TOP, 10, 0);
+ 460              		.loc 1 122 9 is_stmt 0 view .LVU105
+ 461 016e 0097     		str	r7, [sp]
+ 462 0170 0A23     		movs	r3, #10
+ 463 0172 1322     		movs	r2, #19
+ 464 0174 2946     		mov	r1, r5
+ 465 0176 3046     		mov	r0, r6
+ 466 0178 FFF7FEFF 		bl	lv_obj_align_to
+ 467              	.LVL62:
+ 124:lv_bio_safety/lv_bio_safety_main.c ****         label = lv_label_create(tab_btns);
+ 468              		.loc 1 124 9 is_stmt 1 view .LVU106
+ 124:lv_bio_safety/lv_bio_safety_main.c ****         label = lv_label_create(tab_btns);
+ 469              		.loc 1 124 17 is_stmt 0 view .LVU107
+ 470 017c 2046     		mov	r0, r4
+ 471 017e FFF7FEFF 		bl	lv_label_create
+ 472              	.LVL63:
+ 473 0182 0446     		mov	r4, r0
+ 474              	.LVL64:
+ 125:lv_bio_safety/lv_bio_safety_main.c ****         lv_label_set_text(label, "Widgets demo");
+ 475              		.loc 1 125 9 is_stmt 1 view .LVU108
+ 476 0184 1249     		ldr	r1, .L17+44
+ 477 0186 FFF7FEFF 		bl	lv_label_set_text
+ 478              	.LVL65:
+ 126:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_add_style(label, &style_text_muted, 0);
+ 479              		.loc 1 126 9 view .LVU109
+ 480 018a 3A46     		mov	r2, r7
+ 481 018c 0949     		ldr	r1, .L17+16
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 20
+
+
+ 482 018e 2046     		mov	r0, r4
+ 483 0190 FFF7FEFF 		bl	lv_obj_add_style
+ 484              	.LVL66:
+ 127:lv_bio_safety/lv_bio_safety_main.c ****         lv_obj_align_to(label, logo, LV_ALIGN_OUT_RIGHT_BOTTOM, 10, 0);
+ 485              		.loc 1 127 9 view .LVU110
+ 486 0194 0097     		str	r7, [sp]
+ 487 0196 0A23     		movs	r3, #10
+ 488 0198 1522     		movs	r2, #21
+ 489 019a 2946     		mov	r1, r5
+ 490 019c 2046     		mov	r0, r4
+ 491 019e FFF7FEFF 		bl	lv_obj_align_to
+ 492              	.LVL67:
+ 493 01a2 96E7     		b	.L12
+ 494              	.L18:
+ 495              		.align	2
+ 496              	.L17:
+ 497 01a4 00000000 		.word	.LANCHOR0
+ 498 01a8 00000000 		.word	lv_font_montserrat_14
+ 499 01ac 00000000 		.word	.LANCHOR1
+ 500 01b0 00000000 		.word	.LANCHOR2
+ 501 01b4 00000000 		.word	.LANCHOR3
+ 502 01b8 00000000 		.word	.LANCHOR4
+ 503 01bc 00000000 		.word	.LANCHOR5
+ 504 01c0 00000000 		.word	.LANCHOR6
+ 505 01c4 00000000 		.word	.LANCHOR7
+ 506 01c8 00000000 		.word	img_lvgl_logo
+ 507 01cc 00000000 		.word	.LC1
+ 508 01d0 08000000 		.word	.LC2
+ 509              	.LBE23:
+ 510              		.cfi_endproc
+ 511              	.LFE184:
+ 513              		.section	.bss.disp_size,"aw",%nobits
+ 514              		.set	.LANCHOR0,. + 0
+ 517              	disp_size:
+ 518 0000 00       		.space	1
+ 519              		.section	.bss.font_large,"aw",%nobits
+ 520              		.align	2
+ 521              		.set	.LANCHOR1,. + 0
+ 524              	font_large:
+ 525 0000 00000000 		.space	4
+ 526              		.section	.bss.font_normal,"aw",%nobits
+ 527              		.align	2
+ 528              		.set	.LANCHOR2,. + 0
+ 531              	font_normal:
+ 532 0000 00000000 		.space	4
+ 533              		.section	.bss.style_bullet,"aw",%nobits
+ 534              		.align	2
+ 535              		.set	.LANCHOR6,. + 0
+ 538              	style_bullet:
+ 539 0000 00000000 		.space	8
+ 539      00000000 
+ 540              		.section	.bss.style_icon,"aw",%nobits
+ 541              		.align	2
+ 542              		.set	.LANCHOR5,. + 0
+ 545              	style_icon:
+ 546 0000 00000000 		.space	8
+ 546      00000000 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 21
+
+
+ 547              		.section	.bss.style_text_muted,"aw",%nobits
+ 548              		.align	2
+ 549              		.set	.LANCHOR3,. + 0
+ 552              	style_text_muted:
+ 553 0000 00000000 		.space	8
+ 553      00000000 
+ 554              		.section	.bss.style_title,"aw",%nobits
+ 555              		.align	2
+ 556              		.set	.LANCHOR4,. + 0
+ 559              	style_title:
+ 560 0000 00000000 		.space	8
+ 560      00000000 
+ 561              		.section	.bss.tv,"aw",%nobits
+ 562              		.align	2
+ 563              		.set	.LANCHOR7,. + 0
+ 566              	tv:
+ 567 0000 00000000 		.space	4
+ 568              		.text
+ 569              	.Letext0:
+ 570              		.file 4 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\machine\\_default_typ
+ 571              		.file 5 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 572              		.file 6 "lvgl/src/misc/lv_ll.h"
+ 573              		.file 7 "lvgl/src/hal/../misc/lv_color.h"
+ 574              		.file 8 "lvgl/src/hal/../misc/lv_area.h"
+ 575              		.file 9 "lvgl/src/core/lv_obj.h"
+ 576              		.file 10 "lvgl/src/core/lv_group.h"
+ 577              		.file 11 "lvgl/src/core/../misc/../font/lv_font.h"
+ 578              		.file 12 "lvgl/src/core/../misc/lv_style.h"
+ 579              		.file 13 "lvgl/src/core/lv_obj_scroll.h"
+ 580              		.file 14 "lvgl/src/core/lv_obj_style.h"
+ 581              		.file 15 "lvgl/src/core/../draw/lv_img_buf.h"
+ 582              		.file 16 "lvgl/src/core/lv_obj_class.h"
+ 583              		.file 17 "lvgl/src/core/lv_event.h"
+ 584              		.file 18 "lvgl/src/widgets/lv_bar.h"
+ 585              		.file 19 "lvgl/src/extra/widgets/chart/lv_chart.h"
+ 586              		.file 20 "lvgl/src/extra/widgets/list/../../layouts/flex/lv_flex.h"
+ 587              		.file 21 "lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h"
+ 588              		.file 22 "lvgl/src/widgets/lv_btn.h"
+ 589              		.file 23 "lvgl/src/widgets/lv_label.h"
+ 590              		.file 24 "lvgl/src/extra/widgets/tabview/lv_tabview.h"
+ 591              		.file 25 "lvgl/src/hal/lv_hal_disp.h"
+ 592              		.file 26 "lvgl/src/core/lv_obj_style_gen.h"
+ 593              		.file 27 "lvgl/src/widgets/lv_img.h"
+ 594              		.file 28 "lvgl/src/extra/themes/default/lv_theme_default.h"
+ 595              		.file 29 "lvgl/src/core/../misc/lv_style_gen.h"
+ 596              		.file 30 "lvgl/src/core/lv_theme.h"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 22
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 lv_bio_safety_main.c
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:20     .rodata.home_create.str1.4:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:24     .text.home_create:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:29     .text.home_create:00000000 home_create
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:139    .text.home_create:00000060 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:144    .rodata.lv_bio_safety.str1.4:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:151    .text.lv_bio_safety:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:157    .text.lv_bio_safety:00000000 lv_bio_safety
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:497    .text.lv_bio_safety:000001a4 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:517    .bss.disp_size:00000000 disp_size
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:518    .bss.disp_size:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:520    .bss.font_large:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:524    .bss.font_large:00000000 font_large
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:527    .bss.font_normal:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:531    .bss.font_normal:00000000 font_normal
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:534    .bss.style_bullet:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:538    .bss.style_bullet:00000000 style_bullet
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:541    .bss.style_icon:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:545    .bss.style_icon:00000000 style_icon
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:548    .bss.style_text_muted:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:552    .bss.style_text_muted:00000000 style_text_muted
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:555    .bss.style_title:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:559    .bss.style_title:00000000 style_title
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:562    .bss.tv:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s:566    .bss.tv:00000000 tv
+
+UNDEFINED SYMBOLS
+lv_obj_create
+lv_obj_set_size
+lv_obj_align
+lv_obj_set_flex_flow
+lv_btn_create
+lv_label_create
+lv_label_set_text_fmt
+lv_disp_get_default
+lv_disp_get_hor_res
+lv_palette_main
+lv_theme_default_init
+lv_style_init
+lv_style_set_text_opa
+lv_style_set_text_font
+lv_theme_get_color_primary
+lv_style_set_text_color
+lv_style_set_border_width
+lv_style_set_radius
+lv_disp_get_scr_act
+lv_tabview_create
+lv_obj_set_style_text_font
+lv_tabview_get_tab_btns
+lv_obj_set_style_pad_left
+lv_img_create
+lv_img_set_src
+lv_obj_add_style
+lv_label_set_text
+lv_obj_align_to
+lv_font_montserrat_14
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccSPimdX.s 			page 23
+
+
+img_lvgl_logo

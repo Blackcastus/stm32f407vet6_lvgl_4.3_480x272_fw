@@ -1,0 +1,1472 @@
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"ip4_addr.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ip4_addr_isbroadcast_u32,"ax",%progbits
+  20              		.align	1
+  21              		.global	ip4_addr_isbroadcast_u32
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	ip4_addr_isbroadcast_u32:
+  27              	.LVL0:
+  28              	.LFB156:
+  29              		.file 1 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+   1:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** /**
+   2:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @file
+   3:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * This is the IPv4 address tools implementation.
+   4:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *
+   5:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  */
+   6:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+   7:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** /*
+   8:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+   9:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * All rights reserved.
+  10:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *
+  11:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * Redistribution and use in source and binary forms, with or without modification,
+  12:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * are permitted provided that the following conditions are met:
+  13:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *
+  14:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * 1. Redistributions of source code must retain the above copyright notice,
+  15:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *    this list of conditions and the following disclaimer.
+  16:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice,
+  17:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *    this list of conditions and the following disclaimer in the documentation
+  18:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *    and/or other materials provided with the distribution.
+  19:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * 3. The name of the author may not be used to endorse or promote products
+  20:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *    derived from this software without specific prior written permission.
+  21:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *
+  22:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+  23:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  24:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+  25:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  26:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+  27:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  28:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  29:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 2
+
+
+  30:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  31:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * OF SUCH DAMAGE.
+  32:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *
+  33:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * This file is part of the lwIP TCP/IP stack.
+  34:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *
+  35:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * Author: Adam Dunkels <adam@sics.se>
+  36:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *
+  37:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  */
+  38:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+  39:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** #include "lwip/opt.h"
+  40:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+  41:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** #if LWIP_IPV4
+  42:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+  43:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** #include "lwip/ip_addr.h"
+  44:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** #include "lwip/netif.h"
+  45:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+  46:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** /* used by IP4_ADDR_ANY and IP_ADDR_BROADCAST in ip_addr.h */
+  47:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** const ip_addr_t ip_addr_any = IPADDR4_INIT(IPADDR_ANY);
+  48:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** const ip_addr_t ip_addr_broadcast = IPADDR4_INIT(IPADDR_BROADCAST);
+  49:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+  50:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** /**
+  51:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * Determine if an address is a broadcast address on a network interface
+  52:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *
+  53:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @param addr address to be checked
+  54:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @param netif the network interface against which the address is checked
+  55:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @return returns non-zero if the address is a broadcast address
+  56:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  */
+  57:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** u8_t
+  58:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** ip4_addr_isbroadcast_u32(u32_t addr, const struct netif *netif)
+  59:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** {
+  30              		.loc 1 59 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  35              		.loc 1 59 1 is_stmt 0 view .LVU1
+  36 0000 0346     		mov	r3, r0
+  60:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   ip4_addr_t ipaddr;
+  37              		.loc 1 60 3 is_stmt 1 view .LVU2
+  61:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   ip4_addr_set_u32(&ipaddr, addr);
+  38              		.loc 1 61 3 view .LVU3
+  62:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+  63:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   /* all ones (broadcast) or all zeroes (old skool broadcast) */
+  64:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   if ((~addr == IPADDR_ANY) ||
+  39              		.loc 1 64 3 view .LVU4
+  40              		.loc 1 64 29 is_stmt 0 view .LVU5
+  41 0002 421E     		subs	r2, r0, #1
+  42              		.loc 1 64 6 view .LVU6
+  43 0004 12F1030F 		cmn	r2, #3
+  44 0008 12D8     		bhi	.L3
+  65:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       (addr == IPADDR_ANY)) {
+  66:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     return 1;
+  67:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     /* no broadcast support on this network interface? */
+  68:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   } else if ((netif->flags & NETIF_FLAG_BROADCAST) == 0) {
+  45              		.loc 1 68 10 is_stmt 1 view .LVU7
+  46              		.loc 1 68 20 is_stmt 0 view .LVU8
+  47 000a 91F83100 		ldrb	r0, [r1, #49]	@ zero_extendqisi2
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 3
+
+
+  48              	.LVL1:
+  49              		.loc 1 68 13 view .LVU9
+  50 000e 10F00200 		ands	r0, r0, #2
+  51 0012 14D0     		beq	.L2
+  69:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     /* the given address cannot be a broadcast address
+  70:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****      * nor can we check against any broadcast addresses */
+  71:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     return 0;
+  72:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     /* address matches network interface address exactly? => no broadcast */
+  73:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   } else if (addr == ip4_addr_get_u32(netif_ip4_addr(netif))) {
+  52              		.loc 1 73 10 is_stmt 1 view .LVU10
+  53              		.loc 1 73 22 is_stmt 0 view .LVU11
+  54 0014 4A68     		ldr	r2, [r1, #4]
+  55              		.loc 1 73 13 view .LVU12
+  56 0016 9A42     		cmp	r2, r3
+  57 0018 0CD0     		beq	.L4
+  74:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     return 0;
+  75:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     /*  on the same (sub) network... */
+  76:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   } else if (ip4_addr_netcmp(&ipaddr, netif_ip4_addr(netif), netif_ip4_netmask(netif))
+  58              		.loc 1 76 10 is_stmt 1 view .LVU13
+  59              		.loc 1 76 14 is_stmt 0 view .LVU14
+  60 001a 8868     		ldr	r0, [r1, #8]
+  61 001c 5A40     		eors	r2, r2, r3
+  62              		.loc 1 76 13 view .LVU15
+  63 001e 0242     		tst	r2, r0
+  64 0020 0AD1     		bne	.L5
+  77:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****              /* ...and host identifier bits are all ones? =>... */
+  78:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****              && ((addr & ~ip4_addr_get_u32(netif_ip4_netmask(netif))) ==
+  65              		.loc 1 78 26 view .LVU16
+  66 0022 C243     		mvns	r2, r0
+  67              		.loc 1 78 24 view .LVU17
+  68 0024 23EA0003 		bic	r3, r3, r0
+  69              	.LVL2:
+  70              		.loc 1 78 14 view .LVU18
+  71 0028 9A42     		cmp	r2, r3
+  72 002a 07D0     		beq	.L6
+  79:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****                  (IPADDR_BROADCAST & ~ip4_addr_get_u32(netif_ip4_netmask(netif))))) {
+  80:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     /* => network broadcast address */
+  81:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     return 1;
+  82:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   } else {
+  83:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     return 0;
+  73              		.loc 1 83 12 view .LVU19
+  74 002c 0020     		movs	r0, #0
+  75 002e 7047     		bx	lr
+  76              	.LVL3:
+  77              	.L3:
+  66:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     /* no broadcast support on this network interface? */
+  78              		.loc 1 66 12 view .LVU20
+  79 0030 0120     		movs	r0, #1
+  80              	.LVL4:
+  66:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     /* no broadcast support on this network interface? */
+  81              		.loc 1 66 12 view .LVU21
+  82 0032 7047     		bx	lr
+  83              	.L4:
+  74:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     /*  on the same (sub) network... */
+  84              		.loc 1 74 12 view .LVU22
+  85 0034 0020     		movs	r0, #0
+  86 0036 7047     		bx	lr
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 4
+
+
+  87              	.L5:
+  88              		.loc 1 83 12 view .LVU23
+  89 0038 0020     		movs	r0, #0
+  90 003a 7047     		bx	lr
+  91              	.LVL5:
+  92              	.L6:
+  81:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   } else {
+  93              		.loc 1 81 12 view .LVU24
+  94 003c 0120     		movs	r0, #1
+  95              	.L2:
+  84:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+  85:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** }
+  96              		.loc 1 85 1 view .LVU25
+  97 003e 7047     		bx	lr
+  98              		.cfi_endproc
+  99              	.LFE156:
+ 101              		.section	.text.ip4_addr_netmask_valid,"ax",%progbits
+ 102              		.align	1
+ 103              		.global	ip4_addr_netmask_valid
+ 104              		.syntax unified
+ 105              		.thumb
+ 106              		.thumb_func
+ 108              	ip4_addr_netmask_valid:
+ 109              	.LVL6:
+ 110              	.LFB157:
+  86:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+  87:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** /** Checks if a netmask is valid (starting with ones, then only zeros)
+  88:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *
+  89:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @param netmask the IPv4 netmask to check (in network byte order!)
+  90:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @return 1 if the netmask is valid, 0 if it is not
+  91:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  */
+  92:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** u8_t
+  93:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** ip4_addr_netmask_valid(u32_t netmask)
+  94:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** {
+ 111              		.loc 1 94 1 is_stmt 1 view -0
+ 112              		.cfi_startproc
+ 113              		@ args = 0, pretend = 0, frame = 0
+ 114              		@ frame_needed = 0, uses_anonymous_args = 0
+ 115              		.loc 1 94 1 is_stmt 0 view .LVU27
+ 116 0000 08B5     		push	{r3, lr}
+ 117              	.LCFI0:
+ 118              		.cfi_def_cfa_offset 8
+ 119              		.cfi_offset 3, -8
+ 120              		.cfi_offset 14, -4
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   u32_t mask;
+ 121              		.loc 1 95 3 is_stmt 1 view .LVU28
+  96:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   u32_t nm_hostorder = lwip_htonl(netmask);
+ 122              		.loc 1 96 3 view .LVU29
+ 123              		.loc 1 96 24 is_stmt 0 view .LVU30
+ 124 0002 FFF7FEFF 		bl	lwip_htonl
+ 125              	.LVL7:
+  97:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+  98:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   /* first, check for the first zero */
+  99:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   for (mask = 1UL << 31 ; mask != 0; mask >>= 1) {
+ 126              		.loc 1 99 3 is_stmt 1 view .LVU31
+ 127              		.loc 1 99 13 is_stmt 0 view .LVU32
+ 128 0006 4FF00043 		mov	r3, #-2147483648
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 5
+
+
+ 129              	.LVL8:
+ 130              	.L8:
+ 131              		.loc 1 99 27 is_stmt 1 discriminator 1 view .LVU33
+ 132              		.loc 1 99 3 is_stmt 0 discriminator 1 view .LVU34
+ 133 000a 1BB1     		cbz	r3, .L12
+ 100:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     if ((nm_hostorder & mask) == 0) {
+ 134              		.loc 1 100 5 is_stmt 1 view .LVU35
+ 135              		.loc 1 100 8 is_stmt 0 view .LVU36
+ 136 000c 0342     		tst	r3, r0
+ 137 000e 01D0     		beq	.L12
+  99:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     if ((nm_hostorder & mask) == 0) {
+ 138              		.loc 1 99 38 is_stmt 1 discriminator 2 view .LVU37
+  99:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     if ((nm_hostorder & mask) == 0) {
+ 139              		.loc 1 99 43 is_stmt 0 discriminator 2 view .LVU38
+ 140 0010 5B08     		lsrs	r3, r3, #1
+ 141              	.LVL9:
+  99:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     if ((nm_hostorder & mask) == 0) {
+ 142              		.loc 1 99 43 discriminator 2 view .LVU39
+ 143 0012 FAE7     		b	.L8
+ 144              	.L12:
+ 101:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 102:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     }
+ 103:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ 104:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   /* then check that there is no one */
+ 105:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   for (; mask != 0; mask >>= 1) {
+ 145              		.loc 1 105 10 is_stmt 1 discriminator 1 view .LVU40
+ 146              		.loc 1 105 3 is_stmt 0 discriminator 1 view .LVU41
+ 147 0014 1BB1     		cbz	r3, .L16
+ 106:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     if ((nm_hostorder & mask) != 0) {
+ 148              		.loc 1 106 5 is_stmt 1 view .LVU42
+ 149              		.loc 1 106 8 is_stmt 0 view .LVU43
+ 150 0016 0342     		tst	r3, r0
+ 151 0018 03D1     		bne	.L14
+ 105:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     if ((nm_hostorder & mask) != 0) {
+ 152              		.loc 1 105 21 is_stmt 1 view .LVU44
+ 105:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     if ((nm_hostorder & mask) != 0) {
+ 153              		.loc 1 105 26 is_stmt 0 view .LVU45
+ 154 001a 5B08     		lsrs	r3, r3, #1
+ 155              	.LVL10:
+ 105:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     if ((nm_hostorder & mask) != 0) {
+ 156              		.loc 1 105 26 view .LVU46
+ 157 001c FAE7     		b	.L12
+ 158              	.L16:
+ 107:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       /* there is a one after the first zero -> invalid */
+ 108:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       return 0;
+ 109:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     }
+ 110:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ 111:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   /* no one after the first zero -> valid */
+ 112:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   return 1;
+ 159              		.loc 1 112 10 view .LVU47
+ 160 001e 0120     		movs	r0, #1
+ 161              	.LVL11:
+ 162              	.L11:
+ 113:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** }
+ 163              		.loc 1 113 1 view .LVU48
+ 164 0020 08BD     		pop	{r3, pc}
+ 165              	.LVL12:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 6
+
+
+ 166              	.L14:
+ 108:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     }
+ 167              		.loc 1 108 14 view .LVU49
+ 168 0022 0020     		movs	r0, #0
+ 169              	.LVL13:
+ 108:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     }
+ 170              		.loc 1 108 14 view .LVU50
+ 171 0024 FCE7     		b	.L11
+ 172              		.cfi_endproc
+ 173              	.LFE157:
+ 175              		.section	.rodata.ip4addr_aton.str1.4,"aMS",%progbits,1
+ 176              		.align	2
+ 177              	.LC0:
+ 178 0000 633A2F55 		.ascii	"c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_"
+ 178      73657273 
+ 178      2F426C61 
+ 178      636B5F4C 
+ 178      6966652F 
+ 179 0033 46575F46 		.ascii	"FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core"
+ 179      345F5631 
+ 179      2E32362E 
+ 179      322F4D69 
+ 179      64646C65 
+ 180 0066 2F697076 		.ascii	"/ipv4/ip4_addr.c\000"
+ 180      342F6970 
+ 180      345F6164 
+ 180      64722E63 
+ 180      00
+ 181 0077 00       		.align	2
+ 182              	.LC1:
+ 183 0078 756E6861 		.ascii	"unhandled\000"
+ 183      6E646C65 
+ 183      6400
+ 184 0082 0000     		.align	2
+ 185              	.LC2:
+ 186 0084 41737365 		.ascii	"Assertion \"%s\" failed at line %d in %s\012\000"
+ 186      7274696F 
+ 186      6E202225 
+ 186      73222066 
+ 186      61696C65 
+ 187              		.section	.text.ip4addr_aton,"ax",%progbits
+ 188              		.align	1
+ 189              		.global	ip4addr_aton
+ 190              		.syntax unified
+ 191              		.thumb
+ 192              		.thumb_func
+ 194              	ip4addr_aton:
+ 195              	.LVL14:
+ 196              	.LFB159:
+ 114:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 115:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** /**
+ 116:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * Ascii internet address interpretation routine.
+ 117:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * The value returned is in network order.
+ 118:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *
+ 119:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @param cp IP address in ascii representation (e.g. "127.0.0.1")
+ 120:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @return ip address in network order
+ 121:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  */
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 7
+
+
+ 122:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** u32_t
+ 123:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** ipaddr_addr(const char *cp)
+ 124:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** {
+ 125:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   ip4_addr_t val;
+ 126:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 127:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   if (ip4addr_aton(cp, &val)) {
+ 128:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     return ip4_addr_get_u32(&val);
+ 129:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ 130:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   return (IPADDR_NONE);
+ 131:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** }
+ 132:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 133:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** /**
+ 134:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * Check whether "cp" is a valid ascii representation
+ 135:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * of an Internet address and convert to a binary address.
+ 136:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * Returns 1 if the address is valid, 0 if not.
+ 137:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * This replaces inet_addr, the return value from which
+ 138:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * cannot distinguish between failure and a local broadcast address.
+ 139:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *
+ 140:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @param cp IP address in ascii representation (e.g. "127.0.0.1")
+ 141:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @param addr pointer to which to save the ip address in network order
+ 142:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @return 1 if cp could be converted to addr, 0 on failure
+ 143:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  */
+ 144:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** int
+ 145:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** ip4addr_aton(const char *cp, ip4_addr_t *addr)
+ 146:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** {
+ 197              		.loc 1 146 1 is_stmt 1 view -0
+ 198              		.cfi_startproc
+ 199              		@ args = 0, pretend = 0, frame = 16
+ 200              		@ frame_needed = 0, uses_anonymous_args = 0
+ 201              		.loc 1 146 1 is_stmt 0 view .LVU52
+ 202 0000 30B5     		push	{r4, r5, lr}
+ 203              	.LCFI1:
+ 204              		.cfi_def_cfa_offset 12
+ 205              		.cfi_offset 4, -12
+ 206              		.cfi_offset 5, -8
+ 207              		.cfi_offset 14, -4
+ 208 0002 85B0     		sub	sp, sp, #20
+ 209              	.LCFI2:
+ 210              		.cfi_def_cfa_offset 32
+ 211 0004 0D46     		mov	r5, r1
+ 147:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   u32_t val;
+ 212              		.loc 1 147 3 is_stmt 1 view .LVU53
+ 148:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   u8_t base;
+ 213              		.loc 1 148 3 view .LVU54
+ 149:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   char c;
+ 214              		.loc 1 149 3 view .LVU55
+ 150:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   u32_t parts[4];
+ 215              		.loc 1 150 3 view .LVU56
+ 151:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   u32_t *pp = parts;
+ 216              		.loc 1 151 3 view .LVU57
+ 217              	.LVL15:
+ 152:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 153:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   c = *cp;
+ 218              		.loc 1 153 3 view .LVU58
+ 219              		.loc 1 153 5 is_stmt 0 view .LVU59
+ 220 0006 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 221              	.LVL16:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 8
+
+
+ 151:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   u32_t *pp = parts;
+ 222              		.loc 1 151 10 view .LVU60
+ 223 0008 EE46     		mov	lr, sp
+ 224 000a 38E0     		b	.L27
+ 225              	.LVL17:
+ 226              	.L53:
+ 154:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   for (;;) {
+ 155:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     /*
+ 156:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****      * Collect number up to ``.''.
+ 157:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****      * Values are specified as for C:
+ 158:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****      * 0x=hex, 0=octal, 1-9=decimal.
+ 159:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****      */
+ 160:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     if (!lwip_isdigit(c)) {
+ 161:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       return 0;
+ 162:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     }
+ 163:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     val = 0;
+ 164:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     base = 10;
+ 165:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     if (c == '0') {
+ 166:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       c = *++cp;
+ 227              		.loc 1 166 7 is_stmt 1 view .LVU61
+ 228              		.loc 1 166 9 is_stmt 0 view .LVU62
+ 229 000c 421C     		adds	r2, r0, #1
+ 230              	.LVL18:
+ 231              		.loc 1 166 9 view .LVU63
+ 232 000e 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 233              	.LVL19:
+ 167:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       if (c == 'x' || c == 'X') {
+ 234              		.loc 1 167 7 is_stmt 1 view .LVU64
+ 235              		.loc 1 167 10 is_stmt 0 view .LVU65
+ 236 0010 782B     		cmp	r3, #120
+ 237 0012 04D0     		beq	.L20
+ 238              		.loc 1 167 20 discriminator 1 view .LVU66
+ 239 0014 582B     		cmp	r3, #88
+ 240 0016 02D0     		beq	.L20
+ 166:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       if (c == 'x' || c == 'X') {
+ 241              		.loc 1 166 9 view .LVU67
+ 242 0018 1046     		mov	r0, r2
+ 168:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         base = 16;
+ 169:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         c = *++cp;
+ 170:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       } else {
+ 171:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         base = 8;
+ 243              		.loc 1 171 14 view .LVU68
+ 244 001a 0821     		movs	r1, #8
+ 245 001c 37E0     		b	.L19
+ 246              	.L20:
+ 168:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         base = 16;
+ 247              		.loc 1 168 9 is_stmt 1 view .LVU69
+ 248              	.LVL20:
+ 169:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       } else {
+ 249              		.loc 1 169 9 view .LVU70
+ 169:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       } else {
+ 250              		.loc 1 169 11 is_stmt 0 view .LVU71
+ 251 001e 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 252              	.LVL21:
+ 169:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       } else {
+ 253              		.loc 1 169 11 view .LVU72
+ 254 0020 0230     		adds	r0, r0, #2
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 9
+
+
+ 255              	.LVL22:
+ 168:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         base = 16;
+ 256              		.loc 1 168 14 view .LVU73
+ 257 0022 1021     		movs	r1, #16
+ 169:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       } else {
+ 258              		.loc 1 169 11 view .LVU74
+ 259 0024 33E0     		b	.L19
+ 260              	.LVL23:
+ 261              	.L22:
+ 172:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 173:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     }
+ 174:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     for (;;) {
+ 175:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       if (lwip_isdigit(c)) {
+ 176:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         val = (val * base) + (u32_t)(c - '0');
+ 177:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         c = *++cp;
+ 178:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       } else if (base == 16 && lwip_isxdigit(c)) {
+ 262              		.loc 1 178 14 is_stmt 1 view .LVU75
+ 263              		.loc 1 178 17 is_stmt 0 view .LVU76
+ 264 0026 1029     		cmp	r1, #16
+ 265 0028 1ED1     		bne	.L24
+ 266              		.loc 1 178 29 discriminator 1 view .LVU77
+ 267 002a 1CF0440F 		tst	ip, #68
+ 268 002e 1BD0     		beq	.L24
+ 179:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         val = (val << 4) | (u32_t)(c + 10 - (lwip_islower(c) ? 'a' : 'A'));
+ 269              		.loc 1 179 9 is_stmt 1 view .LVU78
+ 270              		.loc 1 179 20 is_stmt 0 view .LVU79
+ 271 0030 2401     		lsls	r4, r4, #4
+ 272              	.LVL24:
+ 273              		.loc 1 179 38 view .LVU80
+ 274 0032 03F10A02 		add	r2, r3, #10
+ 275              		.loc 1 179 68 view .LVU81
+ 276 0036 0CF0030C 		and	ip, ip, #3
+ 277 003a BCF1020F 		cmp	ip, #2
+ 278 003e 11D0     		beq	.L52
+ 279 0040 4123     		movs	r3, #65
+ 280              	.LVL25:
+ 281              	.L25:
+ 282              		.loc 1 179 43 discriminator 4 view .LVU82
+ 283 0042 D21A     		subs	r2, r2, r3
+ 284              		.loc 1 179 13 discriminator 4 view .LVU83
+ 285 0044 1443     		orrs	r4, r4, r2
+ 286              	.LVL26:
+ 180:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         c = *++cp;
+ 287              		.loc 1 180 9 is_stmt 1 discriminator 4 view .LVU84
+ 288              		.loc 1 180 11 is_stmt 0 discriminator 4 view .LVU85
+ 289 0046 10F8013F 		ldrb	r3, [r0, #1]!	@ zero_extendqisi2
+ 290              	.LVL27:
+ 291              	.L21:
+ 174:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       if (lwip_isdigit(c)) {
+ 292              		.loc 1 174 5 is_stmt 1 view .LVU86
+ 175:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         val = (val * base) + (u32_t)(c - '0');
+ 293              		.loc 1 175 7 view .LVU87
+ 175:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         val = (val * base) + (u32_t)(c - '0');
+ 294              		.loc 1 175 11 is_stmt 0 view .LVU88
+ 295 004a 434A     		ldr	r2, .L54
+ 296 004c 13F802C0 		ldrb	ip, [r3, r2]	@ zero_extendqisi2
+ 175:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         val = (val * base) + (u32_t)(c - '0');
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 10
+
+
+ 297              		.loc 1 175 10 view .LVU89
+ 298 0050 1CF0040F 		tst	ip, #4
+ 299 0054 E7D0     		beq	.L22
+ 176:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         c = *++cp;
+ 300              		.loc 1 176 9 is_stmt 1 view .LVU90
+ 176:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         c = *++cp;
+ 301              		.loc 1 176 28 is_stmt 0 view .LVU91
+ 302 0056 04FB0133 		mla	r3, r4, r1, r3
+ 303              	.LVL28:
+ 176:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         c = *++cp;
+ 304              		.loc 1 176 13 view .LVU92
+ 305 005a A3F13004 		sub	r4, r3, #48
+ 306              	.LVL29:
+ 177:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       } else if (base == 16 && lwip_isxdigit(c)) {
+ 307              		.loc 1 177 9 is_stmt 1 view .LVU93
+ 177:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       } else if (base == 16 && lwip_isxdigit(c)) {
+ 308              		.loc 1 177 11 is_stmt 0 view .LVU94
+ 309 005e 10F8013F 		ldrb	r3, [r0, #1]!	@ zero_extendqisi2
+ 310              	.LVL30:
+ 177:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       } else if (base == 16 && lwip_isxdigit(c)) {
+ 311              		.loc 1 177 11 view .LVU95
+ 312 0062 F2E7     		b	.L21
+ 313              	.LVL31:
+ 314              	.L52:
+ 179:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         c = *++cp;
+ 315              		.loc 1 179 68 view .LVU96
+ 316 0064 6123     		movs	r3, #97
+ 317              	.LVL32:
+ 179:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         c = *++cp;
+ 318              		.loc 1 179 68 view .LVU97
+ 319 0066 ECE7     		b	.L25
+ 320              	.LVL33:
+ 321              	.L24:
+ 181:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       } else {
+ 182:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         break;
+ 183:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 184:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     }
+ 185:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     if (c == '.') {
+ 322              		.loc 1 185 5 is_stmt 1 view .LVU98
+ 323              		.loc 1 185 8 is_stmt 0 view .LVU99
+ 324 0068 2E2B     		cmp	r3, #46
+ 325 006a 12D1     		bne	.L26
+ 186:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       /*
+ 187:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****        * Internet format:
+ 188:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****        *  a.b.c.d
+ 189:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****        *  a.b.c   (with c treated as 16 bits)
+ 190:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****        *  a.b (with b treated as 24 bits)
+ 191:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****        */
+ 192:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       if (pp >= parts + 3) {
+ 326              		.loc 1 192 7 is_stmt 1 view .LVU100
+ 327              		.loc 1 192 10 is_stmt 0 view .LVU101
+ 328 006c 03AB     		add	r3, sp, #12
+ 329              	.LVL34:
+ 330              		.loc 1 192 10 view .LVU102
+ 331 006e 9E45     		cmp	lr, r3
+ 332 0070 58D2     		bcs	.L39
+ 193:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 11
+
+
+ 194:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 195:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       *pp++ = val;
+ 333              		.loc 1 195 7 is_stmt 1 view .LVU103
+ 334              		.loc 1 195 10 is_stmt 0 view .LVU104
+ 335 0072 7246     		mov	r2, lr
+ 336              	.LVL35:
+ 337              		.loc 1 195 13 view .LVU105
+ 338 0074 42F8044B 		str	r4, [r2], #4
+ 339              	.LVL36:
+ 196:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       c = *++cp;
+ 340              		.loc 1 196 7 is_stmt 1 view .LVU106
+ 341              		.loc 1 196 9 is_stmt 0 view .LVU107
+ 342 0078 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 343              	.LVL37:
+ 154:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     /*
+ 344              		.loc 1 154 9 is_stmt 1 view .LVU108
+ 195:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       c = *++cp;
+ 345              		.loc 1 195 10 is_stmt 0 view .LVU109
+ 346 007a 9646     		mov	lr, r2
+ 347              		.loc 1 196 9 view .LVU110
+ 348 007c 0130     		adds	r0, r0, #1
+ 349              	.LVL38:
+ 350              	.L27:
+ 154:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     /*
+ 351              		.loc 1 154 3 is_stmt 1 view .LVU111
+ 160:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       return 0;
+ 352              		.loc 1 160 5 view .LVU112
+ 160:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       return 0;
+ 353              		.loc 1 160 10 is_stmt 0 view .LVU113
+ 354 007e 364A     		ldr	r2, .L54
+ 355 0080 9A5C     		ldrb	r2, [r3, r2]	@ zero_extendqisi2
+ 160:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       return 0;
+ 356              		.loc 1 160 8 view .LVU114
+ 357 0082 12F0040F 		tst	r2, #4
+ 358 0086 4BD0     		beq	.L35
+ 163:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     base = 10;
+ 359              		.loc 1 163 5 is_stmt 1 view .LVU115
+ 360              	.LVL39:
+ 164:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     if (c == '0') {
+ 361              		.loc 1 164 5 view .LVU116
+ 165:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       c = *++cp;
+ 362              		.loc 1 165 5 view .LVU117
+ 165:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       c = *++cp;
+ 363              		.loc 1 165 8 is_stmt 0 view .LVU118
+ 364 0088 302B     		cmp	r3, #48
+ 365 008a BFD0     		beq	.L53
+ 164:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     if (c == '0') {
+ 366              		.loc 1 164 10 view .LVU119
+ 367 008c 0A21     		movs	r1, #10
+ 368              	.LVL40:
+ 369              	.L19:
+ 171:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 370              		.loc 1 171 14 view .LVU120
+ 371 008e 0024     		movs	r4, #0
+ 372 0090 DBE7     		b	.L21
+ 373              	.LVL41:
+ 374              	.L26:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 12
+
+
+ 197:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     } else {
+ 198:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 199:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     }
+ 200:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ 201:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   /*
+ 202:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****    * Check for trailing characters.
+ 203:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****    */
+ 204:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   if (c != '\0' && !lwip_isspace(c)) {
+ 375              		.loc 1 204 3 is_stmt 1 view .LVU121
+ 376              		.loc 1 204 6 is_stmt 0 view .LVU122
+ 377 0092 13B1     		cbz	r3, .L28
+ 378              		.loc 1 204 17 discriminator 1 view .LVU123
+ 379 0094 1CF0080F 		tst	ip, #8
+ 380 0098 47D0     		beq	.L40
+ 381              	.L28:
+ 205:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     return 0;
+ 206:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ 207:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   /*
+ 208:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****    * Concoct the address according to
+ 209:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****    * the number of parts specified.
+ 210:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****    */
+ 211:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   switch (pp - parts + 1) {
+ 382              		.loc 1 211 3 is_stmt 1 view .LVU124
+ 383              		.loc 1 211 14 is_stmt 0 view .LVU125
+ 384 009a 6846     		mov	r0, sp
+ 385              	.LVL42:
+ 386              		.loc 1 211 14 view .LVU126
+ 387 009c AEEB0000 		sub	r0, lr, r0
+ 388 00a0 8010     		asrs	r0, r0, #2
+ 389              		.loc 1 211 22 view .LVU127
+ 390 00a2 0130     		adds	r0, r0, #1
+ 391              		.loc 1 211 3 view .LVU128
+ 392 00a4 0428     		cmp	r0, #4
+ 393 00a6 34D8     		bhi	.L29
+ 394 00a8 DFE800F0 		tbb	[pc, r0]
+ 395              	.LVL43:
+ 396              	.L31:
+ 397 00ac 3D       		.byte	(.L17-.L31)/2
+ 398 00ad 0B       		.byte	(.L34-.L31)/2
+ 399 00ae 03       		.byte	(.L33-.L31)/2
+ 400 00af 13       		.byte	(.L32-.L31)/2
+ 401 00b0 21       		.byte	(.L30-.L31)/2
+ 402 00b1 00       		.p2align 1
+ 403              	.L33:
+ 212:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 213:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     case 0:
+ 214:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       return 0;       /* initial nondigit */
+ 215:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 216:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     case 1:             /* a -- 32 bits */
+ 217:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 218:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 219:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     case 2:             /* a.b -- 8.24 bits */
+ 220:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       if (val > 0xffffffUL) {
+ 404              		.loc 1 220 7 is_stmt 1 view .LVU129
+ 405              		.loc 1 220 10 is_stmt 0 view .LVU130
+ 406 00b2 B4F1807F 		cmp	r4, #16777216
+ 407 00b6 3AD2     		bcs	.L41
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 13
+
+
+ 221:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 222:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 223:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       if (parts[0] > 0xff) {
+ 408              		.loc 1 223 7 is_stmt 1 view .LVU131
+ 409              		.loc 1 223 16 is_stmt 0 view .LVU132
+ 410 00b8 009B     		ldr	r3, [sp]
+ 411              		.loc 1 223 10 view .LVU133
+ 412 00ba FF2B     		cmp	r3, #255
+ 413 00bc 39D8     		bhi	.L42
+ 224:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 225:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 226:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       val |= parts[0] << 24;
+ 414              		.loc 1 226 7 is_stmt 1 view .LVU134
+ 415              		.loc 1 226 11 is_stmt 0 view .LVU135
+ 416 00be 44EA0364 		orr	r4, r4, r3, lsl #24
+ 417              	.LVL44:
+ 227:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 418              		.loc 1 227 7 is_stmt 1 view .LVU136
+ 419              	.L34:
+ 228:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 229:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     case 3:             /* a.b.c -- 8.8.16 bits */
+ 230:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       if (val > 0xffff) {
+ 231:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 232:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 233:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       if ((parts[0] > 0xff) || (parts[1] > 0xff)) {
+ 234:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 235:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 236:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       val |= (parts[0] << 24) | (parts[1] << 16);
+ 237:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 238:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 239:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     case 4:             /* a.b.c.d -- 8.8.8.8 bits */
+ 240:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       if (val > 0xff) {
+ 241:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 242:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 243:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       if ((parts[0] > 0xff) || (parts[1] > 0xff) || (parts[2] > 0xff)) {
+ 244:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 245:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 246:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       val |= (parts[0] << 24) | (parts[1] << 16) | (parts[2] << 8);
+ 247:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 248:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     default:
+ 249:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       LWIP_ASSERT("unhandled", 0);
+ 250:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 251:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ 252:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   if (addr) {
+ 420              		.loc 1 252 3 view .LVU137
+ 421              		.loc 1 252 6 is_stmt 0 view .LVU138
+ 422 00c2 002D     		cmp	r5, #0
+ 423 00c4 45D0     		beq	.L50
+ 253:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     ip4_addr_set_u32(addr, lwip_htonl(val));
+ 424              		.loc 1 253 5 is_stmt 1 view .LVU139
+ 425 00c6 2046     		mov	r0, r4
+ 426 00c8 FFF7FEFF 		bl	lwip_htonl
+ 427              	.LVL45:
+ 428 00cc 2860     		str	r0, [r5]
+ 254:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ 255:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   return 1;
+ 429              		.loc 1 255 10 is_stmt 0 view .LVU140
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 14
+
+
+ 430 00ce 0120     		movs	r0, #1
+ 431 00d0 29E0     		b	.L17
+ 432              	.LVL46:
+ 433              	.L32:
+ 230:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 434              		.loc 1 230 7 is_stmt 1 view .LVU141
+ 230:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 435              		.loc 1 230 10 is_stmt 0 view .LVU142
+ 436 00d2 B4F5803F 		cmp	r4, #65536
+ 437 00d6 2ED2     		bcs	.L43
+ 233:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 438              		.loc 1 233 7 is_stmt 1 view .LVU143
+ 233:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 439              		.loc 1 233 17 is_stmt 0 view .LVU144
+ 440 00d8 009A     		ldr	r2, [sp]
+ 233:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 441              		.loc 1 233 10 view .LVU145
+ 442 00da FF2A     		cmp	r2, #255
+ 443 00dc 2DD8     		bhi	.L44
+ 233:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 444              		.loc 1 233 38 discriminator 1 view .LVU146
+ 445 00de 019B     		ldr	r3, [sp, #4]
+ 233:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 446              		.loc 1 233 29 discriminator 1 view .LVU147
+ 447 00e0 FF2B     		cmp	r3, #255
+ 448 00e2 2CD8     		bhi	.L45
+ 236:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 449              		.loc 1 236 7 is_stmt 1 view .LVU148
+ 236:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 450              		.loc 1 236 43 is_stmt 0 view .LVU149
+ 451 00e4 1B04     		lsls	r3, r3, #16
+ 236:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 452              		.loc 1 236 31 view .LVU150
+ 453 00e6 43EA0263 		orr	r3, r3, r2, lsl #24
+ 236:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 454              		.loc 1 236 11 view .LVU151
+ 455 00ea 1C43     		orrs	r4, r4, r3
+ 456              	.LVL47:
+ 237:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 457              		.loc 1 237 7 is_stmt 1 view .LVU152
+ 458 00ec E9E7     		b	.L34
+ 459              	.L30:
+ 240:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 460              		.loc 1 240 7 view .LVU153
+ 240:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 461              		.loc 1 240 10 is_stmt 0 view .LVU154
+ 462 00ee FF2C     		cmp	r4, #255
+ 463 00f0 27D8     		bhi	.L46
+ 243:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 464              		.loc 1 243 7 is_stmt 1 view .LVU155
+ 243:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 465              		.loc 1 243 17 is_stmt 0 view .LVU156
+ 466 00f2 0099     		ldr	r1, [sp]
+ 467              	.LVL48:
+ 243:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 468              		.loc 1 243 10 view .LVU157
+ 469 00f4 FF29     		cmp	r1, #255
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 15
+
+
+ 470 00f6 26D8     		bhi	.L47
+ 243:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 471              		.loc 1 243 38 discriminator 1 view .LVU158
+ 472 00f8 019B     		ldr	r3, [sp, #4]
+ 243:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 473              		.loc 1 243 29 discriminator 1 view .LVU159
+ 474 00fa FF2B     		cmp	r3, #255
+ 475 00fc 25D8     		bhi	.L48
+ 243:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 476              		.loc 1 243 59 discriminator 2 view .LVU160
+ 477 00fe 029A     		ldr	r2, [sp, #8]
+ 243:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return 0;
+ 478              		.loc 1 243 50 discriminator 2 view .LVU161
+ 479 0100 FF2A     		cmp	r2, #255
+ 480 0102 24D8     		bhi	.L49
+ 246:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 481              		.loc 1 246 7 is_stmt 1 view .LVU162
+ 246:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 482              		.loc 1 246 43 is_stmt 0 view .LVU163
+ 483 0104 1B04     		lsls	r3, r3, #16
+ 246:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 484              		.loc 1 246 31 view .LVU164
+ 485 0106 43EA0163 		orr	r3, r3, r1, lsl #24
+ 246:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 486              		.loc 1 246 50 view .LVU165
+ 487 010a 43EA0223 		orr	r3, r3, r2, lsl #8
+ 246:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 488              		.loc 1 246 11 view .LVU166
+ 489 010e 1C43     		orrs	r4, r4, r3
+ 490              	.LVL49:
+ 247:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     default:
+ 491              		.loc 1 247 7 is_stmt 1 view .LVU167
+ 492 0110 D7E7     		b	.L34
+ 493              	.LVL50:
+ 494              	.L29:
+ 249:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 495              		.loc 1 249 7 discriminator 1 view .LVU168
+ 249:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 496              		.loc 1 249 7 discriminator 1 view .LVU169
+ 249:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 497              		.loc 1 249 7 discriminator 1 view .LVU170
+ 249:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 498              		.loc 1 249 7 discriminator 1 view .LVU171
+ 499 0112 124B     		ldr	r3, .L54+4
+ 500 0114 F922     		movs	r2, #249
+ 501 0116 1249     		ldr	r1, .L54+8
+ 502              	.LVL51:
+ 249:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 503              		.loc 1 249 7 is_stmt 0 discriminator 1 view .LVU172
+ 504 0118 1248     		ldr	r0, .L54+12
+ 505 011a FFF7FEFF 		bl	printf
+ 506              	.LVL52:
+ 249:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 507              		.loc 1 249 7 is_stmt 1 discriminator 1 view .LVU173
+ 249:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       break;
+ 508              		.loc 1 249 7 discriminator 1 view .LVU174
+ 250:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 16
+
+
+ 509              		.loc 1 250 7 discriminator 1 view .LVU175
+ 510 011e D0E7     		b	.L34
+ 511              	.LVL53:
+ 512              	.L35:
+ 161:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     }
+ 513              		.loc 1 161 14 is_stmt 0 view .LVU176
+ 514 0120 0020     		movs	r0, #0
+ 515              	.LVL54:
+ 161:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     }
+ 516              		.loc 1 161 14 view .LVU177
+ 517 0122 00E0     		b	.L17
+ 518              	.LVL55:
+ 519              	.L39:
+ 193:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 520              		.loc 1 193 16 view .LVU178
+ 521 0124 0020     		movs	r0, #0
+ 522              	.LVL56:
+ 523              	.L17:
+ 256:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** }
+ 524              		.loc 1 256 1 view .LVU179
+ 525 0126 05B0     		add	sp, sp, #20
+ 526              	.LCFI3:
+ 527              		.cfi_remember_state
+ 528              		.cfi_def_cfa_offset 12
+ 529              		@ sp needed
+ 530 0128 30BD     		pop	{r4, r5, pc}
+ 531              	.LVL57:
+ 532              	.L40:
+ 533              	.LCFI4:
+ 534              		.cfi_restore_state
+ 205:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ 535              		.loc 1 205 12 view .LVU180
+ 536 012a 0020     		movs	r0, #0
+ 537              	.LVL58:
+ 205:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ 538              		.loc 1 205 12 view .LVU181
+ 539 012c FBE7     		b	.L17
+ 540              	.LVL59:
+ 541              	.L41:
+ 221:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 542              		.loc 1 221 16 view .LVU182
+ 543 012e 0020     		movs	r0, #0
+ 544 0130 F9E7     		b	.L17
+ 545              	.L42:
+ 224:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 546              		.loc 1 224 16 view .LVU183
+ 547 0132 0020     		movs	r0, #0
+ 548 0134 F7E7     		b	.L17
+ 549              	.L43:
+ 231:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 550              		.loc 1 231 16 view .LVU184
+ 551 0136 0020     		movs	r0, #0
+ 552 0138 F5E7     		b	.L17
+ 553              	.L44:
+ 234:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 554              		.loc 1 234 16 view .LVU185
+ 555 013a 0020     		movs	r0, #0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 17
+
+
+ 556 013c F3E7     		b	.L17
+ 557              	.L45:
+ 558 013e 0020     		movs	r0, #0
+ 559 0140 F1E7     		b	.L17
+ 560              	.L46:
+ 241:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 561              		.loc 1 241 16 view .LVU186
+ 562 0142 0020     		movs	r0, #0
+ 563 0144 EFE7     		b	.L17
+ 564              	.LVL60:
+ 565              	.L47:
+ 244:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 566              		.loc 1 244 16 view .LVU187
+ 567 0146 0020     		movs	r0, #0
+ 568 0148 EDE7     		b	.L17
+ 569              	.L48:
+ 570 014a 0020     		movs	r0, #0
+ 571 014c EBE7     		b	.L17
+ 572              	.L49:
+ 573 014e 0020     		movs	r0, #0
+ 574 0150 E9E7     		b	.L17
+ 575              	.LVL61:
+ 576              	.L50:
+ 255:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** }
+ 577              		.loc 1 255 10 view .LVU188
+ 578 0152 0120     		movs	r0, #1
+ 579 0154 E7E7     		b	.L17
+ 580              	.L55:
+ 581 0156 00BF     		.align	2
+ 582              	.L54:
+ 583 0158 01000000 		.word	_ctype_+1
+ 584 015c 00000000 		.word	.LC0
+ 585 0160 78000000 		.word	.LC1
+ 586 0164 84000000 		.word	.LC2
+ 587              		.cfi_endproc
+ 588              	.LFE159:
+ 590              		.section	.text.ipaddr_addr,"ax",%progbits
+ 591              		.align	1
+ 592              		.global	ipaddr_addr
+ 593              		.syntax unified
+ 594              		.thumb
+ 595              		.thumb_func
+ 597              	ipaddr_addr:
+ 598              	.LVL62:
+ 599              	.LFB158:
+ 124:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   ip4_addr_t val;
+ 600              		.loc 1 124 1 is_stmt 1 view -0
+ 601              		.cfi_startproc
+ 602              		@ args = 0, pretend = 0, frame = 8
+ 603              		@ frame_needed = 0, uses_anonymous_args = 0
+ 124:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   ip4_addr_t val;
+ 604              		.loc 1 124 1 is_stmt 0 view .LVU190
+ 605 0000 00B5     		push	{lr}
+ 606              	.LCFI5:
+ 607              		.cfi_def_cfa_offset 4
+ 608              		.cfi_offset 14, -4
+ 609 0002 83B0     		sub	sp, sp, #12
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 18
+
+
+ 610              	.LCFI6:
+ 611              		.cfi_def_cfa_offset 16
+ 125:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 612              		.loc 1 125 3 is_stmt 1 view .LVU191
+ 127:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     return ip4_addr_get_u32(&val);
+ 613              		.loc 1 127 3 view .LVU192
+ 127:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     return ip4_addr_get_u32(&val);
+ 614              		.loc 1 127 7 is_stmt 0 view .LVU193
+ 615 0004 01A9     		add	r1, sp, #4
+ 616 0006 FFF7FEFF 		bl	ip4addr_aton
+ 617              	.LVL63:
+ 127:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     return ip4_addr_get_u32(&val);
+ 618              		.loc 1 127 6 view .LVU194
+ 619 000a 20B9     		cbnz	r0, .L60
+ 130:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** }
+ 620              		.loc 1 130 10 view .LVU195
+ 621 000c 4FF0FF30 		mov	r0, #-1
+ 622              	.L56:
+ 131:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 623              		.loc 1 131 1 view .LVU196
+ 624 0010 03B0     		add	sp, sp, #12
+ 625              	.LCFI7:
+ 626              		.cfi_remember_state
+ 627              		.cfi_def_cfa_offset 4
+ 628              		@ sp needed
+ 629 0012 5DF804FB 		ldr	pc, [sp], #4
+ 630              	.L60:
+ 631              	.LCFI8:
+ 632              		.cfi_restore_state
+ 128:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ 633              		.loc 1 128 5 is_stmt 1 view .LVU197
+ 128:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ 634              		.loc 1 128 12 is_stmt 0 view .LVU198
+ 635 0016 0198     		ldr	r0, [sp, #4]
+ 636 0018 FAE7     		b	.L56
+ 637              		.cfi_endproc
+ 638              	.LFE158:
+ 640              		.section	.text.ip4addr_ntoa_r,"ax",%progbits
+ 641              		.align	1
+ 642              		.global	ip4addr_ntoa_r
+ 643              		.syntax unified
+ 644              		.thumb
+ 645              		.thumb_func
+ 647              	ip4addr_ntoa_r:
+ 648              	.LVL64:
+ 649              	.LFB161:
+ 257:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 258:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** /**
+ 259:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * Convert numeric IP address into decimal dotted ASCII representation.
+ 260:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * returns ptr to static buffer; not reentrant!
+ 261:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *
+ 262:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @param addr ip address in network order to convert
+ 263:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @return pointer to a global static (!) buffer that holds the ASCII
+ 264:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *         representation of addr
+ 265:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  */
+ 266:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** char *
+ 267:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** ip4addr_ntoa(const ip4_addr_t *addr)
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 19
+
+
+ 268:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** {
+ 269:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   static char str[IP4ADDR_STRLEN_MAX];
+ 270:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   return ip4addr_ntoa_r(addr, str, IP4ADDR_STRLEN_MAX);
+ 271:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** }
+ 272:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 273:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** /**
+ 274:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * Same as ip4addr_ntoa, but reentrant since a user-supplied buffer is used.
+ 275:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *
+ 276:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @param addr ip address in network order to convert
+ 277:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @param buf target buffer where the string is stored
+ 278:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @param buflen length of buf
+ 279:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  * @return either pointer to buf which now holds the ASCII
+ 280:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  *         representation of addr or NULL if buf was too small
+ 281:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****  */
+ 282:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** char *
+ 283:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** ip4addr_ntoa_r(const ip4_addr_t *addr, char *buf, int buflen)
+ 284:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** {
+ 650              		.loc 1 284 1 is_stmt 1 view -0
+ 651              		.cfi_startproc
+ 652              		@ args = 0, pretend = 0, frame = 8
+ 653              		@ frame_needed = 0, uses_anonymous_args = 0
+ 654              		.loc 1 284 1 is_stmt 0 view .LVU200
+ 655 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 656              	.LCFI9:
+ 657              		.cfi_def_cfa_offset 20
+ 658              		.cfi_offset 4, -20
+ 659              		.cfi_offset 5, -16
+ 660              		.cfi_offset 6, -12
+ 661              		.cfi_offset 7, -8
+ 662              		.cfi_offset 14, -4
+ 663 0002 83B0     		sub	sp, sp, #12
+ 664              	.LCFI10:
+ 665              		.cfi_def_cfa_offset 32
+ 285:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   u32_t s_addr;
+ 666              		.loc 1 285 3 is_stmt 1 view .LVU201
+ 286:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   char inv[3];
+ 667              		.loc 1 286 3 view .LVU202
+ 287:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   char *rp;
+ 668              		.loc 1 287 3 view .LVU203
+ 288:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   u8_t *ap;
+ 669              		.loc 1 288 3 view .LVU204
+ 289:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   u8_t rem;
+ 670              		.loc 1 289 3 view .LVU205
+ 290:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   u8_t n;
+ 671              		.loc 1 290 3 view .LVU206
+ 291:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   u8_t i;
+ 672              		.loc 1 291 3 view .LVU207
+ 292:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   int len = 0;
+ 673              		.loc 1 292 3 view .LVU208
+ 674              	.LVL65:
+ 293:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 294:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   s_addr = ip4_addr_get_u32(addr);
+ 675              		.loc 1 294 3 view .LVU209
+ 676              		.loc 1 294 12 is_stmt 0 view .LVU210
+ 677 0004 0368     		ldr	r3, [r0]
+ 678              		.loc 1 294 10 view .LVU211
+ 679 0006 0193     		str	r3, [sp, #4]
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 20
+
+
+ 295:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 296:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   rp = buf;
+ 680              		.loc 1 296 3 is_stmt 1 view .LVU212
+ 681              	.LVL66:
+ 297:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   ap = (u8_t *)&s_addr;
+ 682              		.loc 1 297 3 view .LVU213
+ 298:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   for (n = 0; n < 4; n++) {
+ 683              		.loc 1 298 3 view .LVU214
+ 296:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   ap = (u8_t *)&s_addr;
+ 684              		.loc 1 296 6 is_stmt 0 view .LVU215
+ 685 0008 8E46     		mov	lr, r1
+ 292:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 686              		.loc 1 292 7 view .LVU216
+ 687 000a 0024     		movs	r4, #0
+ 688              		.loc 1 298 10 view .LVU217
+ 689 000c 2646     		mov	r6, r4
+ 297:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   for (n = 0; n < 4; n++) {
+ 690              		.loc 1 297 6 view .LVU218
+ 691 000e 01AD     		add	r5, sp, #4
+ 692              	.LVL67:
+ 693              	.L62:
+ 694              		.loc 1 298 15 is_stmt 1 discriminator 1 view .LVU219
+ 695              		.loc 1 298 3 is_stmt 0 discriminator 1 view .LVU220
+ 696 0010 032E     		cmp	r6, #3
+ 697 0012 37D8     		bhi	.L71
+ 299:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     i = 0;
+ 698              		.loc 1 299 7 view .LVU221
+ 699 0014 0020     		movs	r0, #0
+ 700              	.L63:
+ 701              	.LVL68:
+ 300:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     do {
+ 702              		.loc 1 300 5 is_stmt 1 discriminator 1 view .LVU222
+ 301:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       rem = *ap % (u8_t)10;
+ 703              		.loc 1 301 7 discriminator 1 view .LVU223
+ 704              		.loc 1 301 13 is_stmt 0 discriminator 1 view .LVU224
+ 705 0016 95F800C0 		ldrb	ip, [r5]	@ zero_extendqisi2
+ 706              		.loc 1 301 11 discriminator 1 view .LVU225
+ 707 001a 1E4B     		ldr	r3, .L74
+ 708 001c A3FB0C73 		umull	r7, r3, r3, ip
+ 709 0020 DB08     		lsrs	r3, r3, #3
+ 710 0022 03EB8307 		add	r7, r3, r3, lsl #2
+ 711 0026 ACEB470C 		sub	ip, ip, r7, lsl #1
+ 712 002a 5FFA8CFC 		uxtb	ip, ip
+ 713              	.LVL69:
+ 302:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       *ap /= (u8_t)10;
+ 714              		.loc 1 302 7 is_stmt 1 discriminator 1 view .LVU226
+ 715              		.loc 1 302 11 is_stmt 0 discriminator 1 view .LVU227
+ 716 002e DBB2     		uxtb	r3, r3
+ 717 0030 2B70     		strb	r3, [r5]
+ 303:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       inv[i++] = (char)('0' + rem);
+ 718              		.loc 1 303 7 is_stmt 1 discriminator 1 view .LVU228
+ 719 0032 0746     		mov	r7, r0
+ 720              		.loc 1 303 12 is_stmt 0 discriminator 1 view .LVU229
+ 721 0034 0130     		adds	r0, r0, #1
+ 722              	.LVL70:
+ 723              		.loc 1 303 12 discriminator 1 view .LVU230
+ 724 0036 C0B2     		uxtb	r0, r0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 21
+
+
+ 725              	.LVL71:
+ 726              		.loc 1 303 18 discriminator 1 view .LVU231
+ 727 0038 0CF1300C 		add	ip, ip, #48
+ 728              	.LVL72:
+ 729              		.loc 1 303 16 discriminator 1 view .LVU232
+ 730 003c 0837     		adds	r7, r7, #8
+ 731 003e 6F44     		add	r7, sp, r7
+ 732 0040 07F808CC 		strb	ip, [r7, #-8]
+ 304:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     } while (*ap);
+ 733              		.loc 1 304 13 is_stmt 1 discriminator 1 view .LVU233
+ 734              		.loc 1 304 5 is_stmt 0 discriminator 1 view .LVU234
+ 735 0044 002B     		cmp	r3, #0
+ 736 0046 E6D1     		bne	.L63
+ 737 0048 08E0     		b	.L64
+ 738              	.LVL73:
+ 739              	.L73:
+ 305:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     while (i--) {
+ 306:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       if (len++ >= buflen) {
+ 307:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return NULL;
+ 308:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 309:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       *rp++ = inv[i];
+ 740              		.loc 1 309 7 is_stmt 1 view .LVU235
+ 741              		.loc 1 309 18 is_stmt 0 view .LVU236
+ 742 004a 03F10804 		add	r4, r3, #8
+ 743 004e 6C44     		add	r4, sp, r4
+ 744 0050 14F8084C 		ldrb	r4, [r4, #-8]	@ zero_extendqisi2
+ 745              		.loc 1 309 13 view .LVU237
+ 746 0054 0EF8014B 		strb	r4, [lr], #1
+ 747              	.LVL74:
+ 306:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return NULL;
+ 748              		.loc 1 306 14 view .LVU238
+ 749 0058 0446     		mov	r4, r0
+ 305:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     while (i--) {
+ 750              		.loc 1 305 13 view .LVU239
+ 751 005a 1846     		mov	r0, r3
+ 752              	.LVL75:
+ 753              	.L64:
+ 305:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     while (i--) {
+ 754              		.loc 1 305 11 is_stmt 1 view .LVU240
+ 305:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     while (i--) {
+ 755              		.loc 1 305 13 is_stmt 0 view .LVU241
+ 756 005c 431E     		subs	r3, r0, #1
+ 757 005e DBB2     		uxtb	r3, r3
+ 758              	.LVL76:
+ 305:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     while (i--) {
+ 759              		.loc 1 305 11 view .LVU242
+ 760 0060 28B1     		cbz	r0, .L72
+ 306:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return NULL;
+ 761              		.loc 1 306 7 is_stmt 1 view .LVU243
+ 306:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return NULL;
+ 762              		.loc 1 306 14 is_stmt 0 view .LVU244
+ 763 0062 601C     		adds	r0, r4, #1
+ 764              	.LVL77:
+ 306:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****         return NULL;
+ 765              		.loc 1 306 10 view .LVU245
+ 766 0064 9442     		cmp	r4, r2
+ 767 0066 F0DB     		blt	.L73
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 22
+
+
+ 307:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       }
+ 768              		.loc 1 307 16 view .LVU246
+ 769 0068 0020     		movs	r0, #0
+ 770              	.LVL78:
+ 771              	.L61:
+ 310:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     }
+ 311:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     if (len++ >= buflen) {
+ 312:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       return NULL;
+ 313:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     }
+ 314:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     *rp++ = '.';
+ 315:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     ap++;
+ 316:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ 317:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   *--rp = 0;
+ 318:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   return buf;
+ 319:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** }
+ 772              		.loc 1 319 1 view .LVU247
+ 773 006a 03B0     		add	sp, sp, #12
+ 774              	.LCFI11:
+ 775              		.cfi_remember_state
+ 776              		.cfi_def_cfa_offset 20
+ 777              		@ sp needed
+ 778 006c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 779              	.LVL79:
+ 780              	.L72:
+ 781              	.LCFI12:
+ 782              		.cfi_restore_state
+ 311:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       return NULL;
+ 783              		.loc 1 311 5 is_stmt 1 view .LVU248
+ 311:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       return NULL;
+ 784              		.loc 1 311 12 is_stmt 0 view .LVU249
+ 785 006e 631C     		adds	r3, r4, #1
+ 786              	.LVL80:
+ 311:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       return NULL;
+ 787              		.loc 1 311 8 view .LVU250
+ 788 0070 9442     		cmp	r4, r2
+ 789 0072 0CDA     		bge	.L68
+ 314:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     ap++;
+ 790              		.loc 1 314 5 is_stmt 1 discriminator 2 view .LVU251
+ 791              	.LVL81:
+ 314:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     ap++;
+ 792              		.loc 1 314 11 is_stmt 0 discriminator 2 view .LVU252
+ 793 0074 2E20     		movs	r0, #46
+ 794              	.LVL82:
+ 314:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     ap++;
+ 795              		.loc 1 314 11 discriminator 2 view .LVU253
+ 796 0076 0EF8010B 		strb	r0, [lr], #1
+ 797              	.LVL83:
+ 315:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ 798              		.loc 1 315 5 is_stmt 1 discriminator 2 view .LVU254
+ 315:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   }
+ 799              		.loc 1 315 7 is_stmt 0 discriminator 2 view .LVU255
+ 800 007a 0135     		adds	r5, r5, #1
+ 801              	.LVL84:
+ 298:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     i = 0;
+ 802              		.loc 1 298 22 is_stmt 1 discriminator 2 view .LVU256
+ 298:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     i = 0;
+ 803              		.loc 1 298 23 is_stmt 0 discriminator 2 view .LVU257
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 23
+
+
+ 804 007c 0136     		adds	r6, r6, #1
+ 805              	.LVL85:
+ 298:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     i = 0;
+ 806              		.loc 1 298 23 discriminator 2 view .LVU258
+ 807 007e F6B2     		uxtb	r6, r6
+ 808              	.LVL86:
+ 311:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****       return NULL;
+ 809              		.loc 1 311 12 discriminator 2 view .LVU259
+ 810 0080 1C46     		mov	r4, r3
+ 811 0082 C5E7     		b	.L62
+ 812              	.LVL87:
+ 813              	.L71:
+ 317:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   return buf;
+ 814              		.loc 1 317 3 is_stmt 1 view .LVU260
+ 317:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   return buf;
+ 815              		.loc 1 317 9 is_stmt 0 view .LVU261
+ 816 0084 0023     		movs	r3, #0
+ 817 0086 0EF8013C 		strb	r3, [lr, #-1]
+ 318:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** }
+ 818              		.loc 1 318 3 is_stmt 1 view .LVU262
+ 318:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** }
+ 819              		.loc 1 318 10 is_stmt 0 view .LVU263
+ 820 008a 0846     		mov	r0, r1
+ 821 008c EDE7     		b	.L61
+ 822              	.LVL88:
+ 823              	.L68:
+ 312:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     }
+ 824              		.loc 1 312 14 view .LVU264
+ 825 008e 0020     		movs	r0, #0
+ 826              	.LVL89:
+ 312:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****     }
+ 827              		.loc 1 312 14 view .LVU265
+ 828 0090 EBE7     		b	.L61
+ 829              	.L75:
+ 830 0092 00BF     		.align	2
+ 831              	.L74:
+ 832 0094 CDCCCCCC 		.word	-858993459
+ 833              		.cfi_endproc
+ 834              	.LFE161:
+ 836              		.section	.text.ip4addr_ntoa,"ax",%progbits
+ 837              		.align	1
+ 838              		.global	ip4addr_ntoa
+ 839              		.syntax unified
+ 840              		.thumb
+ 841              		.thumb_func
+ 843              	ip4addr_ntoa:
+ 844              	.LVL90:
+ 845              	.LFB160:
+ 268:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   static char str[IP4ADDR_STRLEN_MAX];
+ 846              		.loc 1 268 1 is_stmt 1 view -0
+ 847              		.cfi_startproc
+ 848              		@ args = 0, pretend = 0, frame = 0
+ 849              		@ frame_needed = 0, uses_anonymous_args = 0
+ 268:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   static char str[IP4ADDR_STRLEN_MAX];
+ 850              		.loc 1 268 1 is_stmt 0 view .LVU267
+ 851 0000 08B5     		push	{r3, lr}
+ 852              	.LCFI13:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 24
+
+
+ 853              		.cfi_def_cfa_offset 8
+ 854              		.cfi_offset 3, -8
+ 855              		.cfi_offset 14, -4
+ 269:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c ****   return ip4addr_ntoa_r(addr, str, IP4ADDR_STRLEN_MAX);
+ 856              		.loc 1 269 3 is_stmt 1 view .LVU268
+ 270:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** }
+ 857              		.loc 1 270 3 view .LVU269
+ 270:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** }
+ 858              		.loc 1 270 10 is_stmt 0 view .LVU270
+ 859 0002 1022     		movs	r2, #16
+ 860 0004 0149     		ldr	r1, .L78
+ 861 0006 FFF7FEFF 		bl	ip4addr_ntoa_r
+ 862              	.LVL91:
+ 271:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/core/ipv4\ip4_addr.c **** 
+ 863              		.loc 1 271 1 view .LVU271
+ 864 000a 08BD     		pop	{r3, pc}
+ 865              	.L79:
+ 866              		.align	2
+ 867              	.L78:
+ 868 000c 00000000 		.word	.LANCHOR0
+ 869              		.cfi_endproc
+ 870              	.LFE160:
+ 872              		.global	ip_addr_broadcast
+ 873              		.global	ip_addr_any
+ 874              		.section	.bss.str.0,"aw",%nobits
+ 875              		.align	2
+ 876              		.set	.LANCHOR0,. + 0
+ 879              	str.0:
+ 880 0000 00000000 		.space	16
+ 880      00000000 
+ 880      00000000 
+ 880      00000000 
+ 881              		.section	.rodata.ip_addr_any,"a"
+ 882              		.align	2
+ 885              	ip_addr_any:
+ 886 0000 00000000 		.space	4
+ 887              		.section	.rodata.ip_addr_broadcast,"a"
+ 888              		.align	2
+ 891              	ip_addr_broadcast:
+ 892 0000 FFFFFFFF 		.word	-1
+ 893              		.text
+ 894              	.Letext0:
+ 895              		.file 2 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\machine\\_default_typ
+ 896              		.file 3 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 897              		.file 4 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 898              		.file 5 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 899              		.file 6 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 900              		.file 7 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\ctype.h"
+ 901              		.file 8 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 902              		.file 9 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 903              		.file 10 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party
+ 904              		.file 11 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party
+ 905              		.file 12 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\stdio.h"
+ 906              		.file 13 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s 			page 25
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ip4_addr.c
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:20     .text.ip4_addr_isbroadcast_u32:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:26     .text.ip4_addr_isbroadcast_u32:00000000 ip4_addr_isbroadcast_u32
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:102    .text.ip4_addr_netmask_valid:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:108    .text.ip4_addr_netmask_valid:00000000 ip4_addr_netmask_valid
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:176    .rodata.ip4addr_aton.str1.4:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:188    .text.ip4addr_aton:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:194    .text.ip4addr_aton:00000000 ip4addr_aton
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:397    .text.ip4addr_aton:000000ac $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:583    .text.ip4addr_aton:00000158 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:591    .text.ipaddr_addr:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:597    .text.ipaddr_addr:00000000 ipaddr_addr
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:641    .text.ip4addr_ntoa_r:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:647    .text.ip4addr_ntoa_r:00000000 ip4addr_ntoa_r
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:832    .text.ip4addr_ntoa_r:00000094 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:837    .text.ip4addr_ntoa:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:843    .text.ip4addr_ntoa:00000000 ip4addr_ntoa
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:868    .text.ip4addr_ntoa:0000000c $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:891    .rodata.ip_addr_broadcast:00000000 ip_addr_broadcast
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:885    .rodata.ip_addr_any:00000000 ip_addr_any
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:875    .bss.str.0:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:879    .bss.str.0:00000000 str.0
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:882    .rodata.ip_addr_any:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:888    .rodata.ip_addr_broadcast:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:402    .text.ip4addr_aton:000000b1 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccV8FAWS.s:402    .text.ip4addr_aton:000000b2 $t
+
+UNDEFINED SYMBOLS
+lwip_htonl
+printf
+_ctype_

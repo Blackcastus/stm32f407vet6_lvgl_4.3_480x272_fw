@@ -1,0 +1,1903 @@
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"setup_scr_screen2.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.rodata.setup_scr_screen2.str1.4,"aMS",%progbits,1
+  20              		.align	2
+  21              	.LC0:
+  22 0000 73637265 		.ascii	"screen2\000"
+  22      656E3200 
+  23              		.align	2
+  24              	.LC1:
+  25 0008 50726576 		.ascii	"Previous Screen\000"
+  25      696F7573 
+  25      20536372 
+  25      65656E00 
+  26              		.section	.text.setup_scr_screen2,"ax",%progbits
+  27              		.align	1
+  28              		.global	setup_scr_screen2
+  29              		.syntax unified
+  30              		.thumb
+  31              		.thumb_func
+  33              	setup_scr_screen2:
+  34              	.LVL0:
+  35              	.LFB187:
+  36              		.file 1 "generated/setup_scr_screen2.c"
+   1:generated/setup_scr_screen2.c **** /*
+   2:generated/setup_scr_screen2.c ****  * Copyright 2023 NXP
+   3:generated/setup_scr_screen2.c ****  * SPDX-License-Identifier: MIT
+   4:generated/setup_scr_screen2.c ****  * The auto-generated can only be used on NXP devices
+   5:generated/setup_scr_screen2.c ****  */
+   6:generated/setup_scr_screen2.c **** 
+   7:generated/setup_scr_screen2.c **** #include "lvgl.h"
+   8:generated/setup_scr_screen2.c **** #include <stdio.h>
+   9:generated/setup_scr_screen2.c **** #include "gui_guider.h"
+  10:generated/setup_scr_screen2.c **** #include "events_init.h"
+  11:generated/setup_scr_screen2.c **** #include "../custom/custom.h"
+  12:generated/setup_scr_screen2.c **** 
+  13:generated/setup_scr_screen2.c **** 
+  14:generated/setup_scr_screen2.c **** void setup_scr_screen2(lv_ui *ui){
+  37              		.loc 1 14 34 view -0
+  38              		.cfi_startproc
+  39              		@ args = 0, pretend = 0, frame = 0
+  40              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 2
+
+
+  41              		.loc 1 14 34 is_stmt 0 view .LVU1
+  42 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  43              	.LCFI0:
+  44              		.cfi_def_cfa_offset 24
+  45              		.cfi_offset 3, -24
+  46              		.cfi_offset 4, -20
+  47              		.cfi_offset 5, -16
+  48              		.cfi_offset 6, -12
+  49              		.cfi_offset 7, -8
+  50              		.cfi_offset 14, -4
+  51 0002 0446     		mov	r4, r0
+  15:generated/setup_scr_screen2.c **** 
+  16:generated/setup_scr_screen2.c **** 	//Write codes screen2
+  17:generated/setup_scr_screen2.c **** 	ui->screen2 = lv_obj_create(NULL);
+  52              		.loc 1 17 2 is_stmt 1 view .LVU2
+  53              		.loc 1 17 16 is_stmt 0 view .LVU3
+  54 0004 0020     		movs	r0, #0
+  55              	.LVL1:
+  56              		.loc 1 17 16 view .LVU4
+  57 0006 FFF7FEFF 		bl	lv_obj_create
+  58              	.LVL2:
+  59              		.loc 1 17 14 view .LVU5
+  60 000a 2062     		str	r0, [r4, #32]
+  18:generated/setup_scr_screen2.c **** 	lv_obj_set_scrollbar_mode(ui->screen2, LV_SCROLLBAR_MODE_OFF);
+  61              		.loc 1 18 2 is_stmt 1 view .LVU6
+  62 000c 0021     		movs	r1, #0
+  63 000e FFF7FEFF 		bl	lv_obj_set_scrollbar_mode
+  64              	.LVL3:
+  19:generated/setup_scr_screen2.c **** 
+  20:generated/setup_scr_screen2.c **** 	//Write style state: LV_STATE_DEFAULT for style_screen2_main_main_default
+  21:generated/setup_scr_screen2.c **** 	static lv_style_t style_screen2_main_main_default;
+  65              		.loc 1 21 2 view .LVU7
+  22:generated/setup_scr_screen2.c **** 	if (style_screen2_main_main_default.prop_cnt > 1)
+  66              		.loc 1 22 2 view .LVU8
+  67              		.loc 1 22 37 is_stmt 0 view .LVU9
+  68 0012 D74B     		ldr	r3, .L11
+  69 0014 DB79     		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+  70              		.loc 1 22 5 view .LVU10
+  71 0016 012B     		cmp	r3, #1
+  72 0018 40F29A81 		bls	.L2
+  23:generated/setup_scr_screen2.c **** 		lv_style_reset(&style_screen2_main_main_default);
+  73              		.loc 1 23 3 is_stmt 1 view .LVU11
+  74 001c D448     		ldr	r0, .L11
+  75 001e FFF7FEFF 		bl	lv_style_reset
+  76              	.LVL4:
+  77              	.L3:
+  24:generated/setup_scr_screen2.c **** 	else
+  25:generated/setup_scr_screen2.c **** 		lv_style_init(&style_screen2_main_main_default);
+  26:generated/setup_scr_screen2.c **** 	lv_style_set_bg_color(&style_screen2_main_main_default, lv_color_make(0xff, 0xff, 0xff));
+  78              		.loc 1 26 2 view .LVU12
+  79              	.LBB56:
+  80              	.LBI56:
+  81              		.file 2 "lvgl/src/hal/../misc/lv_color.h"
+   1:lvgl/src/hal/../misc/lv_color.h **** /**
+   2:lvgl/src/hal/../misc/lv_color.h ****  * @file lv_color.h
+   3:lvgl/src/hal/../misc/lv_color.h ****  *
+   4:lvgl/src/hal/../misc/lv_color.h ****  */
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 3
+
+
+   5:lvgl/src/hal/../misc/lv_color.h **** 
+   6:lvgl/src/hal/../misc/lv_color.h **** #ifndef LV_COLOR_H
+   7:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_H
+   8:lvgl/src/hal/../misc/lv_color.h **** 
+   9:lvgl/src/hal/../misc/lv_color.h **** #ifdef __cplusplus
+  10:lvgl/src/hal/../misc/lv_color.h **** extern "C" {
+  11:lvgl/src/hal/../misc/lv_color.h **** #endif
+  12:lvgl/src/hal/../misc/lv_color.h **** 
+  13:lvgl/src/hal/../misc/lv_color.h **** /*********************
+  14:lvgl/src/hal/../misc/lv_color.h ****  *      INCLUDES
+  15:lvgl/src/hal/../misc/lv_color.h ****  *********************/
+  16:lvgl/src/hal/../misc/lv_color.h **** #include "../lv_conf_internal.h"
+  17:lvgl/src/hal/../misc/lv_color.h **** #include "lv_math.h"
+  18:lvgl/src/hal/../misc/lv_color.h **** #include "lv_types.h"
+  19:lvgl/src/hal/../misc/lv_color.h **** 
+  20:lvgl/src/hal/../misc/lv_color.h **** /*Error checking*/
+  21:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_DEPTH == 24
+  22:lvgl/src/hal/../misc/lv_color.h **** #error "LV_COLOR_DEPTH 24 is deprecated. Use LV_COLOR_DEPTH 32 instead (lv_conf.h)"
+  23:lvgl/src/hal/../misc/lv_color.h **** #endif
+  24:lvgl/src/hal/../misc/lv_color.h **** 
+  25:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_DEPTH != 32 && LV_COLOR_SCREEN_TRANSP != 0
+  26:lvgl/src/hal/../misc/lv_color.h **** #error "LV_COLOR_SCREEN_TRANSP requires LV_COLOR_DEPTH == 32. Set it in lv_conf.h"
+  27:lvgl/src/hal/../misc/lv_color.h **** #endif
+  28:lvgl/src/hal/../misc/lv_color.h **** 
+  29:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_DEPTH != 16 && LV_COLOR_16_SWAP != 0
+  30:lvgl/src/hal/../misc/lv_color.h **** #error "LV_COLOR_16_SWAP requires LV_COLOR_DEPTH == 16. Set it in lv_conf.h"
+  31:lvgl/src/hal/../misc/lv_color.h **** #endif
+  32:lvgl/src/hal/../misc/lv_color.h **** 
+  33:lvgl/src/hal/../misc/lv_color.h **** #include <stdint.h>
+  34:lvgl/src/hal/../misc/lv_color.h **** 
+  35:lvgl/src/hal/../misc/lv_color.h **** /*********************
+  36:lvgl/src/hal/../misc/lv_color.h ****  *      DEFINES
+  37:lvgl/src/hal/../misc/lv_color.h ****  *********************/
+  38:lvgl/src/hal/../misc/lv_color.h **** 
+  39:lvgl/src/hal/../misc/lv_color.h **** /**
+  40:lvgl/src/hal/../misc/lv_color.h ****  * Opacity percentages.
+  41:lvgl/src/hal/../misc/lv_color.h ****  */
+  42:lvgl/src/hal/../misc/lv_color.h **** enum {
+  43:lvgl/src/hal/../misc/lv_color.h ****     LV_OPA_TRANSP = 0,
+  44:lvgl/src/hal/../misc/lv_color.h ****     LV_OPA_0      = 0,
+  45:lvgl/src/hal/../misc/lv_color.h ****     LV_OPA_10     = 25,
+  46:lvgl/src/hal/../misc/lv_color.h ****     LV_OPA_20     = 51,
+  47:lvgl/src/hal/../misc/lv_color.h ****     LV_OPA_30     = 76,
+  48:lvgl/src/hal/../misc/lv_color.h ****     LV_OPA_40     = 102,
+  49:lvgl/src/hal/../misc/lv_color.h ****     LV_OPA_50     = 127,
+  50:lvgl/src/hal/../misc/lv_color.h ****     LV_OPA_60     = 153,
+  51:lvgl/src/hal/../misc/lv_color.h ****     LV_OPA_70     = 178,
+  52:lvgl/src/hal/../misc/lv_color.h ****     LV_OPA_80     = 204,
+  53:lvgl/src/hal/../misc/lv_color.h ****     LV_OPA_90     = 229,
+  54:lvgl/src/hal/../misc/lv_color.h ****     LV_OPA_100    = 255,
+  55:lvgl/src/hal/../misc/lv_color.h ****     LV_OPA_COVER  = 255,
+  56:lvgl/src/hal/../misc/lv_color.h **** };
+  57:lvgl/src/hal/../misc/lv_color.h **** 
+  58:lvgl/src/hal/../misc/lv_color.h **** #define LV_OPA_MIN 2    /*Opacities below this will be transparent*/
+  59:lvgl/src/hal/../misc/lv_color.h **** #define LV_OPA_MAX 253  /*Opacities above this will fully cover*/
+  60:lvgl/src/hal/../misc/lv_color.h **** 
+  61:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_DEPTH == 1
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 4
+
+
+  62:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_SIZE 8
+  63:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 8
+  64:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_SIZE 8
+  65:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 16
+  66:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_SIZE 16
+  67:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 32
+  68:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_SIZE 32
+  69:lvgl/src/hal/../misc/lv_color.h **** #else
+  70:lvgl/src/hal/../misc/lv_color.h **** #error "Invalid LV_COLOR_DEPTH in lv_conf.h! Set it to 1, 8, 16 or 32!"
+  71:lvgl/src/hal/../misc/lv_color.h **** #endif
+  72:lvgl/src/hal/../misc/lv_color.h **** 
+  73:lvgl/src/hal/../misc/lv_color.h **** /**
+  74:lvgl/src/hal/../misc/lv_color.h ****  * Adjust color mix functions rounding.
+  75:lvgl/src/hal/../misc/lv_color.h ****  * GPUs might calculate color mix (blending) differently.
+  76:lvgl/src/hal/../misc/lv_color.h ****  * Should be in range of 0..254
+  77:lvgl/src/hal/../misc/lv_color.h ****  * 0: no adjustment, get the integer part of the result (round down)
+  78:lvgl/src/hal/../misc/lv_color.h ****  * 64: round up from x.75
+  79:lvgl/src/hal/../misc/lv_color.h ****  * 128: round up from half
+  80:lvgl/src/hal/../misc/lv_color.h ****  * 192: round up from x.25
+  81:lvgl/src/hal/../misc/lv_color.h ****  * 254: round up*/
+  82:lvgl/src/hal/../misc/lv_color.h **** #ifndef LV_COLOR_MIX_ROUND_OFS
+  83:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_DEPTH == 32
+  84:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_MIX_ROUND_OFS 0
+  85:lvgl/src/hal/../misc/lv_color.h **** #else
+  86:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_MIX_ROUND_OFS 128
+  87:lvgl/src/hal/../misc/lv_color.h **** #endif
+  88:lvgl/src/hal/../misc/lv_color.h **** #endif
+  89:lvgl/src/hal/../misc/lv_color.h **** 
+  90:lvgl/src/hal/../misc/lv_color.h **** #if defined(__cplusplus) && !defined(_LV_COLOR_HAS_MODERN_CPP)
+  91:lvgl/src/hal/../misc/lv_color.h **** /**
+  92:lvgl/src/hal/../misc/lv_color.h **** * MSVC compiler's definition of the __cplusplus indicating 199711L regardless to C++ standard versi
+  93:lvgl/src/hal/../misc/lv_color.h **** * see https://devblogs.microsoft.com/cppblog/msvc-now-correctly-reports-cplusplus
+  94:lvgl/src/hal/../misc/lv_color.h **** * so we use _MSC_VER macro instead of __cplusplus
+  95:lvgl/src/hal/../misc/lv_color.h **** */
+  96:lvgl/src/hal/../misc/lv_color.h **** #ifdef _MSC_VER
+  97:lvgl/src/hal/../misc/lv_color.h **** #if _MSC_VER >= 1900 /*Visual Studio 2015*/
+  98:lvgl/src/hal/../misc/lv_color.h **** #define _LV_COLOR_HAS_MODERN_CPP 1
+  99:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 100:lvgl/src/hal/../misc/lv_color.h **** #else
+ 101:lvgl/src/hal/../misc/lv_color.h **** #if __cplusplus >= 201103L
+ 102:lvgl/src/hal/../misc/lv_color.h **** #define _LV_COLOR_HAS_MODERN_CPP 1
+ 103:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 104:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 105:lvgl/src/hal/../misc/lv_color.h **** #endif /*__cplusplus*/
+ 106:lvgl/src/hal/../misc/lv_color.h **** 
+ 107:lvgl/src/hal/../misc/lv_color.h **** #ifndef _LV_COLOR_HAS_MODERN_CPP
+ 108:lvgl/src/hal/../misc/lv_color.h **** #define _LV_COLOR_HAS_MODERN_CPP 0
+ 109:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 110:lvgl/src/hal/../misc/lv_color.h **** 
+ 111:lvgl/src/hal/../misc/lv_color.h **** #if _LV_COLOR_HAS_MODERN_CPP
+ 112:lvgl/src/hal/../misc/lv_color.h **** /*Fix msvc compiler error C4576 inside C++ code*/
+ 113:lvgl/src/hal/../misc/lv_color.h **** #define _LV_COLOR_MAKE_TYPE_HELPER lv_color_t
+ 114:lvgl/src/hal/../misc/lv_color.h **** #else
+ 115:lvgl/src/hal/../misc/lv_color.h **** #define _LV_COLOR_MAKE_TYPE_HELPER (lv_color_t)
+ 116:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 117:lvgl/src/hal/../misc/lv_color.h **** 
+ 118:lvgl/src/hal/../misc/lv_color.h **** /*---------------------------------------
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 5
+
+
+ 119:lvgl/src/hal/../misc/lv_color.h ****  * Macros for all existing color depths
+ 120:lvgl/src/hal/../misc/lv_color.h ****  * to set/get values of the color channels
+ 121:lvgl/src/hal/../misc/lv_color.h ****  *------------------------------------------*/
+ 122:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_R1(c, v) (c).ch.red = (uint8_t)((v) & 0x1)
+ 123:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_G1(c, v) (c).ch.green = (uint8_t)((v) & 0x1)
+ 124:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_B1(c, v) (c).ch.blue = (uint8_t)((v) & 0x1)
+ 125:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_A1(c, v) do {} while(0)
+ 126:lvgl/src/hal/../misc/lv_color.h **** 
+ 127:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_R1(c) (c).ch.red
+ 128:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_G1(c) (c).ch.green
+ 129:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_B1(c) (c).ch.blue
+ 130:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_A1(c) 0xFF
+ 131:lvgl/src/hal/../misc/lv_color.h **** 
+ 132:lvgl/src/hal/../misc/lv_color.h **** # define _LV_COLOR_ZERO_INITIALIZER1 {0x00}
+ 133:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_MAKE1(r8, g8, b8)  {(uint8_t)((b8 >> 7) | (g8 >> 7) | (r8 >> 7))}
+ 134:lvgl/src/hal/../misc/lv_color.h **** 
+ 135:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_R8(c, v) (c).ch.red = (uint8_t)((v) & 0x7U)
+ 136:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_G8(c, v) (c).ch.green = (uint8_t)((v) & 0x7U)
+ 137:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_B8(c, v) (c).ch.blue = (uint8_t)((v) & 0x3U)
+ 138:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_A8(c, v) do {} while(0)
+ 139:lvgl/src/hal/../misc/lv_color.h **** 
+ 140:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_R8(c) (c).ch.red
+ 141:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_G8(c) (c).ch.green
+ 142:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_B8(c) (c).ch.blue
+ 143:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_A8(c) 0xFF
+ 144:lvgl/src/hal/../misc/lv_color.h **** 
+ 145:lvgl/src/hal/../misc/lv_color.h **** # define _LV_COLOR_ZERO_INITIALIZER8 {{0x00, 0x00, 0x00}}
+ 146:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_MAKE8(r8, g8, b8) {{(uint8_t)((b8 >> 6) & 0x3U), (uint8_t)((g8 >> 5) & 0x7U), (ui
+ 147:lvgl/src/hal/../misc/lv_color.h **** 
+ 148:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_R16(c, v) (c).ch.red = (uint8_t)((v) & 0x1FU)
+ 149:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_16_SWAP == 0
+ 150:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_G16(c, v) (c).ch.green = (uint8_t)((v) & 0x3FU)
+ 151:lvgl/src/hal/../misc/lv_color.h **** #else
+ 152:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_G16(c, v) {(c).ch.green_h = (uint8_t)(((v) >> 3) & 0x7); (c).ch.green_l = (ui
+ 153:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 154:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_B16(c, v) (c).ch.blue = (uint8_t)((v) & 0x1FU)
+ 155:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_A16(c, v) do {} while(0)
+ 156:lvgl/src/hal/../misc/lv_color.h **** 
+ 157:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_R16(c) (c).ch.red
+ 158:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_16_SWAP == 0
+ 159:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_G16(c) (c).ch.green
+ 160:lvgl/src/hal/../misc/lv_color.h **** #else
+ 161:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_G16(c) (((c).ch.green_h << 3) + (c).ch.green_l)
+ 162:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 163:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_B16(c) (c).ch.blue
+ 164:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_A16(c) 0xFF
+ 165:lvgl/src/hal/../misc/lv_color.h **** 
+ 166:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_16_SWAP == 0
+ 167:lvgl/src/hal/../misc/lv_color.h **** # define _LV_COLOR_ZERO_INITIALIZER16  {{0x00, 0x00, 0x00}}
+ 168:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_MAKE16(r8, g8, b8) {{(uint8_t)((b8 >> 3) & 0x1FU), (uint8_t)((g8 >> 2) & 0x3FU), 
+ 169:lvgl/src/hal/../misc/lv_color.h **** #else
+ 170:lvgl/src/hal/../misc/lv_color.h **** # define _LV_COLOR_ZERO_INITIALIZER16 {{0x00, 0x00, 0x00, 0x00}}
+ 171:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_MAKE16(r8, g8, b8) {{(uint8_t)((g8 >> 5) & 0x7U), (uint8_t)((r8 >> 3) & 0x1FU), (
+ 172:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 173:lvgl/src/hal/../misc/lv_color.h **** 
+ 174:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_R32(c, v) (c).ch.red = (uint8_t)((v) & 0xFF)
+ 175:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_G32(c, v) (c).ch.green = (uint8_t)((v) & 0xFF)
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 6
+
+
+ 176:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_B32(c, v) (c).ch.blue = (uint8_t)((v) & 0xFF)
+ 177:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_SET_A32(c, v) (c).ch.alpha = (uint8_t)((v) & 0xFF)
+ 178:lvgl/src/hal/../misc/lv_color.h **** 
+ 179:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_R32(c) (c).ch.red
+ 180:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_G32(c) (c).ch.green
+ 181:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_B32(c) (c).ch.blue
+ 182:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_GET_A32(c) (c).ch.alpha
+ 183:lvgl/src/hal/../misc/lv_color.h **** 
+ 184:lvgl/src/hal/../misc/lv_color.h **** # define _LV_COLOR_ZERO_INITIALIZER32  {{0x00, 0x00, 0x00, 0x00}}
+ 185:lvgl/src/hal/../misc/lv_color.h **** # define LV_COLOR_MAKE32(r8, g8, b8) {{b8, g8, r8, 0xff}} /*Fix 0xff alpha*/
+ 186:lvgl/src/hal/../misc/lv_color.h **** 
+ 187:lvgl/src/hal/../misc/lv_color.h **** /*---------------------------------------
+ 188:lvgl/src/hal/../misc/lv_color.h ****  * Macros for the current color depth
+ 189:lvgl/src/hal/../misc/lv_color.h ****  * to set/get values of the color channels
+ 190:lvgl/src/hal/../misc/lv_color.h ****  *------------------------------------------*/
+ 191:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_SET_R(c, v) LV_CONCAT(LV_COLOR_SET_R, LV_COLOR_DEPTH)(c, v)
+ 192:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_SET_G(c, v) LV_CONCAT(LV_COLOR_SET_G, LV_COLOR_DEPTH)(c, v)
+ 193:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_SET_B(c, v) LV_CONCAT(LV_COLOR_SET_B, LV_COLOR_DEPTH)(c, v)
+ 194:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_SET_A(c, v) LV_CONCAT(LV_COLOR_SET_A, LV_COLOR_DEPTH)(c, v)
+ 195:lvgl/src/hal/../misc/lv_color.h **** 
+ 196:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_GET_R(c) LV_CONCAT(LV_COLOR_GET_R, LV_COLOR_DEPTH)(c)
+ 197:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_GET_G(c) LV_CONCAT(LV_COLOR_GET_G, LV_COLOR_DEPTH)(c)
+ 198:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_GET_B(c) LV_CONCAT(LV_COLOR_GET_B, LV_COLOR_DEPTH)(c)
+ 199:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_GET_A(c) LV_CONCAT(LV_COLOR_GET_A, LV_COLOR_DEPTH)(c)
+ 200:lvgl/src/hal/../misc/lv_color.h **** 
+ 201:lvgl/src/hal/../misc/lv_color.h **** #define _LV_COLOR_ZERO_INITIALIZER LV_CONCAT(_LV_COLOR_ZERO_INITIALIZER, LV_COLOR_DEPTH)
+ 202:lvgl/src/hal/../misc/lv_color.h **** #define LV_COLOR_MAKE(r8, g8, b8) LV_CONCAT(LV_COLOR_MAKE, LV_COLOR_DEPTH)(r8, g8, b8)
+ 203:lvgl/src/hal/../misc/lv_color.h **** 
+ 204:lvgl/src/hal/../misc/lv_color.h **** #define LV_UDIV255(x) ((uint32_t)((uint32_t) (x) * 0x8081) >> 0x17)
+ 205:lvgl/src/hal/../misc/lv_color.h **** 
+ 206:lvgl/src/hal/../misc/lv_color.h **** /**********************
+ 207:lvgl/src/hal/../misc/lv_color.h ****  *      TYPEDEFS
+ 208:lvgl/src/hal/../misc/lv_color.h ****  **********************/
+ 209:lvgl/src/hal/../misc/lv_color.h **** 
+ 210:lvgl/src/hal/../misc/lv_color.h **** typedef union {
+ 211:lvgl/src/hal/../misc/lv_color.h ****     uint8_t full; /*must be declared first to set all bits of byte via initializer list*/
+ 212:lvgl/src/hal/../misc/lv_color.h ****     union {
+ 213:lvgl/src/hal/../misc/lv_color.h ****         uint8_t blue : 1;
+ 214:lvgl/src/hal/../misc/lv_color.h ****         uint8_t green : 1;
+ 215:lvgl/src/hal/../misc/lv_color.h ****         uint8_t red : 1;
+ 216:lvgl/src/hal/../misc/lv_color.h ****     } ch;
+ 217:lvgl/src/hal/../misc/lv_color.h **** } lv_color1_t;
+ 218:lvgl/src/hal/../misc/lv_color.h **** 
+ 219:lvgl/src/hal/../misc/lv_color.h **** typedef union {
+ 220:lvgl/src/hal/../misc/lv_color.h ****     struct {
+ 221:lvgl/src/hal/../misc/lv_color.h ****         uint8_t blue : 2;
+ 222:lvgl/src/hal/../misc/lv_color.h ****         uint8_t green : 3;
+ 223:lvgl/src/hal/../misc/lv_color.h ****         uint8_t red : 3;
+ 224:lvgl/src/hal/../misc/lv_color.h ****     } ch;
+ 225:lvgl/src/hal/../misc/lv_color.h ****     uint8_t full;
+ 226:lvgl/src/hal/../misc/lv_color.h **** } lv_color8_t;
+ 227:lvgl/src/hal/../misc/lv_color.h **** 
+ 228:lvgl/src/hal/../misc/lv_color.h **** typedef union {
+ 229:lvgl/src/hal/../misc/lv_color.h ****     struct {
+ 230:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_16_SWAP == 0
+ 231:lvgl/src/hal/../misc/lv_color.h ****         uint16_t blue : 5;
+ 232:lvgl/src/hal/../misc/lv_color.h ****         uint16_t green : 6;
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 7
+
+
+ 233:lvgl/src/hal/../misc/lv_color.h ****         uint16_t red : 5;
+ 234:lvgl/src/hal/../misc/lv_color.h **** #else
+ 235:lvgl/src/hal/../misc/lv_color.h ****         uint16_t green_h : 3;
+ 236:lvgl/src/hal/../misc/lv_color.h ****         uint16_t red : 5;
+ 237:lvgl/src/hal/../misc/lv_color.h ****         uint16_t blue : 5;
+ 238:lvgl/src/hal/../misc/lv_color.h ****         uint16_t green_l : 3;
+ 239:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 240:lvgl/src/hal/../misc/lv_color.h ****     } ch;
+ 241:lvgl/src/hal/../misc/lv_color.h ****     uint16_t full;
+ 242:lvgl/src/hal/../misc/lv_color.h **** } lv_color16_t;
+ 243:lvgl/src/hal/../misc/lv_color.h **** 
+ 244:lvgl/src/hal/../misc/lv_color.h **** typedef union {
+ 245:lvgl/src/hal/../misc/lv_color.h ****     struct {
+ 246:lvgl/src/hal/../misc/lv_color.h ****         uint8_t blue;
+ 247:lvgl/src/hal/../misc/lv_color.h ****         uint8_t green;
+ 248:lvgl/src/hal/../misc/lv_color.h ****         uint8_t red;
+ 249:lvgl/src/hal/../misc/lv_color.h ****         uint8_t alpha;
+ 250:lvgl/src/hal/../misc/lv_color.h ****     } ch;
+ 251:lvgl/src/hal/../misc/lv_color.h ****     uint32_t full;
+ 252:lvgl/src/hal/../misc/lv_color.h **** } lv_color32_t;
+ 253:lvgl/src/hal/../misc/lv_color.h **** 
+ 254:lvgl/src/hal/../misc/lv_color.h **** typedef LV_CONCAT3(uint, LV_COLOR_SIZE, _t) lv_color_int_t;
+ 255:lvgl/src/hal/../misc/lv_color.h **** typedef LV_CONCAT3(lv_color, LV_COLOR_DEPTH, _t) lv_color_t;
+ 256:lvgl/src/hal/../misc/lv_color.h **** 
+ 257:lvgl/src/hal/../misc/lv_color.h **** typedef struct {
+ 258:lvgl/src/hal/../misc/lv_color.h ****     uint16_t h;
+ 259:lvgl/src/hal/../misc/lv_color.h ****     uint8_t s;
+ 260:lvgl/src/hal/../misc/lv_color.h ****     uint8_t v;
+ 261:lvgl/src/hal/../misc/lv_color.h **** } lv_color_hsv_t;
+ 262:lvgl/src/hal/../misc/lv_color.h **** 
+ 263:lvgl/src/hal/../misc/lv_color.h **** //! @cond Doxygen_Suppress
+ 264:lvgl/src/hal/../misc/lv_color.h **** /*No idea where the guard is required but else throws warnings in the docs*/
+ 265:lvgl/src/hal/../misc/lv_color.h **** typedef uint8_t lv_opa_t;
+ 266:lvgl/src/hal/../misc/lv_color.h **** //! @endcond
+ 267:lvgl/src/hal/../misc/lv_color.h **** 
+ 268:lvgl/src/hal/../misc/lv_color.h **** struct _lv_color_filter_dsc_t;
+ 269:lvgl/src/hal/../misc/lv_color.h **** 
+ 270:lvgl/src/hal/../misc/lv_color.h **** typedef lv_color_t (*lv_color_filter_cb_t)(const struct _lv_color_filter_dsc_t *, lv_color_t, lv_op
+ 271:lvgl/src/hal/../misc/lv_color.h **** 
+ 272:lvgl/src/hal/../misc/lv_color.h **** typedef struct _lv_color_filter_dsc_t {
+ 273:lvgl/src/hal/../misc/lv_color.h ****     lv_color_filter_cb_t filter_cb;
+ 274:lvgl/src/hal/../misc/lv_color.h ****     void * user_data;
+ 275:lvgl/src/hal/../misc/lv_color.h **** }lv_color_filter_dsc_t;
+ 276:lvgl/src/hal/../misc/lv_color.h **** 
+ 277:lvgl/src/hal/../misc/lv_color.h **** 
+ 278:lvgl/src/hal/../misc/lv_color.h **** typedef enum {
+ 279:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_RED,
+ 280:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_PINK,
+ 281:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_PURPLE,
+ 282:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_DEEP_PURPLE,
+ 283:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_INDIGO,
+ 284:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_BLUE,
+ 285:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_LIGHT_BLUE,
+ 286:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_CYAN,
+ 287:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_TEAL,
+ 288:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_GREEN,
+ 289:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_LIGHT_GREEN,
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 8
+
+
+ 290:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_LIME,
+ 291:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_YELLOW,
+ 292:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_AMBER,
+ 293:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_ORANGE,
+ 294:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_DEEP_ORANGE,
+ 295:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_BROWN,
+ 296:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_BLUE_GREY,
+ 297:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_GREY,
+ 298:lvgl/src/hal/../misc/lv_color.h ****     _LV_PALETTE_LAST,
+ 299:lvgl/src/hal/../misc/lv_color.h ****     LV_PALETTE_NONE = 0xff,
+ 300:lvgl/src/hal/../misc/lv_color.h **** }lv_palette_t;
+ 301:lvgl/src/hal/../misc/lv_color.h **** 
+ 302:lvgl/src/hal/../misc/lv_color.h **** /**********************
+ 303:lvgl/src/hal/../misc/lv_color.h ****  * GLOBAL PROTOTYPES
+ 304:lvgl/src/hal/../misc/lv_color.h ****  **********************/
+ 305:lvgl/src/hal/../misc/lv_color.h **** 
+ 306:lvgl/src/hal/../misc/lv_color.h **** /*In color conversations:
+ 307:lvgl/src/hal/../misc/lv_color.h ****  * - When converting to bigger color type the LSB weight of 1 LSB is calculated
+ 308:lvgl/src/hal/../misc/lv_color.h ****  *   E.g. 16 bit Red has 5 bits
+ 309:lvgl/src/hal/../misc/lv_color.h ****  *         8 bit Red has 3 bits
+ 310:lvgl/src/hal/../misc/lv_color.h ****  *        ----------------------
+ 311:lvgl/src/hal/../misc/lv_color.h ****  *        8 bit red LSB = (2^5 - 1) / (2^3 - 1) = 31 / 7 = 4
+ 312:lvgl/src/hal/../misc/lv_color.h ****  *
+ 313:lvgl/src/hal/../misc/lv_color.h ****  * - When calculating to smaller color type simply shift out the LSBs
+ 314:lvgl/src/hal/../misc/lv_color.h ****  *   E.g.  8 bit Red has 3 bits
+ 315:lvgl/src/hal/../misc/lv_color.h ****  *        16 bit Red has 5 bits
+ 316:lvgl/src/hal/../misc/lv_color.h ****  *        ----------------------
+ 317:lvgl/src/hal/../misc/lv_color.h ****  *         Shift right with 5 - 3 = 2
+ 318:lvgl/src/hal/../misc/lv_color.h ****  */
+ 319:lvgl/src/hal/../misc/lv_color.h **** static inline uint8_t lv_color_to1(lv_color_t color)
+ 320:lvgl/src/hal/../misc/lv_color.h **** {
+ 321:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_DEPTH == 1
+ 322:lvgl/src/hal/../misc/lv_color.h ****     return color.full;
+ 323:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 8
+ 324:lvgl/src/hal/../misc/lv_color.h ****     if((LV_COLOR_GET_R(color) & 0x4) || (LV_COLOR_GET_G(color) & 0x4) || (LV_COLOR_GET_B(color) & 0
+ 325:lvgl/src/hal/../misc/lv_color.h ****         return 1;
+ 326:lvgl/src/hal/../misc/lv_color.h ****     }
+ 327:lvgl/src/hal/../misc/lv_color.h ****     else {
+ 328:lvgl/src/hal/../misc/lv_color.h ****         return 0;
+ 329:lvgl/src/hal/../misc/lv_color.h ****     }
+ 330:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 16
+ 331:lvgl/src/hal/../misc/lv_color.h ****     if((LV_COLOR_GET_R(color) & 0x10) || (LV_COLOR_GET_G(color) & 0x20) || (LV_COLOR_GET_B(color) &
+ 332:lvgl/src/hal/../misc/lv_color.h ****         return 1;
+ 333:lvgl/src/hal/../misc/lv_color.h ****     }
+ 334:lvgl/src/hal/../misc/lv_color.h ****     else {
+ 335:lvgl/src/hal/../misc/lv_color.h ****         return 0;
+ 336:lvgl/src/hal/../misc/lv_color.h ****     }
+ 337:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 32
+ 338:lvgl/src/hal/../misc/lv_color.h ****     if((LV_COLOR_GET_R(color) & 0x80) || (LV_COLOR_GET_G(color) & 0x80) || (LV_COLOR_GET_B(color) &
+ 339:lvgl/src/hal/../misc/lv_color.h ****         return 1;
+ 340:lvgl/src/hal/../misc/lv_color.h ****     }
+ 341:lvgl/src/hal/../misc/lv_color.h ****     else {
+ 342:lvgl/src/hal/../misc/lv_color.h ****         return 0;
+ 343:lvgl/src/hal/../misc/lv_color.h ****     }
+ 344:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 345:lvgl/src/hal/../misc/lv_color.h **** }
+ 346:lvgl/src/hal/../misc/lv_color.h **** 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 9
+
+
+ 347:lvgl/src/hal/../misc/lv_color.h **** static inline uint8_t lv_color_to8(lv_color_t color)
+ 348:lvgl/src/hal/../misc/lv_color.h **** {
+ 349:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_DEPTH == 1
+ 350:lvgl/src/hal/../misc/lv_color.h ****     if(color.full == 0)
+ 351:lvgl/src/hal/../misc/lv_color.h ****         return 0;
+ 352:lvgl/src/hal/../misc/lv_color.h ****     else
+ 353:lvgl/src/hal/../misc/lv_color.h ****         return 0xFF;
+ 354:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 8
+ 355:lvgl/src/hal/../misc/lv_color.h ****     return color.full;
+ 356:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 16
+ 357:lvgl/src/hal/../misc/lv_color.h ****     lv_color8_t ret;
+ 358:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_R8(ret, LV_COLOR_GET_R(color) >> 2); /*5 - 3  = 2*/
+ 359:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_G8(ret, LV_COLOR_GET_G(color) >> 3); /*6 - 3  = 3*/
+ 360:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_B8(ret, LV_COLOR_GET_B(color) >> 3); /*5 - 2  = 3*/
+ 361:lvgl/src/hal/../misc/lv_color.h ****     return ret.full;
+ 362:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 32
+ 363:lvgl/src/hal/../misc/lv_color.h ****     lv_color8_t ret;
+ 364:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_R8(ret, LV_COLOR_GET_R(color) >> 5); /*8 - 3  = 5*/
+ 365:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_G8(ret, LV_COLOR_GET_G(color) >> 5); /*8 - 3  = 5*/
+ 366:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_B8(ret, LV_COLOR_GET_B(color) >> 6); /*8 - 2  = 6*/
+ 367:lvgl/src/hal/../misc/lv_color.h ****     return ret.full;
+ 368:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 369:lvgl/src/hal/../misc/lv_color.h **** }
+ 370:lvgl/src/hal/../misc/lv_color.h **** 
+ 371:lvgl/src/hal/../misc/lv_color.h **** static inline uint16_t lv_color_to16(lv_color_t color)
+ 372:lvgl/src/hal/../misc/lv_color.h **** {
+ 373:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_DEPTH == 1
+ 374:lvgl/src/hal/../misc/lv_color.h ****     if(color.full == 0)
+ 375:lvgl/src/hal/../misc/lv_color.h ****         return 0;
+ 376:lvgl/src/hal/../misc/lv_color.h ****     else
+ 377:lvgl/src/hal/../misc/lv_color.h ****         return 0xFFFF;
+ 378:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 8
+ 379:lvgl/src/hal/../misc/lv_color.h ****     lv_color16_t ret;
+ 380:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_R16(ret, LV_COLOR_GET_R(color) * 4);  /*(2^5 - 1)/(2^3 - 1) = 31/7 = 4*/
+ 381:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_G16(ret, LV_COLOR_GET_G(color) * 9);  /*(2^6 - 1)/(2^3 - 1) = 63/7 = 9*/
+ 382:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_B16(ret, LV_COLOR_GET_B(color) * 10); /*(2^5 - 1)/(2^2 - 1) = 31/3 = 10*/
+ 383:lvgl/src/hal/../misc/lv_color.h ****     return ret.full;
+ 384:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 16
+ 385:lvgl/src/hal/../misc/lv_color.h ****     return color.full;
+ 386:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 32
+ 387:lvgl/src/hal/../misc/lv_color.h ****     lv_color16_t ret;
+ 388:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_R16(ret, LV_COLOR_GET_R(color) >> 3); /*8 - 5  = 3*/
+ 389:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_G16(ret, LV_COLOR_GET_G(color) >> 2); /*8 - 6  = 2*/
+ 390:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_B16(ret, LV_COLOR_GET_B(color) >> 3); /*8 - 5  = 3*/
+ 391:lvgl/src/hal/../misc/lv_color.h ****     return ret.full;
+ 392:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 393:lvgl/src/hal/../misc/lv_color.h **** }
+ 394:lvgl/src/hal/../misc/lv_color.h **** 
+ 395:lvgl/src/hal/../misc/lv_color.h **** static inline uint32_t lv_color_to32(lv_color_t color)
+ 396:lvgl/src/hal/../misc/lv_color.h **** {
+ 397:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_DEPTH == 1
+ 398:lvgl/src/hal/../misc/lv_color.h ****     if(color.full == 0)
+ 399:lvgl/src/hal/../misc/lv_color.h ****         return 0xFF000000;
+ 400:lvgl/src/hal/../misc/lv_color.h ****     else
+ 401:lvgl/src/hal/../misc/lv_color.h ****         return 0xFFFFFFFF;
+ 402:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 8
+ 403:lvgl/src/hal/../misc/lv_color.h ****     lv_color32_t ret;
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 10
+
+
+ 404:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_R32(ret, LV_COLOR_GET_R(color) * 36); /*(2^8 - 1)/(2^3 - 1) = 255/7 = 36*/
+ 405:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_G32(ret, LV_COLOR_GET_G(color) * 36); /*(2^8 - 1)/(2^3 - 1) = 255/7 = 36*/
+ 406:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_B32(ret, LV_COLOR_GET_B(color) * 85); /*(2^8 - 1)/(2^2 - 1) = 255/3 = 85*/
+ 407:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_A32(ret, 0xFF);
+ 408:lvgl/src/hal/../misc/lv_color.h ****     return ret.full;
+ 409:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 16
+ 410:lvgl/src/hal/../misc/lv_color.h ****     /**
+ 411:lvgl/src/hal/../misc/lv_color.h ****      * The floating point math for conversion is:
+ 412:lvgl/src/hal/../misc/lv_color.h ****      *  valueto = valuefrom * ( (2^bitsto - 1) / (float)(2^bitsfrom - 1) )
+ 413:lvgl/src/hal/../misc/lv_color.h ****      * The faster integer math for conversion is:
+ 414:lvgl/src/hal/../misc/lv_color.h ****      *  valueto = ( valuefrom * multiplier + adder ) >> divisor
+ 415:lvgl/src/hal/../misc/lv_color.h ****      *   multiplier = FLOOR( ( (2^bitsto - 1) << divisor ) / (float)(2^bitsfrom - 1) )
+ 416:lvgl/src/hal/../misc/lv_color.h ****      *
+ 417:lvgl/src/hal/../misc/lv_color.h ****      * Find the first divisor where ( adder >> divisor ) <= 0
+ 418:lvgl/src/hal/../misc/lv_color.h ****      *
+ 419:lvgl/src/hal/../misc/lv_color.h ****      * 5-bit to 8-bit: ( 31 * multiplier + adder ) >> divisor = 255
+ 420:lvgl/src/hal/../misc/lv_color.h ****      * divisor  multiplier  adder  min (0)  max (31)
+ 421:lvgl/src/hal/../misc/lv_color.h ****      *       0           8      7        7       255
+ 422:lvgl/src/hal/../misc/lv_color.h ****      *       1          16     14        7       255
+ 423:lvgl/src/hal/../misc/lv_color.h ****      *       2          32     28        7       255
+ 424:lvgl/src/hal/../misc/lv_color.h ****      *       3          65     25        3       255
+ 425:lvgl/src/hal/../misc/lv_color.h ****      *       4         131     19        1       255
+ 426:lvgl/src/hal/../misc/lv_color.h ****      *       5         263      7        0       255
+ 427:lvgl/src/hal/../misc/lv_color.h ****      *
+ 428:lvgl/src/hal/../misc/lv_color.h ****      * 6-bit to 8-bit: 255 = ( 63 * multiplier + adder ) >> divisor
+ 429:lvgl/src/hal/../misc/lv_color.h ****      * divisor  multiplier  adder  min (0)  max (63)
+ 430:lvgl/src/hal/../misc/lv_color.h ****      *       0           4      3        3       255
+ 431:lvgl/src/hal/../misc/lv_color.h ****      *       1           8      6        3       255
+ 432:lvgl/src/hal/../misc/lv_color.h ****      *       2          16     12        3       255
+ 433:lvgl/src/hal/../misc/lv_color.h ****      *       3          32     24        3       255
+ 434:lvgl/src/hal/../misc/lv_color.h ****      *       4          64     48        3       255
+ 435:lvgl/src/hal/../misc/lv_color.h ****      *       5         129     33        1       255
+ 436:lvgl/src/hal/../misc/lv_color.h ****      *       6         259      3        0       255
+ 437:lvgl/src/hal/../misc/lv_color.h ****      */
+ 438:lvgl/src/hal/../misc/lv_color.h **** 
+ 439:lvgl/src/hal/../misc/lv_color.h ****     lv_color32_t ret;
+ 440:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_R32(ret, (LV_COLOR_GET_R(color) * 263 + 7) >> 5);
+ 441:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_G32(ret, (LV_COLOR_GET_G(color) * 259 + 3) >> 6);
+ 442:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_B32(ret, (LV_COLOR_GET_B(color) * 263 + 7) >> 5);
+ 443:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_A32(ret, 0xFF);
+ 444:lvgl/src/hal/../misc/lv_color.h ****     return ret.full;
+ 445:lvgl/src/hal/../misc/lv_color.h **** #elif LV_COLOR_DEPTH == 32
+ 446:lvgl/src/hal/../misc/lv_color.h ****     return color.full;
+ 447:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 448:lvgl/src/hal/../misc/lv_color.h **** }
+ 449:lvgl/src/hal/../misc/lv_color.h **** 
+ 450:lvgl/src/hal/../misc/lv_color.h **** //! @cond Doxygen_Suppress
+ 451:lvgl/src/hal/../misc/lv_color.h **** 
+ 452:lvgl/src/hal/../misc/lv_color.h **** /**
+ 453:lvgl/src/hal/../misc/lv_color.h ****  * Mix two colors with a given ratio.
+ 454:lvgl/src/hal/../misc/lv_color.h ****  * @param c1 the first color to mix (usually the foreground)
+ 455:lvgl/src/hal/../misc/lv_color.h ****  * @param c2 the second color to mix (usually the background)
+ 456:lvgl/src/hal/../misc/lv_color.h ****  * @param mix The ratio of the colors. 0: full `c2`, 255: full `c1`, 127: half `c1` and half`c2`
+ 457:lvgl/src/hal/../misc/lv_color.h ****  * @return the mixed color
+ 458:lvgl/src/hal/../misc/lv_color.h ****  */
+ 459:lvgl/src/hal/../misc/lv_color.h **** LV_ATTRIBUTE_FAST_MEM static inline lv_color_t lv_color_mix(lv_color_t c1, lv_color_t c2, uint8_t m
+ 460:lvgl/src/hal/../misc/lv_color.h **** {
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 11
+
+
+ 461:lvgl/src/hal/../misc/lv_color.h ****     lv_color_t ret;
+ 462:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_DEPTH != 1
+ 463:lvgl/src/hal/../misc/lv_color.h ****     /*LV_COLOR_DEPTH == 8, 16 or 32*/
+ 464:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_R(ret, LV_UDIV255((uint16_t) LV_COLOR_GET_R(c1) * mix + LV_COLOR_GET_R(c2) *
+ 465:lvgl/src/hal/../misc/lv_color.h ****                                         (255 - mix) + LV_COLOR_MIX_ROUND_OFS));
+ 466:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_G(ret, LV_UDIV255((uint16_t) LV_COLOR_GET_G(c1) * mix + LV_COLOR_GET_G(c2) *
+ 467:lvgl/src/hal/../misc/lv_color.h ****                                         (255 - mix) + LV_COLOR_MIX_ROUND_OFS));
+ 468:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_B(ret, LV_UDIV255((uint16_t) LV_COLOR_GET_B(c1) * mix + LV_COLOR_GET_B(c2) *
+ 469:lvgl/src/hal/../misc/lv_color.h ****                                         (255 - mix) + LV_COLOR_MIX_ROUND_OFS));
+ 470:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_A(ret, 0xFF);
+ 471:lvgl/src/hal/../misc/lv_color.h **** #else
+ 472:lvgl/src/hal/../misc/lv_color.h ****     /*LV_COLOR_DEPTH == 1*/
+ 473:lvgl/src/hal/../misc/lv_color.h ****     ret.full = mix > LV_OPA_50 ? c1.full : c2.full;
+ 474:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 475:lvgl/src/hal/../misc/lv_color.h **** 
+ 476:lvgl/src/hal/../misc/lv_color.h ****     return ret;
+ 477:lvgl/src/hal/../misc/lv_color.h **** }
+ 478:lvgl/src/hal/../misc/lv_color.h **** 
+ 479:lvgl/src/hal/../misc/lv_color.h **** LV_ATTRIBUTE_FAST_MEM static inline void lv_color_premult(lv_color_t c, uint8_t mix, uint16_t * out
+ 480:lvgl/src/hal/../misc/lv_color.h **** {
+ 481:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_DEPTH != 1
+ 482:lvgl/src/hal/../misc/lv_color.h ****     out[0] = (uint16_t) LV_COLOR_GET_R(c) * mix;
+ 483:lvgl/src/hal/../misc/lv_color.h ****     out[1] = (uint16_t) LV_COLOR_GET_G(c) * mix;
+ 484:lvgl/src/hal/../misc/lv_color.h ****     out[2] = (uint16_t) LV_COLOR_GET_B(c) * mix;
+ 485:lvgl/src/hal/../misc/lv_color.h **** #else
+ 486:lvgl/src/hal/../misc/lv_color.h ****     (void) mix;
+ 487:lvgl/src/hal/../misc/lv_color.h ****     /*Pre-multiplication can't be used with 1 bpp*/
+ 488:lvgl/src/hal/../misc/lv_color.h ****     out[0] = LV_COLOR_GET_R(c);
+ 489:lvgl/src/hal/../misc/lv_color.h ****     out[1] = LV_COLOR_GET_G(c);
+ 490:lvgl/src/hal/../misc/lv_color.h ****     out[2] = LV_COLOR_GET_B(c);
+ 491:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 492:lvgl/src/hal/../misc/lv_color.h **** 
+ 493:lvgl/src/hal/../misc/lv_color.h **** }
+ 494:lvgl/src/hal/../misc/lv_color.h **** 
+ 495:lvgl/src/hal/../misc/lv_color.h **** /**
+ 496:lvgl/src/hal/../misc/lv_color.h ****  * Mix two colors with a given ratio. It runs faster then `lv_color_mix` but requires some pre comp
+ 497:lvgl/src/hal/../misc/lv_color.h ****  * @param premult_c1 The first color. Should be preprocessed with `lv_color_premult(c1)`
+ 498:lvgl/src/hal/../misc/lv_color.h ****  * @param c2 The second color. As it is no pre computation required on it
+ 499:lvgl/src/hal/../misc/lv_color.h ****  * @param mix The ratio of the colors. 0: full `c1`, 255: full `c2`, 127: half `c1` and half `c2`.
+ 500:lvgl/src/hal/../misc/lv_color.h ****  *            Should be modified like mix = `255 - mix`
+ 501:lvgl/src/hal/../misc/lv_color.h ****  * @return the mixed color
+ 502:lvgl/src/hal/../misc/lv_color.h ****  * @note 255 won't give clearly `c1`.
+ 503:lvgl/src/hal/../misc/lv_color.h ****  */
+ 504:lvgl/src/hal/../misc/lv_color.h **** LV_ATTRIBUTE_FAST_MEM static inline lv_color_t lv_color_mix_premult(uint16_t * premult_c1, lv_color
+ 505:lvgl/src/hal/../misc/lv_color.h **** {
+ 506:lvgl/src/hal/../misc/lv_color.h ****     lv_color_t ret;
+ 507:lvgl/src/hal/../misc/lv_color.h **** #if LV_COLOR_DEPTH != 1
+ 508:lvgl/src/hal/../misc/lv_color.h ****     /*LV_COLOR_DEPTH == 8, 16 or 32*/
+ 509:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_R(ret, LV_UDIV255(premult_c1[0] + LV_COLOR_GET_R(c2) * mix + LV_COLOR_MIX_ROUND_OF
+ 510:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_G(ret, LV_UDIV255(premult_c1[1] + LV_COLOR_GET_G(c2) * mix + LV_COLOR_MIX_ROUND_OF
+ 511:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_B(ret, LV_UDIV255(premult_c1[2] + LV_COLOR_GET_B(c2) * mix + LV_COLOR_MIX_ROUND_OF
+ 512:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_A(ret, 0xFF);
+ 513:lvgl/src/hal/../misc/lv_color.h **** #else
+ 514:lvgl/src/hal/../misc/lv_color.h ****     /*LV_COLOR_DEPTH == 1*/
+ 515:lvgl/src/hal/../misc/lv_color.h ****     /*Restore color1*/
+ 516:lvgl/src/hal/../misc/lv_color.h ****     lv_color_t c1;
+ 517:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_R(c1, premult_c1[0]);
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 12
+
+
+ 518:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_G(c1, premult_c1[1]);
+ 519:lvgl/src/hal/../misc/lv_color.h ****     LV_COLOR_SET_B(c1, premult_c1[2]);
+ 520:lvgl/src/hal/../misc/lv_color.h ****     ret.full = mix > LV_OPA_50 ? c2.full : c1.full;
+ 521:lvgl/src/hal/../misc/lv_color.h **** #endif
+ 522:lvgl/src/hal/../misc/lv_color.h **** 
+ 523:lvgl/src/hal/../misc/lv_color.h ****     return ret;
+ 524:lvgl/src/hal/../misc/lv_color.h **** }
+ 525:lvgl/src/hal/../misc/lv_color.h **** 
+ 526:lvgl/src/hal/../misc/lv_color.h **** /**
+ 527:lvgl/src/hal/../misc/lv_color.h ****  * Mix two colors. Both color can have alpha value.
+ 528:lvgl/src/hal/../misc/lv_color.h ****  * @param bg_color background color
+ 529:lvgl/src/hal/../misc/lv_color.h ****  * @param bg_opa alpha of the background color
+ 530:lvgl/src/hal/../misc/lv_color.h ****  * @param fg_color foreground color
+ 531:lvgl/src/hal/../misc/lv_color.h ****  * @param fg_opa alpha of the foreground color
+ 532:lvgl/src/hal/../misc/lv_color.h ****  * @param res_color the result color
+ 533:lvgl/src/hal/../misc/lv_color.h ****  * @param res_opa the result opacity
+ 534:lvgl/src/hal/../misc/lv_color.h ****  */
+ 535:lvgl/src/hal/../misc/lv_color.h **** LV_ATTRIBUTE_FAST_MEM static inline void lv_color_mix_with_alpha(lv_color_t bg_color, lv_opa_t bg_o
+ 536:lvgl/src/hal/../misc/lv_color.h ****                                                                  lv_color_t fg_color, lv_opa_t fg_o
+ 537:lvgl/src/hal/../misc/lv_color.h ****                                                                  lv_color_t * res_color, lv_opa_t *
+ 538:lvgl/src/hal/../misc/lv_color.h **** {
+ 539:lvgl/src/hal/../misc/lv_color.h ****     /*Pick the foreground if it's fully opaque or the Background is fully transparent*/
+ 540:lvgl/src/hal/../misc/lv_color.h ****     if(fg_opa >= LV_OPA_MAX || bg_opa <= LV_OPA_MIN) {
+ 541:lvgl/src/hal/../misc/lv_color.h ****         res_color->full = fg_color.full;
+ 542:lvgl/src/hal/../misc/lv_color.h ****         *res_opa = fg_opa;
+ 543:lvgl/src/hal/../misc/lv_color.h ****     }
+ 544:lvgl/src/hal/../misc/lv_color.h ****     /*Transparent foreground: use the Background*/
+ 545:lvgl/src/hal/../misc/lv_color.h ****     else if(fg_opa <= LV_OPA_MIN) {
+ 546:lvgl/src/hal/../misc/lv_color.h ****         res_color->full = bg_color.full;
+ 547:lvgl/src/hal/../misc/lv_color.h ****         *res_opa = bg_opa;
+ 548:lvgl/src/hal/../misc/lv_color.h ****     }
+ 549:lvgl/src/hal/../misc/lv_color.h ****     /*Opaque background: use simple mix*/
+ 550:lvgl/src/hal/../misc/lv_color.h ****     else if(bg_opa >= LV_OPA_MAX) {
+ 551:lvgl/src/hal/../misc/lv_color.h ****         *res_color = lv_color_mix(fg_color, bg_color, fg_opa);
+ 552:lvgl/src/hal/../misc/lv_color.h ****         *res_opa = LV_OPA_COVER;
+ 553:lvgl/src/hal/../misc/lv_color.h ****     }
+ 554:lvgl/src/hal/../misc/lv_color.h ****     /*Both colors have alpha. Expensive calculation need to be applied*/
+ 555:lvgl/src/hal/../misc/lv_color.h ****     else {
+ 556:lvgl/src/hal/../misc/lv_color.h ****         /*Save the parameters and the result. If they will be asked again don't compute again*/
+ 557:lvgl/src/hal/../misc/lv_color.h ****         static lv_opa_t fg_opa_save     = 0;
+ 558:lvgl/src/hal/../misc/lv_color.h ****         static lv_opa_t bg_opa_save     = 0;
+ 559:lvgl/src/hal/../misc/lv_color.h ****         static lv_color_t fg_color_save = _LV_COLOR_ZERO_INITIALIZER;
+ 560:lvgl/src/hal/../misc/lv_color.h ****         static lv_color_t bg_color_save = _LV_COLOR_ZERO_INITIALIZER;
+ 561:lvgl/src/hal/../misc/lv_color.h ****         static lv_color_t res_color_saved = _LV_COLOR_ZERO_INITIALIZER;
+ 562:lvgl/src/hal/../misc/lv_color.h ****         static lv_opa_t res_opa_saved = 0;
+ 563:lvgl/src/hal/../misc/lv_color.h **** 
+ 564:lvgl/src/hal/../misc/lv_color.h ****         if(fg_opa != fg_opa_save || bg_opa != bg_opa_save || fg_color.full != fg_color_save.full ||
+ 565:lvgl/src/hal/../misc/lv_color.h ****            bg_color.full != bg_color_save.full) {
+ 566:lvgl/src/hal/../misc/lv_color.h ****             fg_opa_save        = fg_opa;
+ 567:lvgl/src/hal/../misc/lv_color.h ****             bg_opa_save        = bg_opa;
+ 568:lvgl/src/hal/../misc/lv_color.h ****             fg_color_save.full = fg_color.full;
+ 569:lvgl/src/hal/../misc/lv_color.h ****             bg_color_save.full = bg_color.full;
+ 570:lvgl/src/hal/../misc/lv_color.h ****             /*Info:
+ 571:lvgl/src/hal/../misc/lv_color.h ****              * https://en.wikipedia.org/wiki/Alpha_compositing#Analytical_derivation_of_the_over_op
+ 572:lvgl/src/hal/../misc/lv_color.h ****             res_opa_saved = 255 - ((uint16_t)((uint16_t)(255 - fg_opa) * (255 - bg_opa)) >> 8);
+ 573:lvgl/src/hal/../misc/lv_color.h ****             if(res_opa_saved == 0) {
+ 574:lvgl/src/hal/../misc/lv_color.h ****                 while(1)
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 13
+
+
+ 575:lvgl/src/hal/../misc/lv_color.h ****                     ;
+ 576:lvgl/src/hal/../misc/lv_color.h ****             }
+ 577:lvgl/src/hal/../misc/lv_color.h ****             lv_opa_t ratio = (uint16_t)((uint16_t)fg_opa * 255) / res_opa_saved;
+ 578:lvgl/src/hal/../misc/lv_color.h ****             res_color_saved = lv_color_mix(fg_color, bg_color, ratio);
+ 579:lvgl/src/hal/../misc/lv_color.h **** 
+ 580:lvgl/src/hal/../misc/lv_color.h ****         }
+ 581:lvgl/src/hal/../misc/lv_color.h **** 
+ 582:lvgl/src/hal/../misc/lv_color.h ****         res_color->full = res_color_saved.full;
+ 583:lvgl/src/hal/../misc/lv_color.h ****         *res_opa = res_opa_saved;
+ 584:lvgl/src/hal/../misc/lv_color.h ****     }
+ 585:lvgl/src/hal/../misc/lv_color.h **** }
+ 586:lvgl/src/hal/../misc/lv_color.h **** 
+ 587:lvgl/src/hal/../misc/lv_color.h **** //! @endcond
+ 588:lvgl/src/hal/../misc/lv_color.h **** 
+ 589:lvgl/src/hal/../misc/lv_color.h **** /**
+ 590:lvgl/src/hal/../misc/lv_color.h ****  * Get the brightness of a color
+ 591:lvgl/src/hal/../misc/lv_color.h ****  * @param color a color
+ 592:lvgl/src/hal/../misc/lv_color.h ****  * @return the brightness [0..255]
+ 593:lvgl/src/hal/../misc/lv_color.h ****  */
+ 594:lvgl/src/hal/../misc/lv_color.h **** static inline uint8_t lv_color_brightness(lv_color_t color)
+ 595:lvgl/src/hal/../misc/lv_color.h **** {
+ 596:lvgl/src/hal/../misc/lv_color.h ****     lv_color32_t c32;
+ 597:lvgl/src/hal/../misc/lv_color.h ****     c32.full        = lv_color_to32(color);
+ 598:lvgl/src/hal/../misc/lv_color.h ****     uint16_t bright = (uint16_t)(3u * LV_COLOR_GET_R32(c32) + LV_COLOR_GET_B32(c32) + 4u * LV_COLOR
+ 599:lvgl/src/hal/../misc/lv_color.h ****     return (uint8_t)(bright >> 3);
+ 600:lvgl/src/hal/../misc/lv_color.h **** }
+ 601:lvgl/src/hal/../misc/lv_color.h **** 
+ 602:lvgl/src/hal/../misc/lv_color.h **** static inline lv_color_t lv_color_make(uint8_t r, uint8_t g, uint8_t b)
+  82              		.loc 2 602 26 view .LVU13
+  83              	.LBB57:
+ 603:lvgl/src/hal/../misc/lv_color.h **** {
+ 604:lvgl/src/hal/../misc/lv_color.h ****     return _LV_COLOR_MAKE_TYPE_HELPER LV_COLOR_MAKE(r, g, b);
+  84              		.loc 2 604 5 view .LVU14
+  85              		.loc 2 604 5 is_stmt 0 view .LVU15
+  86              	.LBE57:
+  87              	.LBE56:
+  88              		.loc 1 26 2 view .LVU16
+  89 0022 D34D     		ldr	r5, .L11
+  90 0024 4FF0FF31 		mov	r1, #-1	@ movhi
+  91 0028 2846     		mov	r0, r5
+  92 002a FFF7FEFF 		bl	lv_style_set_bg_color
+  93              	.LVL5:
+  27:generated/setup_scr_screen2.c **** 	lv_style_set_bg_opa(&style_screen2_main_main_default, 0);
+  94              		.loc 1 27 2 is_stmt 1 view .LVU17
+  95 002e 0021     		movs	r1, #0
+  96 0030 2846     		mov	r0, r5
+  97 0032 FFF7FEFF 		bl	lv_style_set_bg_opa
+  98              	.LVL6:
+  28:generated/setup_scr_screen2.c **** 	lv_obj_add_style(ui->screen2, &style_screen2_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+  99              		.loc 1 28 2 view .LVU18
+ 100 0036 0022     		movs	r2, #0
+ 101 0038 2946     		mov	r1, r5
+ 102 003a 206A     		ldr	r0, [r4, #32]
+ 103 003c FFF7FEFF 		bl	lv_obj_add_style
+ 104              	.LVL7:
+  29:generated/setup_scr_screen2.c **** 
+  30:generated/setup_scr_screen2.c **** 	//Write codes screen2_label0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 14
+
+
+  31:generated/setup_scr_screen2.c **** 	ui->screen2_label0 = lv_label_create(ui->screen2);
+ 105              		.loc 1 31 2 view .LVU19
+ 106              		.loc 1 31 23 is_stmt 0 view .LVU20
+ 107 0040 206A     		ldr	r0, [r4, #32]
+ 108 0042 FFF7FEFF 		bl	lv_label_create
+ 109              	.LVL8:
+ 110              		.loc 1 31 21 view .LVU21
+ 111 0046 A062     		str	r0, [r4, #40]
+  32:generated/setup_scr_screen2.c **** 	lv_obj_set_pos(ui->screen2_label0, 180, 240);
+ 112              		.loc 1 32 2 is_stmt 1 view .LVU22
+ 113 0048 F022     		movs	r2, #240
+ 114 004a B421     		movs	r1, #180
+ 115 004c FFF7FEFF 		bl	lv_obj_set_pos
+ 116              	.LVL9:
+  33:generated/setup_scr_screen2.c **** 	lv_obj_set_size(ui->screen2_label0, 100, 20);
+ 117              		.loc 1 33 2 view .LVU23
+ 118 0050 1422     		movs	r2, #20
+ 119 0052 6421     		movs	r1, #100
+ 120 0054 A06A     		ldr	r0, [r4, #40]
+ 121 0056 FFF7FEFF 		bl	lv_obj_set_size
+ 122              	.LVL10:
+  34:generated/setup_scr_screen2.c **** 	lv_obj_set_scrollbar_mode(ui->screen2_label0, LV_SCROLLBAR_MODE_OFF);
+ 123              		.loc 1 34 2 view .LVU24
+ 124 005a 0021     		movs	r1, #0
+ 125 005c A06A     		ldr	r0, [r4, #40]
+ 126 005e FFF7FEFF 		bl	lv_obj_set_scrollbar_mode
+ 127              	.LVL11:
+  35:generated/setup_scr_screen2.c **** 	lv_label_set_text(ui->screen2_label0, "screen2");
+ 128              		.loc 1 35 2 view .LVU25
+ 129 0062 C449     		ldr	r1, .L11+4
+ 130 0064 A06A     		ldr	r0, [r4, #40]
+ 131 0066 FFF7FEFF 		bl	lv_label_set_text
+ 132              	.LVL12:
+  36:generated/setup_scr_screen2.c **** 	lv_label_set_long_mode(ui->screen2_label0, LV_LABEL_LONG_WRAP);
+ 133              		.loc 1 36 2 view .LVU26
+ 134 006a 0021     		movs	r1, #0
+ 135 006c A06A     		ldr	r0, [r4, #40]
+ 136 006e FFF7FEFF 		bl	lv_label_set_long_mode
+ 137              	.LVL13:
+  37:generated/setup_scr_screen2.c **** 
+  38:generated/setup_scr_screen2.c **** 	//Write style state: LV_STATE_DEFAULT for style_screen2_label0_main_main_default
+  39:generated/setup_scr_screen2.c **** 	static lv_style_t style_screen2_label0_main_main_default;
+ 138              		.loc 1 39 2 view .LVU27
+  40:generated/setup_scr_screen2.c **** 	if (style_screen2_label0_main_main_default.prop_cnt > 1)
+ 139              		.loc 1 40 2 view .LVU28
+ 140              		.loc 1 40 44 is_stmt 0 view .LVU29
+ 141 0072 C14B     		ldr	r3, .L11+8
+ 142 0074 DB79     		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+ 143              		.loc 1 40 5 view .LVU30
+ 144 0076 012B     		cmp	r3, #1
+ 145 0078 40F26E81 		bls	.L4
+  41:generated/setup_scr_screen2.c **** 		lv_style_reset(&style_screen2_label0_main_main_default);
+ 146              		.loc 1 41 3 is_stmt 1 view .LVU31
+ 147 007c BE48     		ldr	r0, .L11+8
+ 148 007e FFF7FEFF 		bl	lv_style_reset
+ 149              	.LVL14:
+ 150              	.L5:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 15
+
+
+  42:generated/setup_scr_screen2.c **** 	else
+  43:generated/setup_scr_screen2.c **** 		lv_style_init(&style_screen2_label0_main_main_default);
+  44:generated/setup_scr_screen2.c **** 	lv_style_set_radius(&style_screen2_label0_main_main_default, 0);
+ 151              		.loc 1 44 2 view .LVU32
+ 152 0082 BD4D     		ldr	r5, .L11+8
+ 153 0084 0021     		movs	r1, #0
+ 154 0086 2846     		mov	r0, r5
+ 155 0088 FFF7FEFF 		bl	lv_style_set_radius
+ 156              	.LVL15:
+  45:generated/setup_scr_screen2.c **** 	lv_style_set_bg_color(&style_screen2_label0_main_main_default, lv_color_make(0xff, 0xff, 0xff));
+ 157              		.loc 1 45 2 view .LVU33
+ 158              	.LBB58:
+ 159              	.LBI58:
+ 602:lvgl/src/hal/../misc/lv_color.h **** {
+ 160              		.loc 2 602 26 view .LVU34
+ 161              	.LBB59:
+ 162              		.loc 2 604 5 view .LVU35
+ 163              		.loc 2 604 5 is_stmt 0 view .LVU36
+ 164              	.LBE59:
+ 165              	.LBE58:
+ 166              		.loc 1 45 2 view .LVU37
+ 167 008c 4FF0FF31 		mov	r1, #-1	@ movhi
+ 168 0090 2846     		mov	r0, r5
+ 169 0092 FFF7FEFF 		bl	lv_style_set_bg_color
+ 170              	.LVL16:
+  46:generated/setup_scr_screen2.c **** 	lv_style_set_bg_grad_color(&style_screen2_label0_main_main_default, lv_color_make(0xff, 0xff, 0xff
+ 171              		.loc 1 46 2 is_stmt 1 view .LVU38
+ 172              	.LBB60:
+ 173              	.LBI60:
+ 602:lvgl/src/hal/../misc/lv_color.h **** {
+ 174              		.loc 2 602 26 view .LVU39
+ 175              	.LBB61:
+ 176              		.loc 2 604 5 view .LVU40
+ 177              		.loc 2 604 5 is_stmt 0 view .LVU41
+ 178              	.LBE61:
+ 179              	.LBE60:
+ 180              		.loc 1 46 2 view .LVU42
+ 181 0096 4FF0FF31 		mov	r1, #-1	@ movhi
+ 182 009a 2846     		mov	r0, r5
+ 183 009c FFF7FEFF 		bl	lv_style_set_bg_grad_color
+ 184              	.LVL17:
+  47:generated/setup_scr_screen2.c **** 	lv_style_set_bg_grad_dir(&style_screen2_label0_main_main_default, LV_GRAD_DIR_VER);
+ 185              		.loc 1 47 2 is_stmt 1 view .LVU43
+ 186 00a0 0121     		movs	r1, #1
+ 187 00a2 2846     		mov	r0, r5
+ 188 00a4 FFF7FEFF 		bl	lv_style_set_bg_grad_dir
+ 189              	.LVL18:
+  48:generated/setup_scr_screen2.c **** 	lv_style_set_bg_opa(&style_screen2_label0_main_main_default, 0);
+ 190              		.loc 1 48 2 view .LVU44
+ 191 00a8 0021     		movs	r1, #0
+ 192 00aa 2846     		mov	r0, r5
+ 193 00ac FFF7FEFF 		bl	lv_style_set_bg_opa
+ 194              	.LVL19:
+  49:generated/setup_scr_screen2.c **** 	lv_style_set_text_color(&style_screen2_label0_main_main_default, lv_color_make(0x00, 0x00, 0x00));
+ 195              		.loc 1 49 2 view .LVU45
+ 196              	.LBB62:
+ 197              	.LBI62:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 16
+
+
+ 602:lvgl/src/hal/../misc/lv_color.h **** {
+ 198              		.loc 2 602 26 view .LVU46
+ 199              	.LBB63:
+ 200              		.loc 2 604 5 view .LVU47
+ 201              		.loc 2 604 5 is_stmt 0 view .LVU48
+ 202              	.LBE63:
+ 203              	.LBE62:
+ 204              		.loc 1 49 2 view .LVU49
+ 205 00b0 4FF00001 		mov	r1, #0	@ movhi
+ 206 00b4 2846     		mov	r0, r5
+ 207 00b6 FFF7FEFF 		bl	lv_style_set_text_color
+ 208              	.LVL20:
+  50:generated/setup_scr_screen2.c **** 	lv_style_set_text_font(&style_screen2_label0_main_main_default, &lv_font_arial_12);
+ 209              		.loc 1 50 2 is_stmt 1 view .LVU50
+ 210 00ba B049     		ldr	r1, .L11+12
+ 211 00bc 2846     		mov	r0, r5
+ 212 00be FFF7FEFF 		bl	lv_style_set_text_font
+ 213              	.LVL21:
+  51:generated/setup_scr_screen2.c **** 	lv_style_set_text_letter_space(&style_screen2_label0_main_main_default, 2);
+ 214              		.loc 1 51 2 view .LVU51
+ 215 00c2 0221     		movs	r1, #2
+ 216 00c4 2846     		mov	r0, r5
+ 217 00c6 FFF7FEFF 		bl	lv_style_set_text_letter_space
+ 218              	.LVL22:
+  52:generated/setup_scr_screen2.c **** 	lv_style_set_text_line_space(&style_screen2_label0_main_main_default, 0);
+ 219              		.loc 1 52 2 view .LVU52
+ 220 00ca 0021     		movs	r1, #0
+ 221 00cc 2846     		mov	r0, r5
+ 222 00ce FFF7FEFF 		bl	lv_style_set_text_line_space
+ 223              	.LVL23:
+  53:generated/setup_scr_screen2.c **** 	lv_style_set_text_align(&style_screen2_label0_main_main_default, LV_TEXT_ALIGN_CENTER);
+ 224              		.loc 1 53 2 view .LVU53
+ 225 00d2 0221     		movs	r1, #2
+ 226 00d4 2846     		mov	r0, r5
+ 227 00d6 FFF7FEFF 		bl	lv_style_set_text_align
+ 228              	.LVL24:
+  54:generated/setup_scr_screen2.c **** 	lv_style_set_pad_left(&style_screen2_label0_main_main_default, 0);
+ 229              		.loc 1 54 2 view .LVU54
+ 230 00da 0021     		movs	r1, #0
+ 231 00dc 2846     		mov	r0, r5
+ 232 00de FFF7FEFF 		bl	lv_style_set_pad_left
+ 233              	.LVL25:
+  55:generated/setup_scr_screen2.c **** 	lv_style_set_pad_right(&style_screen2_label0_main_main_default, 0);
+ 234              		.loc 1 55 2 view .LVU55
+ 235 00e2 0021     		movs	r1, #0
+ 236 00e4 2846     		mov	r0, r5
+ 237 00e6 FFF7FEFF 		bl	lv_style_set_pad_right
+ 238              	.LVL26:
+  56:generated/setup_scr_screen2.c **** 	lv_style_set_pad_top(&style_screen2_label0_main_main_default, 0);
+ 239              		.loc 1 56 2 view .LVU56
+ 240 00ea 0021     		movs	r1, #0
+ 241 00ec 2846     		mov	r0, r5
+ 242 00ee FFF7FEFF 		bl	lv_style_set_pad_top
+ 243              	.LVL27:
+  57:generated/setup_scr_screen2.c **** 	lv_style_set_pad_bottom(&style_screen2_label0_main_main_default, 0);
+ 244              		.loc 1 57 2 view .LVU57
+ 245 00f2 0021     		movs	r1, #0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 17
+
+
+ 246 00f4 2846     		mov	r0, r5
+ 247 00f6 FFF7FEFF 		bl	lv_style_set_pad_bottom
+ 248              	.LVL28:
+  58:generated/setup_scr_screen2.c **** 	lv_obj_add_style(ui->screen2_label0, &style_screen2_label0_main_main_default, LV_PART_MAIN|LV_STAT
+ 249              		.loc 1 58 2 view .LVU58
+ 250 00fa 0022     		movs	r2, #0
+ 251 00fc 2946     		mov	r1, r5
+ 252 00fe A06A     		ldr	r0, [r4, #40]
+ 253 0100 FFF7FEFF 		bl	lv_obj_add_style
+ 254              	.LVL29:
+  59:generated/setup_scr_screen2.c **** 
+  60:generated/setup_scr_screen2.c **** 	//Write codes screen2_btn1_1
+  61:generated/setup_scr_screen2.c **** 	ui->screen2_btn1_1 = lv_btn_create(ui->screen2);
+ 255              		.loc 1 61 2 view .LVU59
+ 256              		.loc 1 61 23 is_stmt 0 view .LVU60
+ 257 0104 206A     		ldr	r0, [r4, #32]
+ 258 0106 FFF7FEFF 		bl	lv_btn_create
+ 259              	.LVL30:
+ 260              		.loc 1 61 21 view .LVU61
+ 261 010a E062     		str	r0, [r4, #44]
+  62:generated/setup_scr_screen2.c **** 	lv_obj_set_pos(ui->screen2_btn1_1, 30, 235);
+ 262              		.loc 1 62 2 is_stmt 1 view .LVU62
+ 263 010c EB22     		movs	r2, #235
+ 264 010e 1E21     		movs	r1, #30
+ 265 0110 FFF7FEFF 		bl	lv_obj_set_pos
+ 266              	.LVL31:
+  63:generated/setup_scr_screen2.c **** 	lv_obj_set_size(ui->screen2_btn1_1, 100, 25);
+ 267              		.loc 1 63 2 view .LVU63
+ 268 0114 1922     		movs	r2, #25
+ 269 0116 6421     		movs	r1, #100
+ 270 0118 E06A     		ldr	r0, [r4, #44]
+ 271 011a FFF7FEFF 		bl	lv_obj_set_size
+ 272              	.LVL32:
+  64:generated/setup_scr_screen2.c **** 	lv_obj_set_scrollbar_mode(ui->screen2_btn1_1, LV_SCROLLBAR_MODE_OFF);
+ 273              		.loc 1 64 2 view .LVU64
+ 274 011e 0021     		movs	r1, #0
+ 275 0120 E06A     		ldr	r0, [r4, #44]
+ 276 0122 FFF7FEFF 		bl	lv_obj_set_scrollbar_mode
+ 277              	.LVL33:
+  65:generated/setup_scr_screen2.c **** 
+  66:generated/setup_scr_screen2.c **** 	//Write style state: LV_STATE_DEFAULT for style_screen2_btn1_1_main_main_default
+  67:generated/setup_scr_screen2.c **** 	static lv_style_t style_screen2_btn1_1_main_main_default;
+ 278              		.loc 1 67 2 view .LVU65
+  68:generated/setup_scr_screen2.c **** 	if (style_screen2_btn1_1_main_main_default.prop_cnt > 1)
+ 279              		.loc 1 68 2 view .LVU66
+ 280              		.loc 1 68 44 is_stmt 0 view .LVU67
+ 281 0126 964B     		ldr	r3, .L11+16
+ 282 0128 DB79     		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+ 283              		.loc 1 68 5 view .LVU68
+ 284 012a 012B     		cmp	r3, #1
+ 285 012c 40F21881 		bls	.L6
+  69:generated/setup_scr_screen2.c **** 		lv_style_reset(&style_screen2_btn1_1_main_main_default);
+ 286              		.loc 1 69 3 is_stmt 1 view .LVU69
+ 287 0130 9348     		ldr	r0, .L11+16
+ 288 0132 FFF7FEFF 		bl	lv_style_reset
+ 289              	.LVL34:
+ 290              	.L7:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 18
+
+
+  70:generated/setup_scr_screen2.c **** 	else
+  71:generated/setup_scr_screen2.c **** 		lv_style_init(&style_screen2_btn1_1_main_main_default);
+  72:generated/setup_scr_screen2.c **** 	lv_style_set_radius(&style_screen2_btn1_1_main_main_default, 50);
+ 291              		.loc 1 72 2 view .LVU70
+ 292 0136 924D     		ldr	r5, .L11+16
+ 293 0138 3221     		movs	r1, #50
+ 294 013a 2846     		mov	r0, r5
+ 295 013c FFF7FEFF 		bl	lv_style_set_radius
+ 296              	.LVL35:
+  73:generated/setup_scr_screen2.c **** 	lv_style_set_bg_color(&style_screen2_btn1_1_main_main_default, lv_color_make(0xff, 0xff, 0xff));
+ 297              		.loc 1 73 2 view .LVU71
+ 298              	.LBB64:
+ 299              	.LBI64:
+ 602:lvgl/src/hal/../misc/lv_color.h **** {
+ 300              		.loc 2 602 26 view .LVU72
+ 301              	.LBB65:
+ 302              		.loc 2 604 5 view .LVU73
+ 303              		.loc 2 604 5 is_stmt 0 view .LVU74
+ 304              	.LBE65:
+ 305              	.LBE64:
+ 306              		.loc 1 73 2 view .LVU75
+ 307 0140 4FF0FF31 		mov	r1, #-1	@ movhi
+ 308 0144 2846     		mov	r0, r5
+ 309 0146 FFF7FEFF 		bl	lv_style_set_bg_color
+ 310              	.LVL36:
+  74:generated/setup_scr_screen2.c **** 	lv_style_set_bg_grad_color(&style_screen2_btn1_1_main_main_default, lv_color_make(0xff, 0xff, 0xff
+ 311              		.loc 1 74 2 is_stmt 1 view .LVU76
+ 312              	.LBB66:
+ 313              	.LBI66:
+ 602:lvgl/src/hal/../misc/lv_color.h **** {
+ 314              		.loc 2 602 26 view .LVU77
+ 315              	.LBB67:
+ 316              		.loc 2 604 5 view .LVU78
+ 317              		.loc 2 604 5 is_stmt 0 view .LVU79
+ 318              	.LBE67:
+ 319              	.LBE66:
+ 320              		.loc 1 74 2 view .LVU80
+ 321 014a 4FF0FF31 		mov	r1, #-1	@ movhi
+ 322 014e 2846     		mov	r0, r5
+ 323 0150 FFF7FEFF 		bl	lv_style_set_bg_grad_color
+ 324              	.LVL37:
+  75:generated/setup_scr_screen2.c **** 	lv_style_set_bg_grad_dir(&style_screen2_btn1_1_main_main_default, LV_GRAD_DIR_VER);
+ 325              		.loc 1 75 2 is_stmt 1 view .LVU81
+ 326 0154 0121     		movs	r1, #1
+ 327 0156 2846     		mov	r0, r5
+ 328 0158 FFF7FEFF 		bl	lv_style_set_bg_grad_dir
+ 329              	.LVL38:
+  76:generated/setup_scr_screen2.c **** 	lv_style_set_bg_opa(&style_screen2_btn1_1_main_main_default, 255);
+ 330              		.loc 1 76 2 view .LVU82
+ 331 015c FF21     		movs	r1, #255
+ 332 015e 2846     		mov	r0, r5
+ 333 0160 FFF7FEFF 		bl	lv_style_set_bg_opa
+ 334              	.LVL39:
+  77:generated/setup_scr_screen2.c **** 	lv_style_set_border_color(&style_screen2_btn1_1_main_main_default, lv_color_make(0x01, 0xa2, 0xb1)
+ 335              		.loc 1 77 2 view .LVU83
+ 336              	.LBB68:
+ 337              	.LBI68:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 19
+
+
+ 602:lvgl/src/hal/../misc/lv_color.h **** {
+ 338              		.loc 2 602 26 view .LVU84
+ 339              	.LBB69:
+ 340              		.loc 2 604 5 view .LVU85
+ 341              		.loc 2 604 12 is_stmt 0 view .LVU86
+ 342 0164 4FF00001 		mov	r1, #0	@ movhi
+ 343 0168 1623     		movs	r3, #22
+ 344 016a 63F30401 		bfi	r1, r3, #0, #5
+ 345 016e 2823     		movs	r3, #40
+ 346 0170 63F34A11 		bfi	r1, r3, #5, #6
+ 347 0174 6FF3CF21 		bfc	r1, #11, #5
+ 348              	.LVL40:
+ 349              		.loc 2 604 12 view .LVU87
+ 350              	.LBE69:
+ 351              	.LBE68:
+ 352              		.loc 1 77 2 view .LVU88
+ 353 0178 2846     		mov	r0, r5
+ 354 017a FFF7FEFF 		bl	lv_style_set_border_color
+ 355              	.LVL41:
+  78:generated/setup_scr_screen2.c **** 	lv_style_set_border_width(&style_screen2_btn1_1_main_main_default, 2);
+ 356              		.loc 1 78 2 is_stmt 1 view .LVU89
+ 357 017e 0221     		movs	r1, #2
+ 358 0180 2846     		mov	r0, r5
+ 359 0182 FFF7FEFF 		bl	lv_style_set_border_width
+ 360              	.LVL42:
+  79:generated/setup_scr_screen2.c **** 	lv_style_set_border_opa(&style_screen2_btn1_1_main_main_default, 255);
+ 361              		.loc 1 79 2 view .LVU90
+ 362 0186 FF21     		movs	r1, #255
+ 363 0188 2846     		mov	r0, r5
+ 364 018a FFF7FEFF 		bl	lv_style_set_border_opa
+ 365              	.LVL43:
+  80:generated/setup_scr_screen2.c **** 	lv_style_set_text_color(&style_screen2_btn1_1_main_main_default, lv_color_make(0x00, 0x00, 0x00));
+ 366              		.loc 1 80 2 view .LVU91
+ 367              	.LBB70:
+ 368              	.LBI70:
+ 602:lvgl/src/hal/../misc/lv_color.h **** {
+ 369              		.loc 2 602 26 view .LVU92
+ 370              	.LBB71:
+ 371              		.loc 2 604 5 view .LVU93
+ 372              		.loc 2 604 5 is_stmt 0 view .LVU94
+ 373              	.LBE71:
+ 374              	.LBE70:
+ 375              		.loc 1 80 2 view .LVU95
+ 376 018e 4FF00001 		mov	r1, #0	@ movhi
+ 377 0192 2846     		mov	r0, r5
+ 378 0194 FFF7FEFF 		bl	lv_style_set_text_color
+ 379              	.LVL44:
+  81:generated/setup_scr_screen2.c **** 	lv_style_set_text_font(&style_screen2_btn1_1_main_main_default, &lv_font_simsun_12);
+ 380              		.loc 1 81 2 is_stmt 1 view .LVU96
+ 381 0198 7A49     		ldr	r1, .L11+20
+ 382 019a 2846     		mov	r0, r5
+ 383 019c FFF7FEFF 		bl	lv_style_set_text_font
+ 384              	.LVL45:
+  82:generated/setup_scr_screen2.c **** 	lv_style_set_text_align(&style_screen2_btn1_1_main_main_default, LV_TEXT_ALIGN_CENTER);
+ 385              		.loc 1 82 2 view .LVU97
+ 386 01a0 0221     		movs	r1, #2
+ 387 01a2 2846     		mov	r0, r5
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 20
+
+
+ 388 01a4 FFF7FEFF 		bl	lv_style_set_text_align
+ 389              	.LVL46:
+  83:generated/setup_scr_screen2.c **** 	lv_obj_add_style(ui->screen2_btn1_1, &style_screen2_btn1_1_main_main_default, LV_PART_MAIN|LV_STAT
+ 390              		.loc 1 83 2 view .LVU98
+ 391 01a8 0022     		movs	r2, #0
+ 392 01aa 2946     		mov	r1, r5
+ 393 01ac E06A     		ldr	r0, [r4, #44]
+ 394 01ae FFF7FEFF 		bl	lv_obj_add_style
+ 395              	.LVL47:
+  84:generated/setup_scr_screen2.c **** 	ui->screen2_btn1_1_label = lv_label_create(ui->screen2_btn1_1);
+ 396              		.loc 1 84 2 view .LVU99
+ 397              		.loc 1 84 29 is_stmt 0 view .LVU100
+ 398 01b2 E06A     		ldr	r0, [r4, #44]
+ 399 01b4 FFF7FEFF 		bl	lv_label_create
+ 400              	.LVL48:
+ 401              		.loc 1 84 27 view .LVU101
+ 402 01b8 2063     		str	r0, [r4, #48]
+  85:generated/setup_scr_screen2.c **** 	lv_label_set_text(ui->screen2_btn1_1_label, "Previous Screen");
+ 403              		.loc 1 85 2 is_stmt 1 view .LVU102
+ 404 01ba 7349     		ldr	r1, .L11+24
+ 405 01bc FFF7FEFF 		bl	lv_label_set_text
+ 406              	.LVL49:
+  86:generated/setup_scr_screen2.c **** 	lv_obj_set_style_pad_all(ui->screen2_btn1_1, 0, LV_STATE_DEFAULT);
+ 407              		.loc 1 86 2 view .LVU103
+ 408              		.loc 1 86 29 is_stmt 0 view .LVU104
+ 409 01c0 E56A     		ldr	r5, [r4, #44]
+ 410              	.LVL50:
+ 411              	.LBB72:
+ 412              	.LBI72:
+ 413              		.file 3 "lvgl/src/core/lv_obj_style.h"
+   1:lvgl/src/core/lv_obj_style.h **** /**
+   2:lvgl/src/core/lv_obj_style.h ****  * @file lv_obj_style.h
+   3:lvgl/src/core/lv_obj_style.h ****  *
+   4:lvgl/src/core/lv_obj_style.h ****  */
+   5:lvgl/src/core/lv_obj_style.h **** 
+   6:lvgl/src/core/lv_obj_style.h **** #ifndef LV_OBJ_STYLE_H
+   7:lvgl/src/core/lv_obj_style.h **** #define LV_OBJ_STYLE_H
+   8:lvgl/src/core/lv_obj_style.h **** 
+   9:lvgl/src/core/lv_obj_style.h **** #ifdef __cplusplus
+  10:lvgl/src/core/lv_obj_style.h **** extern "C" {
+  11:lvgl/src/core/lv_obj_style.h **** #endif
+  12:lvgl/src/core/lv_obj_style.h **** 
+  13:lvgl/src/core/lv_obj_style.h **** /*********************
+  14:lvgl/src/core/lv_obj_style.h ****  *      INCLUDES
+  15:lvgl/src/core/lv_obj_style.h ****  *********************/
+  16:lvgl/src/core/lv_obj_style.h **** #include <stdint.h>
+  17:lvgl/src/core/lv_obj_style.h **** #include <stdbool.h>
+  18:lvgl/src/core/lv_obj_style.h **** #include "../misc/lv_bidi.h"
+  19:lvgl/src/core/lv_obj_style.h **** 
+  20:lvgl/src/core/lv_obj_style.h **** /*********************
+  21:lvgl/src/core/lv_obj_style.h ****  *      DEFINES
+  22:lvgl/src/core/lv_obj_style.h ****  *********************/
+  23:lvgl/src/core/lv_obj_style.h **** 
+  24:lvgl/src/core/lv_obj_style.h **** /**********************
+  25:lvgl/src/core/lv_obj_style.h ****  *      TYPEDEFS
+  26:lvgl/src/core/lv_obj_style.h ****  **********************/
+  27:lvgl/src/core/lv_obj_style.h **** /*Can't include lv_obj.h because it includes this header file*/
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 21
+
+
+  28:lvgl/src/core/lv_obj_style.h **** struct _lv_obj_t;
+  29:lvgl/src/core/lv_obj_style.h **** 
+  30:lvgl/src/core/lv_obj_style.h **** typedef enum {
+  31:lvgl/src/core/lv_obj_style.h ****     _LV_STYLE_STATE_CMP_SAME,           /*The style properties in the 2 states are identical*/
+  32:lvgl/src/core/lv_obj_style.h ****     _LV_STYLE_STATE_CMP_DIFF_REDRAW,    /*The differences can be shown with a simple redraw*/
+  33:lvgl/src/core/lv_obj_style.h ****     _LV_STYLE_STATE_CMP_DIFF_DRAW_PAD,  /*The differences can be shown with a simple redraw*/
+  34:lvgl/src/core/lv_obj_style.h ****     _LV_STYLE_STATE_CMP_DIFF_LAYOUT,    /*The differences can be shown with a simple redraw*/
+  35:lvgl/src/core/lv_obj_style.h **** } _lv_style_state_cmp_t;
+  36:lvgl/src/core/lv_obj_style.h **** 
+  37:lvgl/src/core/lv_obj_style.h **** typedef uint32_t lv_style_selector_t;
+  38:lvgl/src/core/lv_obj_style.h **** 
+  39:lvgl/src/core/lv_obj_style.h **** typedef struct {
+  40:lvgl/src/core/lv_obj_style.h ****     lv_style_t * style;
+  41:lvgl/src/core/lv_obj_style.h ****     uint32_t selector :24;
+  42:lvgl/src/core/lv_obj_style.h ****     uint32_t is_local :1;
+  43:lvgl/src/core/lv_obj_style.h ****     uint32_t is_trans :1;
+  44:lvgl/src/core/lv_obj_style.h **** }_lv_obj_style_t;
+  45:lvgl/src/core/lv_obj_style.h **** 
+  46:lvgl/src/core/lv_obj_style.h **** typedef struct {
+  47:lvgl/src/core/lv_obj_style.h ****     uint16_t time;
+  48:lvgl/src/core/lv_obj_style.h ****     uint16_t delay;
+  49:lvgl/src/core/lv_obj_style.h ****     lv_style_selector_t selector;
+  50:lvgl/src/core/lv_obj_style.h ****     lv_style_prop_t prop;
+  51:lvgl/src/core/lv_obj_style.h ****     lv_anim_path_cb_t path_cb;
+  52:lvgl/src/core/lv_obj_style.h **** #if LV_USE_USER_DATA
+  53:lvgl/src/core/lv_obj_style.h ****     void * user_data;
+  54:lvgl/src/core/lv_obj_style.h **** #endif
+  55:lvgl/src/core/lv_obj_style.h **** }_lv_obj_style_transition_dsc_t;
+  56:lvgl/src/core/lv_obj_style.h **** 
+  57:lvgl/src/core/lv_obj_style.h **** /**********************
+  58:lvgl/src/core/lv_obj_style.h ****  * GLOBAL PROTOTYPES
+  59:lvgl/src/core/lv_obj_style.h ****  **********************/
+  60:lvgl/src/core/lv_obj_style.h **** 
+  61:lvgl/src/core/lv_obj_style.h **** /**
+  62:lvgl/src/core/lv_obj_style.h ****  * Initialize the object related style manager module.
+  63:lvgl/src/core/lv_obj_style.h ****  * Called by LVGL in `lv_init()`
+  64:lvgl/src/core/lv_obj_style.h ****  */
+  65:lvgl/src/core/lv_obj_style.h **** void _lv_obj_style_init(void);
+  66:lvgl/src/core/lv_obj_style.h **** 
+  67:lvgl/src/core/lv_obj_style.h **** /**
+  68:lvgl/src/core/lv_obj_style.h ****  * Add a style to an object.
+  69:lvgl/src/core/lv_obj_style.h ****  * @param obj       pointer to an object
+  70:lvgl/src/core/lv_obj_style.h ****  * @param style     pointer to a style to add
+  71:lvgl/src/core/lv_obj_style.h ****  * @param selector  OR-ed value of parts and state to which the style should be added
+  72:lvgl/src/core/lv_obj_style.h ****  * @example         lv_obj_add_style(btn, &style_btn, 0); //Default button style
+  73:lvgl/src/core/lv_obj_style.h ****  * @example         lv_obj_add_style(btn, &btn_red, LV_STATE_PRESSED); //Overwrite only some colors
+  74:lvgl/src/core/lv_obj_style.h ****  */
+  75:lvgl/src/core/lv_obj_style.h **** void lv_obj_add_style(struct _lv_obj_t * obj, lv_style_t * style, lv_style_selector_t selector);
+  76:lvgl/src/core/lv_obj_style.h **** 
+  77:lvgl/src/core/lv_obj_style.h **** /**
+  78:lvgl/src/core/lv_obj_style.h ****  * Add a style to an object.
+  79:lvgl/src/core/lv_obj_style.h ****  * @param obj       pointer to an object
+  80:lvgl/src/core/lv_obj_style.h ****  * @param style     pointer to a style to remove. Can be NULL to check only the selector
+  81:lvgl/src/core/lv_obj_style.h ****  * @param selector  OR-ed values of states and a part to remove only styles with matching selectors
+  82:lvgl/src/core/lv_obj_style.h ****  * @example lv_obj_remove_style(obj, &style, LV_PART_ANY | LV_STATE_ANY); //Remove a specific style
+  83:lvgl/src/core/lv_obj_style.h ****  * @example lv_obj_remove_style(obj, NULL, LV_PART_MAIN | LV_STATE_ANY); //Remove all styles from t
+  84:lvgl/src/core/lv_obj_style.h ****  * @example lv_obj_remove_style(obj, NULL, LV_PART_ANY | LV_STATE_ANY); //Remove all styles
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 22
+
+
+  85:lvgl/src/core/lv_obj_style.h ****  */
+  86:lvgl/src/core/lv_obj_style.h **** void lv_obj_remove_style(struct _lv_obj_t * obj, lv_style_t * style, lv_style_selector_t selector);
+  87:lvgl/src/core/lv_obj_style.h **** 
+  88:lvgl/src/core/lv_obj_style.h **** /**
+  89:lvgl/src/core/lv_obj_style.h ****  * Remove all styles from an object
+  90:lvgl/src/core/lv_obj_style.h ****  * @param obj       pointer to an object
+  91:lvgl/src/core/lv_obj_style.h ****  */
+  92:lvgl/src/core/lv_obj_style.h **** static inline void lv_obj_remove_style_all(struct _lv_obj_t * obj)
+  93:lvgl/src/core/lv_obj_style.h **** {
+  94:lvgl/src/core/lv_obj_style.h ****     lv_obj_remove_style(obj, NULL, LV_PART_ANY | LV_STATE_ANY);
+  95:lvgl/src/core/lv_obj_style.h **** }
+  96:lvgl/src/core/lv_obj_style.h **** 
+  97:lvgl/src/core/lv_obj_style.h **** /**
+  98:lvgl/src/core/lv_obj_style.h ****  * Notify all object if a style is modified
+  99:lvgl/src/core/lv_obj_style.h ****  * @param style     pointer to a style. Only the objects with this style will be notified
+ 100:lvgl/src/core/lv_obj_style.h ****  *                  (NULL to notify all objects)
+ 101:lvgl/src/core/lv_obj_style.h ****  */
+ 102:lvgl/src/core/lv_obj_style.h **** void lv_obj_report_style_change(lv_style_t * style);
+ 103:lvgl/src/core/lv_obj_style.h **** 
+ 104:lvgl/src/core/lv_obj_style.h **** /**
+ 105:lvgl/src/core/lv_obj_style.h ****  * Notify an object and its children about its style is modified.
+ 106:lvgl/src/core/lv_obj_style.h ****  * @param obj       pointer to an object
+ 107:lvgl/src/core/lv_obj_style.h ****  * @param part      the part whose style was changed. E.g. `LV_PART_ANY`, `LV_PART_MAIN`
+ 108:lvgl/src/core/lv_obj_style.h ****  * @param prop      `LV_STYLE_PROP_ANY` or an `LV_STYLE_...` property.
+ 109:lvgl/src/core/lv_obj_style.h ****  *                  It is used to optimize what needs to be refreshed.
+ 110:lvgl/src/core/lv_obj_style.h ****  *                  `LV_STYLE_PROP_INV` to perform only a style cache update
+ 111:lvgl/src/core/lv_obj_style.h ****  */
+ 112:lvgl/src/core/lv_obj_style.h **** void lv_obj_refresh_style(struct _lv_obj_t * obj, lv_part_t part, lv_style_prop_t prop);
+ 113:lvgl/src/core/lv_obj_style.h **** 
+ 114:lvgl/src/core/lv_obj_style.h **** /**
+ 115:lvgl/src/core/lv_obj_style.h ****  * Enable or disable automatic style refreshing when a new style is added/removed to/from an object
+ 116:lvgl/src/core/lv_obj_style.h ****  * or any other style change happens.
+ 117:lvgl/src/core/lv_obj_style.h ****  * @param en        true: enable refreshing; false: disable refreshing
+ 118:lvgl/src/core/lv_obj_style.h ****  */
+ 119:lvgl/src/core/lv_obj_style.h **** void lv_obj_enable_style_refresh(bool en);
+ 120:lvgl/src/core/lv_obj_style.h **** 
+ 121:lvgl/src/core/lv_obj_style.h **** /**
+ 122:lvgl/src/core/lv_obj_style.h ****  * Get the value of a style property. The current state of the object will be considered.
+ 123:lvgl/src/core/lv_obj_style.h ****  * Inherited properties will be inherited.
+ 124:lvgl/src/core/lv_obj_style.h ****  * If a property is not set a default value will be returned.
+ 125:lvgl/src/core/lv_obj_style.h ****  * @param obj       pointer to an object
+ 126:lvgl/src/core/lv_obj_style.h ****  * @param part      a part from which the property should be get
+ 127:lvgl/src/core/lv_obj_style.h ****  * @param prop      the property to get
+ 128:lvgl/src/core/lv_obj_style.h ****  * @return          the value of the property.
+ 129:lvgl/src/core/lv_obj_style.h ****  *                  Should be read from the correct field of the `lv_style_value_t` according to th
+ 130:lvgl/src/core/lv_obj_style.h ****  */
+ 131:lvgl/src/core/lv_obj_style.h **** lv_style_value_t lv_obj_get_style_prop(const struct _lv_obj_t * obj, lv_part_t part, lv_style_prop_
+ 132:lvgl/src/core/lv_obj_style.h **** 
+ 133:lvgl/src/core/lv_obj_style.h **** /**
+ 134:lvgl/src/core/lv_obj_style.h ****  * Set local style property on an object's part and state.
+ 135:lvgl/src/core/lv_obj_style.h ****  * @param obj       pointer to an object
+ 136:lvgl/src/core/lv_obj_style.h ****  * @param part      a part to which the property should be added
+ 137:lvgl/src/core/lv_obj_style.h ****  * @param state     a state to which the property should be added
+ 138:lvgl/src/core/lv_obj_style.h ****  * @param prop      the property
+ 139:lvgl/src/core/lv_obj_style.h ****  * @param value     value of the property. The correct element should be set according to the type 
+ 140:lvgl/src/core/lv_obj_style.h ****  */
+ 141:lvgl/src/core/lv_obj_style.h **** void lv_obj_set_local_style_prop(struct _lv_obj_t * obj, lv_style_prop_t prop, lv_style_value_t val
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 23
+
+
+ 142:lvgl/src/core/lv_obj_style.h **** 
+ 143:lvgl/src/core/lv_obj_style.h **** lv_res_t lv_obj_get_local_style_prop(struct _lv_obj_t * obj, lv_style_prop_t prop, lv_style_value_t
+ 144:lvgl/src/core/lv_obj_style.h **** 
+ 145:lvgl/src/core/lv_obj_style.h **** /**
+ 146:lvgl/src/core/lv_obj_style.h ****  * Remove a local style property from a part of an object with a given state.
+ 147:lvgl/src/core/lv_obj_style.h ****  * @param obj       pointer to an object
+ 148:lvgl/src/core/lv_obj_style.h ****  * @param part      the part of the object which style property should be removed.
+ 149:lvgl/src/core/lv_obj_style.h ****  * @param state     the state from which the property should be removed.
+ 150:lvgl/src/core/lv_obj_style.h ****  * @param prop      a style property to remove.
+ 151:lvgl/src/core/lv_obj_style.h ****  * @return true     the property was found and removed; false: the property was not found
+ 152:lvgl/src/core/lv_obj_style.h ****  */
+ 153:lvgl/src/core/lv_obj_style.h **** bool lv_obj_remove_local_style_prop(struct _lv_obj_t * obj, lv_style_prop_t prop, lv_style_selector
+ 154:lvgl/src/core/lv_obj_style.h **** 
+ 155:lvgl/src/core/lv_obj_style.h **** /**
+ 156:lvgl/src/core/lv_obj_style.h ****  * Used internally to create a style tarnsition
+ 157:lvgl/src/core/lv_obj_style.h ****  * @param obj
+ 158:lvgl/src/core/lv_obj_style.h ****  * @param part
+ 159:lvgl/src/core/lv_obj_style.h ****  * @param prev_state
+ 160:lvgl/src/core/lv_obj_style.h ****  * @param new_state
+ 161:lvgl/src/core/lv_obj_style.h ****  * @param tr
+ 162:lvgl/src/core/lv_obj_style.h ****  */
+ 163:lvgl/src/core/lv_obj_style.h **** void _lv_obj_style_create_transition(struct _lv_obj_t * obj, lv_part_t part, lv_state_t prev_state,
+ 164:lvgl/src/core/lv_obj_style.h **** 
+ 165:lvgl/src/core/lv_obj_style.h **** /**
+ 166:lvgl/src/core/lv_obj_style.h ****  * Used internally to compare the appearance of an object in 2 states
+ 167:lvgl/src/core/lv_obj_style.h ****  * @param obj
+ 168:lvgl/src/core/lv_obj_style.h ****  * @param state1
+ 169:lvgl/src/core/lv_obj_style.h ****  * @param state2
+ 170:lvgl/src/core/lv_obj_style.h ****  * @return
+ 171:lvgl/src/core/lv_obj_style.h ****  */
+ 172:lvgl/src/core/lv_obj_style.h **** _lv_style_state_cmp_t _lv_obj_style_state_compare(struct _lv_obj_t * obj, lv_state_t state1, lv_sta
+ 173:lvgl/src/core/lv_obj_style.h **** 
+ 174:lvgl/src/core/lv_obj_style.h **** /**
+ 175:lvgl/src/core/lv_obj_style.h ****  * Fade in an an object and all its children.
+ 176:lvgl/src/core/lv_obj_style.h ****  * @param obj       the object to fade in
+ 177:lvgl/src/core/lv_obj_style.h ****  * @param time      time of fade
+ 178:lvgl/src/core/lv_obj_style.h ****  * @param delay     delay to start the animation
+ 179:lvgl/src/core/lv_obj_style.h ****  */
+ 180:lvgl/src/core/lv_obj_style.h **** void lv_obj_fade_in(struct _lv_obj_t * obj, uint32_t time, uint32_t delay);
+ 181:lvgl/src/core/lv_obj_style.h **** 
+ 182:lvgl/src/core/lv_obj_style.h **** /**
+ 183:lvgl/src/core/lv_obj_style.h ****  * Fade out an an object and all its children.
+ 184:lvgl/src/core/lv_obj_style.h ****  * @param obj       the object to fade out
+ 185:lvgl/src/core/lv_obj_style.h ****  * @param time      time of fade
+ 186:lvgl/src/core/lv_obj_style.h ****  * @param delay     delay to start the animation
+ 187:lvgl/src/core/lv_obj_style.h ****  */
+ 188:lvgl/src/core/lv_obj_style.h **** void lv_obj_fade_out(struct _lv_obj_t * obj, uint32_t time, uint32_t delay);
+ 189:lvgl/src/core/lv_obj_style.h **** 
+ 190:lvgl/src/core/lv_obj_style.h **** lv_state_t lv_obj_style_get_selector_state(lv_style_selector_t selector);
+ 191:lvgl/src/core/lv_obj_style.h **** 
+ 192:lvgl/src/core/lv_obj_style.h **** lv_part_t lv_obj_style_get_selector_part(lv_style_selector_t selector);
+ 193:lvgl/src/core/lv_obj_style.h **** 
+ 194:lvgl/src/core/lv_obj_style.h **** #include "lv_obj_style_gen.h"
+ 195:lvgl/src/core/lv_obj_style.h **** 
+ 196:lvgl/src/core/lv_obj_style.h **** static inline void lv_obj_set_style_pad_all(struct _lv_obj_t * obj, lv_coord_t value, lv_style_sele
+ 414              		.loc 3 196 20 is_stmt 1 view .LVU105
+ 415              	.LBB73:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 24
+
+
+ 197:lvgl/src/core/lv_obj_style.h ****     lv_obj_set_style_pad_left(obj, value, selector);
+ 416              		.loc 3 197 5 view .LVU106
+ 417 01c2 0022     		movs	r2, #0
+ 418 01c4 1146     		mov	r1, r2
+ 419 01c6 2846     		mov	r0, r5
+ 420 01c8 FFF7FEFF 		bl	lv_obj_set_style_pad_left
+ 421              	.LVL51:
+ 198:lvgl/src/core/lv_obj_style.h ****     lv_obj_set_style_pad_right(obj, value, selector);
+ 422              		.loc 3 198 5 view .LVU107
+ 423 01cc 0022     		movs	r2, #0
+ 424 01ce 1146     		mov	r1, r2
+ 425 01d0 2846     		mov	r0, r5
+ 426 01d2 FFF7FEFF 		bl	lv_obj_set_style_pad_right
+ 427              	.LVL52:
+ 199:lvgl/src/core/lv_obj_style.h ****     lv_obj_set_style_pad_top(obj, value, selector);
+ 428              		.loc 3 199 5 view .LVU108
+ 429 01d6 0022     		movs	r2, #0
+ 430 01d8 1146     		mov	r1, r2
+ 431 01da 2846     		mov	r0, r5
+ 432 01dc FFF7FEFF 		bl	lv_obj_set_style_pad_top
+ 433              	.LVL53:
+ 200:lvgl/src/core/lv_obj_style.h ****     lv_obj_set_style_pad_bottom(obj, value, selector);
+ 434              		.loc 3 200 5 view .LVU109
+ 435 01e0 0022     		movs	r2, #0
+ 436 01e2 1146     		mov	r1, r2
+ 437 01e4 2846     		mov	r0, r5
+ 438 01e6 FFF7FEFF 		bl	lv_obj_set_style_pad_bottom
+ 439              	.LVL54:
+ 440              		.loc 3 200 5 is_stmt 0 view .LVU110
+ 441              	.LBE73:
+ 442              	.LBE72:
+  87:generated/setup_scr_screen2.c **** 	lv_obj_align(ui->screen2_btn1_1_label, LV_ALIGN_CENTER, 0, 0);
+ 443              		.loc 1 87 2 is_stmt 1 view .LVU111
+ 444 01ea 0023     		movs	r3, #0
+ 445 01ec 1A46     		mov	r2, r3
+ 446 01ee 0921     		movs	r1, #9
+ 447 01f0 206B     		ldr	r0, [r4, #48]
+ 448 01f2 FFF7FEFF 		bl	lv_obj_align
+ 449              	.LVL55:
+  88:generated/setup_scr_screen2.c **** 
+  89:generated/setup_scr_screen2.c **** 	//Write codes screen2_chart2
+  90:generated/setup_scr_screen2.c **** 	ui->screen2_chart2 = lv_chart_create(ui->screen2);
+ 450              		.loc 1 90 2 view .LVU112
+ 451              		.loc 1 90 23 is_stmt 0 view .LVU113
+ 452 01f6 206A     		ldr	r0, [r4, #32]
+ 453 01f8 FFF7FEFF 		bl	lv_chart_create
+ 454              	.LVL56:
+ 455              		.loc 1 90 21 view .LVU114
+ 456 01fc 6063     		str	r0, [r4, #52]
+  91:generated/setup_scr_screen2.c **** 	lv_obj_set_pos(ui->screen2_chart2, 129, 36);
+ 457              		.loc 1 91 2 is_stmt 1 view .LVU115
+ 458 01fe 2422     		movs	r2, #36
+ 459 0200 8121     		movs	r1, #129
+ 460 0202 FFF7FEFF 		bl	lv_obj_set_pos
+ 461              	.LVL57:
+  92:generated/setup_scr_screen2.c **** 	lv_obj_set_size(ui->screen2_chart2, 205, 155);
+ 462              		.loc 1 92 2 view .LVU116
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 25
+
+
+ 463 0206 9B22     		movs	r2, #155
+ 464 0208 CD21     		movs	r1, #205
+ 465 020a 606B     		ldr	r0, [r4, #52]
+ 466 020c FFF7FEFF 		bl	lv_obj_set_size
+ 467              	.LVL58:
+  93:generated/setup_scr_screen2.c **** 	lv_obj_set_scrollbar_mode(ui->screen2_chart2, LV_SCROLLBAR_MODE_OFF);
+ 468              		.loc 1 93 2 view .LVU117
+ 469 0210 0021     		movs	r1, #0
+ 470 0212 606B     		ldr	r0, [r4, #52]
+ 471 0214 FFF7FEFF 		bl	lv_obj_set_scrollbar_mode
+ 472              	.LVL59:
+  94:generated/setup_scr_screen2.c **** 
+  95:generated/setup_scr_screen2.c **** 	//Write style state: LV_STATE_DEFAULT for style_screen2_chart2_main_main_default
+  96:generated/setup_scr_screen2.c **** 	static lv_style_t style_screen2_chart2_main_main_default;
+ 473              		.loc 1 96 2 view .LVU118
+  97:generated/setup_scr_screen2.c **** 	if (style_screen2_chart2_main_main_default.prop_cnt > 1)
+ 474              		.loc 1 97 2 view .LVU119
+ 475              		.loc 1 97 44 is_stmt 0 view .LVU120
+ 476 0218 5C4B     		ldr	r3, .L11+28
+ 477 021a DB79     		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+ 478              		.loc 1 97 5 view .LVU121
+ 479 021c 012B     		cmp	r3, #1
+ 480 021e 40F2A380 		bls	.L8
+  98:generated/setup_scr_screen2.c **** 		lv_style_reset(&style_screen2_chart2_main_main_default);
+ 481              		.loc 1 98 3 is_stmt 1 view .LVU122
+ 482 0222 5A48     		ldr	r0, .L11+28
+ 483 0224 FFF7FEFF 		bl	lv_style_reset
+ 484              	.LVL60:
+ 485              	.L9:
+  99:generated/setup_scr_screen2.c **** 	else
+ 100:generated/setup_scr_screen2.c **** 		lv_style_init(&style_screen2_chart2_main_main_default);
+ 101:generated/setup_scr_screen2.c **** 	lv_style_set_radius(&style_screen2_chart2_main_main_default, 0);
+ 486              		.loc 1 101 2 view .LVU123
+ 487 0228 584D     		ldr	r5, .L11+28
+ 488 022a 0021     		movs	r1, #0
+ 489 022c 2846     		mov	r0, r5
+ 490 022e FFF7FEFF 		bl	lv_style_set_radius
+ 491              	.LVL61:
+ 102:generated/setup_scr_screen2.c **** 	lv_style_set_bg_color(&style_screen2_chart2_main_main_default, lv_color_make(0xff, 0xff, 0xff));
+ 492              		.loc 1 102 2 view .LVU124
+ 493              	.LBB74:
+ 494              	.LBI74:
+ 602:lvgl/src/hal/../misc/lv_color.h **** {
+ 495              		.loc 2 602 26 view .LVU125
+ 496              	.LBB75:
+ 497              		.loc 2 604 5 view .LVU126
+ 498              		.loc 2 604 5 is_stmt 0 view .LVU127
+ 499              	.LBE75:
+ 500              	.LBE74:
+ 501              		.loc 1 102 2 view .LVU128
+ 502 0232 4FF0FF31 		mov	r1, #-1	@ movhi
+ 503 0236 2846     		mov	r0, r5
+ 504 0238 FFF7FEFF 		bl	lv_style_set_bg_color
+ 505              	.LVL62:
+ 103:generated/setup_scr_screen2.c **** 	lv_style_set_bg_grad_color(&style_screen2_chart2_main_main_default, lv_color_make(0xff, 0xff, 0xff
+ 506              		.loc 1 103 2 is_stmt 1 view .LVU129
+ 507              	.LBB76:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 26
+
+
+ 508              	.LBI76:
+ 602:lvgl/src/hal/../misc/lv_color.h **** {
+ 509              		.loc 2 602 26 view .LVU130
+ 510              	.LBB77:
+ 511              		.loc 2 604 5 view .LVU131
+ 512              		.loc 2 604 5 is_stmt 0 view .LVU132
+ 513              	.LBE77:
+ 514              	.LBE76:
+ 515              		.loc 1 103 2 view .LVU133
+ 516 023c 4FF0FF31 		mov	r1, #-1	@ movhi
+ 517 0240 2846     		mov	r0, r5
+ 518 0242 FFF7FEFF 		bl	lv_style_set_bg_grad_color
+ 519              	.LVL63:
+ 104:generated/setup_scr_screen2.c **** 	lv_style_set_bg_grad_dir(&style_screen2_chart2_main_main_default, LV_GRAD_DIR_VER);
+ 520              		.loc 1 104 2 is_stmt 1 view .LVU134
+ 521 0246 0121     		movs	r1, #1
+ 522 0248 2846     		mov	r0, r5
+ 523 024a FFF7FEFF 		bl	lv_style_set_bg_grad_dir
+ 524              	.LVL64:
+ 105:generated/setup_scr_screen2.c **** 	lv_style_set_bg_opa(&style_screen2_chart2_main_main_default, 255);
+ 525              		.loc 1 105 2 view .LVU135
+ 526 024e FF21     		movs	r1, #255
+ 527 0250 2846     		mov	r0, r5
+ 528 0252 FFF7FEFF 		bl	lv_style_set_bg_opa
+ 529              	.LVL65:
+ 106:generated/setup_scr_screen2.c **** 	lv_style_set_border_color(&style_screen2_chart2_main_main_default, lv_color_make(0xe8, 0xe8, 0xe8)
+ 530              		.loc 1 106 2 view .LVU136
+ 531              	.LBB78:
+ 532              	.LBI78:
+ 602:lvgl/src/hal/../misc/lv_color.h **** {
+ 533              		.loc 2 602 26 view .LVU137
+ 534              	.LBB79:
+ 535              		.loc 2 604 5 view .LVU138
+ 536              		.loc 2 604 12 is_stmt 0 view .LVU139
+ 537 0256 1D26     		movs	r6, #29
+ 538 0258 4FF00001 		mov	r1, #0	@ movhi
+ 539 025c 66F30401 		bfi	r1, r6, #0, #5
+ 540 0260 3A27     		movs	r7, #58
+ 541 0262 67F34A11 		bfi	r1, r7, #5, #6
+ 542 0266 66F3CF21 		bfi	r1, r6, #11, #5
+ 543              	.LVL66:
+ 544              		.loc 2 604 12 view .LVU140
+ 545              	.LBE79:
+ 546              	.LBE78:
+ 547              		.loc 1 106 2 view .LVU141
+ 548 026a 2846     		mov	r0, r5
+ 549 026c FFF7FEFF 		bl	lv_style_set_border_color
+ 550              	.LVL67:
+ 107:generated/setup_scr_screen2.c **** 	lv_style_set_border_width(&style_screen2_chart2_main_main_default, 1);
+ 551              		.loc 1 107 2 is_stmt 1 view .LVU142
+ 552 0270 0121     		movs	r1, #1
+ 553 0272 2846     		mov	r0, r5
+ 554 0274 FFF7FEFF 		bl	lv_style_set_border_width
+ 555              	.LVL68:
+ 108:generated/setup_scr_screen2.c **** 	lv_style_set_border_opa(&style_screen2_chart2_main_main_default, 255);
+ 556              		.loc 1 108 2 view .LVU143
+ 557 0278 FF21     		movs	r1, #255
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 27
+
+
+ 558 027a 2846     		mov	r0, r5
+ 559 027c FFF7FEFF 		bl	lv_style_set_border_opa
+ 560              	.LVL69:
+ 109:generated/setup_scr_screen2.c **** 	lv_style_set_line_color(&style_screen2_chart2_main_main_default, lv_color_make(0xe8, 0xe8, 0xe8));
+ 561              		.loc 1 109 2 view .LVU144
+ 562              	.LBB80:
+ 563              	.LBI80:
+ 602:lvgl/src/hal/../misc/lv_color.h **** {
+ 564              		.loc 2 602 26 view .LVU145
+ 565              	.LBB81:
+ 566              		.loc 2 604 5 view .LVU146
+ 567              		.loc 2 604 12 is_stmt 0 view .LVU147
+ 568 0280 4FF00001 		mov	r1, #0	@ movhi
+ 569 0284 66F30401 		bfi	r1, r6, #0, #5
+ 570 0288 67F34A11 		bfi	r1, r7, #5, #6
+ 571 028c 66F3CF21 		bfi	r1, r6, #11, #5
+ 572              	.LVL70:
+ 573              		.loc 2 604 12 view .LVU148
+ 574              	.LBE81:
+ 575              	.LBE80:
+ 576              		.loc 1 109 2 view .LVU149
+ 577 0290 2846     		mov	r0, r5
+ 578 0292 FFF7FEFF 		bl	lv_style_set_line_color
+ 579              	.LVL71:
+ 110:generated/setup_scr_screen2.c **** 	lv_style_set_line_width(&style_screen2_chart2_main_main_default, 2);
+ 580              		.loc 1 110 2 is_stmt 1 view .LVU150
+ 581 0296 0221     		movs	r1, #2
+ 582 0298 2846     		mov	r0, r5
+ 583 029a FFF7FEFF 		bl	lv_style_set_line_width
+ 584              	.LVL72:
+ 111:generated/setup_scr_screen2.c **** 	lv_style_set_line_opa(&style_screen2_chart2_main_main_default, 255);
+ 585              		.loc 1 111 2 view .LVU151
+ 586 029e FF21     		movs	r1, #255
+ 587 02a0 2846     		mov	r0, r5
+ 588 02a2 FFF7FEFF 		bl	lv_style_set_line_opa
+ 589              	.LVL73:
+ 112:generated/setup_scr_screen2.c **** 	lv_obj_add_style(ui->screen2_chart2, &style_screen2_chart2_main_main_default, LV_PART_MAIN|LV_STAT
+ 590              		.loc 1 112 2 view .LVU152
+ 591 02a6 0022     		movs	r2, #0
+ 592 02a8 2946     		mov	r1, r5
+ 593 02aa 606B     		ldr	r0, [r4, #52]
+ 594 02ac FFF7FEFF 		bl	lv_obj_add_style
+ 595              	.LVL74:
+ 113:generated/setup_scr_screen2.c **** 	lv_chart_set_type(ui->screen2_chart2, LV_CHART_TYPE_LINE);
+ 596              		.loc 1 113 2 view .LVU153
+ 597 02b0 0121     		movs	r1, #1
+ 598 02b2 606B     		ldr	r0, [r4, #52]
+ 599 02b4 FFF7FEFF 		bl	lv_chart_set_type
+ 600              	.LVL75:
+ 114:generated/setup_scr_screen2.c **** 	lv_chart_set_range(ui->screen2_chart2,LV_CHART_AXIS_PRIMARY_Y, 0, 100);
+ 601              		.loc 1 114 2 view .LVU154
+ 602 02b8 6423     		movs	r3, #100
+ 603 02ba 0022     		movs	r2, #0
+ 604 02bc 1146     		mov	r1, r2
+ 605 02be 606B     		ldr	r0, [r4, #52]
+ 606 02c0 FFF7FEFF 		bl	lv_chart_set_range
+ 607              	.LVL76:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 28
+
+
+ 115:generated/setup_scr_screen2.c **** 	lv_chart_set_div_line_count(ui->screen2_chart2, 3, 5);
+ 608              		.loc 1 115 2 view .LVU155
+ 609 02c4 0522     		movs	r2, #5
+ 610 02c6 0321     		movs	r1, #3
+ 611 02c8 606B     		ldr	r0, [r4, #52]
+ 612 02ca FFF7FEFF 		bl	lv_chart_set_div_line_count
+ 613              	.LVL77:
+ 116:generated/setup_scr_screen2.c **** 	lv_chart_set_point_count(ui->screen2_chart2, 10);
+ 614              		.loc 1 116 2 view .LVU156
+ 615 02ce 0A21     		movs	r1, #10
+ 616 02d0 606B     		ldr	r0, [r4, #52]
+ 617 02d2 FFF7FEFF 		bl	lv_chart_set_point_count
+ 618              	.LVL78:
+ 117:generated/setup_scr_screen2.c **** 	lv_chart_series_t * screen2_chart2_0 = lv_chart_add_series(ui->screen2_chart2, lv_color_make(0x00,
+ 619              		.loc 1 117 2 view .LVU157
+ 620              	.LBB82:
+ 621              	.LBI82:
+ 602:lvgl/src/hal/../misc/lv_color.h **** {
+ 622              		.loc 2 602 26 view .LVU158
+ 623              	.LBB83:
+ 624              		.loc 2 604 5 view .LVU159
+ 625              		.loc 2 604 5 is_stmt 0 view .LVU160
+ 626              	.LBE83:
+ 627              	.LBE82:
+ 628              		.loc 1 117 41 view .LVU161
+ 629 02d6 0022     		movs	r2, #0
+ 630 02d8 4FF00001 		mov	r1, #0	@ movhi
+ 631 02dc 606B     		ldr	r0, [r4, #52]
+ 632 02de FFF7FEFF 		bl	lv_chart_add_series
+ 633              	.LVL79:
+ 634 02e2 0546     		mov	r5, r0
+ 635              	.LVL80:
+ 118:generated/setup_scr_screen2.c **** 	lv_chart_set_next_value(ui->screen2_chart2, screen2_chart2_0, 10);
+ 636              		.loc 1 118 2 is_stmt 1 view .LVU162
+ 637 02e4 0A22     		movs	r2, #10
+ 638 02e6 0146     		mov	r1, r0
+ 639 02e8 606B     		ldr	r0, [r4, #52]
+ 640              	.LVL81:
+ 641              		.loc 1 118 2 is_stmt 0 view .LVU163
+ 642 02ea FFF7FEFF 		bl	lv_chart_set_next_value
+ 643              	.LVL82:
+ 119:generated/setup_scr_screen2.c **** 	lv_chart_set_next_value(ui->screen2_chart2, screen2_chart2_0, 20);
+ 644              		.loc 1 119 2 is_stmt 1 view .LVU164
+ 645 02ee 1422     		movs	r2, #20
+ 646 02f0 2946     		mov	r1, r5
+ 647 02f2 606B     		ldr	r0, [r4, #52]
+ 648 02f4 FFF7FEFF 		bl	lv_chart_set_next_value
+ 649              	.LVL83:
+ 120:generated/setup_scr_screen2.c **** 	lv_chart_set_next_value(ui->screen2_chart2, screen2_chart2_0, 30);
+ 650              		.loc 1 120 2 view .LVU165
+ 651 02f8 1E22     		movs	r2, #30
+ 652 02fa 2946     		mov	r1, r5
+ 653 02fc 606B     		ldr	r0, [r4, #52]
+ 654 02fe FFF7FEFF 		bl	lv_chart_set_next_value
+ 655              	.LVL84:
+ 121:generated/setup_scr_screen2.c **** 	lv_chart_set_next_value(ui->screen2_chart2, screen2_chart2_0, 40);
+ 656              		.loc 1 121 2 view .LVU166
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 29
+
+
+ 657 0302 2822     		movs	r2, #40
+ 658 0304 2946     		mov	r1, r5
+ 659 0306 606B     		ldr	r0, [r4, #52]
+ 660 0308 FFF7FEFF 		bl	lv_chart_set_next_value
+ 661              	.LVL85:
+ 122:generated/setup_scr_screen2.c **** 	lv_chart_set_next_value(ui->screen2_chart2, screen2_chart2_0, 10);
+ 662              		.loc 1 122 2 view .LVU167
+ 663 030c 0A22     		movs	r2, #10
+ 664 030e 2946     		mov	r1, r5
+ 665 0310 606B     		ldr	r0, [r4, #52]
+ 666 0312 FFF7FEFF 		bl	lv_chart_set_next_value
+ 667              	.LVL86:
+ 123:generated/setup_scr_screen2.c **** 	lv_chart_set_next_value(ui->screen2_chart2, screen2_chart2_0, 50);
+ 668              		.loc 1 123 2 view .LVU168
+ 669 0316 3222     		movs	r2, #50
+ 670 0318 2946     		mov	r1, r5
+ 671 031a 606B     		ldr	r0, [r4, #52]
+ 672 031c FFF7FEFF 		bl	lv_chart_set_next_value
+ 673              	.LVL87:
+ 124:generated/setup_scr_screen2.c **** 	lv_chart_set_next_value(ui->screen2_chart2, screen2_chart2_0, 70);
+ 674              		.loc 1 124 2 view .LVU169
+ 675 0320 4622     		movs	r2, #70
+ 676 0322 2946     		mov	r1, r5
+ 677 0324 606B     		ldr	r0, [r4, #52]
+ 678 0326 FFF7FEFF 		bl	lv_chart_set_next_value
+ 679              	.LVL88:
+ 125:generated/setup_scr_screen2.c **** 	lv_chart_set_next_value(ui->screen2_chart2, screen2_chart2_0, 30);
+ 680              		.loc 1 125 2 view .LVU170
+ 681 032a 1E22     		movs	r2, #30
+ 682 032c 2946     		mov	r1, r5
+ 683 032e 606B     		ldr	r0, [r4, #52]
+ 684 0330 FFF7FEFF 		bl	lv_chart_set_next_value
+ 685              	.LVL89:
+ 126:generated/setup_scr_screen2.c **** 	lv_chart_set_next_value(ui->screen2_chart2, screen2_chart2_0, 10);
+ 686              		.loc 1 126 2 view .LVU171
+ 687 0334 0A22     		movs	r2, #10
+ 688 0336 2946     		mov	r1, r5
+ 689 0338 606B     		ldr	r0, [r4, #52]
+ 690 033a FFF7FEFF 		bl	lv_chart_set_next_value
+ 691              	.LVL90:
+ 127:generated/setup_scr_screen2.c **** 	lv_chart_set_next_value(ui->screen2_chart2, screen2_chart2_0, 30);
+ 692              		.loc 1 127 2 view .LVU172
+ 693 033e 1E22     		movs	r2, #30
+ 694 0340 2946     		mov	r1, r5
+ 695 0342 606B     		ldr	r0, [r4, #52]
+ 696 0344 FFF7FEFF 		bl	lv_chart_set_next_value
+ 697              	.LVL91:
+ 128:generated/setup_scr_screen2.c **** 
+ 129:generated/setup_scr_screen2.c **** 	//Init events for screen
+ 130:generated/setup_scr_screen2.c **** 	events_init_screen2(ui);
+ 698              		.loc 1 130 2 view .LVU173
+ 699 0348 2046     		mov	r0, r4
+ 700 034a FFF7FEFF 		bl	events_init_screen2
+ 701              	.LVL92:
+ 131:generated/setup_scr_screen2.c **** }...
+ 702              		.loc 1 131 1 is_stmt 0 view .LVU174
+ 703 034e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 30
+
+
+ 704              	.LVL93:
+ 705              	.L2:
+  25:generated/setup_scr_screen2.c **** 		lv_style_init(&style_screen2_main_main_default);
+ 706              		.loc 1 25 3 is_stmt 1 view .LVU175
+ 707 0350 0748     		ldr	r0, .L11
+ 708 0352 FFF7FEFF 		bl	lv_style_init
+ 709              	.LVL94:
+ 710 0356 64E6     		b	.L3
+ 711              	.L4:
+  43:generated/setup_scr_screen2.c **** 		lv_style_init(&style_screen2_label0_main_main_default);
+ 712              		.loc 1 43 3 view .LVU176
+ 713 0358 0748     		ldr	r0, .L11+8
+ 714 035a FFF7FEFF 		bl	lv_style_init
+ 715              	.LVL95:
+ 716 035e 90E6     		b	.L5
+ 717              	.L6:
+  71:generated/setup_scr_screen2.c **** 		lv_style_init(&style_screen2_btn1_1_main_main_default);
+ 718              		.loc 1 71 3 view .LVU177
+ 719 0360 0748     		ldr	r0, .L11+16
+ 720 0362 FFF7FEFF 		bl	lv_style_init
+ 721              	.LVL96:
+ 722 0366 E6E6     		b	.L7
+ 723              	.L8:
+ 100:generated/setup_scr_screen2.c **** 		lv_style_init(&style_screen2_chart2_main_main_default);
+ 724              		.loc 1 100 3 view .LVU178
+ 725 0368 0848     		ldr	r0, .L11+28
+ 726 036a FFF7FEFF 		bl	lv_style_init
+ 727              	.LVL97:
+ 728 036e 5BE7     		b	.L9
+ 729              	.L12:
+ 730              		.align	2
+ 731              	.L11:
+ 732 0370 00000000 		.word	.LANCHOR0
+ 733 0374 00000000 		.word	.LC0
+ 734 0378 00000000 		.word	.LANCHOR1
+ 735 037c 00000000 		.word	lv_font_arial_12
+ 736 0380 00000000 		.word	.LANCHOR2
+ 737 0384 00000000 		.word	lv_font_simsun_12
+ 738 0388 08000000 		.word	.LC1
+ 739 038c 00000000 		.word	.LANCHOR3
+ 740              		.cfi_endproc
+ 741              	.LFE187:
+ 743              		.section	.bss.style_screen2_btn1_1_main_main_default.1,"aw",%nobits
+ 744              		.align	2
+ 745              		.set	.LANCHOR2,. + 0
+ 748              	style_screen2_btn1_1_main_main_default.1:
+ 749 0000 00000000 		.space	8
+ 749      00000000 
+ 750              		.section	.bss.style_screen2_chart2_main_main_default.0,"aw",%nobits
+ 751              		.align	2
+ 752              		.set	.LANCHOR3,. + 0
+ 755              	style_screen2_chart2_main_main_default.0:
+ 756 0000 00000000 		.space	8
+ 756      00000000 
+ 757              		.section	.bss.style_screen2_label0_main_main_default.2,"aw",%nobits
+ 758              		.align	2
+ 759              		.set	.LANCHOR1,. + 0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 31
+
+
+ 762              	style_screen2_label0_main_main_default.2:
+ 763 0000 00000000 		.space	8
+ 763      00000000 
+ 764              		.section	.bss.style_screen2_main_main_default.3,"aw",%nobits
+ 765              		.align	2
+ 766              		.set	.LANCHOR0,. + 0
+ 769              	style_screen2_main_main_default.3:
+ 770 0000 00000000 		.space	8
+ 770      00000000 
+ 771              		.text
+ 772              	.Letext0:
+ 773              		.file 4 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\machine\\_default_typ
+ 774              		.file 5 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 775              		.file 6 "lvgl/src/misc/lv_ll.h"
+ 776              		.file 7 "lvgl/src/hal/../misc/lv_area.h"
+ 777              		.file 8 "lvgl/src/core/lv_obj.h"
+ 778              		.file 9 "lvgl/src/core/lv_group.h"
+ 779              		.file 10 "lvgl/src/core/../misc/../font/lv_font.h"
+ 780              		.file 11 "lvgl/src/core/../misc/lv_txt.h"
+ 781              		.file 12 "lvgl/src/core/../misc/lv_style.h"
+ 782              		.file 13 "lvgl/src/core/lv_obj_scroll.h"
+ 783              		.file 14 "lvgl/src/core/lv_obj_class.h"
+ 784              		.file 15 "lvgl/src/core/lv_event.h"
+ 785              		.file 16 "lvgl/src/widgets/lv_label.h"
+ 786              		.file 17 "lvgl/src/extra/widgets/chart/lv_chart.h"
+ 787              		.file 18 "generated/../generated/guider_fonts/guider_fonts.h"
+ 788              		.file 19 "generated/gui_guider.h"
+ 789              		.file 20 "lvgl/src/core/lv_obj_style_gen.h"
+ 790              		.file 21 "lvgl/src/core/../misc/lv_style_gen.h"
+ 791              		.file 22 "lvgl/src/core/lv_obj_pos.h"
+ 792              		.file 23 "lvgl/src/widgets/lv_btn.h"
+ 793              		.file 24 "generated/events_init.h"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 32
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 setup_scr_screen2.c
+C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s:20     .rodata.setup_scr_screen2.str1.4:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s:27     .text.setup_scr_screen2:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s:33     .text.setup_scr_screen2:00000000 setup_scr_screen2
+C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s:732    .text.setup_scr_screen2:00000370 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s:744    .bss.style_screen2_btn1_1_main_main_default.1:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s:748    .bss.style_screen2_btn1_1_main_main_default.1:00000000 style_screen2_btn1_1_main_main_default.1
+C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s:751    .bss.style_screen2_chart2_main_main_default.0:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s:755    .bss.style_screen2_chart2_main_main_default.0:00000000 style_screen2_chart2_main_main_default.0
+C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s:758    .bss.style_screen2_label0_main_main_default.2:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s:762    .bss.style_screen2_label0_main_main_default.2:00000000 style_screen2_label0_main_main_default.2
+C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s:765    .bss.style_screen2_main_main_default.3:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s:769    .bss.style_screen2_main_main_default.3:00000000 style_screen2_main_main_default.3
+
+UNDEFINED SYMBOLS
+lv_obj_create
+lv_obj_set_scrollbar_mode
+lv_style_reset
+lv_style_set_bg_color
+lv_style_set_bg_opa
+lv_obj_add_style
+lv_label_create
+lv_obj_set_pos
+lv_obj_set_size
+lv_label_set_text
+lv_label_set_long_mode
+lv_style_set_radius
+lv_style_set_bg_grad_color
+lv_style_set_bg_grad_dir
+lv_style_set_text_color
+lv_style_set_text_font
+lv_style_set_text_letter_space
+lv_style_set_text_line_space
+lv_style_set_text_align
+lv_style_set_pad_left
+lv_style_set_pad_right
+lv_style_set_pad_top
+lv_style_set_pad_bottom
+lv_btn_create
+lv_style_set_border_color
+lv_style_set_border_width
+lv_style_set_border_opa
+lv_obj_set_style_pad_left
+lv_obj_set_style_pad_right
+lv_obj_set_style_pad_top
+lv_obj_set_style_pad_bottom
+lv_obj_align
+lv_chart_create
+lv_style_set_line_color
+lv_style_set_line_width
+lv_style_set_line_opa
+lv_chart_set_type
+lv_chart_set_range
+lv_chart_set_div_line_count
+lv_chart_set_point_count
+lv_chart_add_series
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccZ6mbep.s 			page 33
+
+
+lv_chart_set_next_value
+events_init_screen2
+lv_style_init
+lv_font_arial_12
+lv_font_simsun_12

@@ -1,0 +1,828 @@
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"events_init.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.screen_btn_2_event_handler,"ax",%progbits
+  20              		.align	1
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	screen_btn_2_event_handler:
+  26              	.LVL0:
+  27              	.LFB189:
+  28              		.file 1 "generated/events_init.c"
+   1:generated/events_init.c **** /*
+   2:generated/events_init.c ****  * Copyright 2023 NXP
+   3:generated/events_init.c ****  * SPDX-License-Identifier: MIT
+   4:generated/events_init.c ****  * The auto-generated can only be used on NXP devices
+   5:generated/events_init.c ****  */
+   6:generated/events_init.c **** 
+   7:generated/events_init.c **** #include "events_init.h"
+   8:generated/events_init.c **** #include <stdio.h>
+   9:generated/events_init.c **** #include "lvgl.h"
+  10:generated/events_init.c **** 
+  11:generated/events_init.c **** uint8_t text1 = 1;
+  12:generated/events_init.c **** void events_init(lv_ui *ui)
+  13:generated/events_init.c **** {
+  14:generated/events_init.c **** }
+  15:generated/events_init.c **** 
+  16:generated/events_init.c **** static void screen_btn1_event_handler(lv_event_t *e)
+  17:generated/events_init.c **** {
+  18:generated/events_init.c **** 	lv_event_code_t code = lv_event_get_code(e);
+  19:generated/events_init.c **** 	switch (code)
+  20:generated/events_init.c **** 	{
+  21:generated/events_init.c **** 	case LV_EVENT_PRESSED:
+  22:generated/events_init.c **** 	{
+  23:generated/events_init.c **** 		lv_disp_t * d = lv_obj_get_disp(lv_scr_act());
+  24:generated/events_init.c **** 		if (d->prev_scr == NULL && d->scr_to_load == NULL)
+  25:generated/events_init.c **** 		{
+  26:generated/events_init.c **** 			if (guider_ui.screen2_del == true)
+  27:generated/events_init.c **** 				setup_scr_screen2(&guider_ui);
+  28:generated/events_init.c **** 			lv_scr_load_anim(guider_ui.screen2, LV_SCR_LOAD_ANIM_FADE_ON, 100, 100, true);
+  29:generated/events_init.c **** 		}
+  30:generated/events_init.c **** 		guider_ui.screen_del = true;
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 2
+
+
+  31:generated/events_init.c **** 	}
+  32:generated/events_init.c **** 		break;
+  33:generated/events_init.c **** 	default:
+  34:generated/events_init.c **** 		break;
+  35:generated/events_init.c **** 	}
+  36:generated/events_init.c **** }
+  37:generated/events_init.c **** 
+  38:generated/events_init.c **** static void screen_btn_2_event_handler(lv_event_t *e)
+  39:generated/events_init.c **** {
+  29              		.loc 1 39 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		.loc 1 39 1 is_stmt 0 view .LVU1
+  34 0000 10B5     		push	{r4, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 4, -8
+  38              		.cfi_offset 14, -4
+  40:generated/events_init.c **** 	lv_event_code_t code = lv_event_get_code(e);
+  39              		.loc 1 40 2 is_stmt 1 view .LVU2
+  40              		.loc 1 40 25 is_stmt 0 view .LVU3
+  41 0002 FFF7FEFF 		bl	lv_event_get_code
+  42              	.LVL1:
+  41:generated/events_init.c **** 	switch (code)
+  43              		.loc 1 41 2 is_stmt 1 view .LVU4
+  44 0006 0128     		cmp	r0, #1
+  45 0008 00D0     		beq	.L4
+  46              	.LVL2:
+  47              	.L1:
+  42:generated/events_init.c **** 	{
+  43:generated/events_init.c **** 	case LV_EVENT_PRESSED:
+  44:generated/events_init.c **** 	{
+  45:generated/events_init.c **** 		lv_obj_set_style_text_font(guider_ui.screen_label_1, &lv_font_simsun_12, 0);
+  46:generated/events_init.c **** 		lv_label_set_text(guider_ui.screen_label_1, text1);
+  47:generated/events_init.c **** 	}
+  48:generated/events_init.c **** 		break;
+  49:generated/events_init.c **** 	default:
+  50:generated/events_init.c **** 		break;
+  51:generated/events_init.c **** 	}
+  52:generated/events_init.c **** }
+  48              		.loc 1 52 1 is_stmt 0 view .LVU5
+  49 000a 10BD     		pop	{r4, pc}
+  50              	.LVL3:
+  51              	.L4:
+  45:generated/events_init.c **** 		lv_label_set_text(guider_ui.screen_label_1, text1);
+  52              		.loc 1 45 3 is_stmt 1 view .LVU6
+  45:generated/events_init.c **** 		lv_label_set_text(guider_ui.screen_label_1, text1);
+  53              		.loc 1 45 39 is_stmt 0 view .LVU7
+  54 000c 054C     		ldr	r4, .L5
+  45:generated/events_init.c **** 		lv_label_set_text(guider_ui.screen_label_1, text1);
+  55              		.loc 1 45 3 view .LVU8
+  56 000e 0022     		movs	r2, #0
+  57 0010 0549     		ldr	r1, .L5+4
+  58 0012 E069     		ldr	r0, [r4, #28]
+  59              	.LVL4:
+  45:generated/events_init.c **** 		lv_label_set_text(guider_ui.screen_label_1, text1);
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 3
+
+
+  60              		.loc 1 45 3 view .LVU9
+  61 0014 FFF7FEFF 		bl	lv_obj_set_style_text_font
+  62              	.LVL5:
+  46:generated/events_init.c **** 	}
+  63              		.loc 1 46 3 is_stmt 1 view .LVU10
+  64 0018 044B     		ldr	r3, .L5+8
+  65 001a 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+  66 001c E069     		ldr	r0, [r4, #28]
+  67 001e FFF7FEFF 		bl	lv_label_set_text
+  68              	.LVL6:
+  48:generated/events_init.c **** 	default:
+  69              		.loc 1 48 3 view .LVU11
+  70              		.loc 1 52 1 is_stmt 0 view .LVU12
+  71 0022 F2E7     		b	.L1
+  72              	.L6:
+  73              		.align	2
+  74              	.L5:
+  75 0024 00000000 		.word	guider_ui
+  76 0028 00000000 		.word	lv_font_simsun_12
+  77 002c 00000000 		.word	.LANCHOR0
+  78              		.cfi_endproc
+  79              	.LFE189:
+  81              		.section	.text.screen_btn1_event_handler,"ax",%progbits
+  82              		.align	1
+  83              		.syntax unified
+  84              		.thumb
+  85              		.thumb_func
+  87              	screen_btn1_event_handler:
+  88              	.LVL7:
+  89              	.LFB188:
+  17:generated/events_init.c **** 	lv_event_code_t code = lv_event_get_code(e);
+  90              		.loc 1 17 1 is_stmt 1 view -0
+  91              		.cfi_startproc
+  92              		@ args = 0, pretend = 0, frame = 0
+  93              		@ frame_needed = 0, uses_anonymous_args = 0
+  17:generated/events_init.c **** 	lv_event_code_t code = lv_event_get_code(e);
+  94              		.loc 1 17 1 is_stmt 0 view .LVU14
+  95 0000 00B5     		push	{lr}
+  96              	.LCFI1:
+  97              		.cfi_def_cfa_offset 4
+  98              		.cfi_offset 14, -4
+  99 0002 83B0     		sub	sp, sp, #12
+ 100              	.LCFI2:
+ 101              		.cfi_def_cfa_offset 16
+  18:generated/events_init.c **** 	switch (code)
+ 102              		.loc 1 18 2 is_stmt 1 view .LVU15
+  18:generated/events_init.c **** 	switch (code)
+ 103              		.loc 1 18 25 is_stmt 0 view .LVU16
+ 104 0004 FFF7FEFF 		bl	lv_event_get_code
+ 105              	.LVL8:
+  19:generated/events_init.c **** 	{
+ 106              		.loc 1 19 2 is_stmt 1 view .LVU17
+ 107 0008 0128     		cmp	r0, #1
+ 108 000a 02D0     		beq	.L12
+ 109              	.LVL9:
+ 110              	.L7:
+  36:generated/events_init.c **** 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 4
+
+
+ 111              		.loc 1 36 1 is_stmt 0 view .LVU18
+ 112 000c 03B0     		add	sp, sp, #12
+ 113              	.LCFI3:
+ 114              		.cfi_remember_state
+ 115              		.cfi_def_cfa_offset 4
+ 116              		@ sp needed
+ 117 000e 5DF804FB 		ldr	pc, [sp], #4
+ 118              	.LVL10:
+ 119              	.L12:
+ 120              	.LCFI4:
+ 121              		.cfi_restore_state
+ 122              	.LBB5:
+  23:generated/events_init.c **** 		if (d->prev_scr == NULL && d->scr_to_load == NULL)
+ 123              		.loc 1 23 3 is_stmt 1 view .LVU19
+ 124              	.LBB6:
+ 125              	.LBI6:
+ 126              		.file 2 "lvgl/src/core/lv_disp.h"
+   1:lvgl/src/core/lv_disp.h **** /**
+   2:lvgl/src/core/lv_disp.h ****  * @file lv_disp.h
+   3:lvgl/src/core/lv_disp.h ****  *
+   4:lvgl/src/core/lv_disp.h ****  */
+   5:lvgl/src/core/lv_disp.h **** 
+   6:lvgl/src/core/lv_disp.h **** #ifndef LV_DISP_H
+   7:lvgl/src/core/lv_disp.h **** #define LV_DISP_H
+   8:lvgl/src/core/lv_disp.h **** 
+   9:lvgl/src/core/lv_disp.h **** #ifdef __cplusplus
+  10:lvgl/src/core/lv_disp.h **** extern "C" {
+  11:lvgl/src/core/lv_disp.h **** #endif
+  12:lvgl/src/core/lv_disp.h **** 
+  13:lvgl/src/core/lv_disp.h **** /*********************
+  14:lvgl/src/core/lv_disp.h ****  *      INCLUDES
+  15:lvgl/src/core/lv_disp.h ****  *********************/
+  16:lvgl/src/core/lv_disp.h **** #include "../hal/lv_hal.h"
+  17:lvgl/src/core/lv_disp.h **** #include "lv_obj.h"
+  18:lvgl/src/core/lv_disp.h **** #include "lv_theme.h"
+  19:lvgl/src/core/lv_disp.h **** 
+  20:lvgl/src/core/lv_disp.h **** /*********************
+  21:lvgl/src/core/lv_disp.h ****  *      DEFINES
+  22:lvgl/src/core/lv_disp.h ****  *********************/
+  23:lvgl/src/core/lv_disp.h **** 
+  24:lvgl/src/core/lv_disp.h **** /**********************
+  25:lvgl/src/core/lv_disp.h ****  *      TYPEDEFS
+  26:lvgl/src/core/lv_disp.h ****  **********************/
+  27:lvgl/src/core/lv_disp.h **** 
+  28:lvgl/src/core/lv_disp.h **** typedef enum {
+  29:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_NONE,
+  30:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_OVER_LEFT,
+  31:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_OVER_RIGHT,
+  32:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_OVER_TOP,
+  33:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_OVER_BOTTOM,
+  34:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_MOVE_LEFT,
+  35:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_MOVE_RIGHT,
+  36:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_MOVE_TOP,
+  37:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_MOVE_BOTTOM,
+  38:lvgl/src/core/lv_disp.h ****     LV_SCR_LOAD_ANIM_FADE_ON,
+  39:lvgl/src/core/lv_disp.h **** } lv_scr_load_anim_t;
+  40:lvgl/src/core/lv_disp.h **** 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 5
+
+
+  41:lvgl/src/core/lv_disp.h **** /**********************
+  42:lvgl/src/core/lv_disp.h ****  * GLOBAL PROTOTYPES
+  43:lvgl/src/core/lv_disp.h ****  **********************/
+  44:lvgl/src/core/lv_disp.h **** 
+  45:lvgl/src/core/lv_disp.h **** /**
+  46:lvgl/src/core/lv_disp.h ****  * Return with a pointer to the active screen
+  47:lvgl/src/core/lv_disp.h ****  * @param disp pointer to display which active screen should be get. (NULL to use the default
+  48:lvgl/src/core/lv_disp.h ****  * screen)
+  49:lvgl/src/core/lv_disp.h ****  * @return pointer to the active screen object (loaded by 'lv_scr_load()')
+  50:lvgl/src/core/lv_disp.h ****  */
+  51:lvgl/src/core/lv_disp.h **** lv_obj_t * lv_disp_get_scr_act(lv_disp_t * disp);
+  52:lvgl/src/core/lv_disp.h **** 
+  53:lvgl/src/core/lv_disp.h **** /**
+  54:lvgl/src/core/lv_disp.h ****  * Return with a pointer to the previous screen. Only used during screen transitions.
+  55:lvgl/src/core/lv_disp.h ****  * @param disp pointer to display which previous screen should be get. (NULL to use the default
+  56:lvgl/src/core/lv_disp.h ****  * screen)
+  57:lvgl/src/core/lv_disp.h ****  * @return pointer to the previous screen object or NULL if not used now
+  58:lvgl/src/core/lv_disp.h ****  */
+  59:lvgl/src/core/lv_disp.h **** lv_obj_t * lv_disp_get_scr_prev(lv_disp_t * disp);
+  60:lvgl/src/core/lv_disp.h **** 
+  61:lvgl/src/core/lv_disp.h **** /**
+  62:lvgl/src/core/lv_disp.h ****  * Make a screen active
+  63:lvgl/src/core/lv_disp.h ****  * @param scr pointer to a screen
+  64:lvgl/src/core/lv_disp.h ****  */
+  65:lvgl/src/core/lv_disp.h **** void lv_disp_load_scr(lv_obj_t * scr);
+  66:lvgl/src/core/lv_disp.h **** 
+  67:lvgl/src/core/lv_disp.h **** /**
+  68:lvgl/src/core/lv_disp.h ****  * Return with the top layer. (Same on every screen and it is above the normal screen layer)
+  69:lvgl/src/core/lv_disp.h ****  * @param disp pointer to display which top layer should be get. (NULL to use the default screen)
+  70:lvgl/src/core/lv_disp.h ****  * @return pointer to the top layer object  (transparent screen sized lv_obj)
+  71:lvgl/src/core/lv_disp.h ****  */
+  72:lvgl/src/core/lv_disp.h **** lv_obj_t * lv_disp_get_layer_top(lv_disp_t * disp);
+  73:lvgl/src/core/lv_disp.h **** 
+  74:lvgl/src/core/lv_disp.h **** /**
+  75:lvgl/src/core/lv_disp.h ****  * Return with the sys. layer. (Same on every screen and it is above the normal screen and the top
+  76:lvgl/src/core/lv_disp.h ****  * layer)
+  77:lvgl/src/core/lv_disp.h ****  * @param disp pointer to display which sys. layer  should be get. (NULL to use the default screen)
+  78:lvgl/src/core/lv_disp.h ****  * @return pointer to the sys layer object  (transparent screen sized lv_obj)
+  79:lvgl/src/core/lv_disp.h ****  */
+  80:lvgl/src/core/lv_disp.h **** lv_obj_t * lv_disp_get_layer_sys(lv_disp_t * disp);
+  81:lvgl/src/core/lv_disp.h **** 
+  82:lvgl/src/core/lv_disp.h **** /**
+  83:lvgl/src/core/lv_disp.h ****  * Get the theme of a display
+  84:lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+  85:lvgl/src/core/lv_disp.h ****  * @return the display's theme (can be NULL)
+  86:lvgl/src/core/lv_disp.h ****  */
+  87:lvgl/src/core/lv_disp.h **** void lv_disp_set_theme(lv_disp_t * disp, lv_theme_t * th);
+  88:lvgl/src/core/lv_disp.h **** 
+  89:lvgl/src/core/lv_disp.h **** /**
+  90:lvgl/src/core/lv_disp.h ****  * Get the theme of a display
+  91:lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+  92:lvgl/src/core/lv_disp.h ****  * @return the display's theme (can be NULL)
+  93:lvgl/src/core/lv_disp.h ****  */
+  94:lvgl/src/core/lv_disp.h **** lv_theme_t * lv_disp_get_theme(lv_disp_t * disp);
+  95:lvgl/src/core/lv_disp.h **** 
+  96:lvgl/src/core/lv_disp.h **** /**
+  97:lvgl/src/core/lv_disp.h ****  * Set the background color of a display
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 6
+
+
+  98:lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+  99:lvgl/src/core/lv_disp.h ****  * @param color color of the background
+ 100:lvgl/src/core/lv_disp.h ****  */
+ 101:lvgl/src/core/lv_disp.h **** void lv_disp_set_bg_color(lv_disp_t * disp, lv_color_t color);
+ 102:lvgl/src/core/lv_disp.h **** 
+ 103:lvgl/src/core/lv_disp.h **** /**
+ 104:lvgl/src/core/lv_disp.h ****  * Set the background image of a display
+ 105:lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+ 106:lvgl/src/core/lv_disp.h ****  * @param img_src path to file or pointer to an `lv_img_dsc_t` variable
+ 107:lvgl/src/core/lv_disp.h ****  */
+ 108:lvgl/src/core/lv_disp.h **** void lv_disp_set_bg_image(lv_disp_t * disp, const void  * img_src);
+ 109:lvgl/src/core/lv_disp.h **** 
+ 110:lvgl/src/core/lv_disp.h **** /**
+ 111:lvgl/src/core/lv_disp.h ****  * Opacity of the background
+ 112:lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+ 113:lvgl/src/core/lv_disp.h ****  * @param opa opacity (0..255)
+ 114:lvgl/src/core/lv_disp.h ****  */
+ 115:lvgl/src/core/lv_disp.h **** void lv_disp_set_bg_opa(lv_disp_t * disp, lv_opa_t opa);
+ 116:lvgl/src/core/lv_disp.h **** 
+ 117:lvgl/src/core/lv_disp.h **** /**
+ 118:lvgl/src/core/lv_disp.h ****  * Switch screen with animation
+ 119:lvgl/src/core/lv_disp.h ****  * @param scr pointer to the new screen to load
+ 120:lvgl/src/core/lv_disp.h ****  * @param anim_type type of the animation from `lv_scr_load_anim_t`. E.g.  `LV_SCR_LOAD_ANIM_MOVE_L
+ 121:lvgl/src/core/lv_disp.h ****  * @param time time of the animation
+ 122:lvgl/src/core/lv_disp.h ****  * @param delay delay before the transition
+ 123:lvgl/src/core/lv_disp.h ****  * @param auto_del true: automatically delete the old screen
+ 124:lvgl/src/core/lv_disp.h ****  */
+ 125:lvgl/src/core/lv_disp.h **** void lv_scr_load_anim(lv_obj_t * scr, lv_scr_load_anim_t anim_type, uint32_t time, uint32_t delay, 
+ 126:lvgl/src/core/lv_disp.h **** 
+ 127:lvgl/src/core/lv_disp.h **** /**
+ 128:lvgl/src/core/lv_disp.h ****  * Get elapsed time since last user activity on a display (e.g. click)
+ 129:lvgl/src/core/lv_disp.h ****  * @param disp pointer to an display (NULL to get the overall smallest inactivity)
+ 130:lvgl/src/core/lv_disp.h ****  * @return elapsed ticks (milliseconds) since the last activity
+ 131:lvgl/src/core/lv_disp.h ****  */
+ 132:lvgl/src/core/lv_disp.h **** uint32_t lv_disp_get_inactive_time(const lv_disp_t * disp);
+ 133:lvgl/src/core/lv_disp.h **** 
+ 134:lvgl/src/core/lv_disp.h **** /**
+ 135:lvgl/src/core/lv_disp.h ****  * Manually trigger an activity on a display
+ 136:lvgl/src/core/lv_disp.h ****  * @param disp pointer to an display (NULL to use the default display)
+ 137:lvgl/src/core/lv_disp.h ****  */
+ 138:lvgl/src/core/lv_disp.h **** void lv_disp_trig_activity(lv_disp_t * disp);
+ 139:lvgl/src/core/lv_disp.h **** 
+ 140:lvgl/src/core/lv_disp.h **** /**
+ 141:lvgl/src/core/lv_disp.h ****  * Clean any CPU cache that is related to the display.
+ 142:lvgl/src/core/lv_disp.h ****  * @param disp pointer to an display (NULL to use the default display)
+ 143:lvgl/src/core/lv_disp.h ****  */
+ 144:lvgl/src/core/lv_disp.h **** void lv_disp_clean_dcache(lv_disp_t * disp);
+ 145:lvgl/src/core/lv_disp.h **** 
+ 146:lvgl/src/core/lv_disp.h **** /**
+ 147:lvgl/src/core/lv_disp.h ****  * Get a pointer to the screen refresher timer to
+ 148:lvgl/src/core/lv_disp.h ****  * modify its parameters with `lv_timer_...` functions.
+ 149:lvgl/src/core/lv_disp.h ****  * @param disp pointer to a display
+ 150:lvgl/src/core/lv_disp.h ****  * @return pointer to the display refresher timer. (NULL on error)
+ 151:lvgl/src/core/lv_disp.h ****  */
+ 152:lvgl/src/core/lv_disp.h **** lv_timer_t * _lv_disp_get_refr_timer(lv_disp_t * disp);
+ 153:lvgl/src/core/lv_disp.h **** 
+ 154:lvgl/src/core/lv_disp.h **** /*------------------------------------------------
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 7
+
+
+ 155:lvgl/src/core/lv_disp.h ****  * To improve backward compatibility
+ 156:lvgl/src/core/lv_disp.h ****  * Recommended only if you have one display
+ 157:lvgl/src/core/lv_disp.h ****  *------------------------------------------------*/
+ 158:lvgl/src/core/lv_disp.h **** 
+ 159:lvgl/src/core/lv_disp.h **** /**
+ 160:lvgl/src/core/lv_disp.h ****  * Get the active screen of the default display
+ 161:lvgl/src/core/lv_disp.h ****  * @return pointer to the active screen
+ 162:lvgl/src/core/lv_disp.h ****  */
+ 163:lvgl/src/core/lv_disp.h **** static inline lv_obj_t * lv_scr_act(void)
+ 127              		.loc 2 163 26 view .LVU20
+ 128              	.LBB7:
+ 164:lvgl/src/core/lv_disp.h **** {
+ 165:lvgl/src/core/lv_disp.h ****     return lv_disp_get_scr_act(lv_disp_get_default());
+ 129              		.loc 2 165 5 view .LVU21
+ 130              		.loc 2 165 12 is_stmt 0 view .LVU22
+ 131 0012 FFF7FEFF 		bl	lv_disp_get_default
+ 132              	.LVL11:
+ 133              		.loc 2 165 12 view .LVU23
+ 134 0016 FFF7FEFF 		bl	lv_disp_get_scr_act
+ 135              	.LVL12:
+ 136              	.LBE7:
+ 137              	.LBE6:
+  23:generated/events_init.c **** 		if (d->prev_scr == NULL && d->scr_to_load == NULL)
+ 138              		.loc 1 23 19 view .LVU24
+ 139 001a FFF7FEFF 		bl	lv_obj_get_disp
+ 140              	.LVL13:
+  24:generated/events_init.c **** 		{
+ 141              		.loc 1 24 3 is_stmt 1 view .LVU25
+  24:generated/events_init.c **** 		{
+ 142              		.loc 1 24 8 is_stmt 0 view .LVU26
+ 143 001e 4369     		ldr	r3, [r0, #20]
+  24:generated/events_init.c **** 		{
+ 144              		.loc 1 24 6 view .LVU27
+ 145 0020 1BB1     		cbz	r3, .L13
+ 146              	.LVL14:
+ 147              	.L9:
+  30:generated/events_init.c **** 	}
+ 148              		.loc 1 30 3 is_stmt 1 view .LVU28
+  30:generated/events_init.c **** 	}
+ 149              		.loc 1 30 24 is_stmt 0 view .LVU29
+ 150 0022 0C4B     		ldr	r3, .L15
+ 151 0024 0122     		movs	r2, #1
+ 152 0026 1A71     		strb	r2, [r3, #4]
+ 153              	.LBE5:
+  32:generated/events_init.c **** 	default:
+ 154              		.loc 1 32 3 is_stmt 1 view .LVU30
+  36:generated/events_init.c **** 
+ 155              		.loc 1 36 1 is_stmt 0 view .LVU31
+ 156 0028 F0E7     		b	.L7
+ 157              	.LVL15:
+ 158              	.L13:
+ 159              	.LBB8:
+  24:generated/events_init.c **** 		{
+ 160              		.loc 1 24 31 discriminator 1 view .LVU32
+ 161 002a 8369     		ldr	r3, [r0, #24]
+  24:generated/events_init.c **** 		{
+ 162              		.loc 1 24 27 discriminator 1 view .LVU33
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 8
+
+
+ 163 002c 002B     		cmp	r3, #0
+ 164 002e F8D1     		bne	.L9
+  26:generated/events_init.c **** 				setup_scr_screen2(&guider_ui);
+ 165              		.loc 1 26 4 is_stmt 1 view .LVU34
+  26:generated/events_init.c **** 				setup_scr_screen2(&guider_ui);
+ 166              		.loc 1 26 17 is_stmt 0 view .LVU35
+ 167 0030 084B     		ldr	r3, .L15
+ 168 0032 93F82430 		ldrb	r3, [r3, #36]	@ zero_extendqisi2
+  26:generated/events_init.c **** 				setup_scr_screen2(&guider_ui);
+ 169              		.loc 1 26 7 view .LVU36
+ 170 0036 4BB9     		cbnz	r3, .L14
+ 171              	.LVL16:
+ 172              	.L10:
+  28:generated/events_init.c **** 		}
+ 173              		.loc 1 28 4 is_stmt 1 view .LVU37
+ 174 0038 0123     		movs	r3, #1
+ 175 003a 0093     		str	r3, [sp]
+ 176 003c 6423     		movs	r3, #100
+ 177 003e 1A46     		mov	r2, r3
+ 178 0040 0921     		movs	r1, #9
+ 179 0042 0448     		ldr	r0, .L15
+ 180 0044 006A     		ldr	r0, [r0, #32]
+ 181 0046 FFF7FEFF 		bl	lv_scr_load_anim
+ 182              	.LVL17:
+ 183 004a EAE7     		b	.L9
+ 184              	.LVL18:
+ 185              	.L14:
+  27:generated/events_init.c **** 			lv_scr_load_anim(guider_ui.screen2, LV_SCR_LOAD_ANIM_FADE_ON, 100, 100, true);
+ 186              		.loc 1 27 5 view .LVU38
+ 187 004c 0148     		ldr	r0, .L15
+ 188              	.LVL19:
+  27:generated/events_init.c **** 			lv_scr_load_anim(guider_ui.screen2, LV_SCR_LOAD_ANIM_FADE_ON, 100, 100, true);
+ 189              		.loc 1 27 5 is_stmt 0 view .LVU39
+ 190 004e FFF7FEFF 		bl	setup_scr_screen2
+ 191              	.LVL20:
+ 192 0052 F1E7     		b	.L10
+ 193              	.L16:
+ 194              		.align	2
+ 195              	.L15:
+ 196 0054 00000000 		.word	guider_ui
+ 197              	.LBE8:
+ 198              		.cfi_endproc
+ 199              	.LFE188:
+ 201              		.section	.text.screen2_btn1_1_event_handler,"ax",%progbits
+ 202              		.align	1
+ 203              		.syntax unified
+ 204              		.thumb
+ 205              		.thumb_func
+ 207              	screen2_btn1_1_event_handler:
+ 208              	.LVL21:
+ 209              	.LFB191:
+  53:generated/events_init.c **** 
+  54:generated/events_init.c **** void events_init_screen(lv_ui *ui)
+  55:generated/events_init.c **** {
+  56:generated/events_init.c **** 	lv_obj_add_event_cb(ui->screen_btn1, screen_btn1_event_handler, LV_EVENT_ALL, NULL);
+  57:generated/events_init.c **** 	lv_obj_add_event_cb(ui->screen_btn_2, screen_btn_2_event_handler, LV_EVENT_ALL, NULL);
+  58:generated/events_init.c **** }
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 9
+
+
+  59:generated/events_init.c **** 
+  60:generated/events_init.c **** static void screen2_btn1_1_event_handler(lv_event_t *e)
+  61:generated/events_init.c **** {
+ 210              		.loc 1 61 1 is_stmt 1 view -0
+ 211              		.cfi_startproc
+ 212              		@ args = 0, pretend = 0, frame = 0
+ 213              		@ frame_needed = 0, uses_anonymous_args = 0
+ 214              		.loc 1 61 1 is_stmt 0 view .LVU41
+ 215 0000 00B5     		push	{lr}
+ 216              	.LCFI5:
+ 217              		.cfi_def_cfa_offset 4
+ 218              		.cfi_offset 14, -4
+ 219 0002 83B0     		sub	sp, sp, #12
+ 220              	.LCFI6:
+ 221              		.cfi_def_cfa_offset 16
+  62:generated/events_init.c **** 	lv_event_code_t code = lv_event_get_code(e);
+ 222              		.loc 1 62 2 is_stmt 1 view .LVU42
+ 223              		.loc 1 62 25 is_stmt 0 view .LVU43
+ 224 0004 FFF7FEFF 		bl	lv_event_get_code
+ 225              	.LVL22:
+  63:generated/events_init.c **** 	switch (code)
+ 226              		.loc 1 63 2 is_stmt 1 view .LVU44
+ 227 0008 0128     		cmp	r0, #1
+ 228 000a 02D0     		beq	.L22
+ 229              	.LVL23:
+ 230              	.L17:
+  64:generated/events_init.c **** 	{
+  65:generated/events_init.c **** 	case LV_EVENT_PRESSED:
+  66:generated/events_init.c **** 	{
+  67:generated/events_init.c **** 		lv_disp_t * d = lv_obj_get_disp(lv_scr_act());
+  68:generated/events_init.c **** 		if (d->prev_scr == NULL && d->scr_to_load == NULL)
+  69:generated/events_init.c **** 		{
+  70:generated/events_init.c **** 			if (guider_ui.screen_del == true)
+  71:generated/events_init.c **** 				setup_scr_screen(&guider_ui);
+  72:generated/events_init.c **** 			lv_scr_load_anim(guider_ui.screen, LV_SCR_LOAD_ANIM_FADE_ON, 100, 100, true);
+  73:generated/events_init.c **** 		}
+  74:generated/events_init.c **** 		guider_ui.screen2_del = true;
+  75:generated/events_init.c **** 	}
+  76:generated/events_init.c **** 		break;
+  77:generated/events_init.c **** 	default:
+  78:generated/events_init.c **** 		break;
+  79:generated/events_init.c **** 	}
+  80:generated/events_init.c **** }
+ 231              		.loc 1 80 1 is_stmt 0 view .LVU45
+ 232 000c 03B0     		add	sp, sp, #12
+ 233              	.LCFI7:
+ 234              		.cfi_remember_state
+ 235              		.cfi_def_cfa_offset 4
+ 236              		@ sp needed
+ 237 000e 5DF804FB 		ldr	pc, [sp], #4
+ 238              	.LVL24:
+ 239              	.L22:
+ 240              	.LCFI8:
+ 241              		.cfi_restore_state
+ 242              	.LBB12:
+  67:generated/events_init.c **** 		if (d->prev_scr == NULL && d->scr_to_load == NULL)
+ 243              		.loc 1 67 3 is_stmt 1 view .LVU46
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 10
+
+
+ 244              	.LBB13:
+ 245              	.LBI13:
+ 163:lvgl/src/core/lv_disp.h **** {
+ 246              		.loc 2 163 26 view .LVU47
+ 247              	.LBB14:
+ 248              		.loc 2 165 5 view .LVU48
+ 249              		.loc 2 165 12 is_stmt 0 view .LVU49
+ 250 0012 FFF7FEFF 		bl	lv_disp_get_default
+ 251              	.LVL25:
+ 252              		.loc 2 165 12 view .LVU50
+ 253 0016 FFF7FEFF 		bl	lv_disp_get_scr_act
+ 254              	.LVL26:
+ 255              	.LBE14:
+ 256              	.LBE13:
+  67:generated/events_init.c **** 		if (d->prev_scr == NULL && d->scr_to_load == NULL)
+ 257              		.loc 1 67 19 view .LVU51
+ 258 001a FFF7FEFF 		bl	lv_obj_get_disp
+ 259              	.LVL27:
+  68:generated/events_init.c **** 		{
+ 260              		.loc 1 68 3 is_stmt 1 view .LVU52
+  68:generated/events_init.c **** 		{
+ 261              		.loc 1 68 8 is_stmt 0 view .LVU53
+ 262 001e 4369     		ldr	r3, [r0, #20]
+  68:generated/events_init.c **** 		{
+ 263              		.loc 1 68 6 view .LVU54
+ 264 0020 23B1     		cbz	r3, .L23
+ 265              	.LVL28:
+ 266              	.L19:
+  74:generated/events_init.c **** 	}
+ 267              		.loc 1 74 3 is_stmt 1 view .LVU55
+  74:generated/events_init.c **** 	}
+ 268              		.loc 1 74 25 is_stmt 0 view .LVU56
+ 269 0022 0C4B     		ldr	r3, .L25
+ 270 0024 0122     		movs	r2, #1
+ 271 0026 83F82420 		strb	r2, [r3, #36]
+ 272              	.LBE12:
+  76:generated/events_init.c **** 	default:
+ 273              		.loc 1 76 3 is_stmt 1 view .LVU57
+ 274              		.loc 1 80 1 is_stmt 0 view .LVU58
+ 275 002a EFE7     		b	.L17
+ 276              	.LVL29:
+ 277              	.L23:
+ 278              	.LBB15:
+  68:generated/events_init.c **** 		{
+ 279              		.loc 1 68 31 discriminator 1 view .LVU59
+ 280 002c 8369     		ldr	r3, [r0, #24]
+  68:generated/events_init.c **** 		{
+ 281              		.loc 1 68 27 discriminator 1 view .LVU60
+ 282 002e 002B     		cmp	r3, #0
+ 283 0030 F7D1     		bne	.L19
+  70:generated/events_init.c **** 				setup_scr_screen(&guider_ui);
+ 284              		.loc 1 70 4 is_stmt 1 view .LVU61
+  70:generated/events_init.c **** 				setup_scr_screen(&guider_ui);
+ 285              		.loc 1 70 17 is_stmt 0 view .LVU62
+ 286 0032 084B     		ldr	r3, .L25
+ 287 0034 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+  70:generated/events_init.c **** 				setup_scr_screen(&guider_ui);
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 11
+
+
+ 288              		.loc 1 70 7 view .LVU63
+ 289 0036 4BB9     		cbnz	r3, .L24
+ 290              	.LVL30:
+ 291              	.L20:
+  72:generated/events_init.c **** 		}
+ 292              		.loc 1 72 4 is_stmt 1 view .LVU64
+ 293 0038 0123     		movs	r3, #1
+ 294 003a 0093     		str	r3, [sp]
+ 295 003c 6423     		movs	r3, #100
+ 296 003e 1A46     		mov	r2, r3
+ 297 0040 0921     		movs	r1, #9
+ 298 0042 0448     		ldr	r0, .L25
+ 299 0044 0068     		ldr	r0, [r0]
+ 300 0046 FFF7FEFF 		bl	lv_scr_load_anim
+ 301              	.LVL31:
+ 302 004a EAE7     		b	.L19
+ 303              	.LVL32:
+ 304              	.L24:
+  71:generated/events_init.c **** 			lv_scr_load_anim(guider_ui.screen, LV_SCR_LOAD_ANIM_FADE_ON, 100, 100, true);
+ 305              		.loc 1 71 5 view .LVU65
+ 306 004c 0148     		ldr	r0, .L25
+ 307              	.LVL33:
+  71:generated/events_init.c **** 			lv_scr_load_anim(guider_ui.screen, LV_SCR_LOAD_ANIM_FADE_ON, 100, 100, true);
+ 308              		.loc 1 71 5 is_stmt 0 view .LVU66
+ 309 004e FFF7FEFF 		bl	setup_scr_screen
+ 310              	.LVL34:
+ 311 0052 F1E7     		b	.L20
+ 312              	.L26:
+ 313              		.align	2
+ 314              	.L25:
+ 315 0054 00000000 		.word	guider_ui
+ 316              	.LBE15:
+ 317              		.cfi_endproc
+ 318              	.LFE191:
+ 320              		.section	.text.events_init,"ax",%progbits
+ 321              		.align	1
+ 322              		.global	events_init
+ 323              		.syntax unified
+ 324              		.thumb
+ 325              		.thumb_func
+ 327              	events_init:
+ 328              	.LVL35:
+ 329              	.LFB187:
+  13:generated/events_init.c **** }
+ 330              		.loc 1 13 1 is_stmt 1 view -0
+ 331              		.cfi_startproc
+ 332              		@ args = 0, pretend = 0, frame = 0
+ 333              		@ frame_needed = 0, uses_anonymous_args = 0
+ 334              		@ link register save eliminated.
+  14:generated/events_init.c **** 
+ 335              		.loc 1 14 1 view .LVU68
+ 336 0000 7047     		bx	lr
+ 337              		.cfi_endproc
+ 338              	.LFE187:
+ 340              		.section	.text.events_init_screen,"ax",%progbits
+ 341              		.align	1
+ 342              		.global	events_init_screen
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 12
+
+
+ 343              		.syntax unified
+ 344              		.thumb
+ 345              		.thumb_func
+ 347              	events_init_screen:
+ 348              	.LVL36:
+ 349              	.LFB190:
+  55:generated/events_init.c **** 	lv_obj_add_event_cb(ui->screen_btn1, screen_btn1_event_handler, LV_EVENT_ALL, NULL);
+ 350              		.loc 1 55 1 view -0
+ 351              		.cfi_startproc
+ 352              		@ args = 0, pretend = 0, frame = 0
+ 353              		@ frame_needed = 0, uses_anonymous_args = 0
+  55:generated/events_init.c **** 	lv_obj_add_event_cb(ui->screen_btn1, screen_btn1_event_handler, LV_EVENT_ALL, NULL);
+ 354              		.loc 1 55 1 is_stmt 0 view .LVU70
+ 355 0000 10B5     		push	{r4, lr}
+ 356              	.LCFI9:
+ 357              		.cfi_def_cfa_offset 8
+ 358              		.cfi_offset 4, -8
+ 359              		.cfi_offset 14, -4
+ 360 0002 0446     		mov	r4, r0
+  56:generated/events_init.c **** 	lv_obj_add_event_cb(ui->screen_btn_2, screen_btn_2_event_handler, LV_EVENT_ALL, NULL);
+ 361              		.loc 1 56 2 is_stmt 1 view .LVU71
+ 362 0004 0023     		movs	r3, #0
+ 363 0006 1A46     		mov	r2, r3
+ 364 0008 0549     		ldr	r1, .L30
+ 365 000a C068     		ldr	r0, [r0, #12]
+ 366              	.LVL37:
+  56:generated/events_init.c **** 	lv_obj_add_event_cb(ui->screen_btn_2, screen_btn_2_event_handler, LV_EVENT_ALL, NULL);
+ 367              		.loc 1 56 2 is_stmt 0 view .LVU72
+ 368 000c FFF7FEFF 		bl	lv_obj_add_event_cb
+ 369              	.LVL38:
+  57:generated/events_init.c **** }
+ 370              		.loc 1 57 2 is_stmt 1 view .LVU73
+ 371 0010 0023     		movs	r3, #0
+ 372 0012 1A46     		mov	r2, r3
+ 373 0014 0349     		ldr	r1, .L30+4
+ 374 0016 6069     		ldr	r0, [r4, #20]
+ 375 0018 FFF7FEFF 		bl	lv_obj_add_event_cb
+ 376              	.LVL39:
+  58:generated/events_init.c **** 
+ 377              		.loc 1 58 1 is_stmt 0 view .LVU74
+ 378 001c 10BD     		pop	{r4, pc}
+ 379              	.LVL40:
+ 380              	.L31:
+  58:generated/events_init.c **** 
+ 381              		.loc 1 58 1 view .LVU75
+ 382 001e 00BF     		.align	2
+ 383              	.L30:
+ 384 0020 00000000 		.word	screen_btn1_event_handler
+ 385 0024 00000000 		.word	screen_btn_2_event_handler
+ 386              		.cfi_endproc
+ 387              	.LFE190:
+ 389              		.section	.text.events_init_screen2,"ax",%progbits
+ 390              		.align	1
+ 391              		.global	events_init_screen2
+ 392              		.syntax unified
+ 393              		.thumb
+ 394              		.thumb_func
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 13
+
+
+ 396              	events_init_screen2:
+ 397              	.LVL41:
+ 398              	.LFB192:
+  81:generated/events_init.c **** 
+  82:generated/events_init.c **** void events_init_screen2(lv_ui *ui)
+  83:generated/events_init.c **** {
+ 399              		.loc 1 83 1 is_stmt 1 view -0
+ 400              		.cfi_startproc
+ 401              		@ args = 0, pretend = 0, frame = 0
+ 402              		@ frame_needed = 0, uses_anonymous_args = 0
+ 403              		.loc 1 83 1 is_stmt 0 view .LVU77
+ 404 0000 08B5     		push	{r3, lr}
+ 405              	.LCFI10:
+ 406              		.cfi_def_cfa_offset 8
+ 407              		.cfi_offset 3, -8
+ 408              		.cfi_offset 14, -4
+  84:generated/events_init.c **** 	lv_obj_add_event_cb(ui->screen2_btn1_1, screen2_btn1_1_event_handler, LV_EVENT_ALL, NULL);
+ 409              		.loc 1 84 2 is_stmt 1 view .LVU78
+ 410 0002 0023     		movs	r3, #0
+ 411 0004 1A46     		mov	r2, r3
+ 412 0006 0249     		ldr	r1, .L34
+ 413 0008 C06A     		ldr	r0, [r0, #44]
+ 414              	.LVL42:
+ 415              		.loc 1 84 2 is_stmt 0 view .LVU79
+ 416 000a FFF7FEFF 		bl	lv_obj_add_event_cb
+ 417              	.LVL43:
+  85:generated/events_init.c **** }
+ 418              		.loc 1 85 1 view .LVU80
+ 419 000e 08BD     		pop	{r3, pc}
+ 420              	.L35:
+ 421              		.align	2
+ 422              	.L34:
+ 423 0010 00000000 		.word	screen2_btn1_1_event_handler
+ 424              		.cfi_endproc
+ 425              	.LFE192:
+ 427              		.global	text1
+ 428              		.section	.data.text1,"aw"
+ 429              		.set	.LANCHOR0,. + 0
+ 432              	text1:
+ 433 0000 01       		.byte	1
+ 434              		.text
+ 435              	.Letext0:
+ 436              		.file 3 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\machine\\_default_typ
+ 437              		.file 4 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 438              		.file 5 "lvgl/src/misc/lv_ll.h"
+ 439              		.file 6 "lvgl/src/misc/lv_timer.h"
+ 440              		.file 7 "lvgl/src/hal/../misc/lv_color.h"
+ 441              		.file 8 "lvgl/src/hal/../misc/lv_area.h"
+ 442              		.file 9 "lvgl/src/hal/lv_hal_disp.h"
+ 443              		.file 10 "lvgl/src/core/lv_theme.h"
+ 444              		.file 11 "lvgl/src/core/lv_obj.h"
+ 445              		.file 12 "lvgl/src/core/lv_group.h"
+ 446              		.file 13 "lvgl/src/core/../misc/../font/lv_font.h"
+ 447              		.file 14 "lvgl/src/core/../misc/lv_style.h"
+ 448              		.file 15 "lvgl/src/core/lv_obj_scroll.h"
+ 449              		.file 16 "lvgl/src/core/lv_obj_style.h"
+ 450              		.file 17 "lvgl/src/core/lv_obj_class.h"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 14
+
+
+ 451              		.file 18 "lvgl/src/core/lv_event.h"
+ 452              		.file 19 "lvgl/src/widgets/lv_bar.h"
+ 453              		.file 20 "lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h"
+ 454              		.file 21 "generated/gui_guider.h"
+ 455              		.file 22 "generated/../generated/guider_fonts/guider_fonts.h"
+ 456              		.file 23 "lvgl/src/core/lv_obj_tree.h"
+ 457              		.file 24 "lvgl/src/core/lv_obj_style_gen.h"
+ 458              		.file 25 "lvgl/src/widgets/lv_label.h"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 events_init.c
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:20     .text.screen_btn_2_event_handler:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:25     .text.screen_btn_2_event_handler:00000000 screen_btn_2_event_handler
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:75     .text.screen_btn_2_event_handler:00000024 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:82     .text.screen_btn1_event_handler:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:87     .text.screen_btn1_event_handler:00000000 screen_btn1_event_handler
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:196    .text.screen_btn1_event_handler:00000054 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:202    .text.screen2_btn1_1_event_handler:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:207    .text.screen2_btn1_1_event_handler:00000000 screen2_btn1_1_event_handler
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:315    .text.screen2_btn1_1_event_handler:00000054 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:321    .text.events_init:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:327    .text.events_init:00000000 events_init
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:341    .text.events_init_screen:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:347    .text.events_init_screen:00000000 events_init_screen
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:384    .text.events_init_screen:00000020 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:390    .text.events_init_screen2:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:396    .text.events_init_screen2:00000000 events_init_screen2
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:423    .text.events_init_screen2:00000010 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccTL4CR0.s:432    .data.text1:00000000 text1
+
+UNDEFINED SYMBOLS
+lv_event_get_code
+lv_obj_set_style_text_font
+lv_label_set_text
+guider_ui
+lv_font_simsun_12
+lv_disp_get_default
+lv_disp_get_scr_act
+lv_obj_get_disp
+lv_scr_load_anim
+setup_scr_screen2
+setup_scr_screen
+lv_obj_add_event_cb

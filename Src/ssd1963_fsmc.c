@@ -516,7 +516,7 @@ void LCD_Init(void)
 	//9. Set the back light control PWM clock frequency
 	//PWM signal frequency = PLL clock / (256 * (PWMF[7:0] + 1)) / 256
 	LCD_Send_Cmd(0xBE);    // PWM configuration 
-	LCD_Send_Dat(0x06);     // set PWM signal frequency to 170Hz when PLL frequency is 100MHz 
+	LCD_Send_Dat(0x05);     // set PWM signal frequency to 170Hz when PLL frequency is 100MHz 
 	LCD_Send_Dat(0xFF);     // PWM duty cycle  (50%) 
 	LCD_Send_Dat(0x01);     // 0x09 = enable DBC, 0x01 = disable DBC  //on
 	LCD_Send_Cmd(0x36);     // set address_mode

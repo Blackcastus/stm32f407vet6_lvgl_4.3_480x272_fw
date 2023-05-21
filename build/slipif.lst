@@ -1,0 +1,1516 @@
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"slipif.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.rodata.slipif_output.str1.4,"aMS",%progbits,1
+  20              		.align	2
+  21              	.LC0:
+  22 0000 633A2F55 		.ascii	"c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_"
+  22      73657273 
+  22      2F426C61 
+  22      636B5F4C 
+  22      6966652F 
+  23 0033 46575F46 		.ascii	"FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/neti"
+  23      345F5631 
+  23      2E32362E 
+  23      322F4D69 
+  23      64646C65 
+  24 0066 662F736C 		.ascii	"f/slipif.c\000"
+  24      69706966 
+  24      2E6300
+  25 0071 000000   		.align	2
+  26              	.LC1:
+  27 0074 6E657469 		.ascii	"netif != NULL\000"
+  27      6620213D 
+  27      204E554C 
+  27      4C00
+  28 0082 0000     		.align	2
+  29              	.LC2:
+  30 0084 41737365 		.ascii	"Assertion \"%s\" failed at line %d in %s\012\000"
+  30      7274696F 
+  30      6E202225 
+  30      73222066 
+  30      61696C65 
+  31              		.align	2
+  32              	.LC3:
+  33 00ac 6E657469 		.ascii	"netif->state != NULL\000"
+  33      662D3E73 
+  33      74617465 
+  33      20213D20 
+  33      4E554C4C 
+  34 00c1 000000   		.align	2
+  35              	.LC4:
+  36 00c4 7020213D 		.ascii	"p != NULL\000"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 2
+
+
+  36      204E554C 
+  36      4C00
+  37              		.section	.text.slipif_output,"ax",%progbits
+  38              		.align	1
+  39              		.syntax unified
+  40              		.thumb
+  41              		.thumb_func
+  43              	slipif_output:
+  44              	.LVL0:
+  45              	.LFB156:
+  46              		.file 1 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+   1:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** /**
+   2:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @file
+   3:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * SLIP Interface
+   4:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+   5:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  */
+   6:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+   7:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** /*
+   8:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+   9:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * All rights reserved.
+  10:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+  11:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * Redistribution and use in source and binary forms, with or without
+  12:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * modification, are permitted provided that the following conditions
+  13:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * are met:
+  14:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * 1. Redistributions of source code must retain the above copyright
+  15:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *    notice, this list of conditions and the following disclaimer.
+  16:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * 2. Redistributions in binary form must reproduce the above copyright
+  17:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *    notice, this list of conditions and the following disclaimer in the
+  18:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *    documentation and/or other materials provided with the distribution.
+  19:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * 3. Neither the name of the Institute nor the names of its contributors
+  20:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *    may be used to endorse or promote products derived from this software
+  21:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *    without specific prior written permission.
+  22:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+  23:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * THIS SOFTWARE IS PROVIDED BY THE INSTITUTE AND CONTRIBUTORS ``AS IS'' AND
+  24:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  25:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  26:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * ARE DISCLAIMED.  IN NO EVENT SHALL THE INSTITUTE OR CONTRIBUTORS BE LIABLE
+  27:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  28:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+  29:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  30:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  31:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+  32:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+  33:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * SUCH DAMAGE.
+  34:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+  35:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * This file is built upon the file: src/arch/rtxc/netif/sioslip.c
+  36:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+  37:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * Author: Magnus Ivarsson <magnus.ivarsson(at)volvo.com>
+  38:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *         Simon Goldschmidt
+  39:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  */
+  40:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+  41:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+  42:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** /**
+  43:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @defgroup slipif SLIP
+  44:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @ingroup netifs
+  45:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+  46:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * This is an arch independent SLIP netif. The specific serial hooks must be
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 3
+
+
+  47:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * provided by another file. They are sio_open, sio_read/sio_tryread and sio_send
+  48:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+  49:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * Usage: This netif can be used in three ways:\n
+  50:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *        1) For NO_SYS==0, an RX thread can be used which blocks on sio_read()
+  51:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *           until data is received.\n
+  52:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *        2) In your main loop, call slipif_poll() to check for new RX bytes,
+  53:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *           completed packets are fed into netif->input().\n
+  54:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *        3) Call slipif_received_byte[s]() from your serial RX ISR and
+  55:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *           slipif_process_rxqueue() from your main loop. ISR level decodes
+  56:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *           packets and puts completed packets on a queue which is fed into
+  57:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *           the stack from the main loop (needs SYS_LIGHTWEIGHT_PROT for
+  58:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *           pbuf_alloc to work on ISR level!).
+  59:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+  60:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  */
+  61:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+  62:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #include "netif/slipif.h"
+  63:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #include "lwip/opt.h"
+  64:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+  65:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #include "lwip/def.h"
+  66:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #include "lwip/pbuf.h"
+  67:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #include "lwip/stats.h"
+  68:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #include "lwip/snmp.h"
+  69:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #include "lwip/sys.h"
+  70:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #include "lwip/sio.h"
+  71:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+  72:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #define SLIP_END     0xC0 /* 0300: start and end of every packet */
+  73:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #define SLIP_ESC     0xDB /* 0333: escape start (one byte escaped data follows) */
+  74:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #define SLIP_ESC_END 0xDC /* 0334: following escape: original byte is 0xC0 (END) */
+  75:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #define SLIP_ESC_ESC 0xDD /* 0335: following escape: original byte is 0xDB (ESC) */
+  76:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+  77:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** /** Maximum packet size that is received by this netif */
+  78:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #ifndef SLIP_MAX_SIZE
+  79:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #define SLIP_MAX_SIZE 1500
+  80:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #endif
+  81:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+  82:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** /** Define this to the interface speed for SNMP
+  83:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * (sio_fd is the sio_fd_t returned by sio_open).
+  84:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * The default value of zero means 'unknown'.
+  85:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  */
+  86:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #ifndef SLIP_SIO_SPEED
+  87:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #define SLIP_SIO_SPEED(sio_fd) 0
+  88:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #endif
+  89:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+  90:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** enum slipif_recv_state {
+  91:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   SLIP_RECV_NORMAL,
+  92:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   SLIP_RECV_ESCAPE
+  93:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** };
+  94:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+  95:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** struct slipif_priv {
+  96:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   sio_fd_t sd;
+  97:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   /* q is the whole pbuf chain for a packet, p is the current pbuf in the chain */
+  98:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   struct pbuf *p, *q;
+  99:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   u8_t state;
+ 100:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   u16_t i, recved;
+ 101:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #if SLIP_RX_FROM_ISR
+ 102:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   struct pbuf *rxpackets;
+ 103:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #endif
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 4
+
+
+ 104:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** };
+ 105:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 106:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** /**
+ 107:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * Send a pbuf doing the necessary SLIP encapsulation
+ 108:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ 109:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * Uses the serial layer's sio_send()
+ 110:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ 111:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param netif the lwip network interface structure for this slipif
+ 112:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param p the pbuf chain packet to send
+ 113:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @return always returns ERR_OK since the serial layer does not provide return values
+ 114:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  */
+ 115:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** static err_t
+ 116:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** slipif_output(struct netif *netif, struct pbuf *p)
+ 117:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** {
+  47              		.loc 1 117 1 view -0
+  48              		.cfi_startproc
+  49              		@ args = 0, pretend = 0, frame = 0
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51              		.loc 1 117 1 is_stmt 0 view .LVU1
+  52 0000 70B5     		push	{r4, r5, r6, lr}
+  53              	.LCFI0:
+  54              		.cfi_def_cfa_offset 16
+  55              		.cfi_offset 4, -16
+  56              		.cfi_offset 5, -12
+  57              		.cfi_offset 6, -8
+  58              		.cfi_offset 14, -4
+  59 0002 0D46     		mov	r5, r1
+ 118:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   struct slipif_priv *priv;
+  60              		.loc 1 118 3 is_stmt 1 view .LVU2
+ 119:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   struct pbuf *q;
+  61              		.loc 1 119 3 view .LVU3
+ 120:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   u16_t i;
+  62              		.loc 1 120 3 view .LVU4
+ 121:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   u8_t c;
+  63              		.loc 1 121 3 view .LVU5
+ 122:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 123:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif != NULL", (netif != NULL));
+  64              		.loc 1 123 3 view .LVU6
+  65              		.loc 1 123 3 view .LVU7
+  66 0004 0446     		mov	r4, r0
+  67 0006 40B1     		cbz	r0, .L15
+  68              	.LVL1:
+  69              	.L2:
+  70              		.loc 1 123 3 discriminator 3 view .LVU8
+  71              		.loc 1 123 3 discriminator 3 view .LVU9
+ 124:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif->state != NULL", (netif->state != NULL));
+  72              		.loc 1 124 3 discriminator 3 view .LVU10
+  73              		.loc 1 124 3 discriminator 3 view .LVU11
+  74 0008 236A     		ldr	r3, [r4, #32]
+  75 000a 6BB1     		cbz	r3, .L16
+  76              	.L3:
+  77              		.loc 1 124 3 discriminator 3 view .LVU12
+  78              		.loc 1 124 3 discriminator 3 view .LVU13
+ 125:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("p != NULL", (p != NULL));
+  79              		.loc 1 125 3 discriminator 3 view .LVU14
+  80              		.loc 1 125 3 discriminator 3 view .LVU15
+  81 000c 9DB1     		cbz	r5, .L17
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 5
+
+
+  82              	.L4:
+  83              		.loc 1 125 3 discriminator 3 view .LVU16
+  84              		.loc 1 125 3 discriminator 3 view .LVU17
+ 126:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 127:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_DEBUGF(SLIP_DEBUG, ("slipif_output: sending %"U16_F" bytes\n", p->tot_len));
+  85              		.loc 1 127 83 discriminator 3 view .LVU18
+ 128:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   priv = (struct slipif_priv *)netif->state;
+  86              		.loc 1 128 3 discriminator 3 view .LVU19
+  87              		.loc 1 128 8 is_stmt 0 discriminator 3 view .LVU20
+  88 000e 266A     		ldr	r6, [r4, #32]
+  89              	.LVL2:
+ 129:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 130:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   /* Send pbuf out on the serial I/O device. */
+ 131:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   /* Start with packet delimiter. */
+ 132:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   sio_send(SLIP_END, priv->sd);
+  90              		.loc 1 132 3 is_stmt 1 discriminator 3 view .LVU21
+  91 0010 3168     		ldr	r1, [r6]
+  92 0012 C020     		movs	r0, #192
+  93 0014 FFF7FEFF 		bl	sio_send
+  94              	.LVL3:
+ 133:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 134:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   for (q = p; q != NULL; q = q->next) {
+  95              		.loc 1 134 3 discriminator 3 view .LVU22
+  96              		.loc 1 134 3 is_stmt 0 discriminator 3 view .LVU23
+  97 0018 35E0     		b	.L5
+  98              	.LVL4:
+  99              	.L15:
+ 123:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif->state != NULL", (netif->state != NULL));
+ 100              		.loc 1 123 3 is_stmt 1 discriminator 1 view .LVU24
+ 123:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif->state != NULL", (netif->state != NULL));
+ 101              		.loc 1 123 3 discriminator 1 view .LVU25
+ 102 001a 1F4B     		ldr	r3, .L20
+ 103 001c 7B22     		movs	r2, #123
+ 104 001e 1F49     		ldr	r1, .L20+4
+ 105              	.LVL5:
+ 123:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif->state != NULL", (netif->state != NULL));
+ 106              		.loc 1 123 3 is_stmt 0 discriminator 1 view .LVU26
+ 107 0020 1F48     		ldr	r0, .L20+8
+ 108              	.LVL6:
+ 123:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif->state != NULL", (netif->state != NULL));
+ 109              		.loc 1 123 3 discriminator 1 view .LVU27
+ 110 0022 FFF7FEFF 		bl	printf
+ 111              	.LVL7:
+ 112 0026 EFE7     		b	.L2
+ 113              	.L16:
+ 124:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("p != NULL", (p != NULL));
+ 114              		.loc 1 124 3 is_stmt 1 discriminator 1 view .LVU28
+ 124:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("p != NULL", (p != NULL));
+ 115              		.loc 1 124 3 discriminator 1 view .LVU29
+ 116 0028 1B4B     		ldr	r3, .L20
+ 117 002a 7C22     		movs	r2, #124
+ 118 002c 1D49     		ldr	r1, .L20+12
+ 119 002e 1C48     		ldr	r0, .L20+8
+ 120 0030 FFF7FEFF 		bl	printf
+ 121              	.LVL8:
+ 122 0034 EAE7     		b	.L3
+ 123              	.L17:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 6
+
+
+ 125:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 124              		.loc 1 125 3 discriminator 1 view .LVU30
+ 125:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 125              		.loc 1 125 3 discriminator 1 view .LVU31
+ 126 0036 184B     		ldr	r3, .L20
+ 127 0038 7D22     		movs	r2, #125
+ 128 003a 1B49     		ldr	r1, .L20+16
+ 129 003c 1848     		ldr	r0, .L20+8
+ 130 003e FFF7FEFF 		bl	printf
+ 131              	.LVL9:
+ 132 0042 E4E7     		b	.L4
+ 133              	.LVL10:
+ 134              	.L6:
+ 135:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     for (i = 0; i < q->len; i++) {
+ 136:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       c = ((u8_t *)q->payload)[i];
+ 137:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       switch (c) {
+ 138:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         case SLIP_END:
+ 139:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           /* need to escape this byte (0xC0 -> 0xDB, 0xDC) */
+ 140:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           sio_send(SLIP_ESC, priv->sd);
+ 135              		.loc 1 140 11 view .LVU32
+ 136 0044 3168     		ldr	r1, [r6]
+ 137 0046 DB20     		movs	r0, #219
+ 138              	.LVL11:
+ 139              		.loc 1 140 11 is_stmt 0 view .LVU33
+ 140 0048 FFF7FEFF 		bl	sio_send
+ 141              	.LVL12:
+ 141:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           sio_send(SLIP_ESC_END, priv->sd);
+ 142              		.loc 1 141 11 is_stmt 1 view .LVU34
+ 143 004c 3168     		ldr	r1, [r6]
+ 144 004e DC20     		movs	r0, #220
+ 145 0050 FFF7FEFF 		bl	sio_send
+ 146              	.LVL13:
+ 142:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           break;
+ 147              		.loc 1 142 11 view .LVU35
+ 148              	.L9:
+ 135:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     for (i = 0; i < q->len; i++) {
+ 149              		.loc 1 135 29 discriminator 2 view .LVU36
+ 135:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     for (i = 0; i < q->len; i++) {
+ 150              		.loc 1 135 30 is_stmt 0 discriminator 2 view .LVU37
+ 151 0054 0134     		adds	r4, r4, #1
+ 152              	.LVL14:
+ 135:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     for (i = 0; i < q->len; i++) {
+ 153              		.loc 1 135 30 discriminator 2 view .LVU38
+ 154 0056 A4B2     		uxth	r4, r4
+ 155              	.LVL15:
+ 156              	.L11:
+ 135:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     for (i = 0; i < q->len; i++) {
+ 157              		.loc 1 135 17 is_stmt 1 discriminator 1 view .LVU39
+ 135:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     for (i = 0; i < q->len; i++) {
+ 158              		.loc 1 135 22 is_stmt 0 discriminator 1 view .LVU40
+ 159 0058 6B89     		ldrh	r3, [r5, #10]
+ 135:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     for (i = 0; i < q->len; i++) {
+ 160              		.loc 1 135 5 discriminator 1 view .LVU41
+ 161 005a A342     		cmp	r3, r4
+ 162 005c 12D9     		bls	.L18
+ 136:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       switch (c) {
+ 163              		.loc 1 136 7 is_stmt 1 view .LVU42
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 7
+
+
+ 136:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       switch (c) {
+ 164              		.loc 1 136 21 is_stmt 0 view .LVU43
+ 165 005e 6B68     		ldr	r3, [r5, #4]
+ 136:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       switch (c) {
+ 166              		.loc 1 136 9 view .LVU44
+ 167 0060 185D     		ldrb	r0, [r3, r4]	@ zero_extendqisi2
+ 168              	.LVL16:
+ 137:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         case SLIP_END:
+ 169              		.loc 1 137 7 is_stmt 1 view .LVU45
+ 170 0062 C028     		cmp	r0, #192
+ 171 0064 EED0     		beq	.L6
+ 172 0066 DB28     		cmp	r0, #219
+ 173 0068 03D0     		beq	.L7
+ 143:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         case SLIP_ESC:
+ 144:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           /* need to escape this byte (0xDB -> 0xDB, 0xDD) */
+ 145:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           sio_send(SLIP_ESC, priv->sd);
+ 146:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           sio_send(SLIP_ESC_ESC, priv->sd);
+ 147:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           break;
+ 148:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         default:
+ 149:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           /* normal byte - no need for escaping */
+ 150:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           sio_send(c, priv->sd);
+ 174              		.loc 1 150 11 view .LVU46
+ 175 006a 3168     		ldr	r1, [r6]
+ 176 006c FFF7FEFF 		bl	sio_send
+ 177              	.LVL17:
+ 151:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           break;
+ 178              		.loc 1 151 11 view .LVU47
+ 179 0070 F0E7     		b	.L9
+ 180              	.LVL18:
+ 181              	.L7:
+ 145:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           sio_send(SLIP_ESC_ESC, priv->sd);
+ 182              		.loc 1 145 11 view .LVU48
+ 183 0072 3168     		ldr	r1, [r6]
+ 184 0074 DB20     		movs	r0, #219
+ 185              	.LVL19:
+ 145:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           sio_send(SLIP_ESC_ESC, priv->sd);
+ 186              		.loc 1 145 11 is_stmt 0 view .LVU49
+ 187 0076 FFF7FEFF 		bl	sio_send
+ 188              	.LVL20:
+ 146:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           break;
+ 189              		.loc 1 146 11 is_stmt 1 view .LVU50
+ 190 007a 3168     		ldr	r1, [r6]
+ 191 007c DD20     		movs	r0, #221
+ 192 007e FFF7FEFF 		bl	sio_send
+ 193              	.LVL21:
+ 147:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         default:
+ 194              		.loc 1 147 11 view .LVU51
+ 195 0082 E7E7     		b	.L9
+ 196              	.L18:
+ 134:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     for (i = 0; i < q->len; i++) {
+ 197              		.loc 1 134 26 discriminator 2 view .LVU52
+ 134:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     for (i = 0; i < q->len; i++) {
+ 198              		.loc 1 134 28 is_stmt 0 discriminator 2 view .LVU53
+ 199 0084 2D68     		ldr	r5, [r5]
+ 200              	.LVL22:
+ 201              	.L5:
+ 134:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     for (i = 0; i < q->len; i++) {
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 8
+
+
+ 202              		.loc 1 134 15 is_stmt 1 discriminator 1 view .LVU54
+ 134:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     for (i = 0; i < q->len; i++) {
+ 203              		.loc 1 134 3 is_stmt 0 discriminator 1 view .LVU55
+ 204 0086 0DB1     		cbz	r5, .L19
+ 135:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       c = ((u8_t *)q->payload)[i];
+ 205              		.loc 1 135 12 view .LVU56
+ 206 0088 0024     		movs	r4, #0
+ 207 008a E5E7     		b	.L11
+ 208              	.L19:
+ 152:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       }
+ 153:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     }
+ 154:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   }
+ 155:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   /* End with packet delimiter. */
+ 156:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   sio_send(SLIP_END, priv->sd);
+ 209              		.loc 1 156 3 is_stmt 1 view .LVU57
+ 210 008c 3168     		ldr	r1, [r6]
+ 211 008e C020     		movs	r0, #192
+ 212 0090 FFF7FEFF 		bl	sio_send
+ 213              	.LVL23:
+ 157:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   return ERR_OK;
+ 214              		.loc 1 157 3 view .LVU58
+ 158:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** }
+ 215              		.loc 1 158 1 is_stmt 0 view .LVU59
+ 216 0094 0020     		movs	r0, #0
+ 217 0096 70BD     		pop	{r4, r5, r6, pc}
+ 218              	.LVL24:
+ 219              	.L21:
+ 220              		.loc 1 158 1 view .LVU60
+ 221              		.align	2
+ 222              	.L20:
+ 223 0098 00000000 		.word	.LC0
+ 224 009c 74000000 		.word	.LC1
+ 225 00a0 84000000 		.word	.LC2
+ 226 00a4 AC000000 		.word	.LC3
+ 227 00a8 C4000000 		.word	.LC4
+ 228              		.cfi_endproc
+ 229              	.LFE156:
+ 231              		.section	.text.slipif_output_v4,"ax",%progbits
+ 232              		.align	1
+ 233              		.syntax unified
+ 234              		.thumb
+ 235              		.thumb_func
+ 237              	slipif_output_v4:
+ 238              	.LVL25:
+ 239              	.LFB157:
+ 159:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 160:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #if LWIP_IPV4
+ 161:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** /**
+ 162:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * Send a pbuf doing the necessary SLIP encapsulation
+ 163:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ 164:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * Uses the serial layer's sio_send()
+ 165:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ 166:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param netif the lwip network interface structure for this slipif
+ 167:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param p the pbuf chain packet to send
+ 168:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param ipaddr the ip address to send the packet to (not used for slipif)
+ 169:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @return always returns ERR_OK since the serial layer does not provide return values
+ 170:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  */
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 9
+
+
+ 171:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** static err_t
+ 172:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** slipif_output_v4(struct netif *netif, struct pbuf *p, const ip4_addr_t *ipaddr)
+ 173:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** {
+ 240              		.loc 1 173 1 is_stmt 1 view -0
+ 241              		.cfi_startproc
+ 242              		@ args = 0, pretend = 0, frame = 0
+ 243              		@ frame_needed = 0, uses_anonymous_args = 0
+ 244              		.loc 1 173 1 is_stmt 0 view .LVU62
+ 245 0000 08B5     		push	{r3, lr}
+ 246              	.LCFI1:
+ 247              		.cfi_def_cfa_offset 8
+ 248              		.cfi_offset 3, -8
+ 249              		.cfi_offset 14, -4
+ 174:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_UNUSED_ARG(ipaddr);
+ 250              		.loc 1 174 3 is_stmt 1 view .LVU63
+ 175:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   return slipif_output(netif, p);
+ 251              		.loc 1 175 3 view .LVU64
+ 252              		.loc 1 175 10 is_stmt 0 view .LVU65
+ 253 0002 FFF7FEFF 		bl	slipif_output
+ 254              	.LVL26:
+ 176:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** }
+ 255              		.loc 1 176 1 view .LVU66
+ 256 0006 08BD     		pop	{r3, pc}
+ 257              		.cfi_endproc
+ 258              	.LFE157:
+ 260              		.section	.text.slipif_rxbyte,"ax",%progbits
+ 261              		.align	1
+ 262              		.syntax unified
+ 263              		.thumb
+ 264              		.thumb_func
+ 266              	slipif_rxbyte:
+ 267              	.LVL27:
+ 268              	.LFB158:
+ 177:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #endif /* LWIP_IPV4 */
+ 178:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 179:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #if LWIP_IPV6
+ 180:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** /**
+ 181:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * Send a pbuf doing the necessary SLIP encapsulation
+ 182:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ 183:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * Uses the serial layer's sio_send()
+ 184:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ 185:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param netif the lwip network interface structure for this slipif
+ 186:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param p the pbuf chain packet to send
+ 187:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param ipaddr the ip address to send the packet to (not used for slipif)
+ 188:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @return always returns ERR_OK since the serial layer does not provide return values
+ 189:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  */
+ 190:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** static err_t
+ 191:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** slipif_output_v6(struct netif *netif, struct pbuf *p, const ip6_addr_t *ipaddr)
+ 192:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** {
+ 193:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_UNUSED_ARG(ipaddr);
+ 194:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   return slipif_output(netif, p);
+ 195:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** }
+ 196:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #endif /* LWIP_IPV6 */
+ 197:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 198:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** /**
+ 199:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * Handle the incoming SLIP stream character by character
+ 200:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 10
+
+
+ 201:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param netif the lwip network interface structure for this slipif
+ 202:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param c received character (multiple calls to this function will
+ 203:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *        return a complete packet, NULL is returned before - used for polling)
+ 204:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @return The IP packet when SLIP_END is received
+ 205:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  */
+ 206:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** static struct pbuf *
+ 207:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** slipif_rxbyte(struct netif *netif, u8_t c)
+ 208:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** {
+ 269              		.loc 1 208 1 is_stmt 1 view -0
+ 270              		.cfi_startproc
+ 271              		@ args = 0, pretend = 0, frame = 0
+ 272              		@ frame_needed = 0, uses_anonymous_args = 0
+ 273              		.loc 1 208 1 is_stmt 0 view .LVU68
+ 274 0000 38B5     		push	{r3, r4, r5, lr}
+ 275              	.LCFI2:
+ 276              		.cfi_def_cfa_offset 16
+ 277              		.cfi_offset 3, -16
+ 278              		.cfi_offset 4, -12
+ 279              		.cfi_offset 5, -8
+ 280              		.cfi_offset 14, -4
+ 281 0002 0D46     		mov	r5, r1
+ 209:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   struct slipif_priv *priv;
+ 282              		.loc 1 209 3 is_stmt 1 view .LVU69
+ 210:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   struct pbuf *t;
+ 283              		.loc 1 210 3 view .LVU70
+ 211:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 212:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif != NULL", (netif != NULL));
+ 284              		.loc 1 212 3 view .LVU71
+ 285              		.loc 1 212 3 view .LVU72
+ 286 0004 0446     		mov	r4, r0
+ 287 0006 0028     		cmp	r0, #0
+ 288 0008 2CD0     		beq	.L42
+ 289              	.LVL28:
+ 290              	.L25:
+ 291              		.loc 1 212 3 discriminator 3 view .LVU73
+ 292              		.loc 1 212 3 discriminator 3 view .LVU74
+ 213:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif->state != NULL", (netif->state != NULL));
+ 293              		.loc 1 213 3 discriminator 3 view .LVU75
+ 294              		.loc 1 213 3 discriminator 3 view .LVU76
+ 295 000a 236A     		ldr	r3, [r4, #32]
+ 296 000c 002B     		cmp	r3, #0
+ 297 000e 30D0     		beq	.L43
+ 298              	.L26:
+ 299              		.loc 1 213 3 discriminator 3 view .LVU77
+ 300              		.loc 1 213 3 discriminator 3 view .LVU78
+ 214:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 215:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   priv = (struct slipif_priv *)netif->state;
+ 301              		.loc 1 215 3 discriminator 3 view .LVU79
+ 302              		.loc 1 215 8 is_stmt 0 discriminator 3 view .LVU80
+ 303 0010 246A     		ldr	r4, [r4, #32]
+ 304              	.LVL29:
+ 216:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 217:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   switch (priv->state) {
+ 305              		.loc 1 217 3 is_stmt 1 discriminator 3 view .LVU81
+ 306              		.loc 1 217 15 is_stmt 0 discriminator 3 view .LVU82
+ 307 0012 237B     		ldrb	r3, [r4, #12]	@ zero_extendqisi2
+ 308              		.loc 1 217 3 discriminator 3 view .LVU83
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 11
+
+
+ 309 0014 002B     		cmp	r3, #0
+ 310 0016 33D0     		beq	.L27
+ 311              		.loc 1 217 3 view .LVU84
+ 312 0018 012B     		cmp	r3, #1
+ 313 001a 47D0     		beq	.L28
+ 314              	.LVL30:
+ 315              	.L29:
+ 218:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     case SLIP_RECV_NORMAL:
+ 219:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       switch (c) {
+ 220:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         case SLIP_END:
+ 221:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           if (priv->recved > 0) {
+ 222:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             /* Received whole packet. */
+ 223:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             /* Trim the pbuf to the size of the received packet. */
+ 224:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             pbuf_realloc(priv->q, priv->recved);
+ 225:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 226:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             LINK_STATS_INC(link.recv);
+ 227:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 228:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             LWIP_DEBUGF(SLIP_DEBUG, ("slipif: Got packet (%"U16_F" bytes)\n", priv->recved));
+ 229:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             t = priv->q;
+ 230:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             priv->p = priv->q = NULL;
+ 231:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             priv->i = priv->recved = 0;
+ 232:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             return t;
+ 233:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           }
+ 234:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           return NULL;
+ 235:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         case SLIP_ESC:
+ 236:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           priv->state = SLIP_RECV_ESCAPE;
+ 237:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           return NULL;
+ 238:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         default:
+ 239:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           break;
+ 240:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       } /* end switch (c) */
+ 241:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       break;
+ 242:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     case SLIP_RECV_ESCAPE:
+ 243:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       /* un-escape END or ESC bytes, leave other bytes
+ 244:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****          (although that would be a protocol error) */
+ 245:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       switch (c) {
+ 246:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         case SLIP_ESC_END:
+ 247:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           c = SLIP_END;
+ 248:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           break;
+ 249:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         case SLIP_ESC_ESC:
+ 250:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           c = SLIP_ESC;
+ 251:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           break;
+ 252:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         default:
+ 253:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           break;
+ 254:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       }
+ 255:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       priv->state = SLIP_RECV_NORMAL;
+ 256:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       break;
+ 257:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     default:
+ 258:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       break;
+ 259:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   } /* end switch (priv->state) */
+ 260:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 261:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   /* byte received, packet not yet completely received */
+ 262:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   if (priv->p == NULL) {
+ 316              		.loc 1 262 3 is_stmt 1 view .LVU85
+ 317              		.loc 1 262 11 is_stmt 0 view .LVU86
+ 318 001c 6368     		ldr	r3, [r4, #4]
+ 319              		.loc 1 262 6 view .LVU87
+ 320 001e 002B     		cmp	r3, #0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 12
+
+
+ 321 0020 4ED0     		beq	.L44
+ 322              	.L34:
+ 263:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     /* allocate a new pbuf */
+ 264:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     LWIP_DEBUGF(SLIP_DEBUG, ("slipif_input: alloc\n"));
+ 265:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     priv->p = pbuf_alloc(PBUF_LINK, (PBUF_POOL_BUFSIZE - PBUF_LINK_HLEN - PBUF_LINK_ENCAPSULATION_H
+ 266:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 267:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     if (priv->p == NULL) {
+ 268:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       LINK_STATS_INC(link.drop);
+ 269:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       LWIP_DEBUGF(SLIP_DEBUG, ("slipif_input: no new pbuf! (DROP)\n"));
+ 270:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       /* don't process any further since we got no pbuf to receive to */
+ 271:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       return NULL;
+ 272:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     }
+ 273:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 274:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     if (priv->q != NULL) {
+ 275:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       /* 'chain' the pbuf to the existing chain */
+ 276:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       pbuf_cat(priv->q, priv->p);
+ 277:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     } else {
+ 278:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       /* p is the first pbuf in the chain */
+ 279:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       priv->q = priv->p;
+ 280:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     }
+ 281:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   }
+ 282:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 283:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   /* this automatically drops bytes if > SLIP_MAX_SIZE */
+ 284:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   if ((priv->p != NULL) && (priv->recved <= SLIP_MAX_SIZE)) {
+ 323              		.loc 1 284 3 is_stmt 1 view .LVU88
+ 324              		.loc 1 284 12 is_stmt 0 view .LVU89
+ 325 0022 6068     		ldr	r0, [r4, #4]
+ 326              		.loc 1 284 6 view .LVU90
+ 327 0024 0028     		cmp	r0, #0
+ 328 0026 61D0     		beq	.L24
+ 329              		.loc 1 284 33 discriminator 1 view .LVU91
+ 330 0028 228A     		ldrh	r2, [r4, #16]
+ 331              		.loc 1 284 25 discriminator 1 view .LVU92
+ 332 002a 40F2DC53 		movw	r3, #1500
+ 333 002e 9A42     		cmp	r2, r3
+ 334 0030 5BD8     		bhi	.L39
+ 285:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     ((u8_t *)priv->p->payload)[priv->i] = c;
+ 335              		.loc 1 285 5 is_stmt 1 view .LVU93
+ 336              		.loc 1 285 21 is_stmt 0 view .LVU94
+ 337 0032 4268     		ldr	r2, [r0, #4]
+ 338              		.loc 1 285 36 view .LVU95
+ 339 0034 E389     		ldrh	r3, [r4, #14]
+ 340              		.loc 1 285 41 view .LVU96
+ 341 0036 D554     		strb	r5, [r2, r3]
+ 286:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     priv->recved++;
+ 342              		.loc 1 286 5 is_stmt 1 view .LVU97
+ 343              		.loc 1 286 9 is_stmt 0 view .LVU98
+ 344 0038 238A     		ldrh	r3, [r4, #16]
+ 345              		.loc 1 286 17 view .LVU99
+ 346 003a 0133     		adds	r3, r3, #1
+ 347 003c 2382     		strh	r3, [r4, #16]	@ movhi
+ 287:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     priv->i++;
+ 348              		.loc 1 287 5 is_stmt 1 view .LVU100
+ 349              		.loc 1 287 9 is_stmt 0 view .LVU101
+ 350 003e E389     		ldrh	r3, [r4, #14]
+ 351              		.loc 1 287 12 view .LVU102
+ 352 0040 0133     		adds	r3, r3, #1
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 13
+
+
+ 353 0042 9BB2     		uxth	r3, r3
+ 354 0044 E381     		strh	r3, [r4, #14]	@ movhi
+ 288:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     if (priv->i >= priv->p->len) {
+ 355              		.loc 1 288 5 is_stmt 1 view .LVU103
+ 356              		.loc 1 288 24 is_stmt 0 view .LVU104
+ 357 0046 6268     		ldr	r2, [r4, #4]
+ 358              		.loc 1 288 27 view .LVU105
+ 359 0048 5189     		ldrh	r1, [r2, #10]
+ 360              		.loc 1 288 8 view .LVU106
+ 361 004a 8B42     		cmp	r3, r1
+ 362 004c 4FD3     		bcc	.L40
+ 289:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       /* on to the next pbuf */
+ 290:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       priv->i = 0;
+ 363              		.loc 1 290 7 is_stmt 1 view .LVU107
+ 364              		.loc 1 290 15 is_stmt 0 view .LVU108
+ 365 004e 0023     		movs	r3, #0
+ 366 0050 E381     		strh	r3, [r4, #14]	@ movhi
+ 291:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       if (priv->p->next != NULL && priv->p->next->len > 0) {
+ 367              		.loc 1 291 7 is_stmt 1 view .LVU109
+ 368              		.loc 1 291 18 is_stmt 0 view .LVU110
+ 369 0052 1368     		ldr	r3, [r2]
+ 370              		.loc 1 291 10 view .LVU111
+ 371 0054 002B     		cmp	r3, #0
+ 372 0056 45D0     		beq	.L36
+ 373              		.loc 1 291 49 discriminator 1 view .LVU112
+ 374 0058 5A89     		ldrh	r2, [r3, #10]
+ 375              		.loc 1 291 33 discriminator 1 view .LVU113
+ 376 005a 002A     		cmp	r2, #0
+ 377 005c 42D0     		beq	.L36
+ 292:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         /* p is a chain, on to the next in the chain */
+ 293:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         priv->p = priv->p->next;
+ 378              		.loc 1 293 9 is_stmt 1 view .LVU114
+ 379              		.loc 1 293 17 is_stmt 0 view .LVU115
+ 380 005e 6360     		str	r3, [r4, #4]
+ 294:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       } else {
+ 295:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         /* p is a single pbuf, set it to NULL so next time a new
+ 296:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****          * pbuf is allocated */
+ 297:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         priv->p = NULL;
+ 298:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       }
+ 299:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     }
+ 300:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   }
+ 301:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   return NULL;
+ 381              		.loc 1 301 10 view .LVU116
+ 382 0060 0020     		movs	r0, #0
+ 293:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       } else {
+ 383              		.loc 1 293 17 view .LVU117
+ 384 0062 43E0     		b	.L24
+ 385              	.LVL31:
+ 386              	.L42:
+ 212:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif->state != NULL", (netif->state != NULL));
+ 387              		.loc 1 212 3 is_stmt 1 discriminator 1 view .LVU118
+ 212:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif->state != NULL", (netif->state != NULL));
+ 388              		.loc 1 212 3 discriminator 1 view .LVU119
+ 389 0064 234B     		ldr	r3, .L46
+ 390 0066 D422     		movs	r2, #212
+ 391 0068 2349     		ldr	r1, .L46+4
+ 392              	.LVL32:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 14
+
+
+ 212:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif->state != NULL", (netif->state != NULL));
+ 393              		.loc 1 212 3 is_stmt 0 discriminator 1 view .LVU120
+ 394 006a 2448     		ldr	r0, .L46+8
+ 395              	.LVL33:
+ 212:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif->state != NULL", (netif->state != NULL));
+ 396              		.loc 1 212 3 discriminator 1 view .LVU121
+ 397 006c FFF7FEFF 		bl	printf
+ 398              	.LVL34:
+ 399 0070 CBE7     		b	.L25
+ 400              	.L43:
+ 213:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 401              		.loc 1 213 3 is_stmt 1 discriminator 1 view .LVU122
+ 213:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 402              		.loc 1 213 3 discriminator 1 view .LVU123
+ 403 0072 204B     		ldr	r3, .L46
+ 404 0074 D522     		movs	r2, #213
+ 405 0076 2249     		ldr	r1, .L46+12
+ 406 0078 2048     		ldr	r0, .L46+8
+ 407 007a FFF7FEFF 		bl	printf
+ 408              	.LVL35:
+ 409 007e C7E7     		b	.L26
+ 410              	.LVL36:
+ 411              	.L27:
+ 219:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         case SLIP_END:
+ 412              		.loc 1 219 7 view .LVU124
+ 413 0080 C02D     		cmp	r5, #192
+ 414 0082 05D0     		beq	.L30
+ 415 0084 DB2D     		cmp	r5, #219
+ 416 0086 C9D1     		bne	.L29
+ 236:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           return NULL;
+ 417              		.loc 1 236 11 view .LVU125
+ 236:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           return NULL;
+ 418              		.loc 1 236 23 is_stmt 0 view .LVU126
+ 419 0088 0123     		movs	r3, #1
+ 420 008a 2373     		strb	r3, [r4, #12]
+ 237:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         default:
+ 421              		.loc 1 237 11 is_stmt 1 view .LVU127
+ 237:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         default:
+ 422              		.loc 1 237 18 is_stmt 0 view .LVU128
+ 423 008c 0020     		movs	r0, #0
+ 424 008e 2DE0     		b	.L24
+ 425              	.L30:
+ 221:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             /* Received whole packet. */
+ 426              		.loc 1 221 11 is_stmt 1 view .LVU129
+ 221:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             /* Received whole packet. */
+ 427              		.loc 1 221 19 is_stmt 0 view .LVU130
+ 428 0090 218A     		ldrh	r1, [r4, #16]
+ 221:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             /* Received whole packet. */
+ 429              		.loc 1 221 14 view .LVU131
+ 430 0092 09B9     		cbnz	r1, .L45
+ 234:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         case SLIP_ESC:
+ 431              		.loc 1 234 18 view .LVU132
+ 432 0094 0020     		movs	r0, #0
+ 433 0096 29E0     		b	.L24
+ 434              	.L45:
+ 224:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 435              		.loc 1 224 13 is_stmt 1 view .LVU133
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 15
+
+
+ 436 0098 A068     		ldr	r0, [r4, #8]
+ 437 009a FFF7FEFF 		bl	pbuf_realloc
+ 438              	.LVL37:
+ 226:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 439              		.loc 1 226 38 view .LVU134
+ 228:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             t = priv->q;
+ 440              		.loc 1 228 93 view .LVU135
+ 229:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             priv->p = priv->q = NULL;
+ 441              		.loc 1 229 13 view .LVU136
+ 229:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             priv->p = priv->q = NULL;
+ 442              		.loc 1 229 15 is_stmt 0 view .LVU137
+ 443 009e A068     		ldr	r0, [r4, #8]
+ 444              	.LVL38:
+ 230:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             priv->i = priv->recved = 0;
+ 445              		.loc 1 230 13 is_stmt 1 view .LVU138
+ 230:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             priv->i = priv->recved = 0;
+ 446              		.loc 1 230 31 is_stmt 0 view .LVU139
+ 447 00a0 0023     		movs	r3, #0
+ 448 00a2 A360     		str	r3, [r4, #8]
+ 230:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             priv->i = priv->recved = 0;
+ 449              		.loc 1 230 21 view .LVU140
+ 450 00a4 6360     		str	r3, [r4, #4]
+ 231:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             return t;
+ 451              		.loc 1 231 13 is_stmt 1 view .LVU141
+ 231:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             return t;
+ 452              		.loc 1 231 36 is_stmt 0 view .LVU142
+ 453 00a6 2382     		strh	r3, [r4, #16]	@ movhi
+ 231:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****             return t;
+ 454              		.loc 1 231 21 view .LVU143
+ 455 00a8 E381     		strh	r3, [r4, #14]	@ movhi
+ 232:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           }
+ 456              		.loc 1 232 13 is_stmt 1 view .LVU144
+ 232:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           }
+ 457              		.loc 1 232 20 is_stmt 0 view .LVU145
+ 458 00aa 1FE0     		b	.L24
+ 459              	.LVL39:
+ 460              	.L28:
+ 245:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****         case SLIP_ESC_END:
+ 461              		.loc 1 245 7 is_stmt 1 view .LVU146
+ 462 00ac DC2D     		cmp	r5, #220
+ 463 00ae 05D0     		beq	.L38
+ 464 00b0 DD2D     		cmp	r5, #221
+ 465 00b2 00D1     		bne	.L33
+ 250:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           break;
+ 466              		.loc 1 250 13 is_stmt 0 view .LVU147
+ 467 00b4 DB25     		movs	r5, #219
+ 468              	.L33:
+ 469              	.LVL40:
+ 255:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       break;
+ 470              		.loc 1 255 7 is_stmt 1 view .LVU148
+ 255:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       break;
+ 471              		.loc 1 255 19 is_stmt 0 view .LVU149
+ 472 00b6 0023     		movs	r3, #0
+ 473 00b8 2373     		strb	r3, [r4, #12]
+ 256:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     default:
+ 474              		.loc 1 256 7 is_stmt 1 view .LVU150
+ 475 00ba AFE7     		b	.L29
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 16
+
+
+ 476              	.LVL41:
+ 477              	.L38:
+ 247:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****           break;
+ 478              		.loc 1 247 13 is_stmt 0 view .LVU151
+ 479 00bc C025     		movs	r5, #192
+ 480 00be FAE7     		b	.L33
+ 481              	.LVL42:
+ 482              	.L44:
+ 264:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     priv->p = pbuf_alloc(PBUF_LINK, (PBUF_POOL_BUFSIZE - PBUF_LINK_HLEN - PBUF_LINK_ENCAPSULATION_H
+ 483              		.loc 1 264 55 is_stmt 1 view .LVU152
+ 265:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 484              		.loc 1 265 5 view .LVU153
+ 265:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 485              		.loc 1 265 15 is_stmt 0 view .LVU154
+ 486 00c0 4FF4C172 		mov	r2, #386
+ 487 00c4 40F24221 		movw	r1, #578
+ 488 00c8 0E20     		movs	r0, #14
+ 489 00ca FFF7FEFF 		bl	pbuf_alloc
+ 490              	.LVL43:
+ 265:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 491              		.loc 1 265 13 view .LVU155
+ 492 00ce 6060     		str	r0, [r4, #4]
+ 267:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       LINK_STATS_INC(link.drop);
+ 493              		.loc 1 267 5 is_stmt 1 view .LVU156
+ 267:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       LINK_STATS_INC(link.drop);
+ 494              		.loc 1 267 8 is_stmt 0 view .LVU157
+ 495 00d0 60B1     		cbz	r0, .L24
+ 274:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       /* 'chain' the pbuf to the existing chain */
+ 496              		.loc 1 274 5 is_stmt 1 view .LVU158
+ 274:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       /* 'chain' the pbuf to the existing chain */
+ 497              		.loc 1 274 13 is_stmt 0 view .LVU159
+ 498 00d2 A368     		ldr	r3, [r4, #8]
+ 274:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       /* 'chain' the pbuf to the existing chain */
+ 499              		.loc 1 274 8 view .LVU160
+ 500 00d4 23B1     		cbz	r3, .L35
+ 276:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     } else {
+ 501              		.loc 1 276 7 is_stmt 1 view .LVU161
+ 502 00d6 0146     		mov	r1, r0
+ 503 00d8 1846     		mov	r0, r3
+ 504 00da FFF7FEFF 		bl	pbuf_cat
+ 505              	.LVL44:
+ 506 00de A0E7     		b	.L34
+ 507              	.L35:
+ 279:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     }
+ 508              		.loc 1 279 7 view .LVU162
+ 279:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     }
+ 509              		.loc 1 279 15 is_stmt 0 view .LVU163
+ 510 00e0 A060     		str	r0, [r4, #8]
+ 511 00e2 9EE7     		b	.L34
+ 512              	.L36:
+ 297:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       }
+ 513              		.loc 1 297 9 is_stmt 1 view .LVU164
+ 297:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       }
+ 514              		.loc 1 297 17 is_stmt 0 view .LVU165
+ 515 00e4 0020     		movs	r0, #0
+ 516 00e6 6060     		str	r0, [r4, #4]
+ 517 00e8 00E0     		b	.L24
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 17
+
+
+ 518              	.L39:
+ 519              		.loc 1 301 10 view .LVU166
+ 520 00ea 0020     		movs	r0, #0
+ 521              	.LVL45:
+ 522              	.L24:
+ 302:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** }
+ 523              		.loc 1 302 1 view .LVU167
+ 524 00ec 38BD     		pop	{r3, r4, r5, pc}
+ 525              	.LVL46:
+ 526              	.L40:
+ 301:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** }
+ 527              		.loc 1 301 10 view .LVU168
+ 528 00ee 0020     		movs	r0, #0
+ 529 00f0 FCE7     		b	.L24
+ 530              	.L47:
+ 531 00f2 00BF     		.align	2
+ 532              	.L46:
+ 533 00f4 00000000 		.word	.LC0
+ 534 00f8 74000000 		.word	.LC1
+ 535 00fc 84000000 		.word	.LC2
+ 536 0100 AC000000 		.word	.LC3
+ 537              		.cfi_endproc
+ 538              	.LFE158:
+ 540              		.section	.text.slipif_rxbyte_input,"ax",%progbits
+ 541              		.align	1
+ 542              		.syntax unified
+ 543              		.thumb
+ 544              		.thumb_func
+ 546              	slipif_rxbyte_input:
+ 547              	.LVL47:
+ 548              	.LFB159:
+ 303:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 304:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** /** Like slipif_rxbyte, but passes completed packets to netif->input
+ 305:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ 306:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param netif The lwip network interface structure for this slipif
+ 307:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param c received character
+ 308:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  */
+ 309:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** static void
+ 310:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** slipif_rxbyte_input(struct netif *netif, u8_t c)
+ 311:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** {
+ 549              		.loc 1 311 1 is_stmt 1 view -0
+ 550              		.cfi_startproc
+ 551              		@ args = 0, pretend = 0, frame = 0
+ 552              		@ frame_needed = 0, uses_anonymous_args = 0
+ 553              		.loc 1 311 1 is_stmt 0 view .LVU170
+ 554 0000 38B5     		push	{r3, r4, r5, lr}
+ 555              	.LCFI3:
+ 556              		.cfi_def_cfa_offset 16
+ 557              		.cfi_offset 3, -16
+ 558              		.cfi_offset 4, -12
+ 559              		.cfi_offset 5, -8
+ 560              		.cfi_offset 14, -4
+ 561 0002 0446     		mov	r4, r0
+ 312:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   struct pbuf *p;
+ 562              		.loc 1 312 3 is_stmt 1 view .LVU171
+ 313:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   p = slipif_rxbyte(netif, c);
+ 563              		.loc 1 313 3 view .LVU172
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 18
+
+
+ 564              		.loc 1 313 7 is_stmt 0 view .LVU173
+ 565 0004 FFF7FEFF 		bl	slipif_rxbyte
+ 566              	.LVL48:
+ 314:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   if (p != NULL) {
+ 567              		.loc 1 314 3 is_stmt 1 view .LVU174
+ 568              		.loc 1 314 6 is_stmt 0 view .LVU175
+ 569 0008 20B1     		cbz	r0, .L48
+ 570 000a 0546     		mov	r5, r0
+ 315:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     if (netif->input(p, netif) != ERR_OK) {
+ 571              		.loc 1 315 5 is_stmt 1 view .LVU176
+ 572              		.loc 1 315 14 is_stmt 0 view .LVU177
+ 573 000c 2369     		ldr	r3, [r4, #16]
+ 574              		.loc 1 315 9 view .LVU178
+ 575 000e 2146     		mov	r1, r4
+ 576 0010 9847     		blx	r3
+ 577              	.LVL49:
+ 578              		.loc 1 315 8 view .LVU179
+ 579 0012 00B9     		cbnz	r0, .L51
+ 580              	.LVL50:
+ 581              	.L48:
+ 316:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       pbuf_free(p);
+ 317:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     }
+ 318:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   }
+ 319:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** }
+ 582              		.loc 1 319 1 view .LVU180
+ 583 0014 38BD     		pop	{r3, r4, r5, pc}
+ 584              	.LVL51:
+ 585              	.L51:
+ 316:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       pbuf_free(p);
+ 586              		.loc 1 316 7 is_stmt 1 view .LVU181
+ 587 0016 2846     		mov	r0, r5
+ 588 0018 FFF7FEFF 		bl	pbuf_free
+ 589              	.LVL52:
+ 590              		.loc 1 319 1 is_stmt 0 view .LVU182
+ 591 001c FAE7     		b	.L48
+ 592              		.cfi_endproc
+ 593              	.LFE159:
+ 595              		.section	.rodata.slipif_init.str1.4,"aMS",%progbits,1
+ 596              		.align	2
+ 597              	.LC5:
+ 598 0000 736C6970 		.ascii	"slipif needs an input callback\000"
+ 598      6966206E 
+ 598      65656473 
+ 598      20616E20 
+ 598      696E7075 
+ 599              		.section	.text.slipif_init,"ax",%progbits
+ 600              		.align	1
+ 601              		.global	slipif_init
+ 602              		.syntax unified
+ 603              		.thumb
+ 604              		.thumb_func
+ 606              	slipif_init:
+ 607              	.LVL53:
+ 608              	.LFB160:
+ 320:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 321:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #if SLIP_USE_RX_THREAD
+ 322:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** /**
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 19
+
+
+ 323:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * The SLIP input thread.
+ 324:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ 325:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * Feed the IP layer with incoming packets
+ 326:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ 327:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param nf the lwip network interface structure for this slipif
+ 328:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  */
+ 329:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** static void
+ 330:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** slipif_loop_thread(void *nf)
+ 331:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** {
+ 332:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   u8_t c;
+ 333:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   struct netif *netif = (struct netif *)nf;
+ 334:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   struct slipif_priv *priv = (struct slipif_priv *)netif->state;
+ 335:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 336:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   while (1) {
+ 337:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     if (sio_read(priv->sd, &c, 1) > 0) {
+ 338:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****       slipif_rxbyte_input(netif, c);
+ 339:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     }
+ 340:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   }
+ 341:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** }
+ 342:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #endif /* SLIP_USE_RX_THREAD */
+ 343:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 344:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** /**
+ 345:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @ingroup slipif
+ 346:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * SLIP netif initialization
+ 347:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ 348:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * Call the arch specific sio_open and remember
+ 349:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * the opened device in the state field of the netif.
+ 350:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ 351:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param netif the lwip network interface structure for this slipif
+ 352:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @return ERR_OK if serial line could be opened,
+ 353:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *         ERR_MEM if no memory could be allocated,
+ 354:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *         ERR_IF is serial line couldn't be opened
+ 355:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ 356:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @note If netif->state is interpreted as an u8_t serial port number.
+ 357:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ 358:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  */
+ 359:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** err_t
+ 360:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** slipif_init(struct netif *netif)
+ 361:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** {
+ 609              		.loc 1 361 1 is_stmt 1 view -0
+ 610              		.cfi_startproc
+ 611              		@ args = 0, pretend = 0, frame = 0
+ 612              		@ frame_needed = 0, uses_anonymous_args = 0
+ 613              		.loc 1 361 1 is_stmt 0 view .LVU184
+ 614 0000 70B5     		push	{r4, r5, r6, lr}
+ 615              	.LCFI4:
+ 616              		.cfi_def_cfa_offset 16
+ 617              		.cfi_offset 4, -16
+ 618              		.cfi_offset 5, -12
+ 619              		.cfi_offset 6, -8
+ 620              		.cfi_offset 14, -4
+ 621 0002 0446     		mov	r4, r0
+ 362:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   struct slipif_priv *priv;
+ 622              		.loc 1 362 3 is_stmt 1 view .LVU185
+ 363:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   u8_t sio_num;
+ 623              		.loc 1 363 3 view .LVU186
+ 364:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 20
+
+
+ 365:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("slipif needs an input callback", netif->input != NULL);
+ 624              		.loc 1 365 3 view .LVU187
+ 625              		.loc 1 365 3 view .LVU188
+ 626 0004 0369     		ldr	r3, [r0, #16]
+ 627 0006 F3B1     		cbz	r3, .L58
+ 628              	.LVL54:
+ 629              	.L53:
+ 630              		.loc 1 365 3 discriminator 3 view .LVU189
+ 631              		.loc 1 365 3 discriminator 3 view .LVU190
+ 366:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 367:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   /* netif->state contains serial port number */
+ 368:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   sio_num = LWIP_PTR_NUMERIC_CAST(u8_t, netif->state);
+ 632              		.loc 1 368 3 discriminator 3 view .LVU191
+ 633              		.loc 1 368 11 is_stmt 0 discriminator 3 view .LVU192
+ 634 0008 94F82060 		ldrb	r6, [r4, #32]	@ zero_extendqisi2
+ 635              	.LVL55:
+ 369:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 370:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_DEBUGF(SLIP_DEBUG, ("slipif_init: netif->num=%"U16_F"\n", (u16_t)sio_num));
+ 636              		.loc 1 370 82 is_stmt 1 discriminator 3 view .LVU193
+ 371:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 372:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   /* Allocate private data */
+ 373:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   priv = (struct slipif_priv *)mem_malloc(sizeof(struct slipif_priv));
+ 637              		.loc 1 373 3 discriminator 3 view .LVU194
+ 638              		.loc 1 373 32 is_stmt 0 discriminator 3 view .LVU195
+ 639 000c 1420     		movs	r0, #20
+ 640 000e FFF7FEFF 		bl	mem_malloc
+ 641              	.LVL56:
+ 374:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   if (!priv) {
+ 642              		.loc 1 374 3 is_stmt 1 discriminator 3 view .LVU196
+ 643              		.loc 1 374 6 is_stmt 0 discriminator 3 view .LVU197
+ 644 0012 0546     		mov	r5, r0
+ 645 0014 28B3     		cbz	r0, .L56
+ 375:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     return ERR_MEM;
+ 376:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   }
+ 377:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 378:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   netif->name[0] = 's';
+ 646              		.loc 1 378 3 is_stmt 1 view .LVU198
+ 647              		.loc 1 378 18 is_stmt 0 view .LVU199
+ 648 0016 7323     		movs	r3, #115
+ 649 0018 84F83230 		strb	r3, [r4, #50]
+ 379:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   netif->name[1] = 'l';
+ 650              		.loc 1 379 3 is_stmt 1 view .LVU200
+ 651              		.loc 1 379 18 is_stmt 0 view .LVU201
+ 652 001c 6C23     		movs	r3, #108
+ 653 001e 84F83330 		strb	r3, [r4, #51]
+ 380:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #if LWIP_IPV4
+ 381:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   netif->output = slipif_output_v4;
+ 654              		.loc 1 381 3 is_stmt 1 view .LVU202
+ 655              		.loc 1 381 17 is_stmt 0 view .LVU203
+ 656 0022 114B     		ldr	r3, .L60
+ 657 0024 6361     		str	r3, [r4, #20]
+ 382:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #endif /* LWIP_IPV4 */
+ 383:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #if LWIP_IPV6
+ 384:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   netif->output_ip6 = slipif_output_v6;
+ 385:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #endif /* LWIP_IPV6 */
+ 386:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   netif->mtu = SLIP_MAX_SIZE;
+ 658              		.loc 1 386 3 is_stmt 1 view .LVU204
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 21
+
+
+ 659              		.loc 1 386 14 is_stmt 0 view .LVU205
+ 660 0026 40F2DC53 		movw	r3, #1500
+ 661 002a 2385     		strh	r3, [r4, #40]	@ movhi
+ 387:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 388:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   /* Try to open the serial port. */
+ 389:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   priv->sd = sio_open(sio_num);
+ 662              		.loc 1 389 3 is_stmt 1 view .LVU206
+ 663              		.loc 1 389 14 is_stmt 0 view .LVU207
+ 664 002c 3046     		mov	r0, r6
+ 665              	.LVL57:
+ 666              		.loc 1 389 14 view .LVU208
+ 667 002e FFF7FEFF 		bl	sio_open
+ 668              	.LVL58:
+ 669              		.loc 1 389 12 view .LVU209
+ 670 0032 2860     		str	r0, [r5]
+ 390:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   if (!priv->sd) {
+ 671              		.loc 1 390 3 is_stmt 1 view .LVU210
+ 672              		.loc 1 390 6 is_stmt 0 view .LVU211
+ 673 0034 78B1     		cbz	r0, .L59
+ 391:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     /* Opening the serial port failed. */
+ 392:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     mem_free(priv);
+ 393:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     return ERR_IF;
+ 394:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   }
+ 395:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 396:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   /* Initialize private data */
+ 397:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   priv->p = NULL;
+ 674              		.loc 1 397 3 is_stmt 1 view .LVU212
+ 675              		.loc 1 397 11 is_stmt 0 view .LVU213
+ 676 0036 0020     		movs	r0, #0
+ 677 0038 6860     		str	r0, [r5, #4]
+ 398:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   priv->q = NULL;
+ 678              		.loc 1 398 3 is_stmt 1 view .LVU214
+ 679              		.loc 1 398 11 is_stmt 0 view .LVU215
+ 680 003a A860     		str	r0, [r5, #8]
+ 399:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   priv->state = SLIP_RECV_NORMAL;
+ 681              		.loc 1 399 3 is_stmt 1 view .LVU216
+ 682              		.loc 1 399 15 is_stmt 0 view .LVU217
+ 683 003c 2873     		strb	r0, [r5, #12]
+ 400:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   priv->i = 0;
+ 684              		.loc 1 400 3 is_stmt 1 view .LVU218
+ 685              		.loc 1 400 11 is_stmt 0 view .LVU219
+ 686 003e E881     		strh	r0, [r5, #14]	@ movhi
+ 401:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   priv->recved = 0;
+ 687              		.loc 1 401 3 is_stmt 1 view .LVU220
+ 688              		.loc 1 401 16 is_stmt 0 view .LVU221
+ 689 0040 2882     		strh	r0, [r5, #16]	@ movhi
+ 402:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #if SLIP_RX_FROM_ISR
+ 403:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   priv->rxpackets = NULL;
+ 404:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #endif
+ 405:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 406:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   netif->state = priv;
+ 690              		.loc 1 406 3 is_stmt 1 view .LVU222
+ 691              		.loc 1 406 16 is_stmt 0 view .LVU223
+ 692 0042 2562     		str	r5, [r4, #32]
+ 407:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 408:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   /* initialize the snmp variables and counters inside the struct netif */
+ 409:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   MIB2_INIT_NETIF(netif, snmp_ifType_slip, SLIP_SIO_SPEED(priv->sd));
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 22
+
+
+ 693              		.loc 1 409 69 is_stmt 1 view .LVU224
+ 410:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 411:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #if SLIP_USE_RX_THREAD
+ 412:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   /* Create a thread to poll the serial line. */
+ 413:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   sys_thread_new(SLIPIF_THREAD_NAME, slipif_loop_thread, netif,
+ 414:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****                  SLIPIF_THREAD_STACKSIZE, SLIPIF_THREAD_PRIO);
+ 415:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** #endif /* SLIP_USE_RX_THREAD */
+ 416:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   return ERR_OK;
+ 694              		.loc 1 416 3 view .LVU225
+ 695              	.L54:
+ 417:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** }
+ 696              		.loc 1 417 1 is_stmt 0 view .LVU226
+ 697 0044 70BD     		pop	{r4, r5, r6, pc}
+ 698              	.LVL59:
+ 699              	.L58:
+ 365:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 700              		.loc 1 365 3 is_stmt 1 discriminator 1 view .LVU227
+ 365:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 701              		.loc 1 365 3 discriminator 1 view .LVU228
+ 702 0046 094B     		ldr	r3, .L60+4
+ 703 0048 40F26D12 		movw	r2, #365
+ 704 004c 0849     		ldr	r1, .L60+8
+ 705 004e 0948     		ldr	r0, .L60+12
+ 706              	.LVL60:
+ 365:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 707              		.loc 1 365 3 is_stmt 0 discriminator 1 view .LVU229
+ 708 0050 FFF7FEFF 		bl	printf
+ 709              	.LVL61:
+ 710 0054 D8E7     		b	.L53
+ 711              	.LVL62:
+ 712              	.L59:
+ 392:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     return ERR_IF;
+ 713              		.loc 1 392 5 is_stmt 1 view .LVU230
+ 714 0056 2846     		mov	r0, r5
+ 715 0058 FFF7FEFF 		bl	mem_free
+ 716              	.LVL63:
+ 393:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   }
+ 717              		.loc 1 393 5 view .LVU231
+ 393:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   }
+ 718              		.loc 1 393 12 is_stmt 0 view .LVU232
+ 719 005c 6FF00B00 		mvn	r0, #11
+ 720 0060 F0E7     		b	.L54
+ 721              	.LVL64:
+ 722              	.L56:
+ 375:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   }
+ 723              		.loc 1 375 12 view .LVU233
+ 724 0062 4FF0FF30 		mov	r0, #-1
+ 725              	.LVL65:
+ 375:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   }
+ 726              		.loc 1 375 12 view .LVU234
+ 727 0066 EDE7     		b	.L54
+ 728              	.L61:
+ 729              		.align	2
+ 730              	.L60:
+ 731 0068 00000000 		.word	slipif_output_v4
+ 732 006c 00000000 		.word	.LC0
+ 733 0070 00000000 		.word	.LC5
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 23
+
+
+ 734 0074 84000000 		.word	.LC2
+ 735              		.cfi_endproc
+ 736              	.LFE160:
+ 738              		.section	.text.slipif_poll,"ax",%progbits
+ 739              		.align	1
+ 740              		.global	slipif_poll
+ 741              		.syntax unified
+ 742              		.thumb
+ 743              		.thumb_func
+ 745              	slipif_poll:
+ 746              	.LVL66:
+ 747              	.LFB161:
+ 418:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 419:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** /**
+ 420:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @ingroup slipif
+ 421:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * Polls the serial device and feeds the IP layer with incoming packets.
+ 422:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  *
+ 423:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  * @param netif The lwip network interface structure for this slipif
+ 424:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****  */
+ 425:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** void
+ 426:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** slipif_poll(struct netif *netif)
+ 427:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** {
+ 748              		.loc 1 427 1 is_stmt 1 view -0
+ 749              		.cfi_startproc
+ 750              		@ args = 0, pretend = 0, frame = 8
+ 751              		@ frame_needed = 0, uses_anonymous_args = 0
+ 752              		.loc 1 427 1 is_stmt 0 view .LVU236
+ 753 0000 30B5     		push	{r4, r5, lr}
+ 754              	.LCFI5:
+ 755              		.cfi_def_cfa_offset 12
+ 756              		.cfi_offset 4, -12
+ 757              		.cfi_offset 5, -8
+ 758              		.cfi_offset 14, -4
+ 759 0002 83B0     		sub	sp, sp, #12
+ 760              	.LCFI6:
+ 761              		.cfi_def_cfa_offset 24
+ 428:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   u8_t c;
+ 762              		.loc 1 428 3 is_stmt 1 view .LVU237
+ 429:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   struct slipif_priv *priv;
+ 763              		.loc 1 429 3 view .LVU238
+ 430:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 431:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif != NULL", (netif != NULL));
+ 764              		.loc 1 431 3 view .LVU239
+ 765              		.loc 1 431 3 view .LVU240
+ 766 0004 0446     		mov	r4, r0
+ 767 0006 18B1     		cbz	r0, .L68
+ 768              	.LVL67:
+ 769              	.L63:
+ 770              		.loc 1 431 3 discriminator 3 view .LVU241
+ 771              		.loc 1 431 3 discriminator 3 view .LVU242
+ 432:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif->state != NULL", (netif->state != NULL));
+ 772              		.loc 1 432 3 discriminator 3 view .LVU243
+ 773              		.loc 1 432 3 discriminator 3 view .LVU244
+ 774 0008 236A     		ldr	r3, [r4, #32]
+ 775 000a 4BB1     		cbz	r3, .L69
+ 776              	.L64:
+ 777              		.loc 1 432 3 discriminator 3 view .LVU245
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 24
+
+
+ 778              		.loc 1 432 3 discriminator 3 view .LVU246
+ 433:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 434:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   priv = (struct slipif_priv *)netif->state;
+ 779              		.loc 1 434 3 discriminator 3 view .LVU247
+ 780              		.loc 1 434 8 is_stmt 0 discriminator 3 view .LVU248
+ 781 000c 256A     		ldr	r5, [r4, #32]
+ 782              	.LVL68:
+ 435:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 436:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   while (sio_tryread(priv->sd, &c, 1) > 0) {
+ 783              		.loc 1 436 3 is_stmt 1 discriminator 3 view .LVU249
+ 784              		.loc 1 436 9 is_stmt 0 discriminator 3 view .LVU250
+ 785 000e 14E0     		b	.L65
+ 786              	.LVL69:
+ 787              	.L68:
+ 431:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif->state != NULL", (netif->state != NULL));
+ 788              		.loc 1 431 3 is_stmt 1 discriminator 1 view .LVU251
+ 431:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif->state != NULL", (netif->state != NULL));
+ 789              		.loc 1 431 3 discriminator 1 view .LVU252
+ 790 0010 0F4B     		ldr	r3, .L70
+ 791 0012 40F2AF12 		movw	r2, #431
+ 792 0016 0F49     		ldr	r1, .L70+4
+ 793 0018 0F48     		ldr	r0, .L70+8
+ 794              	.LVL70:
+ 431:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   LWIP_ASSERT("netif->state != NULL", (netif->state != NULL));
+ 795              		.loc 1 431 3 is_stmt 0 discriminator 1 view .LVU253
+ 796 001a FFF7FEFF 		bl	printf
+ 797              	.LVL71:
+ 798 001e F3E7     		b	.L63
+ 799              	.L69:
+ 432:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 800              		.loc 1 432 3 is_stmt 1 discriminator 1 view .LVU254
+ 432:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** 
+ 801              		.loc 1 432 3 discriminator 1 view .LVU255
+ 802 0020 0B4B     		ldr	r3, .L70
+ 803 0022 4FF4D872 		mov	r2, #432
+ 804 0026 0D49     		ldr	r1, .L70+12
+ 805 0028 0B48     		ldr	r0, .L70+8
+ 806 002a FFF7FEFF 		bl	printf
+ 807              	.LVL72:
+ 808 002e EDE7     		b	.L64
+ 809              	.LVL73:
+ 810              	.L66:
+ 437:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     slipif_rxbyte_input(netif, c);
+ 811              		.loc 1 437 5 view .LVU256
+ 812 0030 9DF80710 		ldrb	r1, [sp, #7]	@ zero_extendqisi2
+ 813 0034 2046     		mov	r0, r4
+ 814 0036 FFF7FEFF 		bl	slipif_rxbyte_input
+ 815              	.LVL74:
+ 816              	.L65:
+ 436:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     slipif_rxbyte_input(netif, c);
+ 817              		.loc 1 436 9 view .LVU257
+ 436:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     slipif_rxbyte_input(netif, c);
+ 818              		.loc 1 436 10 is_stmt 0 view .LVU258
+ 819 003a 0122     		movs	r2, #1
+ 820 003c 0DF10701 		add	r1, sp, #7
+ 821 0040 2868     		ldr	r0, [r5]
+ 822 0042 FFF7FEFF 		bl	sio_tryread
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 25
+
+
+ 823              	.LVL75:
+ 436:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****     slipif_rxbyte_input(netif, c);
+ 824              		.loc 1 436 9 view .LVU259
+ 825 0046 0028     		cmp	r0, #0
+ 826 0048 F2D1     		bne	.L66
+ 438:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c ****   }
+ 439:c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/LwIP/src/netif\slipif.c **** }
+ 827              		.loc 1 439 1 view .LVU260
+ 828 004a 03B0     		add	sp, sp, #12
+ 829              	.LCFI7:
+ 830              		.cfi_def_cfa_offset 12
+ 831              		@ sp needed
+ 832 004c 30BD     		pop	{r4, r5, pc}
+ 833              	.LVL76:
+ 834              	.L71:
+ 835              		.loc 1 439 1 view .LVU261
+ 836 004e 00BF     		.align	2
+ 837              	.L70:
+ 838 0050 00000000 		.word	.LC0
+ 839 0054 74000000 		.word	.LC1
+ 840 0058 84000000 		.word	.LC2
+ 841 005c AC000000 		.word	.LC3
+ 842              		.cfi_endproc
+ 843              	.LFE161:
+ 845              		.text
+ 846              	.Letext0:
+ 847              		.file 2 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\machine\\_default_typ
+ 848              		.file 3 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 849              		.file 4 "e:\\gnu arm embedded toolchain\\10 2021.10\\lib\\gcc\\arm-none-eabi\\10.3.1\\include\\std
+ 850              		.file 5 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 851              		.file 6 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 852              		.file 7 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 853              		.file 8 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 854              		.file 9 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party/
+ 855              		.file 10 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party
+ 856              		.file 11 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party
+ 857              		.file 12 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\stdio.h"
+ 858              		.file 13 "c:/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2/Middlewares/Third_Party
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s 			page 26
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 slipif.c
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:20     .rodata.slipif_output.str1.4:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:38     .text.slipif_output:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:43     .text.slipif_output:00000000 slipif_output
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:223    .text.slipif_output:00000098 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:232    .text.slipif_output_v4:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:237    .text.slipif_output_v4:00000000 slipif_output_v4
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:261    .text.slipif_rxbyte:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:266    .text.slipif_rxbyte:00000000 slipif_rxbyte
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:533    .text.slipif_rxbyte:000000f4 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:541    .text.slipif_rxbyte_input:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:546    .text.slipif_rxbyte_input:00000000 slipif_rxbyte_input
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:596    .rodata.slipif_init.str1.4:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:600    .text.slipif_init:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:606    .text.slipif_init:00000000 slipif_init
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:731    .text.slipif_init:00000068 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:739    .text.slipif_poll:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:745    .text.slipif_poll:00000000 slipif_poll
+C:\Users\BLACK_~1\AppData\Local\Temp\ccf2Yria.s:838    .text.slipif_poll:00000050 $d
+
+UNDEFINED SYMBOLS
+sio_send
+printf
+pbuf_realloc
+pbuf_alloc
+pbuf_cat
+pbuf_free
+mem_malloc
+sio_open
+mem_free
+sio_tryread

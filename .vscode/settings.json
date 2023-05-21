@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "main.h": "c",
+        "lv_demo.h": "c",
+        "custom.h": "c",
+        "events_init.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}

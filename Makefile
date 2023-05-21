@@ -1,15 +1,15 @@
 ######################################
 # target
 ######################################
-TARGET = stm32f407vet6_hmi_4.3_480x272_fw
+TARGET = stm32f407vet6_lvgl_4.3_480x272_fw
 
 
 #######################################
 # check platform and add DIR
 #######################################
 ifeq ($(OS),Windows_NT)
-	OPENOCD_DIR ?= "D:\Projects\2016\tools\OpenOCD-0.9.0-Win32"
-	LIB_DIR ?= "D:\STM32Cube\Repository\STM32Cube_FW_F4_V1.26.0"
+	OPENOCD_DIR ?= /d/2_Tool/OpenOCD-20211118-0.11.0
+	LIB_DIR ?= /c/Users/Black_Life/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.2
 	CC_PATH ?= "/tools/stm32/gcc/bin"
 else
 	UNAME_S := $(shell uname -s)
@@ -17,6 +17,11 @@ else
 		OPENOCD_DIR ?= /usr/local
 		LIB_DIR ?= /Users/nhantt/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.0
 		CC_PATH ?= /Users/nhantt/tools/stm32/gcc-arm-none-eabi-9-2019-q4-major/bin
+	endif
+	ifeq ($(UNAME_S),Linux)
+		OPENOCD_DIR ?= /usr/local
+		LIB_DIR ?= /home/smartth/STM32Cube/Repository/stm32cube_fw_f4_v1270/STM32Cube_FW_F4_V1.27.0
+		CC_PATH ?= /Users/nhantt/tools/stm32/gcc-arm-none-eabi-10-2020-q4-major/bin/arm-none-eabi-gcc
 	endif
 endif
 
@@ -65,8 +70,6 @@ Src/stm32f4xx_it.c \
 Src/stm32f4xx_hal_msp.c \
 FATFS/App/fatfs.c \
 FATFS/Target/user_diskio.c \
-LWIP/App/lwip.c \
-LWIP/Target/ethernetif.c \
 USB_DEVICE/App/usb_device.c \
 USB_DEVICE/App/usbd_desc.c \
 USB_DEVICE/App/usbd_cdc_if.c \
@@ -312,6 +315,15 @@ lv_demos/src/lv_demo_widgets/lv_demo_widgets.c \
 lv_demos/src/lv_demo_widgets/assets/img_clothes.c \
 lv_demos/src/lv_demo_widgets/assets/img_demo_widgets_avatar.c \
 lv_demos/src/lv_demo_widgets/assets/img_lvgl_logo.c \
+lv_bio_safety/lv_bio_safety_main.c \
+custom/custom.c \
+generated/gui_guider.c \
+generated/events_init.c \
+generated/setup_scr_screen.c \
+generated/setup_scr_screen2.c \
+generated/guider_fonts/lv_font_arial_12.c \
+generated/guider_fonts/lv_font_simsun_12.c \
+generated/guider_fonts/lv_font_simsun_16.c \
 
 # ASM sources
 ASM_SOURCES =  \
@@ -434,6 +446,7 @@ C_INCLUDES =  \
 -Ilv_demos \
 -Ilv_demos/src \
 -Ilv_demos/src/lv_demo_widgets \
+-Ilv_bio_safety \
 
 
 
@@ -499,14 +512,22 @@ $(BUILD_DIR):
 # flash
 #######################################
 
+# flash:
+# 	openocd 	-f interface/stlink-v2.cfg \
+# 				-f target/stm32f4x.cfg \
+# 		        -c init -c targets -c "reset halt" \
+# 		        -c "flash write_image erase $(BUILD_DIR)/$(TARGET).hex" \
+# 		        -c "verify_image $(BUILD_DIR)/$(TARGET).hex" \
+# 		        -c "reset run" -c shutdown
+
 flash:
-	openocd 	-f interface/stlink-v2.cfg \
-				-f target/stm32f4x.cfg \
+	$(OPENOCD) 	-f interface/stlink-v2.cfg \
+				-f target/stm32f1x.cfg \
 		        -c init -c targets -c "reset halt" \
 		        -c "flash write_image erase $(BUILD_DIR)/$(TARGET).hex" \
 		        -c "verify_image $(BUILD_DIR)/$(TARGET).hex" \
-		        -c "reset run" -c shutdown
-
+		        -c "reset run" -c shutdowns
+				
 #######################################
 # clean up
 #######################################

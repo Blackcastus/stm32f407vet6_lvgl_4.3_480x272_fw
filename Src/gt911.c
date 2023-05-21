@@ -1,6 +1,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include <string.h>
-#include "GT911.h"
+#include "gt911.h"
 #include "main.h"
 #include "i2c.h"
 /* Private typedef -----------------------------------------------------------*/
@@ -43,11 +43,11 @@ GT911_Status_t GT911_Init(GT911_Config_t config){
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
 	__HAL_RCC_GPIOE_CLK_ENABLE();
 	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_RESET);
-	GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_2;
+	GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
   	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   	GPIO_InitStruct.Pull = GPIO_NOPULL;
   	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  	HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 //	Set X resolution
 	GT911_Config[1] = config.X_Resolution & 0x00FF;
 	GT911_Config[2] = (config.X_Resolution >> 8) & 0x00FF;

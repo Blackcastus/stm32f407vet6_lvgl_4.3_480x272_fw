@@ -1,0 +1,103 @@
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccjdwsQy.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"custom.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.custom_init,"ax",%progbits
+  20              		.align	1
+  21              		.global	custom_init
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	custom_init:
+  27              	.LVL0:
+  28              	.LFB187:
+  29              		.file 1 "custom/custom.c"
+   1:custom/custom.c **** /**
+   2:custom/custom.c ****  * @file custom.c
+   3:custom/custom.c ****  *
+   4:custom/custom.c ****  */
+   5:custom/custom.c **** 
+   6:custom/custom.c **** /*********************
+   7:custom/custom.c ****  *      INCLUDES
+   8:custom/custom.c ****  *********************/
+   9:custom/custom.c **** #include <stdio.h>
+  10:custom/custom.c **** #include "lvgl.h"
+  11:custom/custom.c **** #include "custom.h"
+  12:custom/custom.c **** 
+  13:custom/custom.c **** /*********************
+  14:custom/custom.c ****  *      DEFINES
+  15:custom/custom.c ****  *********************/
+  16:custom/custom.c **** 
+  17:custom/custom.c **** /**********************
+  18:custom/custom.c ****  *      TYPEDEFS
+  19:custom/custom.c ****  **********************/
+  20:custom/custom.c **** 
+  21:custom/custom.c **** /**********************
+  22:custom/custom.c ****  *  STATIC PROTOTYPES
+  23:custom/custom.c ****  **********************/
+  24:custom/custom.c **** 
+  25:custom/custom.c **** /**********************
+  26:custom/custom.c ****  *  STATIC VARIABLES
+  27:custom/custom.c ****  **********************/
+  28:custom/custom.c **** 
+  29:custom/custom.c **** /**
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccjdwsQy.s 			page 2
+
+
+  30:custom/custom.c ****  * Create a demo application
+  31:custom/custom.c ****  */
+  32:custom/custom.c **** 
+  33:custom/custom.c **** void custom_init(lv_ui *ui)
+  34:custom/custom.c **** {
+  30              		.loc 1 34 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  35:custom/custom.c ****     /* Add your codes here */
+  36:custom/custom.c **** }
+  35              		.loc 1 36 1 view .LVU1
+  36 0000 7047     		bx	lr
+  37              		.cfi_endproc
+  38              	.LFE187:
+  40              		.text
+  41              	.Letext0:
+  42              		.file 2 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\machine\\_default_typ
+  43              		.file 3 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\sys\\_stdint.h"
+  44              		.file 4 "lvgl/src/misc/lv_ll.h"
+  45              		.file 5 "lvgl/src/hal/../misc/lv_color.h"
+  46              		.file 6 "lvgl/src/hal/../misc/lv_area.h"
+  47              		.file 7 "lvgl/src/core/lv_obj.h"
+  48              		.file 8 "lvgl/src/core/lv_group.h"
+  49              		.file 9 "lvgl/src/core/../misc/lv_style.h"
+  50              		.file 10 "lvgl/src/core/lv_obj_scroll.h"
+  51              		.file 11 "lvgl/src/core/lv_obj_style.h"
+  52              		.file 12 "lvgl/src/core/lv_obj_class.h"
+  53              		.file 13 "lvgl/src/core/lv_event.h"
+  54              		.file 14 "custom/../generated/gui_guider.h"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccjdwsQy.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 custom.c
+C:\Users\BLACK_~1\AppData\Local\Temp\ccjdwsQy.s:20     .text.custom_init:00000000 $t
+C:\Users\BLACK_~1\AppData\Local\Temp\ccjdwsQy.s:26     .text.custom_init:00000000 custom_init
+
+NO UNDEFINED SYMBOLS

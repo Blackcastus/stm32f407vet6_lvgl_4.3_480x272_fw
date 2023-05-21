@@ -14,11 +14,11 @@
 #include <string.h>
 
 #define CMD *(uint16_t *)0x60000000
-// #define DAT *(uint16_t *)0x60080000
+#define DAT *(uint16_t *)0x60080000
 
 /*A16: 0x60000000 2^16*2 = 0x60000000 + 0x20000 = 0x60020000*/
 
-#define DAT *(uint16_t *)0x60020000
+//#define DAT *(uint16_t *)0x60020000
 
 #define MIRROR_V 1
 #define MIRROR_H 0
@@ -26,8 +26,8 @@
 // #define LCD_RST_SET   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
 // #define LCD_RST_RESET HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
 
-#define LCD_RST_SET   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_6, GPIO_PIN_SET);
-#define LCD_RST_RESET HAL_GPIO_WritePin(GPIOD, GPIO_PIN_6, GPIO_PIN_RESET);
+#define LCD_RST_SET   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+#define LCD_RST_RESET HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
 											
 #define LSHIFT 0
 

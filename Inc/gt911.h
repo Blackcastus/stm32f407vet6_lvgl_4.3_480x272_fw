@@ -108,7 +108,6 @@ typedef struct{
 /* Exported functions ------------------------------------------------------- */
 GT911_Status_t GT911_Init(GT911_Config_t config);
 GT911_Status_t GT911_ReadTouch(TouchCordinate_t* cordinate, uint8_t* number_of_cordinate);
-
 //User method implementation prototype ----------------------------------------*/
 void GT911_INT_Input(void);
 void GT911_INT_Output(void);

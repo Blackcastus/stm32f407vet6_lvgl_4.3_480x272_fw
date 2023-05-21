@@ -1,0 +1,3155 @@
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"lv_font_simsun_12.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	lv_font_simsun_12
+  20              		.section	.data.font_dsc,"aw"
+  21              		.align	2
+  24              	font_dsc:
+  25 0000 00000000 		.word	gylph_bitmap
+  26 0004 00000000 		.word	glyph_dsc
+  27 0008 00000000 		.word	cmaps
+  28 000c 00000000 		.word	0
+  29 0010 0000     		.short	0
+  30 0012 03       		.byte	3
+  31 0013 08       		.byte	8
+  32 0014 00000000 		.space	4
+  33              		.section	.data.lv_font_simsun_12,"aw"
+  34              		.align	2
+  37              	lv_font_simsun_12:
+  38 0000 00000000 		.word	lv_font_get_glyph_dsc_fmt_txt
+  39 0004 00000000 		.word	lv_font_get_bitmap_fmt_txt
+  40 0008 0D00     		.short	13
+  41 000a 0200     		.short	2
+  42 000c 00       		.byte	0
+  43 000d 000000   		.space	3
+  44 0010 00000000 		.word	font_dsc
+  45 0014 00000000 		.space	4
+  46              		.section	.rodata.cmaps,"a"
+  47              		.align	2
+  50              	cmaps:
+  51 0000 20000000 		.word	32
+  52 0004 0C00     		.short	12
+  53 0006 0100     		.short	1
+  54 0008 00000000 		.word	0
+  55 000c 00000000 		.word	0
+  56 0010 0000     		.short	0
+  57 0012 02       		.byte	2
+  58 0013 00       		.space	1
+  59 0014 2D000000 		.word	45
+  60 0018 5200     		.short	82
+  61 001a 0D00     		.short	13
+  62 001c 00000000 		.word	0
+  63 0020 00000000 		.word	0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 2
+
+
+  64 0024 0000     		.short	0
+  65 0026 02       		.byte	2
+  66 0027 00       		.space	1
+  67 0028 01F00000 		.word	61441
+  68 002c A208     		.short	2210
+  69 002e 5F00     		.short	95
+  70 0030 00000000 		.word	unicode_list_2
+  71 0034 00000000 		.word	0
+  72 0038 3900     		.short	57
+  73 003a 03       		.byte	3
+  74 003b 00       		.space	1
+  75              		.section	.rodata.glyph_dsc,"a"
+  76              		.align	2
+  79              	glyph_dsc:
+  80 0000 00       		.byte	0
+  81 0001 00       		.byte	0
+  82 0002 00       		.byte	0
+  83 0003 00       		.byte	0
+  84 0004 00       		.byte	0
+  85 0005 00       		.byte	0
+  86 0006 00       		.byte	0
+  87 0007 00       		.byte	0
+  88 0008 00       		.byte	0
+  89 0009 00       		.byte	0
+  90 000a 00       		.byte	0
+  91 000b 06       		.byte	6
+  92 000c 00       		.byte	0
+  93 000d 00       		.byte	0
+  94 000e 00       		.byte	0
+  95 000f 00       		.byte	0
+  96 0010 00       		.byte	0
+  97 0011 00       		.byte	0
+  98 0012 00       		.byte	0
+  99 0013 06       		.byte	6
+ 100 0014 02       		.byte	2
+ 101 0015 09       		.byte	9
+ 102 0016 02       		.byte	2
+ 103 0017 00       		.byte	0
+ 104 0018 09       		.byte	9
+ 105 0019 00       		.byte	0
+ 106 001a 00       		.byte	0
+ 107 001b 06       		.byte	6
+ 108 001c 06       		.byte	6
+ 109 001d 04       		.byte	4
+ 110 001e 00       		.byte	0
+ 111 001f 06       		.byte	6
+ 112 0020 15       		.byte	21
+ 113 0021 00       		.byte	0
+ 114 0022 00       		.byte	0
+ 115 0023 06       		.byte	6
+ 116 0024 06       		.byte	6
+ 117 0025 09       		.byte	9
+ 118 0026 00       		.byte	0
+ 119 0027 00       		.byte	0
+ 120 0028 30       		.byte	48
+ 121 0029 00       		.byte	0
+ 122 002a 00       		.byte	0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 3
+
+
+ 123 002b 06       		.byte	6
+ 124 002c 06       		.byte	6
+ 125 002d 0C       		.byte	12
+ 126 002e 00       		.byte	0
+ 127 002f FE       		.byte	-2
+ 128 0030 54       		.byte	84
+ 129 0031 00       		.byte	0
+ 130 0032 00       		.byte	0
+ 131 0033 06       		.byte	6
+ 132 0034 06       		.byte	6
+ 133 0035 09       		.byte	9
+ 134 0036 00       		.byte	0
+ 135 0037 00       		.byte	0
+ 136 0038 6F       		.byte	111
+ 137 0039 00       		.byte	0
+ 138 003a 00       		.byte	0
+ 139 003b 06       		.byte	6
+ 140 003c 06       		.byte	6
+ 141 003d 09       		.byte	9
+ 142 003e 00       		.byte	0
+ 143 003f 00       		.byte	0
+ 144 0040 8A       		.byte	138
+ 145 0041 00       		.byte	0
+ 146 0042 00       		.byte	0
+ 147 0043 06       		.byte	6
+ 148 0044 03       		.byte	3
+ 149 0045 04       		.byte	4
+ 150 0046 00       		.byte	0
+ 151 0047 06       		.byte	6
+ 152 0048 90       		.byte	144
+ 153 0049 00       		.byte	0
+ 154 004a 00       		.byte	0
+ 155 004b 06       		.byte	6
+ 156 004c 04       		.byte	4
+ 157 004d 0D       		.byte	13
+ 158 004e 02       		.byte	2
+ 159 004f FE       		.byte	-2
+ 160 0050 AA       		.byte	170
+ 161 0051 00       		.byte	0
+ 162 0052 00       		.byte	0
+ 163 0053 06       		.byte	6
+ 164 0054 04       		.byte	4
+ 165 0055 0D       		.byte	13
+ 166 0056 00       		.byte	0
+ 167 0057 FE       		.byte	-2
+ 168 0058 C4       		.byte	196
+ 169 0059 00       		.byte	0
+ 170 005a 00       		.byte	0
+ 171 005b 06       		.byte	6
+ 172 005c 06       		.byte	6
+ 173 005d 07       		.byte	7
+ 174 005e 00       		.byte	0
+ 175 005f 01       		.byte	1
+ 176 0060 D9       		.byte	217
+ 177 0061 00       		.byte	0
+ 178 0062 00       		.byte	0
+ 179 0063 06       		.byte	6
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 4
+
+
+ 180 0064 06       		.byte	6
+ 181 0065 07       		.byte	7
+ 182 0066 00       		.byte	0
+ 183 0067 01       		.byte	1
+ 184 0068 EE       		.byte	238
+ 185 0069 00       		.byte	0
+ 186 006a 00       		.byte	0
+ 187 006b 06       		.byte	6
+ 188 006c 06       		.byte	6
+ 189 006d 01       		.byte	1
+ 190 006e 00       		.byte	0
+ 191 006f 04       		.byte	4
+ 192 0070 F1       		.byte	241
+ 193 0071 00       		.byte	0
+ 194 0072 00       		.byte	0
+ 195 0073 06       		.byte	6
+ 196 0074 03       		.byte	3
+ 197 0075 02       		.byte	2
+ 198 0076 00       		.byte	0
+ 199 0077 00       		.byte	0
+ 200 0078 F4       		.byte	244
+ 201 0079 00       		.byte	0
+ 202 007a 00       		.byte	0
+ 203 007b 06       		.byte	6
+ 204 007c 06       		.byte	6
+ 205 007d 0C       		.byte	12
+ 206 007e 00       		.byte	0
+ 207 007f FF       		.byte	-1
+ 208 0080 18       		.byte	24
+ 209 0081 01       		.byte	1
+ 210 0082 00       		.byte	0
+ 211 0083 06       		.byte	6
+ 212 0084 06       		.byte	6
+ 213 0085 09       		.byte	9
+ 214 0086 00       		.byte	0
+ 215 0087 00       		.byte	0
+ 216 0088 33       		.byte	51
+ 217 0089 01       		.byte	1
+ 218 008a 00       		.byte	0
+ 219 008b 06       		.byte	6
+ 220 008c 04       		.byte	4
+ 221 008d 09       		.byte	9
+ 222 008e 01       		.byte	1
+ 223 008f 00       		.byte	0
+ 224 0090 45       		.byte	69
+ 225 0091 01       		.byte	1
+ 226 0092 00       		.byte	0
+ 227 0093 06       		.byte	6
+ 228 0094 06       		.byte	6
+ 229 0095 09       		.byte	9
+ 230 0096 00       		.byte	0
+ 231 0097 00       		.byte	0
+ 232 0098 60       		.byte	96
+ 233 0099 01       		.byte	1
+ 234 009a 00       		.byte	0
+ 235 009b 06       		.byte	6
+ 236 009c 06       		.byte	6
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 5
+
+
+ 237 009d 09       		.byte	9
+ 238 009e 00       		.byte	0
+ 239 009f 00       		.byte	0
+ 240 00a0 7B       		.byte	123
+ 241 00a1 01       		.byte	1
+ 242 00a2 00       		.byte	0
+ 243 00a3 06       		.byte	6
+ 244 00a4 06       		.byte	6
+ 245 00a5 09       		.byte	9
+ 246 00a6 00       		.byte	0
+ 247 00a7 00       		.byte	0
+ 248 00a8 96       		.byte	150
+ 249 00a9 01       		.byte	1
+ 250 00aa 00       		.byte	0
+ 251 00ab 06       		.byte	6
+ 252 00ac 06       		.byte	6
+ 253 00ad 09       		.byte	9
+ 254 00ae 00       		.byte	0
+ 255 00af 00       		.byte	0
+ 256 00b0 B1       		.byte	177
+ 257 00b1 01       		.byte	1
+ 258 00b2 00       		.byte	0
+ 259 00b3 06       		.byte	6
+ 260 00b4 06       		.byte	6
+ 261 00b5 09       		.byte	9
+ 262 00b6 00       		.byte	0
+ 263 00b7 00       		.byte	0
+ 264 00b8 CC       		.byte	204
+ 265 00b9 01       		.byte	1
+ 266 00ba 00       		.byte	0
+ 267 00bb 06       		.byte	6
+ 268 00bc 06       		.byte	6
+ 269 00bd 09       		.byte	9
+ 270 00be 00       		.byte	0
+ 271 00bf 00       		.byte	0
+ 272 00c0 E7       		.byte	231
+ 273 00c1 01       		.byte	1
+ 274 00c2 00       		.byte	0
+ 275 00c3 06       		.byte	6
+ 276 00c4 06       		.byte	6
+ 277 00c5 09       		.byte	9
+ 278 00c6 00       		.byte	0
+ 279 00c7 00       		.byte	0
+ 280 00c8 02       		.byte	2
+ 281 00c9 02       		.byte	2
+ 282 00ca 00       		.byte	0
+ 283 00cb 06       		.byte	6
+ 284 00cc 06       		.byte	6
+ 285 00cd 09       		.byte	9
+ 286 00ce 00       		.byte	0
+ 287 00cf 00       		.byte	0
+ 288 00d0 1D       		.byte	29
+ 289 00d1 02       		.byte	2
+ 290 00d2 00       		.byte	0
+ 291 00d3 06       		.byte	6
+ 292 00d4 02       		.byte	2
+ 293 00d5 06       		.byte	6
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 6
+
+
+ 294 00d6 02       		.byte	2
+ 295 00d7 00       		.byte	0
+ 296 00d8 23       		.byte	35
+ 297 00d9 02       		.byte	2
+ 298 00da 00       		.byte	0
+ 299 00db 06       		.byte	6
+ 300 00dc 02       		.byte	2
+ 301 00dd 08       		.byte	8
+ 302 00de 02       		.byte	2
+ 303 00df FE       		.byte	-2
+ 304 00e0 2B       		.byte	43
+ 305 00e1 02       		.byte	2
+ 306 00e2 00       		.byte	0
+ 307 00e3 06       		.byte	6
+ 308 00e4 06       		.byte	6
+ 309 00e5 0A       		.byte	10
+ 310 00e6 00       		.byte	0
+ 311 00e7 00       		.byte	0
+ 312 00e8 49       		.byte	73
+ 313 00e9 02       		.byte	2
+ 314 00ea 00       		.byte	0
+ 315 00eb 06       		.byte	6
+ 316 00ec 06       		.byte	6
+ 317 00ed 04       		.byte	4
+ 318 00ee 00       		.byte	0
+ 319 00ef 03       		.byte	3
+ 320 00f0 55       		.byte	85
+ 321 00f1 02       		.byte	2
+ 322 00f2 00       		.byte	0
+ 323 00f3 06       		.byte	6
+ 324 00f4 06       		.byte	6
+ 325 00f5 0A       		.byte	10
+ 326 00f6 00       		.byte	0
+ 327 00f7 00       		.byte	0
+ 328 00f8 73       		.byte	115
+ 329 00f9 02       		.byte	2
+ 330 00fa 00       		.byte	0
+ 331 00fb 06       		.byte	6
+ 332 00fc 06       		.byte	6
+ 333 00fd 09       		.byte	9
+ 334 00fe 00       		.byte	0
+ 335 00ff 00       		.byte	0
+ 336 0100 8E       		.byte	142
+ 337 0101 02       		.byte	2
+ 338 0102 00       		.byte	0
+ 339 0103 06       		.byte	6
+ 340 0104 06       		.byte	6
+ 341 0105 09       		.byte	9
+ 342 0106 00       		.byte	0
+ 343 0107 00       		.byte	0
+ 344 0108 A9       		.byte	169
+ 345 0109 02       		.byte	2
+ 346 010a 00       		.byte	0
+ 347 010b 06       		.byte	6
+ 348 010c 06       		.byte	6
+ 349 010d 09       		.byte	9
+ 350 010e 00       		.byte	0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 7
+
+
+ 351 010f 00       		.byte	0
+ 352 0110 C4       		.byte	196
+ 353 0111 02       		.byte	2
+ 354 0112 00       		.byte	0
+ 355 0113 06       		.byte	6
+ 356 0114 06       		.byte	6
+ 357 0115 09       		.byte	9
+ 358 0116 00       		.byte	0
+ 359 0117 00       		.byte	0
+ 360 0118 DF       		.byte	223
+ 361 0119 02       		.byte	2
+ 362 011a 00       		.byte	0
+ 363 011b 06       		.byte	6
+ 364 011c 06       		.byte	6
+ 365 011d 09       		.byte	9
+ 366 011e 00       		.byte	0
+ 367 011f 00       		.byte	0
+ 368 0120 FA       		.byte	250
+ 369 0121 02       		.byte	2
+ 370 0122 00       		.byte	0
+ 371 0123 06       		.byte	6
+ 372 0124 06       		.byte	6
+ 373 0125 09       		.byte	9
+ 374 0126 00       		.byte	0
+ 375 0127 00       		.byte	0
+ 376 0128 15       		.byte	21
+ 377 0129 03       		.byte	3
+ 378 012a 00       		.byte	0
+ 379 012b 06       		.byte	6
+ 380 012c 06       		.byte	6
+ 381 012d 09       		.byte	9
+ 382 012e 00       		.byte	0
+ 383 012f 00       		.byte	0
+ 384 0130 30       		.byte	48
+ 385 0131 03       		.byte	3
+ 386 0132 00       		.byte	0
+ 387 0133 06       		.byte	6
+ 388 0134 06       		.byte	6
+ 389 0135 09       		.byte	9
+ 390 0136 00       		.byte	0
+ 391 0137 00       		.byte	0
+ 392 0138 4B       		.byte	75
+ 393 0139 03       		.byte	3
+ 394 013a 00       		.byte	0
+ 395 013b 06       		.byte	6
+ 396 013c 06       		.byte	6
+ 397 013d 09       		.byte	9
+ 398 013e 00       		.byte	0
+ 399 013f 00       		.byte	0
+ 400 0140 66       		.byte	102
+ 401 0141 03       		.byte	3
+ 402 0142 00       		.byte	0
+ 403 0143 06       		.byte	6
+ 404 0144 06       		.byte	6
+ 405 0145 09       		.byte	9
+ 406 0146 00       		.byte	0
+ 407 0147 00       		.byte	0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 8
+
+
+ 408 0148 81       		.byte	129
+ 409 0149 03       		.byte	3
+ 410 014a 00       		.byte	0
+ 411 014b 06       		.byte	6
+ 412 014c 04       		.byte	4
+ 413 014d 09       		.byte	9
+ 414 014e 01       		.byte	1
+ 415 014f 00       		.byte	0
+ 416 0150 93       		.byte	147
+ 417 0151 03       		.byte	3
+ 418 0152 00       		.byte	0
+ 419 0153 06       		.byte	6
+ 420 0154 06       		.byte	6
+ 421 0155 0B       		.byte	11
+ 422 0156 00       		.byte	0
+ 423 0157 FE       		.byte	-2
+ 424 0158 B4       		.byte	180
+ 425 0159 03       		.byte	3
+ 426 015a 00       		.byte	0
+ 427 015b 06       		.byte	6
+ 428 015c 06       		.byte	6
+ 429 015d 09       		.byte	9
+ 430 015e 00       		.byte	0
+ 431 015f 00       		.byte	0
+ 432 0160 CF       		.byte	207
+ 433 0161 03       		.byte	3
+ 434 0162 00       		.byte	0
+ 435 0163 06       		.byte	6
+ 436 0164 06       		.byte	6
+ 437 0165 09       		.byte	9
+ 438 0166 00       		.byte	0
+ 439 0167 00       		.byte	0
+ 440 0168 EA       		.byte	234
+ 441 0169 03       		.byte	3
+ 442 016a 00       		.byte	0
+ 443 016b 06       		.byte	6
+ 444 016c 06       		.byte	6
+ 445 016d 09       		.byte	9
+ 446 016e 00       		.byte	0
+ 447 016f 00       		.byte	0
+ 448 0170 05       		.byte	5
+ 449 0171 04       		.byte	4
+ 450 0172 00       		.byte	0
+ 451 0173 06       		.byte	6
+ 452 0174 06       		.byte	6
+ 453 0175 09       		.byte	9
+ 454 0176 00       		.byte	0
+ 455 0177 00       		.byte	0
+ 456 0178 20       		.byte	32
+ 457 0179 04       		.byte	4
+ 458 017a 00       		.byte	0
+ 459 017b 06       		.byte	6
+ 460 017c 06       		.byte	6
+ 461 017d 09       		.byte	9
+ 462 017e 00       		.byte	0
+ 463 017f 00       		.byte	0
+ 464 0180 3B       		.byte	59
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 9
+
+
+ 465 0181 04       		.byte	4
+ 466 0182 00       		.byte	0
+ 467 0183 06       		.byte	6
+ 468 0184 06       		.byte	6
+ 469 0185 09       		.byte	9
+ 470 0186 00       		.byte	0
+ 471 0187 00       		.byte	0
+ 472 0188 56       		.byte	86
+ 473 0189 04       		.byte	4
+ 474 018a 00       		.byte	0
+ 475 018b 06       		.byte	6
+ 476 018c 06       		.byte	6
+ 477 018d 0A       		.byte	10
+ 478 018e 00       		.byte	0
+ 479 018f FF       		.byte	-1
+ 480 0190 74       		.byte	116
+ 481 0191 04       		.byte	4
+ 482 0192 00       		.byte	0
+ 483 0193 06       		.byte	6
+ 484 0194 06       		.byte	6
+ 485 0195 09       		.byte	9
+ 486 0196 00       		.byte	0
+ 487 0197 00       		.byte	0
+ 488 0198 8F       		.byte	143
+ 489 0199 04       		.byte	4
+ 490 019a 00       		.byte	0
+ 491 019b 06       		.byte	6
+ 492 019c 06       		.byte	6
+ 493 019d 09       		.byte	9
+ 494 019e 00       		.byte	0
+ 495 019f 00       		.byte	0
+ 496 01a0 AA       		.byte	170
+ 497 01a1 04       		.byte	4
+ 498 01a2 00       		.byte	0
+ 499 01a3 06       		.byte	6
+ 500 01a4 06       		.byte	6
+ 501 01a5 09       		.byte	9
+ 502 01a6 00       		.byte	0
+ 503 01a7 00       		.byte	0
+ 504 01a8 C5       		.byte	197
+ 505 01a9 04       		.byte	4
+ 506 01aa 00       		.byte	0
+ 507 01ab 06       		.byte	6
+ 508 01ac 06       		.byte	6
+ 509 01ad 09       		.byte	9
+ 510 01ae 00       		.byte	0
+ 511 01af 00       		.byte	0
+ 512 01b0 E0       		.byte	224
+ 513 01b1 04       		.byte	4
+ 514 01b2 00       		.byte	0
+ 515 01b3 06       		.byte	6
+ 516 01b4 06       		.byte	6
+ 517 01b5 09       		.byte	9
+ 518 01b6 00       		.byte	0
+ 519 01b7 00       		.byte	0
+ 520 01b8 FB       		.byte	251
+ 521 01b9 04       		.byte	4
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 10
+
+
+ 522 01ba 00       		.byte	0
+ 523 01bb 06       		.byte	6
+ 524 01bc 06       		.byte	6
+ 525 01bd 09       		.byte	9
+ 526 01be 00       		.byte	0
+ 527 01bf 00       		.byte	0
+ 528 01c0 16       		.byte	22
+ 529 01c1 05       		.byte	5
+ 530 01c2 00       		.byte	0
+ 531 01c3 06       		.byte	6
+ 532 01c4 06       		.byte	6
+ 533 01c5 09       		.byte	9
+ 534 01c6 00       		.byte	0
+ 535 01c7 00       		.byte	0
+ 536 01c8 31       		.byte	49
+ 537 01c9 05       		.byte	5
+ 538 01ca 00       		.byte	0
+ 539 01cb 06       		.byte	6
+ 540 01cc 06       		.byte	6
+ 541 01cd 09       		.byte	9
+ 542 01ce 00       		.byte	0
+ 543 01cf 00       		.byte	0
+ 544 01d0 4C       		.byte	76
+ 545 01d1 05       		.byte	5
+ 546 01d2 00       		.byte	0
+ 547 01d3 06       		.byte	6
+ 548 01d4 06       		.byte	6
+ 549 01d5 09       		.byte	9
+ 550 01d6 00       		.byte	0
+ 551 01d7 00       		.byte	0
+ 552 01d8 67       		.byte	103
+ 553 01d9 05       		.byte	5
+ 554 01da 00       		.byte	0
+ 555 01db 06       		.byte	6
+ 556 01dc 04       		.byte	4
+ 557 01dd 0C       		.byte	12
+ 558 01de 02       		.byte	2
+ 559 01df FF       		.byte	-1
+ 560 01e0 7F       		.byte	127
+ 561 01e1 05       		.byte	5
+ 562 01e2 00       		.byte	0
+ 563 01e3 06       		.byte	6
+ 564 01e4 06       		.byte	6
+ 565 01e5 0B       		.byte	11
+ 566 01e6 00       		.byte	0
+ 567 01e7 FE       		.byte	-2
+ 568 01e8 A0       		.byte	160
+ 569 01e9 05       		.byte	5
+ 570 01ea 00       		.byte	0
+ 571 01eb 06       		.byte	6
+ 572 01ec 04       		.byte	4
+ 573 01ed 0C       		.byte	12
+ 574 01ee 00       		.byte	0
+ 575 01ef FF       		.byte	-1
+ 576 01f0 B8       		.byte	184
+ 577 01f1 05       		.byte	5
+ 578 01f2 00       		.byte	0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 11
+
+
+ 579 01f3 06       		.byte	6
+ 580 01f4 04       		.byte	4
+ 581 01f5 02       		.byte	2
+ 582 01f6 01       		.byte	1
+ 583 01f7 09       		.byte	9
+ 584 01f8 BC       		.byte	188
+ 585 01f9 05       		.byte	5
+ 586 01fa 00       		.byte	0
+ 587 01fb 06       		.byte	6
+ 588 01fc 06       		.byte	6
+ 589 01fd 01       		.byte	1
+ 590 01fe 00       		.byte	0
+ 591 01ff FE       		.byte	-2
+ 592 0200 BF       		.byte	191
+ 593 0201 05       		.byte	5
+ 594 0202 00       		.byte	0
+ 595 0203 06       		.byte	6
+ 596 0204 04       		.byte	4
+ 597 0205 02       		.byte	2
+ 598 0206 00       		.byte	0
+ 599 0207 09       		.byte	9
+ 600 0208 C3       		.byte	195
+ 601 0209 05       		.byte	5
+ 602 020a 00       		.byte	0
+ 603 020b 06       		.byte	6
+ 604 020c 06       		.byte	6
+ 605 020d 06       		.byte	6
+ 606 020e 00       		.byte	0
+ 607 020f 00       		.byte	0
+ 608 0210 D5       		.byte	213
+ 609 0211 05       		.byte	5
+ 610 0212 00       		.byte	0
+ 611 0213 06       		.byte	6
+ 612 0214 06       		.byte	6
+ 613 0215 0A       		.byte	10
+ 614 0216 00       		.byte	0
+ 615 0217 00       		.byte	0
+ 616 0218 F3       		.byte	243
+ 617 0219 05       		.byte	5
+ 618 021a 00       		.byte	0
+ 619 021b 06       		.byte	6
+ 620 021c 06       		.byte	6
+ 621 021d 06       		.byte	6
+ 622 021e 00       		.byte	0
+ 623 021f 00       		.byte	0
+ 624 0220 05       		.byte	5
+ 625 0221 06       		.byte	6
+ 626 0222 00       		.byte	0
+ 627 0223 06       		.byte	6
+ 628 0224 06       		.byte	6
+ 629 0225 0A       		.byte	10
+ 630 0226 00       		.byte	0
+ 631 0227 00       		.byte	0
+ 632 0228 23       		.byte	35
+ 633 0229 06       		.byte	6
+ 634 022a 00       		.byte	0
+ 635 022b 06       		.byte	6
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 12
+
+
+ 636 022c 06       		.byte	6
+ 637 022d 06       		.byte	6
+ 638 022e 00       		.byte	0
+ 639 022f 00       		.byte	0
+ 640 0230 35       		.byte	53
+ 641 0231 06       		.byte	6
+ 642 0232 00       		.byte	0
+ 643 0233 06       		.byte	6
+ 644 0234 06       		.byte	6
+ 645 0235 09       		.byte	9
+ 646 0236 00       		.byte	0
+ 647 0237 00       		.byte	0
+ 648 0238 50       		.byte	80
+ 649 0239 06       		.byte	6
+ 650 023a 00       		.byte	0
+ 651 023b 06       		.byte	6
+ 652 023c 06       		.byte	6
+ 653 023d 08       		.byte	8
+ 654 023e 00       		.byte	0
+ 655 023f FE       		.byte	-2
+ 656 0240 68       		.byte	104
+ 657 0241 06       		.byte	6
+ 658 0242 00       		.byte	0
+ 659 0243 06       		.byte	6
+ 660 0244 06       		.byte	6
+ 661 0245 09       		.byte	9
+ 662 0246 00       		.byte	0
+ 663 0247 00       		.byte	0
+ 664 0248 83       		.byte	131
+ 665 0249 06       		.byte	6
+ 666 024a 00       		.byte	0
+ 667 024b 06       		.byte	6
+ 668 024c 04       		.byte	4
+ 669 024d 09       		.byte	9
+ 670 024e 01       		.byte	1
+ 671 024f 00       		.byte	0
+ 672 0250 95       		.byte	149
+ 673 0251 06       		.byte	6
+ 674 0252 00       		.byte	0
+ 675 0253 06       		.byte	6
+ 676 0254 05       		.byte	5
+ 677 0255 0B       		.byte	11
+ 678 0256 00       		.byte	0
+ 679 0257 FE       		.byte	-2
+ 680 0258 B1       		.byte	177
+ 681 0259 06       		.byte	6
+ 682 025a 00       		.byte	0
+ 683 025b 06       		.byte	6
+ 684 025c 06       		.byte	6
+ 685 025d 09       		.byte	9
+ 686 025e 00       		.byte	0
+ 687 025f 00       		.byte	0
+ 688 0260 CC       		.byte	204
+ 689 0261 06       		.byte	6
+ 690 0262 00       		.byte	0
+ 691 0263 06       		.byte	6
+ 692 0264 04       		.byte	4
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 13
+
+
+ 693 0265 09       		.byte	9
+ 694 0266 01       		.byte	1
+ 695 0267 00       		.byte	0
+ 696 0268 DE       		.byte	222
+ 697 0269 06       		.byte	6
+ 698 026a 00       		.byte	0
+ 699 026b 06       		.byte	6
+ 700 026c 06       		.byte	6
+ 701 026d 06       		.byte	6
+ 702 026e 00       		.byte	0
+ 703 026f 00       		.byte	0
+ 704 0270 F0       		.byte	240
+ 705 0271 06       		.byte	6
+ 706 0272 00       		.byte	0
+ 707 0273 06       		.byte	6
+ 708 0274 06       		.byte	6
+ 709 0275 06       		.byte	6
+ 710 0276 00       		.byte	0
+ 711 0277 00       		.byte	0
+ 712 0278 02       		.byte	2
+ 713 0279 07       		.byte	7
+ 714 027a 00       		.byte	0
+ 715 027b 06       		.byte	6
+ 716 027c 06       		.byte	6
+ 717 027d 06       		.byte	6
+ 718 027e 00       		.byte	0
+ 719 027f 00       		.byte	0
+ 720 0280 14       		.byte	20
+ 721 0281 07       		.byte	7
+ 722 0282 00       		.byte	0
+ 723 0283 06       		.byte	6
+ 724 0284 06       		.byte	6
+ 725 0285 08       		.byte	8
+ 726 0286 00       		.byte	0
+ 727 0287 FE       		.byte	-2
+ 728 0288 2C       		.byte	44
+ 729 0289 07       		.byte	7
+ 730 028a 00       		.byte	0
+ 731 028b 06       		.byte	6
+ 732 028c 06       		.byte	6
+ 733 028d 08       		.byte	8
+ 734 028e 00       		.byte	0
+ 735 028f FE       		.byte	-2
+ 736 0290 44       		.byte	68
+ 737 0291 07       		.byte	7
+ 738 0292 00       		.byte	0
+ 739 0293 06       		.byte	6
+ 740 0294 06       		.byte	6
+ 741 0295 06       		.byte	6
+ 742 0296 00       		.byte	0
+ 743 0297 00       		.byte	0
+ 744 0298 56       		.byte	86
+ 745 0299 07       		.byte	7
+ 746 029a 00       		.byte	0
+ 747 029b 06       		.byte	6
+ 748 029c 06       		.byte	6
+ 749 029d 06       		.byte	6
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 14
+
+
+ 750 029e 00       		.byte	0
+ 751 029f 00       		.byte	0
+ 752 02a0 68       		.byte	104
+ 753 02a1 07       		.byte	7
+ 754 02a2 00       		.byte	0
+ 755 02a3 06       		.byte	6
+ 756 02a4 06       		.byte	6
+ 757 02a5 08       		.byte	8
+ 758 02a6 00       		.byte	0
+ 759 02a7 00       		.byte	0
+ 760 02a8 80       		.byte	128
+ 761 02a9 07       		.byte	7
+ 762 02aa 00       		.byte	0
+ 763 02ab 06       		.byte	6
+ 764 02ac 06       		.byte	6
+ 765 02ad 06       		.byte	6
+ 766 02ae 00       		.byte	0
+ 767 02af 00       		.byte	0
+ 768 02b0 92       		.byte	146
+ 769 02b1 07       		.byte	7
+ 770 02b2 00       		.byte	0
+ 771 02b3 06       		.byte	6
+ 772 02b4 06       		.byte	6
+ 773 02b5 06       		.byte	6
+ 774 02b6 00       		.byte	0
+ 775 02b7 00       		.byte	0
+ 776 02b8 A4       		.byte	164
+ 777 02b9 07       		.byte	7
+ 778 02ba 00       		.byte	0
+ 779 02bb 06       		.byte	6
+ 780 02bc 06       		.byte	6
+ 781 02bd 06       		.byte	6
+ 782 02be 00       		.byte	0
+ 783 02bf 00       		.byte	0
+ 784 02c0 B6       		.byte	182
+ 785 02c1 07       		.byte	7
+ 786 02c2 00       		.byte	0
+ 787 02c3 06       		.byte	6
+ 788 02c4 06       		.byte	6
+ 789 02c5 06       		.byte	6
+ 790 02c6 00       		.byte	0
+ 791 02c7 00       		.byte	0
+ 792 02c8 C8       		.byte	200
+ 793 02c9 07       		.byte	7
+ 794 02ca 00       		.byte	0
+ 795 02cb 06       		.byte	6
+ 796 02cc 06       		.byte	6
+ 797 02cd 08       		.byte	8
+ 798 02ce 00       		.byte	0
+ 799 02cf FE       		.byte	-2
+ 800 02d0 E0       		.byte	224
+ 801 02d1 07       		.byte	7
+ 802 02d2 00       		.byte	0
+ 803 02d3 06       		.byte	6
+ 804 02d4 06       		.byte	6
+ 805 02d5 06       		.byte	6
+ 806 02d6 00       		.byte	0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 15
+
+
+ 807 02d7 00       		.byte	0
+ 808 02d8 F2       		.byte	242
+ 809 02d9 07       		.byte	7
+ 810 02da 00       		.byte	0
+ 811 02db 06       		.byte	6
+ 812 02dc 04       		.byte	4
+ 813 02dd 0C       		.byte	12
+ 814 02de 02       		.byte	2
+ 815 02df FF       		.byte	-1
+ 816 02e0 0A       		.byte	10
+ 817 02e1 08       		.byte	8
+ 818 02e2 00       		.byte	0
+ 819 02e3 06       		.byte	6
+ 820 02e4 02       		.byte	2
+ 821 02e5 0D       		.byte	13
+ 822 02e6 02       		.byte	2
+ 823 02e7 FE       		.byte	-2
+ 824 02e8 17       		.byte	23
+ 825 02e9 08       		.byte	8
+ 826 02ea 00       		.byte	0
+ 827 02eb 06       		.byte	6
+ 828 02ec 04       		.byte	4
+ 829 02ed 0C       		.byte	12
+ 830 02ee 00       		.byte	0
+ 831 02ef FF       		.byte	-1
+ 832 02f0 2F       		.byte	47
+ 833 02f1 08       		.byte	8
+ 834 02f2 00       		.byte	0
+ 835 02f3 06       		.byte	6
+ 836 02f4 06       		.byte	6
+ 837 02f5 03       		.byte	3
+ 838 02f6 00       		.byte	0
+ 839 02f7 08       		.byte	8
+ 840 02f8 38       		.byte	56
+ 841 02f9 08       		.byte	8
+ 842 02fa 00       		.byte	0
+ 843 02fb 0C       		.byte	12
+ 844 02fc 0C       		.byte	12
+ 845 02fd 0D       		.byte	13
+ 846 02fe 00       		.byte	0
+ 847 02ff FE       		.byte	-2
+ 848 0300 86       		.byte	134
+ 849 0301 08       		.byte	8
+ 850 0302 00       		.byte	0
+ 851 0303 0C       		.byte	12
+ 852 0304 0C       		.byte	12
+ 853 0305 09       		.byte	9
+ 854 0306 00       		.byte	0
+ 855 0307 00       		.byte	0
+ 856 0308 BC       		.byte	188
+ 857 0309 08       		.byte	8
+ 858 030a 00       		.byte	0
+ 859 030b 0C       		.byte	12
+ 860 030c 0C       		.byte	12
+ 861 030d 0B       		.byte	11
+ 862 030e 00       		.byte	0
+ 863 030f FF       		.byte	-1
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 16
+
+
+ 864 0310 FE       		.byte	254
+ 865 0311 08       		.byte	8
+ 866 0312 00       		.byte	0
+ 867 0313 0C       		.byte	12
+ 868 0314 0C       		.byte	12
+ 869 0315 09       		.byte	9
+ 870 0316 00       		.byte	0
+ 871 0317 00       		.byte	0
+ 872 0318 34       		.byte	52
+ 873 0319 09       		.byte	9
+ 874 031a 40       		.byte	64
+ 875 031b 08       		.byte	8
+ 876 031c 09       		.byte	9
+ 877 031d 09       		.byte	9
+ 878 031e 00       		.byte	0
+ 879 031f 00       		.byte	0
+ 880 0320 5D       		.byte	93
+ 881 0321 09       		.byte	9
+ 882 0322 00       		.byte	0
+ 883 0323 0C       		.byte	12
+ 884 0324 0C       		.byte	12
+ 885 0325 0D       		.byte	13
+ 886 0326 00       		.byte	0
+ 887 0327 FE       		.byte	-2
+ 888 0328 AB       		.byte	171
+ 889 0329 09       		.byte	9
+ 890 032a 00       		.byte	0
+ 891 032b 0C       		.byte	12
+ 892 032c 0C       		.byte	12
+ 893 032d 0D       		.byte	13
+ 894 032e 00       		.byte	0
+ 895 032f FE       		.byte	-2
+ 896 0330 F9       		.byte	249
+ 897 0331 09       		.byte	9
+ 898 0332 80       		.byte	128
+ 899 0333 0D       		.byte	13
+ 900 0334 0E       		.byte	14
+ 901 0335 0B       		.byte	11
+ 902 0336 00       		.byte	0
+ 903 0337 FF       		.byte	-1
+ 904 0338 46       		.byte	70
+ 905 0339 0A       		.byte	10
+ 906 033a 00       		.byte	0
+ 907 033b 0C       		.byte	12
+ 908 033c 0C       		.byte	12
+ 909 033d 0D       		.byte	13
+ 910 033e 00       		.byte	0
+ 911 033f FE       		.byte	-2
+ 912 0340 94       		.byte	148
+ 913 0341 0A       		.byte	10
+ 914 0342 80       		.byte	128
+ 915 0343 0D       		.byte	13
+ 916 0344 0E       		.byte	14
+ 917 0345 09       		.byte	9
+ 918 0346 00       		.byte	0
+ 919 0347 00       		.byte	0
+ 920 0348 D3       		.byte	211
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 17
+
+
+ 921 0349 0A       		.byte	10
+ 922 034a 00       		.byte	0
+ 923 034b 0C       		.byte	12
+ 924 034c 0C       		.byte	12
+ 925 034d 0D       		.byte	13
+ 926 034e 00       		.byte	0
+ 927 034f FE       		.byte	-2
+ 928 0350 21       		.byte	33
+ 929 0351 0B       		.byte	11
+ 930 0352 00       		.byte	0
+ 931 0353 06       		.byte	6
+ 932 0354 06       		.byte	6
+ 933 0355 0A       		.byte	10
+ 934 0356 00       		.byte	0
+ 935 0357 FF       		.byte	-1
+ 936 0358 3F       		.byte	63
+ 937 0359 0B       		.byte	11
+ 938 035a 00       		.byte	0
+ 939 035b 09       		.byte	9
+ 940 035c 09       		.byte	9
+ 941 035d 0A       		.byte	10
+ 942 035e 00       		.byte	0
+ 943 035f FF       		.byte	-1
+ 944 0360 6C       		.byte	108
+ 945 0361 0B       		.byte	11
+ 946 0362 80       		.byte	128
+ 947 0363 0D       		.byte	13
+ 948 0364 0E       		.byte	14
+ 949 0365 0D       		.byte	13
+ 950 0366 00       		.byte	0
+ 951 0367 FE       		.byte	-2
+ 952 0368 C7       		.byte	199
+ 953 0369 0B       		.byte	11
+ 954 036a 00       		.byte	0
+ 955 036b 0C       		.byte	12
+ 956 036c 0C       		.byte	12
+ 957 036d 09       		.byte	9
+ 958 036e 00       		.byte	0
+ 959 036f 00       		.byte	0
+ 960 0370 FD       		.byte	253
+ 961 0371 0B       		.byte	11
+ 962 0372 80       		.byte	128
+ 963 0373 0A       		.byte	10
+ 964 0374 08       		.byte	8
+ 965 0375 0C       		.byte	12
+ 966 0376 01       		.byte	1
+ 967 0377 FE       		.byte	-2
+ 968 0378 2D       		.byte	45
+ 969 0379 0C       		.byte	12
+ 970 037a 80       		.byte	128
+ 971 037b 0A       		.byte	10
+ 972 037c 0B       		.byte	11
+ 973 037d 0D       		.byte	13
+ 974 037e 00       		.byte	0
+ 975 037f FE       		.byte	-2
+ 976 0380 75       		.byte	117
+ 977 0381 0C       		.byte	12
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 18
+
+
+ 978 0382 80       		.byte	128
+ 979 0383 0A       		.byte	10
+ 980 0384 0B       		.byte	11
+ 981 0385 0B       		.byte	11
+ 982 0386 00       		.byte	0
+ 983 0387 FF       		.byte	-1
+ 984 0388 B2       		.byte	178
+ 985 0389 0C       		.byte	12
+ 986 038a 80       		.byte	128
+ 987 038b 0A       		.byte	10
+ 988 038c 0B       		.byte	11
+ 989 038d 0B       		.byte	11
+ 990 038e 00       		.byte	0
+ 991 038f FF       		.byte	-1
+ 992 0390 EF       		.byte	239
+ 993 0391 0C       		.byte	12
+ 994 0392 80       		.byte	128
+ 995 0393 0A       		.byte	10
+ 996 0394 08       		.byte	8
+ 997 0395 0C       		.byte	12
+ 998 0396 01       		.byte	1
+ 999 0397 FE       		.byte	-2
+ 1000 0398 1F       		.byte	31
+ 1001 0399 0D       		.byte	13
+ 1002 039a 80       		.byte	128
+ 1003 039b 0A       		.byte	10
+ 1004 039c 0C       		.byte	12
+ 1005 039d 0B       		.byte	11
+ 1006 039e FF       		.byte	-1
+ 1007 039f FF       		.byte	-1
+ 1008 03a0 61       		.byte	97
+ 1009 03a1 0D       		.byte	13
+ 1010 03a2 80       		.byte	128
+ 1011 03a3 07       		.byte	7
+ 1012 03a4 07       		.byte	7
+ 1013 03a5 0B       		.byte	11
+ 1014 03a6 00       		.byte	0
+ 1015 03a7 FF       		.byte	-1
+ 1016 03a8 88       		.byte	136
+ 1017 03a9 0D       		.byte	13
+ 1018 03aa 80       		.byte	128
+ 1019 03ab 07       		.byte	7
+ 1020 03ac 07       		.byte	7
+ 1021 03ad 0B       		.byte	11
+ 1022 03ae 00       		.byte	0
+ 1023 03af FF       		.byte	-1
+ 1024 03b0 AF       		.byte	175
+ 1025 03b1 0D       		.byte	13
+ 1026 03b2 80       		.byte	128
+ 1027 03b3 0A       		.byte	10
+ 1028 03b4 0B       		.byte	11
+ 1029 03b5 0B       		.byte	11
+ 1030 03b6 00       		.byte	0
+ 1031 03b7 FF       		.byte	-1
+ 1032 03b8 EC       		.byte	236
+ 1033 03b9 0D       		.byte	13
+ 1034 03ba 80       		.byte	128
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 19
+
+
+ 1035 03bb 0A       		.byte	10
+ 1036 03bc 0B       		.byte	11
+ 1037 03bd 03       		.byte	3
+ 1038 03be 00       		.byte	0
+ 1039 03bf 03       		.byte	3
+ 1040 03c0 FD       		.byte	253
+ 1041 03c1 0D       		.byte	13
+ 1042 03c2 80       		.byte	128
+ 1043 03c3 0D       		.byte	13
+ 1044 03c4 0E       		.byte	14
+ 1045 03c5 09       		.byte	9
+ 1046 03c6 00       		.byte	0
+ 1047 03c7 00       		.byte	0
+ 1048 03c8 3C       		.byte	60
+ 1049 03c9 0E       		.byte	14
+ 1050 03ca 00       		.byte	0
+ 1051 03cb 0F       		.byte	15
+ 1052 03cc 10       		.byte	16
+ 1053 03cd 0D       		.byte	13
+ 1054 03ce 00       		.byte	0
+ 1055 03cf FE       		.byte	-2
+ 1056 03d0 A4       		.byte	164
+ 1057 03d1 0E       		.byte	14
+ 1058 03d2 80       		.byte	128
+ 1059 03d3 0D       		.byte	13
+ 1060 03d4 0F       		.byte	15
+ 1061 03d5 0D       		.byte	13
+ 1062 03d6 FF       		.byte	-1
+ 1063 03d7 FE       		.byte	-2
+ 1064 03d8 06       		.byte	6
+ 1065 03d9 0F       		.byte	15
+ 1066 03da 00       		.byte	0
+ 1067 03db 0C       		.byte	12
+ 1068 03dc 0C       		.byte	12
+ 1069 03dd 0B       		.byte	11
+ 1070 03de 00       		.byte	0
+ 1071 03df FF       		.byte	-1
+ 1072 03e0 48       		.byte	72
+ 1073 03e1 0F       		.byte	15
+ 1074 03e2 80       		.byte	128
+ 1075 03e3 0A       		.byte	10
+ 1076 03e4 0B       		.byte	11
+ 1077 03e5 07       		.byte	7
+ 1078 03e6 00       		.byte	0
+ 1079 03e7 01       		.byte	1
+ 1080 03e8 6F       		.byte	111
+ 1081 03e9 0F       		.byte	15
+ 1082 03ea 80       		.byte	128
+ 1083 03eb 0A       		.byte	10
+ 1084 03ec 0B       		.byte	11
+ 1085 03ed 07       		.byte	7
+ 1086 03ee 00       		.byte	0
+ 1087 03ef 01       		.byte	1
+ 1088 03f0 96       		.byte	150
+ 1089 03f1 0F       		.byte	15
+ 1090 03f2 00       		.byte	0
+ 1091 03f3 0F       		.byte	15
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 20
+
+
+ 1092 03f4 10       		.byte	16
+ 1093 03f5 0A       		.byte	10
+ 1094 03f6 FF       		.byte	-1
+ 1095 03f7 00       		.byte	0
+ 1096 03f8 E6       		.byte	230
+ 1097 03f9 0F       		.byte	15
+ 1098 03fa 00       		.byte	0
+ 1099 03fb 0C       		.byte	12
+ 1100 03fc 0C       		.byte	12
+ 1101 03fd 09       		.byte	9
+ 1102 03fe 00       		.byte	0
+ 1103 03ff 00       		.byte	0
+ 1104 0400 1C       		.byte	28
+ 1105 0401 10       		.byte	16
+ 1106 0402 00       		.byte	0
+ 1107 0403 0C       		.byte	12
+ 1108 0404 0C       		.byte	12
+ 1109 0405 0D       		.byte	13
+ 1110 0406 00       		.byte	0
+ 1111 0407 FE       		.byte	-2
+ 1112 0408 6A       		.byte	106
+ 1113 0409 10       		.byte	16
+ 1114 040a 00       		.byte	0
+ 1115 040b 0C       		.byte	12
+ 1116 040c 0D       		.byte	13
+ 1117 040d 0D       		.byte	13
+ 1118 040e FF       		.byte	-1
+ 1119 040f FE       		.byte	-2
+ 1120 0410 BF       		.byte	191
+ 1121 0411 10       		.byte	16
+ 1122 0412 80       		.byte	128
+ 1123 0413 0A       		.byte	10
+ 1124 0414 0B       		.byte	11
+ 1125 0415 0B       		.byte	11
+ 1126 0416 00       		.byte	0
+ 1127 0417 FF       		.byte	-1
+ 1128 0418 FC       		.byte	252
+ 1129 0419 10       		.byte	16
+ 1130 041a 80       		.byte	128
+ 1131 041b 0A       		.byte	10
+ 1132 041c 0B       		.byte	11
+ 1133 041d 0D       		.byte	13
+ 1134 041e 00       		.byte	0
+ 1135 041f FE       		.byte	-2
+ 1136 0420 44       		.byte	68
+ 1137 0421 11       		.byte	17
+ 1138 0422 80       		.byte	128
+ 1139 0423 0A       		.byte	10
+ 1140 0424 0B       		.byte	11
+ 1141 0425 0B       		.byte	11
+ 1142 0426 00       		.byte	0
+ 1143 0427 FF       		.byte	-1
+ 1144 0428 81       		.byte	129
+ 1145 0429 11       		.byte	17
+ 1146 042a 80       		.byte	128
+ 1147 042b 07       		.byte	7
+ 1148 042c 09       		.byte	9
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 21
+
+
+ 1149 042d 0D       		.byte	13
+ 1150 042e FF       		.byte	-1
+ 1151 042f FE       		.byte	-2
+ 1152 0430 BC       		.byte	188
+ 1153 0431 11       		.byte	17
+ 1154 0432 80       		.byte	128
+ 1155 0433 0A       		.byte	10
+ 1156 0434 0B       		.byte	11
+ 1157 0435 0D       		.byte	13
+ 1158 0436 00       		.byte	0
+ 1159 0437 FE       		.byte	-2
+ 1160 0438 04       		.byte	4
+ 1161 0439 12       		.byte	18
+ 1162 043a 80       		.byte	128
+ 1163 043b 0A       		.byte	10
+ 1164 043c 0B       		.byte	11
+ 1165 043d 0D       		.byte	13
+ 1166 043e 00       		.byte	0
+ 1167 043f FE       		.byte	-2
+ 1168 0440 4C       		.byte	76
+ 1169 0441 12       		.byte	18
+ 1170 0442 80       		.byte	128
+ 1171 0443 0D       		.byte	13
+ 1172 0444 0E       		.byte	14
+ 1173 0445 09       		.byte	9
+ 1174 0446 00       		.byte	0
+ 1175 0447 00       		.byte	0
+ 1176 0448 8B       		.byte	139
+ 1177 0449 12       		.byte	18
+ 1178 044a 00       		.byte	0
+ 1179 044b 0C       		.byte	12
+ 1180 044c 0E       		.byte	14
+ 1181 044d 0D       		.byte	13
+ 1182 044e FF       		.byte	-1
+ 1183 044f FE       		.byte	-2
+ 1184 0450 E6       		.byte	230
+ 1185 0451 12       		.byte	18
+ 1186 0452 00       		.byte	0
+ 1187 0453 09       		.byte	9
+ 1188 0454 09       		.byte	9
+ 1189 0455 0D       		.byte	13
+ 1190 0456 00       		.byte	0
+ 1191 0457 FE       		.byte	-2
+ 1192 0458 21       		.byte	33
+ 1193 0459 13       		.byte	19
+ 1194 045a 00       		.byte	0
+ 1195 045b 0F       		.byte	15
+ 1196 045c 0F       		.byte	15
+ 1197 045d 0C       		.byte	12
+ 1198 045e 00       		.byte	0
+ 1199 045f FF       		.byte	-1
+ 1200 0460 7B       		.byte	123
+ 1201 0461 13       		.byte	19
+ 1202 0462 00       		.byte	0
+ 1203 0463 0F       		.byte	15
+ 1204 0464 0F       		.byte	15
+ 1205 0465 09       		.byte	9
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 22
+
+
+ 1206 0466 00       		.byte	0
+ 1207 0467 00       		.byte	0
+ 1208 0468 BF       		.byte	191
+ 1209 0469 13       		.byte	19
+ 1210 046a 00       		.byte	0
+ 1211 046b 0F       		.byte	15
+ 1212 046c 0F       		.byte	15
+ 1213 046d 09       		.byte	9
+ 1214 046e 00       		.byte	0
+ 1215 046f 00       		.byte	0
+ 1216 0470 03       		.byte	3
+ 1217 0471 14       		.byte	20
+ 1218 0472 00       		.byte	0
+ 1219 0473 0F       		.byte	15
+ 1220 0474 0F       		.byte	15
+ 1221 0475 09       		.byte	9
+ 1222 0476 00       		.byte	0
+ 1223 0477 00       		.byte	0
+ 1224 0478 47       		.byte	71
+ 1225 0479 14       		.byte	20
+ 1226 047a 00       		.byte	0
+ 1227 047b 0F       		.byte	15
+ 1228 047c 0F       		.byte	15
+ 1229 047d 09       		.byte	9
+ 1230 047e 00       		.byte	0
+ 1231 047f 00       		.byte	0
+ 1232 0480 8B       		.byte	139
+ 1233 0481 14       		.byte	20
+ 1234 0482 00       		.byte	0
+ 1235 0483 0F       		.byte	15
+ 1236 0484 0F       		.byte	15
+ 1237 0485 09       		.byte	9
+ 1238 0486 00       		.byte	0
+ 1239 0487 00       		.byte	0
+ 1240 0488 CF       		.byte	207
+ 1241 0489 14       		.byte	20
+ 1242 048a 00       		.byte	0
+ 1243 048b 0F       		.byte	15
+ 1244 048c 10       		.byte	16
+ 1245 048d 0B       		.byte	11
+ 1246 048e 00       		.byte	0
+ 1247 048f FF       		.byte	-1
+ 1248 0490 27       		.byte	39
+ 1249 0491 15       		.byte	21
+ 1250 0492 80       		.byte	128
+ 1251 0493 0A       		.byte	10
+ 1252 0494 0A       		.byte	10
+ 1253 0495 0D       		.byte	13
+ 1254 0496 00       		.byte	0
+ 1255 0497 FE       		.byte	-2
+ 1256 0498 68       		.byte	104
+ 1257 0499 15       		.byte	21
+ 1258 049a 80       		.byte	128
+ 1259 049b 0A       		.byte	10
+ 1260 049c 0B       		.byte	11
+ 1261 049d 0D       		.byte	13
+ 1262 049e 00       		.byte	0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 23
+
+
+ 1263 049f FE       		.byte	-2
+ 1264 04a0 B0       		.byte	176
+ 1265 04a1 15       		.byte	21
+ 1266 04a2 00       		.byte	0
+ 1267 04a3 0C       		.byte	12
+ 1268 04a4 0D       		.byte	13
+ 1269 04a5 0D       		.byte	13
+ 1270 04a6 FF       		.byte	-1
+ 1271 04a7 FE       		.byte	-2
+ 1272 04a8 05       		.byte	5
+ 1273 04a9 16       		.byte	22
+ 1274 04aa 00       		.byte	0
+ 1275 04ab 0F       		.byte	15
+ 1276 04ac 0F       		.byte	15
+ 1277 04ad 09       		.byte	9
+ 1278 04ae 00       		.byte	0
+ 1279 04af 00       		.byte	0
+ 1280 04b0 49       		.byte	73
+ 1281 04b1 16       		.byte	22
+ 1282 04b2 00       		.byte	0
+ 1283 04b3 09       		.byte	9
+ 1284 04b4 09       		.byte	9
+ 1285 04b5 0D       		.byte	13
+ 1286 04b6 00       		.byte	0
+ 1287 04b7 FE       		.byte	-2
+ 1288 04b8 84       		.byte	132
+ 1289 04b9 16       		.byte	22
+ 1290 04ba 10       		.byte	16
+ 1291 04bb 0C       		.byte	12
+ 1292 04bc 0D       		.byte	13
+ 1293 04bd 09       		.byte	9
+ 1294 04be 00       		.byte	0
+ 1295 04bf 00       		.byte	0
+ 1296              		.section	.rodata.gylph_bitmap,"a"
+ 1297              		.align	2
+ 1300              	gylph_bitmap:
+ 1301 0000 75867554 		.ascii	"u\206uTC2\000\"\207\000\322\320\006\210`\007\026\000"
+ 1301      43320022 
+ 1301      8700D2D0 
+ 1301      06886007 
+ 1301      1600
+ 1302 0012 00000004 		.ascii	"\000\000\000\004 `\005\020`\217\377\370\006\000`\006"
+ 1302      20600510 
+ 1302      608FFFF8 
+ 1302      06006006 
+ 1303 0022 00600600 		.ascii	"\000`\006\000`\217\377\370\006\002@\006\0030\000\021"
+ 1303      608FFFF8 
+ 1303      06024006 
+ 1303      03300011 
+ 1304 0032 00038850 		.ascii	"\000\003\210P\0124\320\0144@\006\324\000\000~\020\000"
+ 1304      0A34D00C 
+ 1304      344006D4 
+ 1304      00007E10 
+ 1304      00
+ 1305 0043 38B00733 		.ascii	"8\260\0073\260\0343\220\006\2100\0003\000\000\021\000"
+ 1305      B01C3390 
+ 1305      06883000 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 24
+
+
+ 1305      33000011 
+ 1305      00
+ 1306 0054 57305080 		.ascii	"W0P\200\202@\220\225\000\200\205\000%Sa\000X\010\000"
+ 1306      82409095 
+ 1306      00808500 
+ 1306      25536100 
+ 1306      580800
+ 1307 0067 49090508 		.ascii	"I\011\005\010\011\005\004d\005d\000\010\011\000\012"
+ 1307      09050464 
+ 1307      05640008 
+ 1307      09000A
+ 1308 0076 28000B62 		.ascii	"(\000\013b\000\014B\201t\200p\260\2420\260-\001;v\265"
+ 1308      000C4281 
+ 1308      748070B0 
+ 1308      A230B02D 
+ 1308      013B76B5 
+ 1309 008a 1E209308 		.ascii	"\036 \223\010\000\000\000\002\000p\004@\012\000(\000"
+ 1309      00000002 
+ 1309      00700440 
+ 1309      0A002800 
+ 1310 009a 55006400 		.ascii	"U\000d\000F\000\031\000\011\000\002`\000R\000\000 \000"
+ 1310      46001900 
+ 1310      09000260 
+ 1310      00520000 
+ 1310      2000
+ 1311 00ac 17000540 		.ascii	"\027\000\005@\000\240\000\201\000d\000U\000d\000\220"
+ 1311      00A00081 
+ 1311      00640055 
+ 1311      00640090 
+ 1312 00bc 00900710 		.ascii	"\000\220\007\0204\000\000\000\000\"\000\000f\000jD\246"
+ 1312      34000000 
+ 1312      00220000 
+ 1312      66006A44 
+ 1312      A6
+ 1313 00cd 0398303B 		.ascii	"\003\2300;w\2632d3\000u\000\000\023\000\000$\000\000"
+ 1313      77B33264 
+ 1313      33007500 
+ 1313      00130000 
+ 1313      240000
+ 1314 00e0 24003789 		.ascii	"$\0007\211t\000$\000\000$\000\000\023\000Gwt\006\001"
+ 1314      74002400 
+ 1314      00240000 
+ 1314      13004777 
+ 1314      740601
+ 1315 00f3 E1000000 		.ascii	"\341\000\000\000\000\000\025\000\000`\000\000`\000\005"
+ 1315      00001500 
+ 1315      00600000 
+ 1315      600005
+ 1316 0102 10000600 		.ascii	"\020\000\006\000\000B\000\000`\000\002@\000\006\000"
+ 1316      00420000 
+ 1316      60000240 
+ 1316      000600
+ 1317 0111 00150000 		.ascii	"\000\025\000\000P\000\000\003\2100\014\000\260:\000"
+ 1317      50000003 
+ 1317      88300C00 
+ 1317      B03A00
+ 1318 0120 A2580084 		.ascii	"\242X\000\204g\000\205X\000\204:\000\242\013\000\260"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 25
+
+
+ 1318      67008558 
+ 1318      00843A00 
+ 1318      A20B00B0 
+ 1319 0130 03883000 		.ascii	"\003\2100\000P*`\005`\005`\005`\005`\005`\005`:\304"
+ 1319      502A6005 
+ 1319      60056005 
+ 1319      60056005 
+ 1319      6005603A 
+ 1320 0145 05576018 		.ascii	"\005W`\030\000\260+\000\241\000\000\260\000\0070\000"
+ 1320      00B02B00 
+ 1320      A10000B0 
+ 1320      00073000 
+ 1321 0155 44000260 		.ascii	"D\000\002`\000\007\0002\\\314\340\005X0\032\000\260"
+ 1321      00070032 
+ 1321      5CCCE005 
+ 1321      58301A00 
+ 1321      B0
+ 1322 0166 0600C000 		.ascii	"\006\000\300\000\003\200\000[\020\000\000\260\002\000"
+ 1322      0380005B 
+ 1322      100000B0 
+ 1322      0200
+ 1323 0174 A33B00B1 		.ascii	"\243;\000\261\007VP\000\006P\000\014P\000gP\001WP\006"
+ 1323      07565000 
+ 1323      0650000C 
+ 1323      50006750 
+ 1323      01575006 
+ 1324 0188 07502407 		.ascii	"\007P$\007PUY\202\000\007P\000;\222\012\314\260\005"
+ 1324      50555982 
+ 1324      00075000 
+ 1324      3B920ACC 
+ 1324      B005
+ 1325 019a 00000500 		.ascii	"\000\000\005\000\000\010y`\005\000\300\000\000\223\027"
+ 1325      00087960 
+ 1325      0500C000 
+ 1325      009317
+ 1326 01a9 00923900 		.ascii	"\000\2229\000\260\005W@\001v\220\011\000p)\000\000Y"
+ 1326      B0055740 
+ 1326      01769009 
+ 1326      00702900 
+ 1326      0059
+ 1327 01bb 88706C00 		.ascii	"\210pl\000\242g\000uI\000d\014\000\201\004\205P\016"
+ 1327      A2670075 
+ 1327      4900640C 
+ 1327      00810485 
+ 1327      500E
+ 1328 01cd CCD32400 		.ascii	"\314\323$\000`\000\0030\000\007\000\000\030\000\000"
+ 1328      60000330 
+ 1328      00070000 
+ 1328      180000
+ 1329 01dc 640000A2 		.ascii	"d\000\000\242\000\000\322\000\000\302\000\006fP'\000"
+ 1329      0000D200 
+ 1329      00C20006 
+ 1329      66502700 
+ 1330 01ec 91380082 		.ascii	"\2218\000\202\013rp\005\2360'\002\320s\000tE\000\201"
+ 1330      0B727005 
+ 1330      9E302702 
+ 1330      D0730074 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 26
+
+
+ 1330      450081
+ 1331 01ff 06555006 		.ascii	"\006UP\006g08\000\240e\000\222e\000\224:\002\304\005"
+ 1331      67303800 
+ 1331      A0650092 
+ 1331      6500943A 
+ 1331      02C405
+ 1332 0212 85A30000 		.ascii	"\205\243\000\000\260\007\002\200\012h\000\2261\000\000"
+ 1332      B0070280 
+ 1332      0A680096 
+ 1332      310000
+ 1333 0221 31969710 		.ascii	"1\226\227\020\000\000\020\227D0\000\000\000\000\000"
+ 1333      00001097 
+ 1333      44300000 
+ 1333      000000
+ 1334 0230 70000710 		.ascii	"p\000\007\020\000q\000\006 \000\027\000\000\003P\000"
+ 1334      00710006 
+ 1334      20001700 
+ 1334      00035000 
+ 1335 0240 00440000 		.ascii	"\000D\000\000\004@\000\000PGwt\000\000\000\000\000\000"
+ 1335      04400000 
+ 1335      50477774 
+ 1335      00000000 
+ 1335      0000
+ 1336 0252 47777400 		.ascii	"Gwt\000\000\000\007\000\000\001p\000\000\027\000\000"
+ 1336      00000700 
+ 1336      00017000 
+ 1336      00170000 
+ 1337 0262 02600000 		.ascii	"\002`\000\000q\000\0050\000D\000\004@\000\005\000\000"
+ 1337      71000530 
+ 1337      00440004 
+ 1337      40000500 
+ 1337      00
+ 1338 0273 04787024 		.ascii	"\004xp$\000\223Y\000\205\002\000\301\000\011 \000B\000"
+ 1338      00935900 
+ 1338      850200C1 
+ 1338      00092000 
+ 1338      4200
+ 1339 0285 00300000 		.ascii	"\0000\000\0001\000\000\226\000\002u`\010\026u5q\206"
+ 1339      31000096 
+ 1339      00027560 
+ 1339      08167535 
+ 1339      7186
+ 1340 0297 63826684 		.ascii	"c\202f\204tFeh5Etq\010\000$\003\206`\000f\000\000y\000"
+ 1340      74466568 
+ 1340      35457471 
+ 1340      08002403 
+ 1340      86600066 
+ 1341 02af 006B0002 		.ascii	"\000k\000\002:\000\005\007@\007Wp\006\000\260\024\000"
+ 1341      3A000507 
+ 1341      40075770 
+ 1341      0600B014 
+ 1341      00
+ 1342 02c0 C08701D6 		.ascii	"\300\207\001\326MFp\013\000\261\013\000\242\013\000"
+ 1342      4D46700B 
+ 1342      00B10B00 
+ 1342      A20B00
+ 1343 02cf B00C4940 		.ascii	"\260\014I@\013\000\223\013\000X\013\000wMU\220\002v"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 27
+
+
+ 1343      0B00930B 
+ 1343      00580B00 
+ 1343      774D5590 
+ 1343      0276
+ 1344 02e1 D30B0016 		.ascii	"\323\013\000\026H\000\001\205\000\000\224\000\000\225"
+ 1344      48000185 
+ 1344      00009400 
+ 1344      0095
+ 1345 02ef 00006700 		.ascii	"\000\000g\000\002\034\000#\004\227PMW0\013\000\260\013"
+ 1345      021C0023 
+ 1345      0497504D 
+ 1345      57300B00 
+ 1345      B00B
+ 1346 0301 00750B00 		.ascii	"\000u\013\000X\013\000Y\013\000X\013\000\205\013\000"
+ 1346      580B0059 
+ 1346      0B00580B 
+ 1346      00850B00 
+ 1347 0311 B04D5820 		.ascii	"\260MX >E\301\014\000\025\014\000\000\014\000@\014H"
+ 1347      3E45C10C 
+ 1347      00150C00 
+ 1347      000C0040 
+ 1347      0C48
+ 1348 0323 500C0040 		.ascii	"P\014\000@\014\000\000\014\000\005=U\263>E\245\014\000"
+ 1348      0C00000C 
+ 1348      00053D55 
+ 1348      B33E45A5 
+ 1348      0C00
+ 1349 0335 060C0000 		.ascii	"\006\014\000\000\014\000P\015Vp\014\000P\014\000\000"
+ 1349      0C00500D 
+ 1349      56700C00 
+ 1349      500C0000 
+ 1350 0345 0C00004E 		.ascii	"\014\000\000N \000\003x\260\012\000\200V\000 \203\000"
+ 1350      20000378 
+ 1350      B00A0080 
+ 1350      56002083 
+ 1350      00
+ 1351 0356 00A20000 		.ascii	"\000\242\000\000\223\002\224f\000\260\032\000\260\005"
+ 1351      93029466 
+ 1351      00B01A00 
+ 1351      B005
+ 1352 0364 76706C01 		.ascii	"vpl\001\305)\000\241)\000\241)\000\241+U\301)\000\241"
+ 1352      C52900A1 
+ 1352      2900A129 
+ 1352      00A12B55 
+ 1352      C12900A1 
+ 1353 0378 2900A129 		.ascii	")\000\241)\000\241l\021\305I\224\006`\006`\006`\006"
+ 1353      00A16C11 
+ 1353      C5499406 
+ 1353      60066006 
+ 1353      6006
+ 1354 038a 60066006 		.ascii	"`\006`\006`\006`I\224\000Ks\000\011 \000\011 \000\011"
+ 1354      60066049 
+ 1354      94004B73 
+ 1354      00092000 
+ 1354      09200009 
+ 1355 039e 20000920 		.ascii	" \000\011 \000\011 \000\011 \000\011 \000\011 S\012"
+ 1355      00092000 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 28
+
+
+ 1355      09200009 
+ 1355      20000920 
+ 1355      530A
+ 1356 03b0 00495400 		.ascii	"\000IT\000M\"\302\013\004 \013\025\000\013\221\000\016"
+ 1356      4D22C20B 
+ 1356      04200B15 
+ 1356      000B9100 
+ 1356      0E
+ 1357 03c1 87000C0C 		.ascii	"\207\000\014\014\000\013\010@\013\001\260M!\345.0\000"
+ 1357      000B0840 
+ 1357      0B01B04D 
+ 1357      21E52E30 
+ 1357      00
+ 1358 03d2 0C00000C 		.ascii	"\014\000\000\014\000\000\014\000\000\014\000\000\014"
+ 1358      00000C00 
+ 1358      000C0000 
+ 1358      0C
+ 1359 03df 00000C00 		.ascii	"\000\000\014\000\000\014\000\005>U\244\210\000\267J"
+ 1359      000C0005 
+ 1359      3E55A488 
+ 1359      00B74A
+ 1360 03ee 00D44A02 		.ascii	"\000\324J\002\244H$\204EU\204B\205\204@\244\204@\301"
+ 1360      A4482484 
+ 1360      45558442 
+ 1360      858440A4 
+ 1360      8440C1
+ 1361 0401 848370B7 		.ascii	"\204\203p\267\\\000v\0330!\024\240!\022\242!\0229!\022"
+ 1361      5C00761B 
+ 1361      302114A0 
+ 1361      2112A221 
+ 1361      12392112 
+ 1362 0415 0B411204 		.ascii	"\013A\022\004\261\022\000\321g\000a\004vP\012\000\221"
+ 1362      B11200D1 
+ 1362      67006104 
+ 1362      76500A00 
+ 1362      91
+ 1363 0426 57006675 		.ascii	"W\000fu\000I\205\000:u\000IG\000V\012\000\221\003fP"
+ 1363      00498500 
+ 1363      3A750049 
+ 1363      4700560A 
+ 1363      00910366 
+ 1364 043b 3D45700C 		.ascii	"=Ep\014\000e\014\000G\014\000\223\015V@\014\000\000"
+ 1364      00650C00 
+ 1364      470C0093 
+ 1364      0D56400C 
+ 1364      0000
+ 1365 044d 0C00000C 		.ascii	"\014\000\000\014\000\000N \000\005v@\012\000\241f\000"
+ 1365      00004E20 
+ 1365      00057640 
+ 1365      0A00A166 
+ 1365      00
+ 1366 045e 66840059 		.ascii	"f\204\000Y\224\000I\224\000Hg\204f\036\013\221\005k"
+ 1366      94004994 
+ 1366      00486784 
+ 1366      661E0B91 
+ 1366      056B
+ 1367 0470 700002C3 		.ascii	"p\000\002\303>V\200\014\000\242\014\000\203\014\000"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 29
+
+
+ 1367      3E56800C 
+ 1367      00A20C00 
+ 1367      830C00
+ 1368 047f B00C4A20 		.ascii	"\260\014J \014\013\000\014\006P\014\001\240> \264\006"
+ 1368      0C0B000C 
+ 1368      06500C01 
+ 1368      A03E20B4 
+ 1368      06
+ 1369 0490 58D03500 		.ascii	"X\3205\000pU\000\000\034`\000\000\2140\000\002\300 "
+ 1369      70550000 
+ 1369      1C600000 
+ 1369      8C300002 
+ 1369      C020
+ 1370 04a2 00645300 		.ascii	"\000dS\000q>uPX\251\204Pe\005\000e\000\000e\000\000"
+ 1370      713E7550 
+ 1370      58A98450 
+ 1370      65050065 
+ 1370      00006500 
+ 1371 04b7 65000065 		.ascii	"e\000\000e\000\000e\000\000e\000\001\251\000l\020\204"
+ 1371      00006500 
+ 1371      00650001 
+ 1371      A9006C10 
+ 1371      84
+ 1372 04c8 29004029 		.ascii	")\000@)\000@)\000@)\000@)\000@)\000@\012\000P\006v0"
+ 1372      00402900 
+ 1372      40290040 
+ 1372      29004029 
+ 1372      00400A00 
+ 1373 04e0 6D00A40C 		.ascii	"m\000\244\014\000P\013\000P\0101@\005t\000\001\245\000"
+ 1373      00500B00 
+ 1373      50083140 
+ 1373      05740001 
+ 1373      A500
+ 1374 04f2 00C50000 		.ascii	"\000\305\000\000\244\000\000a\000\226x8U7\023791\011"
+ 1374      A4000061 
+ 1374      00967838 
+ 1374      55371337 
+ 1374      393109
+ 1375 0505 5A500A5A 		.ascii	"ZP\012ZP\012ZP\011X`\0106@\006\004 .!\262\0100P\002"
+ 1375      500A5A50 
+ 1375      09586008 
+ 1375      36400604 
+ 1375      202E21B2 
+ 1376 051d 950000A6 		.ascii	"\225\000\000\246\000\000f\000\000k\000\001H0\006\002"
+ 1376      00006600 
+ 1376      006B0001 
+ 1376      48300602 
+ 1377 052d A04B01E4 		.ascii	"\240K\001\344]\020\264\013\000P\007A@\001\225\000\000"
+ 1377      5D10B40B 
+ 1377      00500741 
+ 1377      40019500 
+ 1377      00
+ 1378 053e B5000075 		.ascii	"\265\000\000u\000\000e\000\000e\000\001\251\000\014"
+ 1378      00006500 
+ 1378      00650001 
+ 1378      A9000C
+ 1379 054d 64B33201 		.ascii	"d\2632\001\260\000\007@\000\013\000\000u\000\000\300"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 30
+
+
+ 1379      B0000740 
+ 1379      000B0000 
+ 1379      750000C0 
+ 1380 055d 00066000 		.ascii	"\000\006`\000\014\000$ZU\300gqp\000p\000p\000p\000p"
+ 1380      0C00245A 
+ 1380      55C06771 
+ 1380      70007000 
+ 1380      70007000 
+ 1381 0572 00700070 		.ascii	"\000p\000p\000p\000p\000p\000gq\010\000\000\010\000"
+ 1381      00700070 
+ 1381      00700067 
+ 1381      71080000 
+ 1381      0800
+ 1382 0584 00035000 		.ascii	"\000\003P\000\000\200\000\000q\000\000\027\000\000\011"
+ 1382      00800000 
+ 1382      71000017 
+ 1382      000009
+ 1383 0593 00000620 		.ascii	"\000\000\006 \000\001p\000\000\200\000\000D\027v\000"
+ 1383      00017000 
+ 1383      00800000 
+ 1383      44177600 
+ 1384 05a3 07000700 		.ascii	"\007\000\007\000\007\000\007\000\007\000\007\000\007"
+ 1384      07000700 
+ 1384      07000700 
+ 1384      07
+ 1385 05b0 00070007 		.ascii	"\000\007\000\007\000\007\027v\032\240 \002UUT\006\240"
+ 1385      00071776 
+ 1385      1AA02002 
+ 1385      55555406 
+ 1385      A0
+ 1386 05c1 00010755 		.ascii	"\000\001\007UP\027\000\240\002e\260*\000\240f\000\241"
+ 1386      501700A0 
+ 1386      0265B02A 
+ 1386      00A06600 
+ 1386      A1
+ 1387 05d2 1955A502 		.ascii	"\031U\245\002\000\000J\000\000\012\000\000\012\000\000"
+ 1387      00004A00 
+ 1387      000A0000 
+ 1387      0A0000
+ 1388 05e1 0A66700D 		.ascii	"\012fp\015\000\222\012\000t\012\000t\013\000\221\012"
+ 1388      00920A00 
+ 1388      740A0074 
+ 1388      0B00910A 
+ 1389 05f1 56500365 		.ascii	"VP\003e`\012\000\2608\000\0007\000\000\012\0001\005"
+ 1389      600A00B0 
+ 1389      38000037 
+ 1389      00000A00 
+ 1389      3105
+ 1390 0603 86500000 		.ascii	"\206P\000\000 \000\002\300\000\000\240\000\000\240\004"
+ 1390      200002C0 
+ 1390      0000A000 
+ 1390      00A004
+ 1391 0612 76C00A00 		.ascii	"v\300\012\000\2408\000\2407\000\240\031\000\300\005"
+ 1391      A03800A0 
+ 1391      3700A019 
+ 1391      00C005
+ 1392 0621 76A30366 		.ascii	"v\243\003f`\010\000\221*Ur)\000\000\013\000@\004\206"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 31
+
+
+ 1392      60080091 
+ 1392      2A557229 
+ 1392      00000B00 
+ 1392      400486
+ 1393 0634 40003566 		.ascii	"@\0005f\000\220\024\000\240\000\024\3040\000\240\000"
+ 1393      00901400 
+ 1393      A00014C4 
+ 1393      3000A000 
+ 1394 0644 00A00000 		.ascii	"\000\240\000\000\240\000\000\240\000\005\325\020\005"
+ 1394      A00000A0 
+ 1394      0005D510 
+ 1394      05
+ 1395 0651 57870A00 		.ascii	"W\207\012\000\240\011\000\200\007U\000\013\205\020\012"
+ 1395      A0090080 
+ 1395      0755000B 
+ 1395      85100A
+ 1396 0660 7AD24500 		.ascii	"z\322E\000S\007T`:\000\000\012\000\000\012\000\000\013"
+ 1396      53075460 
+ 1396      3A00000A 
+ 1396      00000A00 
+ 1396      000B
+ 1397 0672 77700C00 		.ascii	"wp\014\000\240\012\000\240\012\000\240\012\000\240="
+ 1397      A00A00A0 
+ 1397      0A00A00A 
+ 1397      00A03D
+ 1398 0681 11D30680 		.ascii	"\021\323\006\200\000\020\001\0209P\005P\005P\005P\005"
+ 1398      00100110 
+ 1398      39500550 
+ 1398      05500550 
+ 1398      05
+ 1399 0692 50399300 		.ascii	"P9\223\000\003\260\000\002\000\000 \001Z\000\000\240"
+ 1399      03B00002 
+ 1399      00002001 
+ 1399      5A0000A0 
+ 1400 06a2 000A0000 		.ascii	"\000\012\000\000\240\000\012\000\000\2200'\013f\000"
+ 1400      A0000A00 
+ 1400      00903027 
+ 1400      0B6600
+ 1401 06b1 3B00000A 		.ascii	";\000\000\012\000\000\012\000\000\012\006\201\012\007"
+ 1401      00000A00 
+ 1401      000A0681 
+ 1401      0A07
+ 1402 06bf 000A9500 		.ascii	"\000\012\225\000\014\033\000\012\005p=!\3439P\005P\005"
+ 1402      0C1B000A 
+ 1402      05703D21 
+ 1402      E3395005 
+ 1402      5005
+ 1403 06d1 50055005 		.ascii	"P\005P\005P\005P\005P\005PI\224\230\227\203eF'dF'dF"
+ 1403      50055005 
+ 1403      50055049 
+ 1403      94989783 
+ 1403      65462764 
+ 1404 06e9 27644627 		.ascii	"'dF'\227xZ;fp\014\000\240\012\000\240\012\000\240\012"
+ 1404      97785A3B 
+ 1404      66700C00 
+ 1404      A00A00A0 
+ 1404      0A00A00A 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 32
+
+
+ 1405 06fd 00A03D11 		.ascii	"\000\240=\021\323\004fP\031\000\221U\000UU\000U\030"
+ 1405      D3046650 
+ 1405      19009155 
+ 1405      00555500 
+ 1405      5518
+ 1406 070f 00810555 		.ascii	"\000\201\005U@Kfp\014\000\203\012\000V\012\000U\013"
+ 1406      404B6670 
+ 1406      0C00830A 
+ 1406      00560A00 
+ 1406      550B
+ 1407 0721 00920C56 		.ascii	"\000\222\014V`\012\000\000= \000\005e\220\031\000\260"
+ 1407      600A0000 
+ 1407      3D200005 
+ 1407      65901900 
+ 1407      B0
+ 1408 0732 5600A056 		.ascii	"V\000\240V\000\240(\000\260\006f\260\000\000\240\000"
+ 1408      00A02800 
+ 1408      B00666B0 
+ 1408      0000A000 
+ 1409 0742 02D33966 		.ascii	"\002\3239f\225\004\260\021\004`\000\004`\000\004`\000"
+ 1409      9504B011 
+ 1409      04600004 
+ 1409      60000460 
+ 1409      00
+ 1410 0753 38A40004 		.ascii	"8\244\000\004V\300\011\000P\006\264\000\000\030\240"
+ 1410      56C00900 
+ 1410      5006B400 
+ 1410      0018A0
+ 1411 0762 0600800D 		.ascii	"\006\000\200\015d`\000 \000\001\220\000\024\3040\000"
+ 1411      64600020 
+ 1411      00019000 
+ 1411      14C43000 
+ 1412 0772 A00000A0 		.ascii	"\240\000\000\240\000\000\240\000\000\240 \000gPJ\002"
+ 1412      0000A000 
+ 1412      00A02000 
+ 1412      67504A02 
+ 1413 0782 C00A00A0 		.ascii	"\300\012\000\240\012\000\240\012\000\240\012\000\300"
+ 1413      0A00A00A 
+ 1413      00A00A00 
+ 1413      C0
+ 1414 078f 0886A33D 		.ascii	"\010\206\243=!\262\011\020P\004b \000\245\000\000\245"
+ 1414      21B20910 
+ 1414      50046220 
+ 1414      00A50000 
+ 1414      A5
+ 1415 07a0 00006300 		.ascii	"\000\000c\000\227\210H6G1\011I@\011I@\010HP\005$0\033"
+ 1415      97884836 
+ 1415      47310949 
+ 1415      40094940 
+ 1415      08485005 
+ 1416 07b7 72A101B6 		.ascii	"r\241\001\266\020\000\207\000\000z\000\0036@;\023\322"
+ 1416      10008700 
+ 1416      007A0003 
+ 1416      36403B13 
+ 1416      D2
+ 1417 07c8 2D21B308 		.ascii	"-!\263\010 `\002s"
+ 1417      20600273 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 33
+
+
+ 1418 07d0 20009600 		.ascii	" \000\226\000\000v\000\0004\000\000P\000\014@\000\014"
+ 1418      00760000 
+ 1418      34000050 
+ 1418      000C4000 
+ 1418      0C
+ 1419 07e1 46A0130A 		.ascii	"F\240\023\012\020\000G\000\000\260\000\007@Q\035U\300"
+ 1419      10004700 
+ 1419      00B00007 
+ 1419      40511D55 
+ 1419      C0
+ 1420 07f2 00600510 		.ascii	"\000`\005\020\006\000\006\000\006\000\026\000\026\000"
+ 1420      06000600 
+ 1420      06001600 
+ 1420      1600
+ 1421 0800 07000600 		.ascii	"\007\000\006\000\006\000\005\020\000`1111111111111\005"
+ 1421      06000510 
+ 1421      00603131 
+ 1421      31313131 
+ 1421      31313131 
+ 1422 0818 00015000 		.ascii	"\000\001P\000`\000`\000`\000a\000a\000p\000`\000`\001"
+ 1422      60006000 
+ 1422      60006100 
+ 1422      61007000 
+ 1422      60006001 
+ 1423 082c 50060006 		.ascii	"P\006\000\006`\000@W\004\000\005p\000\000\000\000\000"
+ 1423      60004057 
+ 1423      04000570 
+ 1423      00000000 
+ 1423      00
+ 1424 083d 12000000 		.ascii	"\022\000\000\000\003|\377\000\000Y\357\377\377\000\016"
+ 1424      037CFF00 
+ 1424      0059EFFF 
+ 1424      FF000E
+ 1425 084c FFFFFFFF 		.ascii	"\377\377\377\377\000\017\377\375\204\217\000\017\327"
+ 1425      000FFFFD 
+ 1425      848F000F 
+ 1425      D7
+ 1426 0859 20008F00 		.ascii	" \000\217\000\017\200\000\000\217\000\017\200\000\000"
+ 1426      0F800000 
+ 1426      8F000F80 
+ 1426      0000
+ 1427 0867 8F000F80 		.ascii	"\217\000\017\200\000{\337\002?\200\006\377\377\257\377"
+ 1427      007BDF02 
+ 1427      3F8006FF 
+ 1427      FFAFFF
+ 1428 0876 8002EFF9 		.ascii	"\200\002\357\371\357\377`\000\002\020)\247\000\000\000"
+ 1428      EFFF6000 
+ 1428      021029A7 
+ 1428      000000
+ 1429 0885 00B4DFFF 		.ascii	"\000\264\337\377\377\375K\350\347\"\"~\216\300\305\000"
+ 1429      FFFD4BE8 
+ 1429      E722227E 
+ 1429      8EC0C500 
+ 1430 0895 006C0CFC 		.ascii	"\000l\014\374\366\021\021\177\317\300\317\377\377\373"
+ 1430      F611117F 
+ 1430      CFC0CFFF 
+ 1430      FFFB
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 34
+
+
+ 1431 08a3 0CFCF611 		.ascii	"\014\374\366\021\021\177\317\300\305\000\000l\014\350"
+ 1431      117FCFC0 
+ 1431      C500006C 
+ 1431      0CE8
+ 1432 08b1 E722227E 		.ascii	"\347\"\"~\216\264\337\377\377\375K\337\366\237\377\377"
+ 1432      8EB4DFFF 
+ 1432      FFFD4BDF 
+ 1432      F69FFFFF 
+ 1433 08c1 FDFFF8CF 		.ascii	"\375\377\370\317\377\377\377\357\366\257\377\377\376"
+ 1433      FFFFFFEF 
+ 1433      F6AFFFFF 
+ 1433      FE
+ 1434 08ce 13200333 		.ascii	"\023 \003331\377\367\277\377\377\377\377\370\317\377"
+ 1434      3331FFF7 
+ 1434      BFFFFFFF 
+ 1434      FFF8CFFF 
+ 1435 08de FFFFFFF7 		.ascii	"\377\377\377\367\277\377\377\377\023 \003331\357\366"
+ 1435      BFFFFFFF 
+ 1435      13200333 
+ 1435      3331EFF6 
+ 1436 08ee AFFFFFFE 		.ascii	"\257\377\377\376\377\370\317\377\377\377\337\366\257"
+ 1436      FFF8CFFF 
+ 1436      FFFFDFF6 
+ 1436      AF
+ 1437 08fb FFFFFD00 		.ascii	"\377\377\375\000\000\000\000\003\324\000\000\000\000"
+ 1437      00000003 
+ 1437      D4000000 
+ 1437      00
+ 1438 0908 3FFE0000 		.ascii	"?\376\000\000\000\003\377\364M0\000?\377@\357\363\003"
+ 1438      0003FFF4 
+ 1438      4D30003F 
+ 1438      FF40EFF3 
+ 1438      03
+ 1439 0919 FFF4004F 		.ascii	"\377\364\000O\377o\377@\000\004\377\377\364\000\000"
+ 1439      FF6FFF40 
+ 1439      0004FFFF 
+ 1439      F40000
+ 1440 0928 004FFF40 		.ascii	"\000O\377@\000\000\000\003\323\000\000\000\024\000\000"
+ 1440      00000003 
+ 1440      D3000000 
+ 1440      140000
+ 1441 0937 220DF700 		.ascii	"\"\015\367\000O\361\237\367O\375\000\257\377\375\020"
+ 1441      4FF19FF7 
+ 1441      4FFD00AF 
+ 1441      FFFD10
+ 1442 0946 00BFFE10 		.ascii	"\000\277\376\020\000O\377\367\000O\375\257\367\016\375"
+ 1442      004FFFF7 
+ 1442      004FFDAF 
+ 1442      F70EFD
+ 1443 0955 10AFF25B 		.ascii	"\020\257\362[\020\000\231\000\000\000\007p\000\000\000"
+ 1443      10009900 
+ 1443      00000770 
+ 1443      000000
+ 1444 0964 320FF024 		.ascii	"2\017\360$\000\005\374\017\360\317P\037\364\017\360"
+ 1444      0005FC0F 
+ 1444      F0CF501F 
+ 1444      F40FF0
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 35
+
+
+ 1445 0973 5FF17F80 		.ascii	"_\361\177\200\017\360\010\367\277 \017\360\002\373\317"
+ 1445      0FF008F7 
+ 1445      BF200FF0 
+ 1445      02FBCF
+ 1446 0982 100EE001 		.ascii	"\020\016\340\001\374\257@\001\020\004\372_\260\000\000"
+ 1446      FCAF4001 
+ 1446      1004FA5F 
+ 1446      B00000
+ 1447 0991 0BF60DFA 		.ascii	"\013\366\015\372\020\001\257\320\002\337\374\317\375"
+ 1447      1001AFD0 
+ 1447      02DFFCCF 
+ 1447      FD
+ 1448 099e 200008EF 		.ascii	" \000\010\357\376\221\000\000\000\001\020\000\000\000"
+ 1448      FE910000 
+ 1448      00011000 
+ 1448      0000
+ 1449 09ac 00144100 		.ascii	"\000\024A\000\000\000\000\177\367\000\000\003C\337\375"
+ 1449      0000007F 
+ 1449      F7000003 
+ 1449      43DFFD
+ 1450 09bb 34300EFF 		.ascii	"40\016\377\377\377\377\340o\377\373\277\377\366\033"
+ 1450      FFFFFFE0 
+ 1450      6FFFFBBF 
+ 1450      FFF61B
+ 1451 09ca FF7007FF 		.ascii	"\377p\007\377\261\007\377 \002\377p\033\377p\007\377"
+ 1451      B107FF20 
+ 1451      02FF701B 
+ 1451      FF7007FF 
+ 1452 09da B16FFFFB 		.ascii	"\261o\377\373\277\377\366\016\377\377\377\377\340\003"
+ 1452      BFFFF60E 
+ 1452      FFFFFFFF 
+ 1452      E003
+ 1453 09e8 42CFFC23 		.ascii	"B\317\374#0\000\000\177\367\000\000\000\000\004A\000"
+ 1453      3000007F 
+ 1453      F7000000 
+ 1453      00044100 
+ 1454 09f8 00000000 		.ascii	"\000\000\000\000s\003\203\000\000\000\035\377g\367\000"
+ 1454      73038300 
+ 1454      00001DFF 
+ 1454      67F700
+ 1455 0a07 0003EE5A 		.ascii	"\000\003\356Z\376\367\000\000o\323\265\177\367\000\011"
+ 1455      FEF70000 
+ 1455      6FD3B57F 
+ 1455      F70009
+ 1456 0a16 FB3DFF85 		.ascii	"\373=\377\205\3760\277\225\377\377\373>\364vo\377\377"
+ 1456      FE30BF95 
+ 1456      FFFFFB3E 
+ 1456      F4766FFF 
+ 1456      FF
+ 1457 0a27 FFD2A100 		.ascii	"\377\322\241\000\317\377\377\377\364\000\000\317\372"
+ 1457      CFFFFFFF 
+ 1457      F40000CF 
+ 1457      FA
+ 1458 0a34 02FFF400 		.ascii	"\002\377\364\000\000\317\372\002\377\364\000\000\257"
+ 1458      00CFFA02 
+ 1458      FFF40000 
+ 1458      AF
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 36
+
+
+ 1459 0a41 F801FFF3 		.ascii	"\370\001\377\363\000\000\000'r\000\000\000\000\177\367"
+ 1459      00000027 
+ 1459      72000000 
+ 1459      007FF7
+ 1460 0a50 00000000 		.ascii	"\000\000\000\000\217\370\000\000\000\000\217\370\000"
+ 1460      8FF80000 
+ 1460      00008FF8 
+ 1460      00
+ 1461 0a5d 0000008F 		.ascii	"\000\000\000\217\370\000\000\000\337\377\377\375\000"
+ 1461      F8000000 
+ 1461      DFFFFFFD 
+ 1461      00
+ 1462 0a6a 004FFFFF 		.ascii	"\000O\377\377\364\000\000\004\377\377@\000#3_\36532"
+ 1462      F4000004 
+ 1462      FFFF4000 
+ 1462      23335FF5 
+ 1462      3332
+ 1463 0a7c FFFFA44A 		.ascii	"\377\377\244J\377\377\377\377\374\317\377\377\377\377"
+ 1463      FFFFFFFF 
+ 1463      FCCFFFFF 
+ 1463      FFFF
+ 1464 0a8a FFFF5C8F 		.ascii	"\377\377\\\217\232\252\252\252\252\250\000O\377\377"
+ 1464      9AAAAAAA 
+ 1464      AAA8004F 
+ 1464      FFFF
+ 1465 0a98 FFB00001 		.ascii	"\377\260\000\001\355\210\210\211\370\000\012\362\000"
+ 1465      ED888889 
+ 1465      F8000AF2 
+ 1465      00
+ 1466 0aa5 0000AF30 		.ascii	"\000\000\2570_p\000\000\000\036\300\357\210`\000(\213"
+ 1466      5F700000 
+ 1466      001EC0EF 
+ 1466      88600028 
+ 1466      8B
+ 1467 0ab6 F6FFFFF3 		.ascii	"\366\377\377\363\000\277\377\370\377\377\377\377\377"
+ 1467      00BFFFF8 
+ 1467      FFFFFFFF 
+ 1467      FF
+ 1468 0ac3 FFF8FFFF 		.ascii	"\377\370\377\377\377\377\377\377\367\277\377\377\377"
+ 1468      FFFFFFFF 
+ 1468      F7BFFFFF 
+ 1468      FF
+ 1469 0ad0 FFFFF400 		.ascii	"\377\377\364\000\000\001\020\000Y\000\031\357\375p\237"
+ 1469      00011000 
+ 1469      590019EF 
+ 1469      FD709F
+ 1470 0adf 03EFDA9D 		.ascii	"\003\357\332\235\376\277\016\366\000\000_\377\177p\000"
+ 1470      FEBF0EF6 
+ 1470      00005FFF 
+ 1470      7F7000
+ 1471 0aee 3FFFFF69 		.ascii	"?\377\377i\000\000*\252\251\000\000\000\000\000\000"
+ 1471      00002AAA 
+ 1471      A9000000 
+ 1471      000000
+ 1472 0afd AAAAA200 		.ascii	"\252\252\242\000\000\246\377\376\363\000\007\367\377"
+ 1472      00A6FFFE 
+ 1472      F30007F7 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 37
+
+
+ 1472      FF
+ 1473 0b0a F500007F 		.ascii	"\365\000\000\177\340\373\357\331\255\3760\372\010\357"
+ 1473      E0FBEFD9 
+ 1473      ADFE30FA 
+ 1473      08EF
+ 1474 0b18 FE910095 		.ascii	"\376\221\000\225\000\001\020\000\000\000\000*\000\002"
+ 1474      00011000 
+ 1474      0000002A 
+ 1474      0002
+ 1475 0b26 EF788EFF 		.ascii	"\357x\216\377\377\377\377\377\377\377\377\377\377\337"
+ 1475      FFFFFFFF 
+ 1475      FFFFFFFF 
+ 1475      FFDF
+ 1476 0b34 FFFF0007 		.ascii	"\377\377\000\007\377\000\000\177\000\000\001\000\000"
+ 1476      FF00007F 
+ 1476      00000100 
+ 1476      00
+ 1477 0b41 2A000000 		.ascii	"*\000\000\000.\360\000x\216\377\003\017\377\377\360"
+ 1477      2EF00078 
+ 1477      8EFF030F 
+ 1477      FFFFF0
+ 1478 0b50 BAFFFFFF 		.ascii	"\272\377\377\377\003\377\377\377\360\252\337\377\377"
+ 1478      03FFFFFF 
+ 1478      F0AADFFF 
+ 1478      FF
+ 1479 0b5d 0400008F 		.ascii	"\004\000\000\217\360\000\000\000\217\000\000\000\000"
+ 1479      F0000000 
+ 1479      8F000000 
+ 1479      00
+ 1480 0b6a 10000000 		.ascii	"\020\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1480      00000000 
+ 1480      00000000 
+ 1480      00
+ 1481 0b77 06D20000 		.ascii	"\006\322\000\000\000*\000\021\216\020\000\002\357\000"
+ 1481      002A0011 
+ 1481      8E100002 
+ 1481      EF00
+ 1482 0b85 7D2B9078 		.ascii	"}+\220x\216\377\003\012\263\360\377\377\377\013\241"
+ 1482      8EFF030A 
+ 1482      B3F0FFFF 
+ 1482      FF0BA1
+ 1483 0b94 F1E3FFFF 		.ascii	"\361\343\377\377\377\003\360\343\305\377\377\377\013"
+ 1483      FF03F0E3 
+ 1483      C5FFFFFF 
+ 1483      0B
+ 1484 0ba1 A1F1E3DF 		.ascii	"\241\361\343\337\377\377\003\012\263\360\000\007\377"
+ 1484      FFFF030A 
+ 1484      B3F00007 
+ 1484      FF
+ 1485 0bae 007D2B90 		.ascii	"\000}+\220\000\000\177\000\021\236\020\000\000\001\000"
+ 1485      00007F00 
+ 1485      119E1000 
+ 1485      000100
+ 1486 0bbd 06D20000 		.ascii	"\006\322\000\000\000\000\000\000\000\000\277\377\377"
+ 1486      00000000 
+ 1486      0000BFFF 
+ 1486      FF
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 38
+
+
+ 1487 0bca FFFFFBFD 		.ascii	"\377\377\373\375[\377\377\377\377\365\001\377\377\357"
+ 1487      5BFFFFFF 
+ 1487      FFF501FF 
+ 1487      FFEF
+ 1488 0bd8 FFFB18FF 		.ascii	"\377\373\030\377\366\034\377\377\374\377`\001\337\377"
+ 1488      F61CFFFF 
+ 1488      FCFF6001 
+ 1488      DFFF
+ 1489 0be6 60960000 		.ascii	"`\226\000\000\217\371\000\000\000\000\217\374\210\210"
+ 1489      8FF90000 
+ 1489      00008FFC 
+ 1489      8888
+ 1490 0bf4 8888CFBF 		.ascii	"\210\210\317\277\377\377\377\377\373X\000\0005\237\020"
+ 1490      FFFFFFFF 
+ 1490      FB580000 
+ 1490      359F10
+ 1491 0c03 05FE9F10 		.ascii	"\005\376\237\020o\376\237\027\377\376\237\237\377\376"
+ 1491      6FFE9F17 
+ 1491      FFFE9F9F 
+ 1491      FFFE
+ 1492 0c11 9FFFFFFE 		.ascii	"\237\377\377\376\237\357\377\376\237-\377\376\237\020"
+ 1492      9FEFFFFE 
+ 1492      9F2DFFFE 
+ 1492      9F10
+ 1493 0c1f CFFE9F10 		.ascii	"\317\376\237\020\013\376\217\000\000\233\000\000\000"
+ 1493      0BFE8F00 
+ 1493      009B0000 
+ 1493      00
+ 1494 0c2c 00460000 		.ascii	"\000F\000\000\000\000\017\375@\000\000\000\377\377\241"
+ 1494      00000FFD 
+ 1494      40000000 
+ 1494      FFFFA1
+ 1495 0c3b 00000FFF 		.ascii	"\000\000\017\377\377\367\000\000\377\377\377\375P\017"
+ 1495      FFF70000 
+ 1495      FFFFFFFD 
+ 1495      500F
+ 1496 0c49 FFFFFFFF 		.ascii	"\377\377\377\377\261\377\377\377\377\377o\377\377\377"
+ 1496      B1FFFFFF 
+ 1496      FFFF6FFF 
+ 1496      FFFF
+ 1497 0c57 FFB1FFFF 		.ascii	"\377\261\377\377\377\375@\017\377\377\367\000\000\377"
+ 1497      FFFD400F 
+ 1497      FFFFF700 
+ 1497      00FF
+ 1498 0c65 FFA10000 		.ascii	"\377\241\000\000\017\375@\000\000\0006\000\000\000\000"
+ 1498      0FFD4000 
+ 1498      00003600 
+ 1498      000000
+ 1499 0c74 00AFFE30 		.ascii	"\000\257\3760\257\376?\377\367\017\377\367\377\377\200"
+ 1499      AFFE3FFF 
+ 1499      F70FFFF7 
+ 1499      FFFF80
+ 1500 0c83 FFFF8FFF 		.ascii	"\377\377\217\377\370\017\377\370\377\377\200\377\377"
+ 1500      F80FFFF8 
+ 1500      FFFF80FF 
+ 1500      FF
+ 1501 0c90 8FFFF80F 		.ascii	"\217\377\370\017\377\370\377\377\200\377\377\217\377"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 39
+
+
+ 1501      FFF8FFFF 
+ 1501      80FFFF8F 
+ 1501      FF
+ 1502 0c9d F80FFFF8 		.ascii	"\370\017\377\370\377\377\200\377\377\217\377\367\017"
+ 1502      FFFF80FF 
+ 1502      FF8FFFF7 
+ 1502      0F
+ 1503 0caa FFF74898 		.ascii	"\377\367H\230\020H\230\020H\210\210\210\210\037\377"
+ 1503      10489810 
+ 1503      48888888 
+ 1503      881FFF
+ 1504 0cb9 FFFFFFF7 		.ascii	"\377\377\377\367\377\377\377\377\377\217\377\377\377"
+ 1504      FFFFFFFF 
+ 1504      FF8FFFFF 
+ 1504      FF
+ 1505 0cc6 FFF8FFFF 		.ascii	"\377\370\377\377\377\377\377\217\377\377\377\377\370"
+ 1505      FFFFFF8F 
+ 1505      FFFFFFFF 
+ 1505      F8
+ 1506 0cd3 FFFFFFFF 		.ascii	"\377\377\377\377\377\217\377\377\377\377\370\377\377"
+ 1506      FF8FFFFF 
+ 1506      FFFFF8FF 
+ 1506      FF
+ 1507 0ce0 FFFFFF8F 		.ascii	"\377\377\377\217\377\377\377\377\367\257\377\377\377"
+ 1507      FFFFFFFF 
+ 1507      F7AFFFFF 
+ 1507      FF
+ 1508 0ced FE302600 		.ascii	"\3760&\000\000X\177\240\000\277\217\373\000\277\217"
+ 1508      00587FA0 
+ 1508      00BF8FFB 
+ 1508      00BF8F
+ 1509 0cfc FFC1BF8F 		.ascii	"\377\301\277\217\377\375\317\217\377\377\377\217\377"
+ 1509      FFFDCF8F 
+ 1509      FFFFFF8F 
+ 1509      FF
+ 1510 0d09 FFEF8FFF 		.ascii	"\377\357\217\377\364\277\217\377@\277\217\343\000\277"
+ 1510      F4BF8FFF 
+ 1510      40BF8FE3 
+ 1510      00BF
+ 1511 0d17 5D2000AE 		.ascii	"] \000\256\000\000\000\000\000\000\003p\000\000\000"
+ 1511      00000000 
+ 1511      00000370 
+ 1511      000000
+ 1512 0d26 003FFA00 		.ascii	"\000?\372\000\000\000\002\357\377\220\000\000\036\377"
+ 1512      000002EF 
+ 1512      FF900000 
+ 1512      1EFF
+ 1513 0d34 FFF80001 		.ascii	"\377\370\000\001\337\377\377\377p\014\377\377\377\377"
+ 1513      DFFFFFFF 
+ 1513      700CFFFF 
+ 1513      FFFF
+ 1514 0d42 F40DFFFF 		.ascii	"\364\015\377\377\377\377\365\0014DDD0\015\377\377\377"
+ 1514      FFFFF501 
+ 1514      34444444 
+ 1514      300DFFFF 
+ 1514      FF
+ 1515 0d53 FFF50FFF 		.ascii	"\377\365\017\377\377\377\377\370\014\377\377\377\377"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 40
+
+
+ 1515      FFFFFFF8 
+ 1515      0CFFFFFF 
+ 1515      FF
+ 1516 0d60 F5000003 		.ascii	"\365\000\000\003\020\000\005\373\000\005\377@\005\377"
+ 1516      100005FB 
+ 1516      0005FF40 
+ 1516      05FF
+ 1517 0d6e 4005FF50 		.ascii	"@\005\377P\003\377P\000\013\374\020\000\013\374\020"
+ 1517      03FF5000 
+ 1517      0BFC1000 
+ 1517      0BFC10
+ 1518 0d7d 000CFC10 		.ascii	"\000\014\374\020\000\014\373\000\000\012P\003\020\000"
+ 1518      000CFB00 
+ 1518      000A5003 
+ 1518      1000
+ 1519 0d8b 03FC1000 		.ascii	"\003\374\020\000\013\374\020\000\013\374\020\000\013"
+ 1519      0BFC1000 
+ 1519      0BFC1000 
+ 1519      0B
+ 1520 0d98 FC10000D 		.ascii	"\374\020\000\015\373\000\005\377P\005\377P\005\377P"
+ 1520      FB0005FF 
+ 1520      5005FF50 
+ 1520      05FF50
+ 1521 0da7 03FF5000 		.ascii	"\003\377P\000\012P\000\000\000\000i\020\000\000\000"
+ 1521      0A500000 
+ 1521      00006910 
+ 1521      000000
+ 1522 0db6 0DF50000 		.ascii	"\015\365\000\000\000\000\357`\000\000\000\016\366\000"
+ 1522      0000EF60 
+ 1522      0000000E 
+ 1522      F600
+ 1523 0dc4 005888FF 		.ascii	"\000X\210\377\270\210\037\377\377\377\377\367\233\273"
+ 1523      B8881FFF 
+ 1523      FFFFFFF7 
+ 1523      9BBB
+ 1524 0dd2 FFDBBB30 		.ascii	"\377\333\2730\000\016\366\000\000\000\000\357`\000\000"
+ 1524      000EF600 
+ 1524      000000EF 
+ 1524      600000
+ 1525 0de1 000EF600 		.ascii	"\000\016\366\000\000\000\000\235 \000\000Fffff\037\377"
+ 1525      0000009D 
+ 1525      20000046 
+ 1525      66666666 
+ 1525      1FFF
+ 1526 0df3 FFFFFFF7 		.ascii	"\377\377\377\367\255\335\335\335\335@\000\003\255\377"
+ 1526      ADDDDDDD 
+ 1526      DD400003 
+ 1526      ADFF
+ 1527 0e01 C7000000 		.ascii	"\307\000\000\000\237\346$\257\343\000\013\377 w\011"
+ 1527      9FE624AF 
+ 1527      E3000BFF 
+ 1527      207709
+ 1528 0e10 FF407FF9 		.ascii	"\377@\177\371\000\317\241\377\341\357\366\177\377\360"
+ 1528      00CFA1FF 
+ 1528      E1EFF67F 
+ 1528      FFF0
+ 1529 0e1e EFF78FF9 		.ascii	"\357\367\217\371?\377\301\377\341\013\377&\312\031\377"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 41
+
+
+ 1529      3FFFC1FF 
+ 1529      E10BFF26 
+ 1529      CA19FF
+ 1530 0e2d 40009FE6 		.ascii	"@\000\237\346$\257\343\000\000\003\235\377\307\000\000"
+ 1530      24AFE300 
+ 1530      00039DFF 
+ 1530      C70000
+ 1531 0e3c 32000000 		.ascii	"2\000\000\000\000\000\000\000\337P\000\000\000\000\000"
+ 1531      00000000 
+ 1531      DF500000 
+ 1531      000000
+ 1532 0e4b 001CF84A 		.ascii	"\000\034\370J\357\353P\000\000\000\237\375R]\374\020"
+ 1532      EFEB5000 
+ 1532      00009FFD 
+ 1532      525DFC10 
+ 1533 0e5b 000005FE 		.ascii	"\000\000\005\376Jp\317\341\000\013\200-\377\367O\373"
+ 1533      4A70CFE1 
+ 1533      000B802D 
+ 1533      FFF74FFB 
+ 1534 0e6b 002FFB00 		.ascii	"\000/\373\000\257\373/\3770\013\377P\007\376\177\373"
+ 1534      AFFB2FFF 
+ 1534      300BFF50 
+ 1534      07FE7FFB 
+ 1535 0e7b 0001DFC0 		.ascii	"\000\001\337\300\000>\377\341\000\000\033\374B\001\277"
+ 1535      003EFFE1 
+ 1535      00001BFC 
+ 1535      4201BF
+ 1536 0e8a A0000000 		.ascii	"\240\000\000\000[\357\260\010\374\020\000\000\000\000"
+ 1536      5BEFB008 
+ 1536      FC100000 
+ 1536      0000
+ 1537 0e98 00004FE0 		.ascii	"\000\000O\340\000\000\000\000\000\000\002@\000\000\000"
+ 1537      00000000 
+ 1537      00000240 
+ 1537      000000
+ 1538 0ea7 03100000 		.ascii	"\003\020\000\000\000\000\000\005\375\000\000\000\000"
+ 1538      00000005 
+ 1538      FD000000 
+ 1538      00
+ 1539 0eb4 0000EFF7 		.ascii	"\000\000\357\367\000\000\000\000\000\217\377\361\000"
+ 1539      00000000 
+ 1539      008FFFF1 
+ 1539      00
+ 1540 0ec1 0000002F 		.ascii	"\000\000\000/\375\357\240\000\000\000\013\373\003\377"
+ 1540      FDEFA000 
+ 1540      00000BFB 
+ 1540      03FF
+ 1541 0ecf 30000004 		.ascii	"0\000\000\004\377\300O\374\000\000\000\337\375\005\377"
+ 1541      FFC04FFC 
+ 1541      000000DF 
+ 1541      FD05FF
+ 1542 0ede F600007F 		.ascii	"\366\000\000\177\377\370\317\377\341\000\037\377\374"
+ 1542      FFF8CFFF 
+ 1542      E1001FFF 
+ 1542      FC
+ 1543 0eeb 04FFFF90 		.ascii	"\004\377\377\220\012\377\377\322\177\377\377 \377\377"
+ 1543      0AFFFFD2 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 42
+
+
+ 1543      7FFFFF20 
+ 1543      FFFF
+ 1544 0ef9 FFFFFFFF 		.ascii	"\377\377\377\377\366\004x\210\210\210\210\207\000\000"
+ 1544      F6047888 
+ 1544      88888887 
+ 1544      0000
+ 1545 0f07 00000006 		.ascii	"\000\000\000\006\020\000\000\000\000\017\301\377\370"
+ 1545      10000000 
+ 1545      000FC1FF 
+ 1545      F8
+ 1546 0f14 002EFFFC 		.ascii	"\000.\377\374\315\377b\357\337\371\000,N\371\017\220"
+ 1546      CDFF62EF 
+ 1546      DFF9002C 
+ 1546      4EF90F90 
+ 1547 0f24 0002EF90 		.ascii	"\000\002\357\220\007\000\000.\370\210\017\240\315\377"
+ 1547      0700002E 
+ 1547      F8880FA0 
+ 1547      CDFF
+ 1548 0f32 80DFDFF9 		.ascii	"\200\337\337\371\377\370\000\036\377\374\000\000\000"
+ 1548      FFF8001E 
+ 1548      FFFC0000 
+ 1548      00
+ 1549 0f3f 000FC000 		.ascii	"\000\017\300\000\000\000\000\006\020\000\000'\000\000"
+ 1549      00000006 
+ 1549      10000027 
+ 1549      0000
+ 1550 0f4d 00002EF9 		.ascii	"\000\000.\371\000\000\000.\377\371\000\000.\371.\371"
+ 1550      0000002E 
+ 1550      FFF90000 
+ 1550      2EF92EF9 
+ 1551 0f5d 002EF900 		.ascii	"\000.\371\000.\371\013\371\000\000.\364'\000\000\000"
+ 1551      2EF90BF9 
+ 1551      00002EF4 
+ 1551      27000000 
+ 1552 0f6d 27002700 		.ascii	"'\000'\000\000\000'\013\371\000\000.\364.\371\000.\371"
+ 1552      0000270B 
+ 1552      F900002E 
+ 1552      F42EF900 
+ 1552      2EF9
+ 1553 0f7f 002EF92E 		.ascii	"\000.\371.\371\000\000.\377\371\000\000\000.\371\000"
+ 1553      F900002E 
+ 1553      FFF90000 
+ 1553      002EF900 
+ 1554 0f8f 00000026 		.ascii	"\000\000\000&\000\000\000\000\001\000\000\000\000\000"
+ 1554      00000000 
+ 1554      01000000 
+ 1554      0000
+ 1555 0f9d 00003F   		.ascii	"\000\000?"
+ 1556 0fa0 C0077777 		.ascii	"\300\007wwr\000\003\377\374.\377\377\371\000\017\317"
+ 1556      720003FF 
+ 1556      FC2EFFFF 
+ 1556      F9000FCF 
+ 1557 0fb0 CFA00000 		.ascii	"\317\240\000\000\351\000\004\036\223 \000\000\351\000"
+ 1557      E900041E 
+ 1557      93200000 
+ 1557      E900
+ 1558 0fbe 000E9000 		.ascii	"\000\016\220\000\000\000\351\000\000\016\220\000\000"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 43
+
+
+ 1558      0000E900 
+ 1558      000E9000 
+ 1558      00
+ 1559 0fcb B5E99700 		.ascii	"\265\351\227\000\016\307ws\277\377\366\000\015\377\377"
+ 1559      0EC77773 
+ 1559      BFFFF600 
+ 1559      0DFFFF
+ 1560 0fda FD0BFF70 		.ascii	"\375\013\377p\000\000\000\000\000\000\246\000\277\377"
+ 1560      00000000 
+ 1560      0000A600 
+ 1560      BFFF
+ 1561 0fe8 F6000000 		.ascii	"\366\000\000\000\377\377\377\230\210t\377\377\377\377"
+ 1561      FFFFFF98 
+ 1561      8874FFFF 
+ 1561      FFFF
+ 1562 0ff6 FFFFFFFF 		.ascii	"\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 1562      FFFFFFFF 
+ 1562      FFFFFFFF 
+ 1562      FF
+ 1563 1003 FFFFFFFF 		.ascii	"\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 1563      FFFFFFFF 
+ 1563      FFFFFFFF 
+ 1563      FF
+ 1564 1010 FFFFFFFF 		.ascii	"\377\377\377\377\377\377\277\377\377\377\377\373\000"
+ 1564      FFFFBFFF 
+ 1564      FFFFFFFB 
+ 1564      00
+ 1565 101d 00022000 		.ascii	"\000\002 \000\000\000\000>\343\000\000\000\003\357\376"
+ 1565      0000003E 
+ 1565      E3000000 
+ 1565      03EFFE
+ 1566 102c 3000003E 		.ascii	"0\000\000>\377\377\343\000\000\357\377\377\376\000\000"
+ 1566      FFFFE300 
+ 1566      00EFFFFF 
+ 1566      FE0000
+ 1567 103b 008FF800 		.ascii	"\000\217\370\000\000\000\000\217\370\000\000\000\000"
+ 1567      0000008F 
+ 1567      F8000000 
+ 1567      00
+ 1568 1048 8FF80000 		.ascii	"\217\370\000\000#2\217\370#2\377\3769\223\357\377\377"
+ 1568      23328FF8 
+ 1568      2332FFFE 
+ 1568      3993EFFF 
+ 1568      FF
+ 1569 1059 FFC99CFF 		.ascii	"\377\311\234\377\377\377\377\377\377\\\217\232\252\252"
+ 1569      FFFFFFFF 
+ 1569      FF5C8F9A 
+ 1569      AAAA
+ 1570 1067 AAAAA800 		.ascii	"\252\252\250\000\000\000\000\003b\000\000\000\000\000"
+ 1570      00000003 
+ 1570      62000000 
+ 1570      0000
+ 1571 1075 CFFE0000 		.ascii	"\317\376\000\000\000\000?\377\340\000\000\000\011\377"
+ 1571      00003FFF 
+ 1571      E0000000 
+ 1571      09FF
+ 1572 1083 FD000000 		.ascii	"\375\000\000\000\000-\377\220\000\000\000\000O\364\000"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 44
+
+
+ 1572      002DFF90 
+ 1572      00000000 
+ 1572      4FF400
+ 1573 1092 0000000C 		.ascii	"\000\000\000\014\375\000\000\001\000\011\377@\001\216"
+ 1573      FD000001 
+ 1573      0009FF40 
+ 1573      018E
+ 1574 10a0 E11AFF70 		.ascii	"\341\032\377p\000\357\377\336\377\220\000\014\377\377"
+ 1574      00EFFFDE 
+ 1574      FF90000C 
+ 1574      FFFF
+ 1575 10ae FF600000 		.ascii	"\377`\000\000\217\377\351\020\000\000\002v0\000\000"
+ 1575      8FFFE910 
+ 1575      00000276 
+ 1575      300000
+ 1576 10bd 00000793 		.ascii	"\000\000\007\223\000\000\"\012\377\362\000\217\365\371"
+ 1576      0000220A 
+ 1576      FFF2008F 
+ 1576      F5F9
+ 1577 10cb 1F708FF9 		.ascii	"\037p\217\371\014\374\370\217\371\000\032\357\377\371"
+ 1577      0CFCF88F 
+ 1577      F9001AEF 
+ 1577      FFF9
+ 1578 10d9 000000EF 		.ascii	"\000\000\000\357\374\000\000\007\277\377\366\000\012"
+ 1578      FC000007 
+ 1578      BFFFF600 
+ 1578      0A
+ 1579 10e6 FFFABFF6 		.ascii	"\377\372\277\366\000\371\037p\277\366\014\374\364\000"
+ 1579      00F91F70 
+ 1579      BFF60CFC 
+ 1579      F400
+ 1580 10f4 BFF41AC6 		.ascii	"\277\364\032\306\000\000V\000\000\003DA \000\000\377"
+ 1580      00005600 
+ 1580      00034441 
+ 1580      200000FF 
+ 1581 1104 FF5E4024 		.ascii	"\377^@$\037\377\365\356/\364\377\377\310\202\377O\377"
+ 1581      1FFFF5EE 
+ 1581      2FF4FFFF 
+ 1581      C882FF4F 
+ 1581      FF
+ 1582 1115 FFFF5FF4 		.ascii	"\377\377_\364\377\377\377\365\377O\377\377\377_\364"
+ 1582      FFFFFFF5 
+ 1582      FF4FFFFF 
+ 1582      FF5FF4
+ 1583 1124 FFFFFFF5 		.ascii	"\377\377\377\365\377O\377\377\377_\364\377\377\377\364"
+ 1583      FF4FFFFF 
+ 1583      FF5FF4FF 
+ 1583      FFFFF4
+ 1584 1133 FF934444 		.ascii	"\377\223DDC\017\377\377\377P\000h\210\210q\000\000H"
+ 1584      430FFFFF 
+ 1584      FF500068 
+ 1584      88887100 
+ 1584      0048
+ 1585 1145 88888700 		.ascii	"\210\210\207\000\017\377\377\377\373\000\370\000\000"
+ 1585      0FFFFFFF 
+ 1585      FB00F800 
+ 1585      00
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 45
+
+
+ 1586 1152 0BFB0F80 		.ascii	"\013\373\017\200\000\000\277\363\373ww}\377O\377\377"
+ 1586      0000BFF3 
+ 1586      FB77777D 
+ 1586      FF4FFFFF 
+ 1587 1162 FFFFF4FF 		.ascii	"\377\377\364\377\377B\337\377O\377\300\010\377\364\377"
+ 1587      FF42DFFF 
+ 1587      4FFFC008 
+ 1587      FFF4FF
+ 1588 1171 FE00AFFF 		.ascii	"\376\000\257\377O\377\374\257\377\364\257\377\377\377"
+ 1588      4FFFFCAF 
+ 1588      FFF4AFFF 
+ 1588      FFFF
+ 1589 117f FD1001BB 		.ascii	"\375\020\001\273\272\020\000_\377\361\000\007\377\373"
+ 1589      BA10005F 
+ 1589      FFF10007 
+ 1589      FFFB
+ 1590 118d 00009FFF 		.ascii	"\000\000\237\377`\000\013\377\377\377`\357\377\377\361"
+ 1590      60000BFF 
+ 1590      FFFF60EF 
+ 1590      FFFFF1
+ 1591 119c 0EFFFFF8 		.ascii	"\016\377\377\370\000\000\014\376\000\000\000\377P\000"
+ 1591      00000CFE 
+ 1591      000000FF 
+ 1591      5000
+ 1592 11aa 003FC000 		.ascii	"\000?\300\000\000\007\363\000\000\000\251\000\000\000"
+ 1592      0007F300 
+ 1592      0000A900 
+ 1592      0000
+ 1593 11b8 02000000 		.ascii	"\002\000\000\000\000*P\000\000\016\377\217\377 \000"
+ 1593      002A5000 
+ 1593      000EFF8F 
+ 1593      FF2000
+ 1594 11c7 FFF8FFF4 		.ascii	"\377\370\377\364\000\017\377\353\2730\000\377\364\231"
+ 1594      000FFFEB 
+ 1594      BB3000FF 
+ 1594      F499
+ 1595 11d5 92600FFF 		.ascii	"\222`\017\377_\377O\240\377\365\377\365V\037\377_\377"
+ 1595      5FFF4FA0 
+ 1595      FFF5FFF5 
+ 1595      561FFF5F 
+ 1595      FF
+ 1596 11e6 FFF4FFF5 		.ascii	"\377\364\377\365\377\377\377N\377_\377\377\364\000\005"
+ 1596      FFFFFF4E 
+ 1596      FF5FFFFF 
+ 1596      F40005
+ 1597 11f5 FFFFFF40 		.ascii	"\377\377\377@\000_\377\377\364\000\000DDD\000\000\000"
+ 1597      005FFFFF 
+ 1597      F4000044 
+ 1597      44440000 
+ 1597      00
+ 1598 1206 15000000 		.ascii	"\025\000\000\000\000\011\361\000\000\000-\377\371\000"
+ 1598      0009F100 
+ 1598      00002DFF 
+ 1598      F900
+ 1599 1214 000EFFFF 		.ascii	"\000\016\377\377\367\000\005\377\377\377\320\000\217"
+ 1599      F70005FF 
+ 1599      FFFFD000 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 46
+
+
+ 1599      8F
+ 1600 1221 FFFFFF00 		.ascii	"\377\377\377\000\012\377\377\377\362\000\337\377\377"
+ 1600      0AFFFFFF 
+ 1600      F200DFFF 
+ 1600      FF
+ 1601 122e FF506FFF 		.ascii	"\377Po\377\377\377\375\016\377\377\377\377\366$DDDC"
+ 1601      FFFFFD0E 
+ 1601      FFFFFFFF 
+ 1601      F6244444 
+ 1601      4443
+ 1602 1240 00002FF9 		.ascii	"\000\000/\371\000\000\000\000F\000\000\000\277\377\377"
+ 1602      00000000 
+ 1602      46000000 
+ 1602      BFFFFF
+ 1603 124f FFFFFFF4 		.ascii	"\377\377\377\364\374\216\216\216\210\350\367\370\014"
+ 1603      FC8E8E8E 
+ 1603      88E8F7F8 
+ 1603      0C
+ 1604 125c 0C0B00B0 		.ascii	"\014\013\000\260\370\377\354\374\354\356\317\370\377"
+ 1604      F8FFECFC 
+ 1604      ECEECFF8 
+ 1604      FF
+ 1605 1269 A0C0A077 		.ascii	"\240\300\240w/\370\377\354\374\354\356\317\370\370\014"
+ 1605      2FF8FFEC 
+ 1605      FCECEECF 
+ 1605      F8F80C
+ 1606 1278 000000B0 		.ascii	"\000\000\000\260\370\374\216\210\210\210\350\367\277"
+ 1606      F8FC8E88 
+ 1606      8888E8F7 
+ 1606      BF
+ 1607 1285 FFFFFFFF 		.ascii	"\377\377\377\377\377\364\000\000\000\000\000\0060\000"
+ 1607      FFF40000 
+ 1607      00000006 
+ 1607      3000
+ 1608 1293 00000018 		.ascii	"\000\000\000\030\357\340\000\000\000)\377\377\260\000"
+ 1608      EFE00000 
+ 1608      0029FFFF 
+ 1608      B000
+ 1609 12a1 003AFFFF 		.ascii	"\000:\377\377\3770\000L\377\377\377\374\000\013\377"
+ 1609      FF30004C 
+ 1609      FFFFFFFC 
+ 1609      000BFF
+ 1610 12b0 FFFFFFF5 		.ascii	"\377\377\377\365\000\016\377\377\377\377\320\000\001"
+ 1610      000EFFFF 
+ 1610      FFFFD000 
+ 1610      01
+ 1611 12bd 3444DFFF 		.ascii	"4D\337\377`\000\000\000\000\317\376\000\000\000\000"
+ 1611      60000000 
+ 1611      00CFFE00 
+ 1611      000000
+ 1612 12cc 00CFF800 		.ascii	"\000\317\370\000\000\000\000\000\317\361\000\000\000"
+ 1612      00000000 
+ 1612      CFF10000 
+ 1612      00
+ 1613 12d9 0000BF90 		.ascii	"\000\000\277\220\000\000\000\000\000&\000\000\000\233"
+ 1613      00000000 
+ 1613      00260000 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 47
+
+
+ 1613      009B
+ 1614 12e7 BBB2700F 		.ascii	"\273\262p\017\377\377O\220\377\377\364\377\237\377\377"
+ 1614      FFFF4F90 
+ 1614      FFFFF4FF 
+ 1614      9FFFFF
+ 1615 12f6 5444FFFF 		.ascii	"TD\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 1615      FFFFFFFF 
+ 1615      FFFFFFFF 
+ 1615      FFFFFF
+ 1616 1305 FFFFFFFF 		.ascii	"\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 1616      FFFFFFFF 
+ 1616      FFFFFFFF 
+ 1616      FF
+ 1617 1312 FFFFFFFF 		.ascii	"\377\377\377\377\377\377\377\377\377\3774DDD0\000\000"
+ 1617      FFFFFFFF 
+ 1617      FFFF3444 
+ 1617      44443000 
+ 1617      00
+ 1618 1323 00000000 		.ascii	"\000\000\000\000\000\000\000\005\233\313\225\000\000"
+ 1618      00000005 
+ 1618      9BCB9500 
+ 1618      00
+ 1619 1330 008FFFFF 		.ascii	"\000\217\377\377\377\377\200\003\357\372S#Z\377\343"
+ 1619      FFFF8003 
+ 1619      EFFA5323 
+ 1619      5AFFE3
+ 1620 133f DFA10000 		.ascii	"\337\241\000\000\000\001\257\322`\005\276\376\265\000"
+ 1620      0001AFD2 
+ 1620      6005BEFE 
+ 1620      B500
+ 1621 134d 52001CFF 		.ascii	"R\000\034\377\376\377\374\020\000\002\354@\000L\342"
+ 1621      FEFFFC10 
+ 1621      0002EC40 
+ 1621      004CE2
+ 1622 135c 00000100 		.ascii	"\000\000\001\000\001\000\001\000\000\000\000\012\372"
+ 1622      01000100 
+ 1622      0000000A 
+ 1622      FA
+ 1623 1369 00000000 		.ascii	"\000\000\000\000\000\000\377\360\000\000\000\000\000"
+ 1623      0000FFF0 
+ 1623      00000000 
+ 1623      00
+ 1624 1376 06D60000 		.ascii	"\006\326\000\000\0007wwwwwu\017\377\377\377\377\377"
+ 1624      00377777 
+ 1624      77777775 
+ 1624      0FFFFFFF 
+ 1624      FFFF
+ 1625 1388 FFF3F834 		.ascii	"\377\363\3704DDDDO\337\214\377\377\377\377\362\317\370"
+ 1625      44444444 
+ 1625      4FDF8CFF 
+ 1625      FFFFFFF2 
+ 1625      CFF8
+ 1626 139a CFFFFFFF 		.ascii	"\317\377\377\377\377\010\377\211\314\314\314\314\303"
+ 1626      FF08FF89 
+ 1626      CCCCCCCC 
+ 1626      C3
+ 1627 13a7 FFFB7777 		.ascii	"\377\373wwwww\237\234\377\377\377\377\377\377\341\000"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 48
+
+
+ 1627      7777779F 
+ 1627      9CFFFFFF 
+ 1627      FFFFFFE1 
+ 1627      00
+ 1628 13b8 00000000 		.ascii	"\000\000\000\000\000\000\0007wwwwwu\017\377\377\377"
+ 1628      00000037 
+ 1628      77777777 
+ 1628      77750FFF 
+ 1628      FFFF
+ 1629 13ca FFFFFFF3 		.ascii	"\377\377\377\363\3704DDC\000O\337\214\377\377\377\300"
+ 1629      F8344444 
+ 1629      43004FDF 
+ 1629      8CFFFFFF 
+ 1629      C0
+ 1630 13db 02CFF8CF 		.ascii	"\002\317\370\317\377\377\374\000\010\377\211\314\314"
+ 1630      FFFFFC00 
+ 1630      08FF89CC 
+ 1630      CC
+ 1631 13e8 CC9003FF 		.ascii	"\314\220\003\377\373wwwww\237\234\377\377\377\377\377"
+ 1631      FB777777 
+ 1631      77779F9C 
+ 1631      FFFFFFFF 
+ 1631      FF
+ 1632 13f9 FFE10000 		.ascii	"\377\341\000\000\000\000\000\000\000\0007wwwwwu\017"
+ 1632      00000000 
+ 1632      00003777 
+ 1632      77777777 
+ 1632      750F
+ 1633 140b FFFFFFFF 		.ascii	"\377\377\377\377\377\377\363\3704DB\000\000O\337\214"
+ 1633      FFFFF3F8 
+ 1633      34444200 
+ 1633      004FDF8C 
+ 1634 141b FFFF8000 		.ascii	"\377\377\200\000\002\317\370\317\377\370\000\000\010"
+ 1634      02CFF8CF 
+ 1634      FFF80000 
+ 1634      08
+ 1635 1428 FF89CCCC 		.ascii	"\377\211\314\314`\000\003\377\373wwwww\237\234\377\377"
+ 1635      600003FF 
+ 1635      FB777777 
+ 1635      77779F9C 
+ 1635      FFFF
+ 1636 143a FFFFFFFF 		.ascii	"\377\377\377\377\341\000\000\000\000\000\000\000\000"
+ 1636      E1000000 
+ 1636      00000000 
+ 1636      00
+ 1637 1447 37777777 		.ascii	"7wwwwwu\017\377\377\377\377\377\377\363\3704A\000\000"
+ 1637      7777750F 
+ 1637      FFFFFFFF 
+ 1637      FFFFF3F8 
+ 1637      34410000 
+ 1638 145b 004FDF8C 		.ascii	"\000O\337\214\377@\000\000\002\317\370\317\364\000\000"
+ 1638      FF400000 
+ 1638      02CFF8CF 
+ 1638      F40000
+ 1639 146a 0008FF89 		.ascii	"\000\010\377\211\3140\000\000\003\377\373wwwww\237\234"
+ 1639      CC300000 
+ 1639      03FFFB77 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 49
+
+
+ 1639      77777777 
+ 1639      9F9C
+ 1640 147c FFFFFFFF 		.ascii	"\377\377\377\377\377\377\341\000\000\000\000\000\000"
+ 1640      FFFFE100 
+ 1640      00000000 
+ 1640      00
+ 1641 1489 00003777 		.ascii	"\000\0007wwwwwu\017\377\377\377\377\377\377\363\370"
+ 1641      77777777 
+ 1641      750FFFFF 
+ 1641      FFFFFFFF 
+ 1641      F3F8
+ 1642 149b 00000000 		.ascii	"\000\000\000\000\000O\337\200\000\000\000\000\002\317"
+ 1642      004FDF80 
+ 1642      00000000 
+ 1642      02CF
+ 1643 14a9 F8000000 		.ascii	"\370\000\000\000\000\000\010\377\200\000\000\000\000"
+ 1643      000008FF 
+ 1643      80000000 
+ 1643      00
+ 1644 14b6 03FFFB77 		.ascii	"\003\377\373wwwww\237\234\377\377\377\377\377\377\341"
+ 1644      77777777 
+ 1644      9F9CFFFF 
+ 1644      FFFFFFFF 
+ 1644      E1
+ 1645 14c7 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1645      00000000 
+ 1645      00000000 
+ 1645      00
+ 1646 14d4 00000000 		.ascii	"\000\000\000\000\000\000%\373\000\000\000\000\000\005"
+ 1646      000025FB 
+ 1646      00000000 
+ 1646      0005
+ 1647 14e2 CBFE0000 		.ascii	"\313\376\000\000\000\001\000\015\020B\000\000\000\237"
+ 1647      0001000D 
+ 1647      10420000 
+ 1647      009F
+ 1648 14f0 D1680000 		.ascii	"\321h\000\000\000h\000\377\376\356\355\335\335\357\300"
+ 1648      006800FF 
+ 1648      FEEEEDDD 
+ 1648      DDEFC0
+ 1649 14ff 9FD100B3 		.ascii	"\237\321\000\263\000\000h\000\001\000\000;\005t\000"
+ 1649      00006800 
+ 1649      0100003B 
+ 1649      057400
+ 1650 150e 00000000 		.ascii	"\000\000\000\000\011\276\373\000\000\000\000\000\000"
+ 1650      09BEFB00 
+ 1650      00000000 
+ 1650      00
+ 1651 151b 2DFB0000 		.ascii	"-\373\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1651      00000000 
+ 1651      00000000 
+ 1651      0000
+ 1652 1529 34200000 		.ascii	"4 \000\000n\376\375 \004\377\363\377\320\014\377\360"
+ 1652      6EFEFD20 
+ 1652      04FFF3FF 
+ 1652      D00CFFF0 
+ 1653 1539 4FF50FD5 		.ascii	"O\365\017\325\362\225\370/\367A<\372?\377`\257\373?"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 50
+
+
+ 1653      F295F82F 
+ 1653      F7413CFA 
+ 1653      3FFF60AF 
+ 1653      FB3F
+ 1654 154b FE204FFB 		.ascii	"\376 O\373/\342\222u\372\017\353\361I\370\011\377\360"
+ 1654      2FE29275 
+ 1654      FA0FEBF1 
+ 1654      49F809FF 
+ 1654      F0
+ 1655 155c 9FF201DF 		.ascii	"\237\362\001\337\371\377\220\000\006\253\225\000\000"
+ 1655      F9FF9000 
+ 1655      06AB9500 
+ 1655      00
+ 1656 1569 04887000 		.ascii	"\004\210p\000\013\314\377\377\334\305\274\314\314\314"
+ 1656      0BCCFFFF 
+ 1656      DCC5BCCC 
+ 1656      CCCC
+ 1657 1577 CC528888 		.ascii	"\314R\210\210\210\210`O\377\377\377\374\004\372\256"
+ 1657      8888604F 
+ 1657      FFFFFFFC 
+ 1657      04FAAE
+ 1658 1586 6F5FC04F 		.ascii	"o_\300O\252\346\364\374\004\372\256oO\300O\252\346\364"
+ 1658      AAE6F4FC 
+ 1658      04FAAE6F 
+ 1658      4FC04FAA 
+ 1658      E6F4
+ 1659 1598 FC04FAAE 		.ascii	"\374\004\372\256oO\300O\252\346\365\374\003\377\377"
+ 1659      6F4FC04F 
+ 1659      AAE6F5FC 
+ 1659      03FFFF
+ 1660 15a7 FFFFB006 		.ascii	"\377\377\260\006\210\210\210r\000\000\000\000\000\001"
+ 1660      88888872 
+ 1660      00000000 
+ 1660      0001
+ 1661 15b5 71000000 		.ascii	"q\000\000\000\000\002\357\321\000\000\000\001_\377\300"
+ 1661      0002EFD1 
+ 1661      00000001 
+ 1661      5FFFC0
+ 1662 15c4 000002EA 		.ascii	"\000\000\002\352_\375\000\000\002\357\372] \000\002"
+ 1662      5FFD0000 
+ 1662      02EFFA5D 
+ 1662      200002
+ 1663 15d3 EFFFF800 		.ascii	"\357\377\370\000\000\002\357\377\376 \000\002\357\377"
+ 1663      0002EFFF 
+ 1663      FE200002 
+ 1663      EFFF
+ 1664 15e1 FE200002 		.ascii	"\376 \000\002\357\377\376 \000\000\277\377\376 \000"
+ 1664      EFFFFE20 
+ 1664      0000BFFF 
+ 1664      FE2000
+ 1665 15f0 000DFFFE 		.ascii	"\000\015\377\376 \000\000\000\377\376 \000\000\000\006"
+ 1665      20000000 
+ 1665      FFFE2000 
+ 1665      000006
+ 1666 15ff 64100000 		.ascii	"d\020\000\000\000\000\000\005\357\377\377\377\377\200"
+ 1666      00000005 
+ 1666      EFFFFFFF 
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 51
+
+
+ 1666      FF80
+ 1667 160d 05FFFFFF 		.ascii	"\005\377\377\377\377\377\377\005\377\377\221\335\031"
+ 1667      FFFFFF05 
+ 1667      FFFF91DD 
+ 1667      19
+ 1668 161a FFF5FFFF 		.ascii	"\377\365\377\377\375\021\021\337\377\357\377\377\373"
+ 1668      FD1111DF 
+ 1668      FFEFFFFF 
+ 1668      FB
+ 1669 1627 00BFFFF5 		.ascii	"\000\277\377\365\377\377\375\021\021\337\377\005\377"
+ 1669      FFFFFD11 
+ 1669      11DFFF05 
+ 1669      FF
+ 1670 1634 FF91DD19 		.ascii	"\377\221\335\031\377\360\005\377\377\377\377\377\377"
+ 1670      FFF005FF 
+ 1670      FFFFFFFF 
+ 1670      FF
+ 1671 1641 0004EFFF 		.ascii	"\000\004\357\377\377\377\377\200\000\027\210\207 -\377"
+ 1671      FFFFFF80 
+ 1671      00178887 
+ 1671      202DFF
+ 1672 1650 FFFD2EA0 		.ascii	"\377\375.\240\263x\376\372\0137\217\377\377\377\377"
+ 1672      B378FEFA 
+ 1672      0B378FFF 
+ 1672      FFFFFF
+ 1673 165f FFFFFFFF 		.ascii	"\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 1673      FFFFFFFF 
+ 1673      FFFFFFFF 
+ 1673      FF
+ 1674 166c FFFFFFFF 		.ascii	"\377\377\377\377\377\377\377\377\377\377\377\377\377"
+ 1674      FFFFFFFF 
+ 1674      FFFFFFFF 
+ 1674      FF
+ 1675 1679 FFFCFFFF 		.ascii	"\377\374\377\377\377\374\004DDD\000\000\000\000\000"
+ 1675      FFFC0444 
+ 1675      44440000 
+ 1675      000000
+ 1676 1688 00020000 		.ascii	"\000\002\000\000\000\000\000\004\360\000i\000\000\000"
+ 1676      00000004 
+ 1676      F0006900 
+ 1676      0000
+ 1677 1696 DF007FC0 		.ascii	"\337\000\177\300\000\000\015\360\217\377\335\335\335"
+ 1677      00000DF0 
+ 1677      8FFFDDDD 
+ 1677      DD
+ 1678 16a3 FF0BFFFF 		.ascii	"\377\013\377\377\377\377\377\360\013\374\000\000\000"
+ 1678      FFFFFFF0 
+ 1678      0BFC0000 
+ 1678      00
+ 1679 16b0 00000AC0 		.ascii	"\000\000\012\300\000\000\000\000\000\000\000\000\000"
+ 1679      00000000 
+ 1679      00000000 
+ 1679      00
+ 1680 16bd 0000     		.ascii	"\000\000"
+ 1681              		.section	.rodata.unicode_list_2,"a"
+ 1682              		.align	2
+ 1685              	unicode_list_2:
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 52
+
+
+ 1686 0000 0000     		.short	0
+ 1687 0002 0700     		.short	7
+ 1688 0004 0A00     		.short	10
+ 1689 0006 0B00     		.short	11
+ 1690 0008 0C00     		.short	12
+ 1691 000a 1000     		.short	16
+ 1692 000c 1200     		.short	18
+ 1693 000e 1400     		.short	20
+ 1694 0010 1800     		.short	24
+ 1695 0012 1B00     		.short	27
+ 1696 0014 2000     		.short	32
+ 1697 0016 2500     		.short	37
+ 1698 0018 2600     		.short	38
+ 1699 001a 2700     		.short	39
+ 1700 001c 3D00     		.short	61
+ 1701 001e 4700     		.short	71
+ 1702 0020 4A00     		.short	74
+ 1703 0022 4B00     		.short	75
+ 1704 0024 4C00     		.short	76
+ 1705 0026 5000     		.short	80
+ 1706 0028 5100     		.short	81
+ 1707 002a 5200     		.short	82
+ 1708 002c 5300     		.short	83
+ 1709 002e 6600     		.short	102
+ 1710 0030 6700     		.short	103
+ 1711 0032 6D00     		.short	109
+ 1712 0034 6F00     		.short	111
+ 1713 0036 7000     		.short	112
+ 1714 0038 7300     		.short	115
+ 1715 003a 7600     		.short	118
+ 1716 003c 7700     		.short	119
+ 1717 003e 7800     		.short	120
+ 1718 0040 7A00     		.short	122
+ 1719 0042 9200     		.short	146
+ 1720 0044 9400     		.short	148
+ 1721 0046 C300     		.short	195
+ 1722 0048 C400     		.short	196
+ 1723 004a C600     		.short	198
+ 1724 004c E600     		.short	230
+ 1725 004e E900     		.short	233
+ 1726 0050 F200     		.short	242
+ 1727 0052 1B01     		.short	283
+ 1728 0054 2301     		.short	291
+ 1729 0056 5A01     		.short	346
+ 1730 0058 EA01     		.short	490
+ 1731 005a 3F02     		.short	575
+ 1732 005c 4002     		.short	576
+ 1733 005e 4102     		.short	577
+ 1734 0060 4202     		.short	578
+ 1735 0062 4302     		.short	579
+ 1736 0064 8602     		.short	646
+ 1737 0066 9202     		.short	658
+ 1738 0068 EC02     		.short	748
+ 1739 006a 0303     		.short	771
+ 1740 006c 5905     		.short	1369
+ 1741 006e C107     		.short	1985
+ 1742 0070 A108     		.short	2209
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 53
+
+
+ 1743              		.text
+ 1744              	.Letext0:
+ 1745              		.file 1 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\machine\\_default_typ
+ 1746              		.file 2 "e:\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1747              		.file 3 "lvgl/src/hal/../misc/lv_area.h"
+ 1748              		.file 4 "lvgl/src/core/../misc/../font/lv_font.h"
+ 1749              		.file 5 "lvgl/src/core/lv_obj.h"
+ 1750              		.file 6 "lvgl/src/font/lv_font_fmt_txt.h"
+ 1751              		.file 7 "lvgl/src/widgets/lv_bar.h"
+ 1752              		.file 8 "lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h"
+ 1753              		.file 9 "generated/guider_fonts/lv_font_simsun_12.c"
+ARM GAS  C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s 			page 54
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 lv_font_simsun_12.c
+C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s:37     .data.lv_font_simsun_12:00000000 lv_font_simsun_12
+C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s:21     .data.font_dsc:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s:24     .data.font_dsc:00000000 font_dsc
+C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s:1300   .rodata.gylph_bitmap:00000000 gylph_bitmap
+C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s:79     .rodata.glyph_dsc:00000000 glyph_dsc
+C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s:50     .rodata.cmaps:00000000 cmaps
+C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s:34     .data.lv_font_simsun_12:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s:47     .rodata.cmaps:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s:1685   .rodata.unicode_list_2:00000000 unicode_list_2
+C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s:76     .rodata.glyph_dsc:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s:1297   .rodata.gylph_bitmap:00000000 $d
+C:\Users\BLACK_~1\AppData\Local\Temp\ccYnBQU6.s:1682   .rodata.unicode_list_2:00000000 $d
+
+UNDEFINED SYMBOLS
+lv_font_get_glyph_dsc_fmt_txt
+lv_font_get_bitmap_fmt_txt
